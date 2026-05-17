@@ -1,0 +1,312 @@
+{
+  "_method": "Direct 1:1 — Bologna OLD (SR 2018-2023) e NEW (GeoPOI 20252) hanno gli stessi codici, no rename observed.",
+  "_verified_via": "set comparison: NEW \\ OLD = {}, OLD \\ NEW = {} su 34 zone",
+  "mapping": [
+    {
+      "old": "B1",
+      "new": [
+        "B1"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "CENTRO STORICO"
+    },
+    {
+      "old": "B7",
+      "new": [
+        "B7"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "ZAMBONI - CASTELTIALTO- ALDROVANDI - SAN VITALE"
+    },
+    {
+      "old": "C10",
+      "new": [
+        "C10"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "QUARTIERE MARCONI PORTO: MILLE - GALLIERA - RIVA RENO - MARCONI"
+    },
+    {
+      "old": "C11",
+      "new": [
+        "C11"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "QUARTIERE MARCONI: S. FELICE - GRADA - VICINI - PIETRAMELLARA - INDIPENDENZA - FALEGNAMI - GALLIERA - MILLE - MARCONI"
+    },
+    {
+      "old": "C3",
+      "new": [
+        "C3"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "IRNERIO CENTOTRECENTO MOLINE RIGHI P.ZZA OTTO AGOSTO INDIPENDENZA V.LI MASINI E PICHAT"
+    },
+    {
+      "old": "C4",
+      "new": [
+        "C4"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "CENTOTRECENTO IRNERIO P.ZZA DI PORTA SAN DONATO V.LE FILOPANTI SAN VITALE PETRONI"
+    },
+    {
+      "old": "C5",
+      "new": [
+        "C5"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "SAN VITALE - VIALE ERCOLANI - PIAZZA CARDUCCI - DANTE - SANTO STEFANO - GUERRAZZI - PIAZZA ALDROVANDI"
+    },
+    {
+      "old": "C6",
+      "new": [
+        "C6"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "QUARTIRE GALVANI: SANTO STEFANO - P.ZZA DI PORTA S. STEFANO - VIALI GOZZADINI E PANZACCHI - SAVENELLA TOVAGLIE - D`AZEGLIO -"
+    },
+    {
+      "old": "C7",
+      "new": [
+        "C7"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "QUARTIERE GALVANI MURA DI PORTA CASTIGLIONE: D`AZEGLIO - TOVAGLIE SAVENELLA - MURA DI PORTA CASTIGLIONE"
+    },
+    {
+      "old": "C8",
+      "new": [
+        "C8"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "QUARTIERE MALPIGHI SARAGOZZA: SANT`ISAIA - VIALI PEPOLI ALDINI - D`AZEGLIO BARBERIA"
+    },
+    {
+      "old": "C9",
+      "new": [
+        "C9"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "QUARTIERE MALPIGHI: S.FELICE - GRADA - VICINI - S.ISAIA - S.FRANCESCO - MALPIGHI"
+    },
+    {
+      "old": "D16",
+      "new": [
+        "D16"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "PEDECOLLINARE"
+    },
+    {
+      "old": "D17",
+      "new": [
+        "D17"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "PEDECOLLINARE E SEMICOLLINARE"
+    },
+    {
+      "old": "D19",
+      "new": [
+        "D19"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "STADIO FUNIVIA"
+    },
+    {
+      "old": "D2",
+      "new": [
+        "D2"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "SAN VITALE"
+    },
+    {
+      "old": "D20",
+      "new": [
+        "D20"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "SAFFI SANTA VIOLA BARCA"
+    },
+    {
+      "old": "D21",
+      "new": [
+        "D21"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "ANDREA COSTA - SARAGOZZA"
+    },
+    {
+      "old": "D22",
+      "new": [
+        "D22"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "CORTICELLA"
+    },
+    {
+      "old": "D23",
+      "new": [
+        "D23"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "V.LE FILOPANTI - MASSARENTI - ZANOLINI - STAZIONE S. VITALE"
+    },
+    {
+      "old": "D24",
+      "new": [
+        "D24"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "MURRI"
+    },
+    {
+      "old": "D25",
+      "new": [
+        "D25"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "STAZIONE  - VIALE FILOPANTI - VIA DEL CHIU`"
+    },
+    {
+      "old": "D3",
+      "new": [
+        "D3"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "SAN RUFFILLO EST"
+    },
+    {
+      "old": "D4",
+      "new": [
+        "D4"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "MAZZINI - FOSSOLO"
+    },
+    {
+      "old": "D5",
+      "new": [
+        "D5"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "SAN DONATO"
+    },
+    {
+      "old": "D6",
+      "new": [
+        "D6"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "FIERA"
+    },
+    {
+      "old": "D7",
+      "new": [
+        "D7"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "MATTEOTTI - P.ZZA UNITA`"
+    },
+    {
+      "old": "D8",
+      "new": [
+        "D8"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "BOLOGNINA ARCOVEGGIO"
+    },
+    {
+      "old": "D9",
+      "new": [
+        "D9"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "MARCO POLO- PESCAROLA"
+    },
+    {
+      "old": "E1",
+      "new": [
+        "E1"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "ROVERI - PILASTRO"
+    },
+    {
+      "old": "E5",
+      "new": [
+        "E5"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "BORGO PANIGALE- BIRRA- CASTELDEBOLE"
+    },
+    {
+      "old": "R1",
+      "new": [
+        "R1"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "AGRICOLA NORD OVEST"
+    },
+    {
+      "old": "R2",
+      "new": [
+        "R2"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "AGRICOLA NORD"
+    },
+    {
+      "old": "R3",
+      "new": [
+        "R3"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "AGRICOLA NORD EST"
+    },
+    {
+      "old": "R4",
+      "new": [
+        "R4"
+      ],
+      "rel": "direct",
+      "confidence": "high",
+      "denominazione_new": "AGRICOLA SUD"
+    }
+  ]
+}

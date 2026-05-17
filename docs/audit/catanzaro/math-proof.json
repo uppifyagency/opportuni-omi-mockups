@@ -1,0 +1,85 @@
+{
+  "headline": {
+    "yield_medio_pct": 4.85,
+    "cagr_avg_pct_signals": 0.46,
+    "cagr_avg_pct_compass": 0.46,
+    "prezzo_medio_attuale": 1084.0,
+    "zone_count_current": 19,
+    "csv_span": 21
+  },
+  "cagr_distribution": {
+    "n": 19,
+    "mean": 0.46473684210526306,
+    "median": 0.54,
+    "sd": 1.3192353358461217,
+    "skewness": -0.0036493588386926797,
+    "kurtosis": 2.510153156775629,
+    "shapiro_p": 0.008221811416926756,
+    "iqr_outliers": 3,
+    "q25": 0.22999999999999998,
+    "q75": 0.9099999999999999
+  },
+  "fascia_ts": {
+    "B": {
+      "years_n": 11,
+      "adf_p_value": 0.5430603029361487,
+      "ols_slope_eur_per_year": -8.063116370809091,
+      "ols_slope_p_value": 0.056768595761044024,
+      "ols_slope_ci95_low": -16.41335873965559,
+      "ols_slope_ci95_high": 0.287125998037407,
+      "ljung_box_p": 0.45142441190972005
+    },
+    "C": {
+      "years_n": 11,
+      "adf_p_value": 0.4141032445128495,
+      "ols_slope_eur_per_year": -6.47613412228835,
+      "ols_slope_p_value": 0.12111856059315845,
+      "ols_slope_ci95_low": -15.035117068787764,
+      "ols_slope_ci95_high": 2.082848824211064,
+      "ljung_box_p": 0.40756659455955857
+    },
+    "D": {
+      "years_n": 11,
+      "adf_p_value": 0.968513462951785,
+      "ols_slope_eur_per_year": 6.548717948717904,
+      "ols_slope_p_value": 0.06282932640565356,
+      "ols_slope_ci95_low": -0.4324187956016816,
+      "ols_slope_ci95_high": 13.529854693037489,
+      "ljung_box_p": 0.5276109407522716
+    },
+    "E": {
+      "years_n": 11,
+      "adf_p_value": 1.981921708826189e-07,
+      "ols_slope_eur_per_year": 12.578303747534662,
+      "ols_slope_p_value": 0.011504709628356332,
+      "ols_slope_ci95_low": 3.580830937915593,
+      "ols_slope_ci95_high": 21.57577655715373,
+      "ljung_box_p": 0.39074254810440323
+    },
+    "R": {
+      "years_n": 7,
+      "adf_p_value": 0.9990831091055826,
+      "ols_slope_eur_per_year": 18.785714285713947,
+      "ols_slope_p_value": 0.05603766198858809,
+      "ols_slope_ci95_low": -0.708676511786944,
+      "ols_slope_ci95_high": 38.280105083214835,
+      "ljung_box_p": 0.27815008555017945
+    }
+  },
+  "pareto": {
+    "pool_n": 131,
+    "pareto_front_n": 6,
+    "top_buy_n": 6,
+    "overlap_pct": 16.666666666666664
+  },
+  "monte_carlo": {
+    "n_sims": 1000,
+    "weight_jitter_pp": 10.0,
+    "base_buy_count": 0,
+    "mc_p5": 0.0,
+    "mc_p50": 0.0,
+    "mc_p95": 0.0,
+    "mc_mean": 0.023,
+    "mc_sd": 0.1499783100768024
+  }
+}

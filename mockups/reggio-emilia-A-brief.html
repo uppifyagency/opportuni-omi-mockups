@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Modena · brief immobiliare · OMI Agenzia delle Entrate</title>
+<title>Reggio Emilia · brief immobiliare · OMI Agenzia delle Entrate</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,12 +16,12 @@
     --ink-dim:  oklch(60% 0.008 30);
     --rule:     oklch(88% 0.005 80);
     --rule-mid: oklch(78% 0.005 80);
-    --up:       oklch(48% 0.16 145);   /* emerald, deep enough for light bg */
+    --up:       oklch(48% 0.16 145);
     --up-bg:    oklch(94% 0.05 145);
-    --down:     oklch(52% 0.20 25);    /* terracotta-red */
+    --down:     oklch(52% 0.20 25);
     --down-bg:  oklch(94% 0.05 25);
     --neutral:  oklch(55% 0.005 80);
-    --accent:   oklch(38% 0.16 250);   /* deep ink-blue, Bloomberg-flavor */
+    --accent:   oklch(38% 0.16 250);
 
     --serif:    'Instrument Serif', 'Times New Roman', serif;
     --sans:     'IBM Plex Sans', system-ui, sans-serif;
@@ -168,7 +168,6 @@
   footer { margin-top: 100px; padding-top: 32px; border-top: 1px solid var(--rule); font-size: 11px; color: var(--ink-dim); }
   footer a { color: var(--ink-mid); text-decoration-color: var(--rule-mid); text-underline-offset: 3px; }
 
-  /* hide spinners */
   .skel { height: 18px; background: var(--rule); border-radius: 2px; animation: pulse 1.5s infinite; }
   @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
 </style>
@@ -179,15 +178,15 @@
 
   <header>
     <div class="eyebrow">Brief immobiliare · banca dati OMI</div>
-    <h1>Modena, <span id="hl-span-years">ventun</span> anni di <em>prezzi fermi</em>.<br>La gerarchia delle zone, intanto, si è capovolta.</h1>
-    <p class="deck">Il valore al metro quadro non si è mosso; chi guidava ha perso terreno, e una semicintura silenziosa è diventata il pivot del mercato. Tre evidenze, lette nei numeri.</p>
-    <div class="dateline">EDIZIONE · OMI <span id="omi-year">…</span> · <span id="dl">…</span></div>
+    <h1>Reggio Emilia in <em>vent'anni</em>:<br>prezzi fermi, volumi raddoppiati.</h1>
+    <p class="deck">Il valore al metro quadro si è assestato, le compravendite no. Centro storico in raffreddamento, semicintura che tiene il passo, periferia che lavora. Tre letture, nessuno slogan.</p>
+    <div class="dateline">Edizione · 2025-S2 · <span id="dl">…</span></div>
   </header>
 
   <!-- ─── HEADLINE NUMBERS ─── -->
   <div class="headline-row">
     <div class="hl">
-      <div class="hl-label">CAGR medio · zone correnti</div>
+      <div class="hl-label">CAGR medio · <span id="kpi-horizon">…</span> anni</div>
       <div class="hl-value num" id="kpi-cagr">…</div>
       <div class="hl-sub" id="kpi-cagr-sub">…</div>
     </div>
@@ -203,33 +202,33 @@
     </div>
     <div class="hl">
       <div class="hl-label">Zone monitorate</div>
-      <div class="hl-value num"><span id="kpi-zones">…</span><span style="font-size: 0.5em; color: var(--ink-dim)"> / 51</span></div>
+      <div class="hl-value num"><span id="kpi-zones">…</span><span style="font-size: 0.5em; color: var(--ink-dim)"> / <span id="kpi-zones-total">…</span></span></div>
       <div class="hl-sub italic">correnti / storiche</div>
     </div>
   </div>
 
   <!-- ─── 3 SIGNALI ─── -->
   <section>
-    <div class="section-eyebrow">Tre letture</div>
-    <h2>Cosa racconta <em>davvero</em> il dato.</h2>
-    <p class="section-deck">Per fascia OMI, per zona, per comune della provincia. Numeri ricalcolati dalle quotazioni semestrali; nessun arrotondamento di comodo, nessuna confusione tra rinumerazioni successive delle zone.</p>
+    <div class="section-eyebrow">Tre segnali</div>
+    <h2>Cosa dice <em>davvero</em> il dato.</h2>
+    <p class="section-deck">Per fascia, per zona, per comune della provincia.<br>Numeri verificati, niente confusione da renomenclatura zone.</p>
 
     <div class="signals">
       <div class="signal">
         <div class="signal-num"><em>1.</em></div>
-        <div class="signal-title">Il centro non <em>guida più</em>.</div>
-        <div class="signal-stat down" id="sig1-stat">…</div>
-        <div class="signal-body">Fascia B (centro storico) cala dello <span id="sig1-pct">…</span>% l'anno in vent'anni. Fascia R (rurale) cresce dello <span id="sig1-r">…</span>%. L'asse di valore si è spostato.</div>
+        <div class="signal-title" id="sig1-title">Centro storico vs <em>rurale</em>.</div>
+        <div class="signal-stat" id="sig1-stat">…</div>
+        <div class="signal-body" id="sig1-body">…</div>
       </div>
       <div class="signal">
         <div class="signal-num"><em>2.</em></div>
-        <div class="signal-title" id="sig2-title">…</div>
+        <div class="signal-title" id="sig2-title">L'<em>outlier</em>.</div>
         <div class="signal-stat up" id="sig2-stat">…</div>
         <div class="signal-body" id="sig2-body">…</div>
       </div>
       <div class="signal">
         <div class="signal-num"><em>3.</em></div>
-        <div class="signal-title">Pianura che sale, <em>Appennino che cede</em>.</div>
+        <div class="signal-title">Costa, città, <em>entroterra</em>.</div>
         <div class="signal-stat up" id="sig3-stat">…</div>
         <div class="signal-body" id="sig3-body">…</div>
       </div>
@@ -238,9 +237,9 @@
 
   <!-- ─── RANKING ZONE ─── -->
   <section>
-    <div class="section-eyebrow">Capitolo primo · Modena città</div>
-    <h2 id="zone-h2">Le zone OMI del capoluogo, <em>in ordine di crescita</em>.</h2>
-    <p class="section-deck">CAGR sul periodo coperto da ciascuna zona (massimo 2014-2026, sette osservazioni semestrali), yield lordo all'attuale, volatilità annua dei rendimenti. La sparkline è normalizzata: si legge la forma del moto, non l'ampiezza.</p>
+    <div class="section-eyebrow">Capitolo primo · Reggio Emilia città</div>
+    <h2>Le <span id="h2-zone-count">…</span> zone OMI, <em>ordinate per crescita</em>.</h2>
+    <p class="section-deck">CAGR sul periodo coperto, sparkline 2005–2026, yield lordo, volatilità annua.</p>
 
     <table id="tbl-zone">
       <thead>
@@ -262,9 +261,9 @@
 
   <!-- ─── PROVINCIA ─── -->
   <section>
-    <div class="section-eyebrow">Capitolo secondo · provincia di Modena</div>
-    <h2><span id="prov-h2-count">…</span> comuni, <em>due geografie</em>.</h2>
-    <p class="section-deck">Asse pedemontano e bassa pianura crescono, Appennino emiliano arretra: la stessa provincia, due cicli differenti. CAGR su <span id="prov-h2-anni">…</span> anni di copertura, ordinato per comune.</p>
+    <div class="section-eyebrow">Capitolo secondo · provincia di Reggio Emilia</div>
+    <h2><span id="h2-prov-count">…</span> comuni, <em>due Calabrie</em>.</h2>
+    <p class="section-deck">Appennino, semicintura, pianura, capoluogo. CAGR sull'orizzonte coperto dai dati OMI.</p>
 
     <table id="tbl-prov">
       <thead>
@@ -283,9 +282,13 @@
   </section>
 
   <footer>
-    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona), wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni zone · <a href="https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/" target="_blank">GeoPOI</a> reverse-engineered (KMZ→GeoJSON). Calcoli verificati con asserts in <span class="mono">scripts/compute-modena-signals.py</span>.
+    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona), wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni zone · <a href="https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/" target="_blank">GeoPOI</a> reverse-engineered (KMZ→GeoJSON). Calcoli verificati con asserts in <span class="mono">scripts/compute-reggio-emilia-signals.py</span>.
     <br><br>
-    <span class="italic">Brief immobiliare Modena · serie OMI Agenzia delle Entrate · MMXXVI</span>
+    <span id="dq-footer-line" style="display:inline-block;padding:8px 12px;border-left:3px solid oklch(70% 0.10 50);background:oklch(98% 0.005 75);margin:8px 0 14px 0;font-size:11px;line-height:1.5;color:oklch(40% 0.005 75)">
+      <strong>Trasparenza qualità dati:</strong> <span id="dq-footer-text">…</span>
+    </span>
+    <br>
+    <span class="italic">Brief immobiliare Reggio Emilia · serie OMI Agenzia delle Entrate · MMXXVI</span>
   </footer>
 
 </div>
@@ -293,6 +296,7 @@
 <script>
 function sparkSvg(values, normalized, trend) {
   if (!values || values.length < 2) return '';
+  if (!normalized || normalized.length !== values.length) return '';
   const w = 110, h = 28, pad = 2;
   const xs = values.map((_, i) => pad + (w - 2*pad) * (i / (values.length - 1)));
   const ys = normalized.map(v => h - pad - (h - 2*pad) * v);
@@ -319,93 +323,138 @@ function fmtEuro(n, digits = 0) {
   return '€' + n.toLocaleString('it-IT', { maximumFractionDigits: digits });
 }
 
+function shortDizione(diz) {
+  if (!diz) return '';
+  // Cataloga ENTI come "CAPOLUOGO - CENTRO STORICO" -> "CENTRO STORICO"
+  return diz.split(' - ').slice(-1)[0];
+}
+
 async function loadAndRender() {
-  const d = await (await fetch('../data/computed/modena-signals.json')).json();
+  const d = await (await fetch('../data/computed/reggio-emilia-signals.json')).json();
+  // FIX UI-5: carica volume-signals per popolare footer trasparenza qualità dati
+  let volMeta = {};
+  try {
+    const vs = await (await fetch('../data/computed/reggio-emilia-volume-signals.json')).json();
+    const agg = vs.aggregated_by_new_zone || [];
+    volMeta = {
+      lowSample: agg.filter(z => z.low_sample).map(z => z.zona_new),
+      gap2018: agg.filter(z => z.has_2018_gap).length,
+      interp2018: agg.filter(z => z.has_2018_interpolated).length,
+      noD14: agg.filter(z => z.is_d14_missing_2024).map(z => z.zona_new),
+      unknown: agg.filter(z => z.rel === 'unknown').map(z => z.zona_new),
+    };
+  } catch (e) { console.warn('volume-signals non caricabile (A-brief):', e); }
+
+  const dqEl = document.getElementById('dq-footer-text');
+  if (dqEl && Object.keys(volMeta).length) {
+    const parts = [];
+    parts.push(`I numeri sopra sono <strong>relativi al pool Reggio Emilia</strong> (capoluogo + provincia). Una performance "top" qui non è confrontabile in assoluto con altre province.`);
+    if (volMeta.gap2018) parts.push(`<strong>Buco 2018</strong> non ricostruibile per ${volMeta.gap2018} zone.`);
+    if (volMeta.interp2018) parts.push(`<strong>NTN 2018 stimato</strong> via macroaree-downscaling per ${volMeta.interp2018} zone (CAGR matematicamente invariante).`);
+    if (volMeta.lowSample.length) parts.push(`<strong>Zone NTN-micro</strong> (campione &lt;5): ${volMeta.lowSample.join(', ')} → CAGR statisticamente debole.`);
+    if (volMeta.noD14.length) parts.push(`<strong>Zone senza dato 2024</strong>: ${volMeta.noD14.join(', ')} (soppressione AdE SR2025).`);
+    if (volMeta.unknown.length) parts.push(`<strong>Mapping non risolto</strong>: ${volMeta.unknown.join(', ')} esclusi dal join NEW.`);
+    dqEl.innerHTML = parts.join(' ');
+  }
   const h = d.headline;
 
   document.getElementById('dl').textContent = new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' });
 
-  // OMI edition year + span in headline — derivati dai dati (niente "2024-S1" hardcoded).
-  // Anno OMI = max ultimo_anno fra le zone correnti. Span = orizzonte dataset (fascia full).
-  const currentZonesForYear = d.zone_metrics.filter(z => z.dizione && z.ultimo_anno);
-  const latestYear = currentZonesForYear.length
-    ? Math.max(...currentZonesForYear.map(z => z.ultimo_anno))
-    : null;
-  const omiYearEl = document.getElementById('omi-year');
-  if (omiYearEl && latestYear) omiYearEl.textContent = latestYear;
-  const spanDataset = h.anni_orizzonte_dataset != null ? h.anni_orizzonte_dataset : 21;
-  const numWordIt = (n) => ({
-    18:'diciotto',19:'diciannove',20:'venti',21:'ventun',22:'ventidue',23:'ventitré',
-    24:'ventiquattro',25:'venticinque',
-  })[n] || String(n);
-  const hlSpan = document.getElementById('hl-span-years');
-  if (hlSpan) hlSpan.textContent = numWordIt(spanDataset);
-
   // KPIs
+  document.getElementById('kpi-horizon').textContent = h.anni_orizzonte || '—';
   const cagrEl = document.getElementById('kpi-cagr');
-  cagrEl.textContent = (h.modena_cagr_avg_pct > 0 ? '+' : '') + h.modena_cagr_avg_pct.toFixed(2) + '%';
-  cagrEl.style.color = h.modena_cagr_avg_pct >= 0 ? 'var(--up)' : 'var(--down)';
-  document.getElementById('kpi-cagr-sub').innerHTML = `<em>mercato piatto</em>, ~zero crescita reale`;
+  if (h.cagr_avg_pct != null) {
+    cagrEl.textContent = (h.cagr_avg_pct > 0 ? '+' : '') + h.cagr_avg_pct.toFixed(2) + '%';
+    cagrEl.style.color = h.cagr_avg_pct >= 0 ? 'var(--up)' : 'var(--down)';
+    const adj = Math.abs(h.cagr_avg_pct) < 0.5 ? 'mercato piatto' :
+                h.cagr_avg_pct > 0 ? 'crescita reale moderata' : 'mercato in contrazione';
+    document.getElementById('kpi-cagr-sub').innerHTML = `<em>${adj}</em>, su ${h.zone_count_current} zone correnti`;
+  } else {
+    cagrEl.textContent = 'n/d';
+  }
 
-  document.getElementById('kpi-yield').textContent = h.yield_medio_pct.toFixed(2) + '%';
+  document.getElementById('kpi-yield').textContent = h.yield_medio_pct != null ? h.yield_medio_pct.toFixed(2) + '%' : 'n/d';
   document.getElementById('kpi-prezzo').textContent = fmtEuro(h.prezzo_medio_attuale);
   document.getElementById('kpi-zones').textContent = h.zone_count_current;
+  document.getElementById('kpi-zones-total').textContent = h.zone_count_total;
 
-  // Signals
+  // Signal 1: fascia B (centro) vs fascia R (rurale)
   const fascia = d.fascia_metrics;
+  const sig1Stat = document.getElementById('sig1-stat');
+  const sig1Body = document.getElementById('sig1-body');
   if (fascia.B && fascia.R) {
     const bCagr = fascia.B.cagr * 100, rCagr = fascia.R.cagr * 100;
-    document.getElementById('sig1-stat').textContent = (bCagr > 0 ? '+' : '') + bCagr.toFixed(2) + '%';
-    document.getElementById('sig1-pct').textContent = Math.abs(bCagr).toFixed(2);
-    document.getElementById('sig1-r').textContent = rCagr.toFixed(2);
+    sig1Stat.textContent = (bCagr > 0 ? '+' : '') + bCagr.toFixed(2) + '%';
+    sig1Stat.classList.add(bCagr >= 0 ? 'up' : 'down');
+    sig1Body.innerHTML = `Fascia B (centro storico) ${bCagr >= 0 ? 'cresce' : 'cala'} dello <span class="num">${Math.abs(bCagr).toFixed(2)}%</span> l'anno. Fascia R (rurale) ${rCagr >= 0 ? 'cresce' : 'cala'} dello <span class="num">${Math.abs(rCagr).toFixed(2)}%</span>. ${Math.abs(rCagr - bCagr) > 0.5 ? "L'asse di valore si sta " + (rCagr > bCagr ? 'spostando verso la periferia' : 'concentrando in centro') + '.' : 'Le due fasce si muovono in parallelo.'}`;
+  } else if (fascia.B) {
+    const bCagr = fascia.B.cagr * 100;
+    sig1Stat.textContent = (bCagr > 0 ? '+' : '') + bCagr.toFixed(2) + '%';
+    sig1Stat.classList.add(bCagr >= 0 ? 'up' : 'down');
+    sig1Body.innerHTML = `Fascia B (centro storico) ${bCagr >= 0 ? 'cresce' : 'cala'} dello <span class="num">${Math.abs(bCagr).toFixed(2)}%</span> l'anno sull'orizzonte coperto.`;
+  } else {
+    sig1Stat.textContent = 'n/d';
+    sig1Body.textContent = 'Dati insufficienti per il confronto fascia B vs fascia R.';
   }
-  const topGrow = d.top_growth[0];
-  if (topGrow) {
-    const cagrTopPct = topGrow.cagr_full * 100;
-    const mediaPct = h.modena_cagr_avg_pct;
-    const mult = mediaPct > 0 ? (cagrTopPct / mediaPct).toFixed(1) : null;
-    const nPoints = topGrow.anni_dati_acquisto;
-    const spanYears = (topGrow.ultimo_anno || 0) - (topGrow.primo_anno || 0);
-    const dizFrag = (topGrow.dizione || '').split(' - ').slice(-1)[0].slice(0,30);
-    const nome = dizFrag || topGrow.zona;
-    document.getElementById('sig2-title').innerHTML = `${nome} <em>l'outlier</em>.`;
-    document.getElementById('sig2-stat').textContent = '+' + cagrTopPct.toFixed(2) + '%';
-    const multTxt = mult ? `${mult}× la media zone correnti (+${mediaPct.toFixed(2)}%/yr)` : `vs media zone +${mediaPct.toFixed(2)}%/yr`;
-    document.getElementById('sig2-body').innerHTML =
-      `Fascia <span class="num">${topGrow.fascia}</span>, zona <span class="num">${topGrow.zona}</span>. ` +
-      `Top per crescita prezzi (<em>${nPoints}</em> datapoint su ${spanYears} anni · ${topGrow.primo_anno}–${topGrow.ultimo_anno}): <strong style="color:var(--up);font-family:var(--mono)">+${cagrTopPct.toFixed(2)}%/yr</strong>, ${multTxt}.`;
+
+  // Signal 2: top growth zona (data-driven, non più hardcoded "Cognento")
+  const topGrow = d.top_growth && d.top_growth[0];
+  const sig2Title = document.getElementById('sig2-title');
+  const sig2Stat = document.getElementById('sig2-stat');
+  const sig2Body = document.getElementById('sig2-body');
+  if (topGrow && topGrow.cagr_full != null) {
+    const cagrPct = topGrow.cagr_full * 100;
+    const dz = shortDizione(topGrow.dizione) || topGrow.zona;
+    sig2Title.innerHTML = `${dz.split(' ').slice(0,3).join(' ')} <em>l'outlier</em>.`;
+    sig2Stat.textContent = (cagrPct > 0 ? '+' : '') + cagrPct.toFixed(2) + '%';
+    sig2Stat.className = 'signal-stat ' + (cagrPct >= 0 ? 'up' : 'down');
+    const avgCagr = h.cagr_avg_pct || 0;
+    const ratio = avgCagr ? (cagrPct / avgCagr).toFixed(1) : '∞';
+    sig2Body.innerHTML = `Zona <span class="mono">${topGrow.zona}</span>, fascia ${topGrow.fascia}. La zona con crescita più alta a Reggio Emilia città — <span class="num">${cagrPct >= 0 ? '+' : ''}${cagrPct.toFixed(2)}%/yr</span> contro la media <span class="num">${avgCagr >= 0 ? '+' : ''}${avgCagr.toFixed(2)}%/yr</span>.`;
+  } else {
+    sig2Title.innerHTML = `Outlier <em>non trovato</em>.`;
+    sig2Stat.textContent = 'n/d';
+    sig2Stat.classList.add('flat');
+    sig2Body.textContent = 'Nessuna zona corrente con CAGR calcolabile.';
   }
-  const pr = d.province_ranking;
-  // Populate province section header dynamically — never let static numbers drift.
-  const provH2Count = document.getElementById('prov-h2-count');
-  const provH2Anni = document.getElementById('prov-h2-anni');
-  if (provH2Count) provH2Count.textContent = pr.length;
-  if (provH2Anni && pr.length) {
-    const anni = Math.max(...pr.map(p => p.anni_coperti || 0));
-    provH2Anni.textContent = anni;
-  }
+
+  // Signal 3: top vs bottom comuni della provincia
+  const pr = d.province_ranking || [];
   if (pr.length >= 6) {
     const top3 = pr.slice(0, 3);
     const bot3 = pr.slice(-3);
     const nGrow = pr.filter(p => p.cagr && p.cagr > 0).length;
     const nDecl = pr.filter(p => p.cagr && p.cagr < 0).length;
-    document.getElementById('sig3-stat').textContent = '+' + (top3[0].cagr * 100).toFixed(2) + '%';
+    const sig3Stat = document.getElementById('sig3-stat');
+    const topCagr = top3[0].cagr * 100;
+    sig3Stat.textContent = (topCagr > 0 ? '+' : '') + topCagr.toFixed(2) + '%';
+    sig3Stat.className = 'signal-stat ' + (topCagr >= 0 ? 'up' : 'down');
     document.getElementById('sig3-body').innerHTML =
-      `<strong style="color: var(--up); font-family: var(--mono)">${top3.map(p=>p.nome).join(', ')}</strong> crescono <span class="num">+${(top3[2].cagr*100).toFixed(2)}–${(top3[0].cagr*100).toFixed(2)}%/yr</span>. ` +
-      `I comuni montani <strong style="color: var(--down); font-family: var(--mono)">${bot3.map(p=>p.nome).join(', ')}</strong> calano. ` +
-      `Su ${pr.length} comuni della provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo.`;
+      `<strong style="color: var(--up); font-family: var(--mono)">${top3.map(p=>p.nome).join(', ')}</strong> in testa con <span class="num">${(top3[2].cagr*100).toFixed(2)}–${(top3[0].cagr*100).toFixed(2)}%/yr</span>. ` +
+      `<strong style="color: var(--down); font-family: var(--mono)">${bot3.map(p=>p.nome).join(', ')}</strong> in coda. ` +
+      `Su <span class="num">${pr.length}</span> comuni provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo.`;
+  } else if (pr.length >= 1) {
+    document.getElementById('sig3-stat').textContent = (pr[0].cagr * 100 > 0 ? '+' : '') + (pr[0].cagr*100).toFixed(2) + '%';
+    document.getElementById('sig3-body').textContent = `Solo ${pr.length} comuni con dati OMI sufficienti — provincia con copertura ancora parziale.`;
+  } else {
+    document.getElementById('sig3-stat').textContent = 'n/d';
+    document.getElementById('sig3-body').textContent = 'Provincia senza comuni con CAGR calcolabile.';
   }
+
+  // Section h2 counts
+  const currentZones = d.zone_metrics.filter(z => z.dizione);
+  document.getElementById('h2-zone-count').textContent = currentZones.length;
+  document.getElementById('h2-prov-count').textContent = pr.length;
 
   // Zone table — only current zones (those with dizione)
   const zoneBody = document.getElementById('tbl-zone-body');
-  const currentZones = d.zone_metrics.filter(z => z.dizione);
   currentZones.sort((a, b) => (b.cagr_full || -99) - (a.cagr_full || -99));
   zoneBody.innerHTML = currentZones.map(z => {
     const cagr = z.cagr_full != null ? z.cagr_full * 100 : null;
     const trend = cagr == null ? 'flat' : cagr > 0.2 ? 'up' : cagr < -0.2 ? 'down' : 'flat';
     return `<tr>
       <td>${z.zona}</td>
-      <td><span class="zona-name">${z.dizione.split(' - ').slice(-1)[0].slice(0, 45)}</span><br><span class="zona-desc">fascia ${z.fascia}</span></td>
+      <td><span class="zona-name">${shortDizione(z.dizione).slice(0, 45)}</span><br><span class="zona-desc">fascia ${z.fascia || '—'}</span></td>
       <td class="right num">${fmtEuro(z.prezzo_acquisto_attuale)}</td>
       <td class="right">${pctPill(cagr)}</td>
       <td>${sparkSvg(z.spark_values, z.spark_normalized, trend)}</td>
@@ -416,7 +465,7 @@ async function loadAndRender() {
 
   // Province table
   const provBody = document.getElementById('tbl-prov-body');
-  provBody.innerHTML = d.province_ranking.map(p => {
+  provBody.innerHTML = pr.map(p => {
     const cagrPct = p.cagr != null ? p.cagr * 100 : null;
     return `<tr>
       <td>${p.catasto}</td>
@@ -433,7 +482,7 @@ loadAndRender().catch(e => {
   document.body.innerHTML = `<div style="padding:60px;max-width:600px;margin:0 auto;font-family:Instrument Serif,serif">
     <h2>Errore caricamento</h2>
     <pre style="background:oklch(94% 0.005 80);padding:18px;border-radius:4px;font-family:IBM Plex Mono,monospace;font-size:13px">${e.message}</pre>
-    <p style="margin-top:16px;color:oklch(40% 0.008 30)">Servi da <code>opportuni-poc/</code> con <code>python3 -m http.server 8765</code>, poi <a href="http://localhost:8765/mockups/investor-A-brief.html">http://localhost:8765/mockups/investor-A-brief.html</a></p>
+    <p style="margin-top:16px;color:oklch(40% 0.008 30)">Servi da <code>opportuni-poc/</code> con <code>python3 -m http.server 8765</code>, poi <a href="http://localhost:8765/mockups/reggio-emilia-A-brief.html">http://localhost:8765/mockups/reggio-emilia-A-brief.html</a></p>
   </div>`;
 });
 </script>

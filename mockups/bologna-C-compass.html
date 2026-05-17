@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Catanzaro · bussola di investimento · OMI Agenzia delle Entrate</title>
+<title>Bologna · bussola di investimento · OMI Agenzia delle Entrate</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -151,10 +151,10 @@
     text-transform: uppercase; letter-spacing: 0.06em; margin-left: 6px;
     vertical-align: middle; }
   .ctx-urban       { background: oklch(92% 0.04 250); color: oklch(35% 0.16 250); }
-  .ctx-tirreno     { background: oklch(94% 0.06 220); color: oklch(40% 0.14 220); }
-  .ctx-ionio       { background: oklch(94% 0.05 200); color: oklch(40% 0.14 200); }
+  .ctx-pianura     { background: oklch(94% 0.06 220); color: oklch(40% 0.14 220); }
+  .ctx-semicintura { background: oklch(94% 0.05 200); color: oklch(40% 0.14 200); }
   .ctx-cintura     { background: oklch(94% 0.06 140); color: oklch(40% 0.14 140); }
-  .ctx-presila     { background: oklch(94% 0.06 35);  color: oklch(45% 0.16 35); }
+  .ctx-montagna    { background: oklch(94% 0.06 35);  color: oklch(45% 0.16 35); }
   .ctx-entroterra  { background: oklch(93% 0.04 70);  color: oklch(40% 0.10 70); }
   .ctx-frazione    { background: oklch(94% 0.05 110); color: oklch(42% 0.12 110); }
   .ctx-rurale      { background: oklch(93% 0.04 70);  color: oklch(40% 0.10 70); }
@@ -291,8 +291,8 @@
 
   <header>
     <div class="eyebrow">Bussola di investimento · banca dati OMI</div>
-    <h1>Catanzaro, <em>zona per zona</em>,<br>segnale <em>per segnale</em>.</h1>
-    <p class="deck">Cinque tipologie di immobile, due decenni di quotazioni, un punteggio composito a tre cifre. Bussola di orientamento per chi guarda Catanzaro come patrimonio — non una rivista, non un consiglio.</p>
+    <h1>Bologna, <em>zona per zona</em>,<br>segnale <em>per segnale</em>.</h1>
+    <p class="deck">Cinque tipologie di immobile, due decenni di quotazioni, un punteggio composito a tre cifre. Bussola di orientamento per chi guarda Bologna come patrimonio — non una rivista, non un consiglio.</p>
   </header>
 
   <div class="toolbar">
@@ -328,8 +328,8 @@
 
   <section id="sec-prov">
     <div class="sec-eye">§ I · Scala provincia</div>
-    <h2>Provincia di Catanzaro, <em><span id="h2-prov-count">80</span> comuni</em>.</h2>
-    <p class="sec-deck">Il colore segue l'indicatore selezionato in toolbar; il mouse sopra il poligono restituisce i numeri. Ogni comune porta un'etichetta contestuale — costa tirrenica, costa ionica, Presila, cintura del capoluogo — che aiuta a leggere il dato senza confonderlo con la geografia.</p>
+    <h2>Provincia di Bologna, <em><span id="h2-prov-count">55</span> comuni</em>.</h2>
+    <p class="sec-deck">Il colore segue l'indicatore selezionato in toolbar; il mouse sopra il poligono restituisce i numeri. Ogni comune porta un'etichetta contestuale — Appennino, semicintura, pianura, cintura capoluogo — che aiuta a leggere il dato senza confonderlo con la geografia.</p>
 
     <div class="map-shell">
       <div id="map-prov"></div>
@@ -361,7 +361,7 @@
   </section>
 
   <section id="sec-zone">
-    <div class="sec-eye">§ II · Scala zona · Catanzaro città</div>
+    <div class="sec-eye">§ II · Scala zona · Bologna città</div>
     <h2><span id="h2-zone-count">…</span> zone OMI, <em>la mappa e la griglia</em>.</h2>
     <p class="sec-deck">Stesso indicatore della provincia, ma a scala di quartiere. Sotto la mappa, la griglia mette le zone in fila per punteggio: utile quando si vuole confrontare a colpo d'occhio chi guida e chi insegue.</p>
 
@@ -422,7 +422,7 @@
         <span class="mono not-italic">Stabilità</span> = inverso della volatilità (stdev dei rendimenti annui).
         <span class="mono not-italic">Momentum</span> = slope ultimi 5 anni / CAGR full-span (catch inflection points).
         <span class="mono not-italic">Convenienza</span> = inverso del prezzo €/m² (più basso = più investibile relativamente).
-        Il <strong style="font-style:normal;font-family:var(--sans);font-weight:600">tag contestuale</strong> (tirreno, ionio, presila…) non entra nello score: serve per leggere il numero in modo qualitativo.
+        Il <strong style="font-style:normal;font-family:var(--sans);font-weight:600">tag contestuale</strong> (Appennino, semicintura, pianura, cintura capoluogo…) non entra nello score: serve per leggere il numero in modo qualitativo.
       </div>
     </div>
 
@@ -513,8 +513,8 @@
   </section>
 
   <footer>
-    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona) wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni zone · GeoPOI reverse-engineered (semestre 20252). Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap. Compute · <span class="mono">scripts/compute-catanzaro-compass.py</span>.
-    <p class="colophon">Bussola di investimento Catanzaro · serie OMI Agenzia delle Entrate · MMXXVI</p>
+    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona) wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni zone · GeoPOI reverse-engineered (semestre 20252). Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap. Compute · <span class="mono">scripts/compute-bologna-compass.py</span>.
+    <p class="colophon">Bussola di investimento Bologna · serie OMI Agenzia delle Entrate · MMXXVI</p>
   </footer>
 
 </div>
@@ -528,7 +528,7 @@ const TIPOLOGIE = [
   { key: 'magazzini',              label: 'Magazzini' },
 ];
 // FALLBACK costanti — usate solo se metadata.scoring assente dal JSON.
-// La fonte autoritativa è data.metadata.scoring (vedi compute-catanzaro-compass.py WEIGHTS_DEFAULT).
+// La fonte autoritativa è data.metadata.scoring (vedi compute-bologna-compass.py WEIGHTS_DEFAULT).
 const FALLBACK_WEIGHTS = { growth: 35, yield: 30, stability: 15, momentum: 15, level: 5 };
 const FALLBACK_BUY_THRESHOLD = 70;
 const FALLBACK_AVOID_THRESHOLD = 35;
@@ -577,7 +577,7 @@ function trendCls(c) { return c == null ? 'flat' : c > 0.2 ? 'up' : c < -0.2 ? '
 
 const state = {
   data: null,
-  volumes: null,        // catanzaro-volume-signals.json
+  volumes: null,        // bologna-volume-signals.json
   volByZonaOld: {},     // {zona_old: entry} per quick lookup
   volByZonaNew: {},     // {zona_new: entry} via mapping
   tipo: 'abitazioni_civili',
@@ -586,7 +586,7 @@ const state = {
   weights: { ...FALLBACK_WEIGHTS },  // sovrascritto dopo il fetch (vedi setScoringFromMetadata)
   mapProv: null,
   mapZone: null,
-  centroidsByCat: {},   // {C352: {lon, lat}, ...}
+  centroidsByCat: {},   // {A944: {lon, lat}, ...}
 };
 
 const MOM_LABEL = {
@@ -665,7 +665,7 @@ function recomputeVerdict(score) {
 // Sostituisce i set hardcoded del Modena (MONTANI_KNOWN, CINTURA_URBANA, ecc.)
 // con una classificazione geografica scalabile. Override per i 3 poli noti.
 function contextTagCZ(entry) {
-  // Per zone Catanzaro città — stesse rule del Modena (fascia-based)
+  // Per zone Bologna città — stesse rule del Modena (fascia-based)
   if (entry.dizione) {
     if (entry.fascia === 'B') return { tag: 'Capoluogo · centro', cls: 'ctx-urban' };
     if (entry.fascia === 'C') return { tag: 'Capoluogo · semicentro', cls: 'ctx-urban' };
@@ -678,20 +678,23 @@ function contextTagCZ(entry) {
   const n = entry.nome;
   if (!n) return null;
   // Override hardcoded — poli noti
-  if (n === 'Catanzaro')        return { tag: 'Capoluogo provincia', cls: 'ctx-urban' };
-  if (n === 'Lamezia Terme')    return { tag: 'Polo tirrenico · aeroporto', cls: 'ctx-industriale' };
-  if (n === 'Soverato')         return { tag: 'Polo turistico ionico', cls: 'ctx-turistico' };
-  // Auto-classify via centroid
+  if (n === 'Bologna')          return { tag: 'Capoluogo provincia', cls: 'ctx-urban' };
+  if (n === 'Imola')            return { tag: 'Polo sud-est · 70k ab', cls: 'ctx-industriale' };
+  if (n === 'Casalecchio di Reno' || n === 'San Lazzaro di Savena')
+                                 return { tag: 'Prima cintura urbana', cls: 'ctx-cintura' };
+  // Auto-classify via centroid: provincia Bologna ~[10.81-11.84] lon × [44.06-44.80] lat
+  // Capoluogo a [11.34, 44.49]. Pianura/Bassa = lat > 44.55, Appennino = lat < 44.35.
   const c = state.centroidsByCat[entry.catasto];
   if (!c) return null;
-  if (c.lon < 16.27) return { tag: 'Costa tirrenica', cls: 'ctx-tirreno' };
-  if (c.lat < 38.78 && c.lon > 16.43) return { tag: 'Costa ionica', cls: 'ctx-ionio' };
-  if (c.lat > 38.97 && c.lon > 16.30 && c.lon < 16.75) return { tag: 'Presila', cls: 'ctx-presila' };
-  // Cintura capoluogo: raggio ~8km da Catanzaro (16.61, 38.89)
-  const dx = (c.lon - 16.61) * 87;  // 1° lon @ 38.9°N ≈ 87 km
-  const dy = (c.lat - 38.89) * 111; // 1° lat ≈ 111 km
-  if (Math.sqrt(dx*dx + dy*dy) < 10) return { tag: 'Cintura capoluogo', cls: 'ctx-cintura' };
-  return { tag: 'Entroterra', cls: 'ctx-entroterra' };
+  if (c.lat < 44.30) return { tag: 'Appennino bolognese', cls: 'ctx-montagna' };
+  if (c.lat > 44.60) return { tag: 'Pianura · Bassa bolognese', cls: 'ctx-pianura' };
+  // Cintura/Semicintura capoluogo: raggio ~10km da Bologna (11.34, 44.49)
+  const dx = (c.lon - 11.34) * 80;  // 1° lon @ 44.5°N ≈ 80 km
+  const dy = (c.lat - 44.49) * 111; // 1° lat ≈ 111 km
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  if (dist < 10) return { tag: 'Cintura capoluogo', cls: 'ctx-cintura' };
+  if (dist < 20) return { tag: 'Semicintura', cls: 'ctx-semicintura' };
+  return { tag: 'Entroterra collinare', cls: 'ctx-entroterra' };
 }
 
 function sparkSvg(values, normalized, cls) {
@@ -811,7 +814,7 @@ function metricFmt(v) {
 async function renderProvMap() {
   const d = curr(); if (!d) return;
   if (!window._provGeo) {
-    window._provGeo = await (await fetch('../data/geojson/catanzaro-province-comuni.geojson')).json();
+    window._provGeo = await (await fetch('../data/geojson/bologna-province-comuni.geojson')).json();
     // Calcolo centroidi (per context-tag auto-classify)
     window._provGeo.features.forEach(f => {
       const coords = f.geometry.coordinates;
@@ -846,7 +849,7 @@ async function renderProvMap() {
         sources: { base: { type: 'raster', tiles: ['https://cartodb-basemaps-a.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap © CARTO' } },
         layers: [{ id: 'base', type: 'raster', source: 'base' }],
       },
-      center: [16.50, 38.92], zoom: 9.1, attributionControl: true,
+      center: [11.30, 44.45], zoom: 9.2, attributionControl: true,
     });
     state.mapProv.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     state.mapProv.on('load', () => attachMap(state.mapProv, window._provGeo, 'prov'));
@@ -859,9 +862,9 @@ async function renderZoneMap() {
   const d = curr(); if (!d) return;
   if (!window._zoneGeo) {
     try {
-      window._zoneGeo = await (await fetch('../data/geojson/catanzaro-zone-omi.geojson')).json();
+      window._zoneGeo = await (await fetch('../data/geojson/bologna-zone-omi.geojson')).json();
     } catch {
-      document.getElementById('map-zone').innerHTML = '<div style="padding:40px;color:var(--ink-dim);font-family:var(--serif);font-style:italic;text-align:center">Zone OMI capoluogo non ancora estratte. Eseguire scripts/geopoi-zone-extract.py --codcom C352 --prov CZ --semestre 20252</div>';
+      document.getElementById('map-zone').innerHTML = '<div style="padding:40px;color:var(--ink-dim);font-family:var(--serif);font-style:italic;text-align:center">Zone OMI capoluogo non ancora estratte. Eseguire scripts/geopoi-zone-extract.py --codcom A944 --prov BO --semestre 20252</div>';
       return;
     }
   }
@@ -882,7 +885,7 @@ async function renderZoneMap() {
         sources: { base: { type: 'raster', tiles: ['https://cartodb-basemaps-a.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap © CARTO' } },
         layers: [{ id: 'base', type: 'raster', source: 'base' }],
       },
-      center: [16.59, 38.91], zoom: 12.2, attributionControl: true,
+      center: [11.34, 44.49], zoom: 11.4, attributionControl: true,
     });
     state.mapZone.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     state.mapZone.on('load', () => {
@@ -977,8 +980,8 @@ function renderProvTable() {
     const rowCls = vd === 'BUY' ? 'row-buy' : vd === 'AVOID' ? 'row-avoid' : '';
     const ctx = contextTagCZ(p);
     const ctxHtml = ctx ? `<span class="ctx ${ctx.cls}">${ctx.tag}</span>` : '';
-    // Volume tag: solo se è il capoluogo (Catanzaro) — i comuni provincia non sono in volume signals
-    const volMacroHtml = p.nome === 'Catanzaro' && state.volumes && state.volumes.macroaree_volume_metrics
+    // Volume tag: solo se è il capoluogo (Bologna) — i comuni provincia non sono in volume signals
+    const volMacroHtml = p.nome === 'Bologna' && state.volumes && state.volumes.macroaree_volume_metrics
       ? (() => {
           const m = state.volumes.macroaree_volume_metrics.find(x => x.name === 'CATANZARO CAPOLUOGO');
           return m ? momChipHtml(m.momentum_tag) : '';
@@ -1019,7 +1022,7 @@ function renderSparkGrid() {
     .sort((a, b) => (b._sc || -1) - (a._sc || -1));
   const host = document.getElementById('spark-grid');
   if (!current.length) {
-    host.innerHTML = '<div style="padding:40px;color:var(--ink-dim);font-family:var(--serif);font-style:italic">Zone OMI capoluogo non ancora estratte — esegui scripts/geopoi-zone-extract.py per C352.</div>';
+    host.innerHTML = '<div style="padding:40px;color:var(--ink-dim);font-family:var(--serif);font-style:italic">Zone OMI capoluogo non ancora estratte — esegui scripts/geopoi-zone-extract.py per A944.</div>';
     return;
   }
   host.innerHTML = current.map(z => {
@@ -1106,7 +1109,7 @@ function buildWhatIfZones() {
   const comuni = d.province_ranking;
   let html = '';
   if (zones.length) {
-    html += `<optgroup label="Catanzaro città · zone OMI">
+    html += `<optgroup label="Bologna città · zone OMI">
       ${zones.map(z => `<option value="zona:${z.zona}">${z.zona} · ${(z.dizione||'').split(' - ').slice(-1)[0].slice(0,45)}</option>`).join('')}
     </optgroup>`;
   }
@@ -1116,10 +1119,10 @@ function buildWhatIfZones() {
     </optgroup>`;
   }
   sel.innerHTML = html || '<option>nessuna zona/comune disponibile</option>';
-  // Default: prima zona, altrimenti primo comune (Catanzaro se presente)
+  // Default: prima zona, altrimenti primo comune (Bologna se presente)
   if (zones.length) sel.value = `zona:${zones[0].zona}`;
   else if (comuni.length) {
-    const cz = comuni.find(c => c.catasto === 'C352');
+    const cz = comuni.find(c => c.catasto === 'A944');
     sel.value = `com:${(cz || comuni[0]).catasto}`;
   }
 }
@@ -1233,7 +1236,7 @@ function renderDataQualityPanel() {
   // mostro placeholder con le 2 note di audit)
   const sc = getScoring();
   body.innerHTML = `
-    BUY/AVOID sono <strong>relativi al pool Catanzaro</strong> (capoluogo + provincia, ${state.data?.by_tipologia?.[state.tipo]?.headline?.zone_count || '—'} zone + ${state.data?.by_tipologia?.[state.tipo]?.headline?.comune_count || '—'} comuni).
+    BUY/AVOID sono <strong>relativi al pool Bologna</strong> (capoluogo + provincia, ${state.data?.by_tipologia?.[state.tipo]?.headline?.zone_count || '—'} zone + ${state.data?.by_tipologia?.[state.tipo]?.headline?.comune_count || '—'} comuni).
     Una zona BUY qui significa "top tier locale", non confrontabile in assoluto con altre province.
     Soglia BUY ≥ ${sc.buyThreshold}, pesi default ${sc.weights.growth}/${sc.weights.yield}/${sc.weights.stability}/${sc.weights.momentum}/${sc.weights.level} (modificabili).
     Penalty −${sc.cagrPenalty} su score se CAGR&lt;0.
@@ -1271,7 +1274,7 @@ function renderAll() {
 }
 
 async function boot() {
-  state.data = await (await fetch('../data/computed/catanzaro-compass.json')).json();
+  state.data = await (await fetch('../data/computed/bologna-compass.json')).json();
   // FIX UI: post-fetch, inizializza weights da metadata (single source of truth)
   state.weights = { ...getScoring().weights };
   // Aggiorna anche gli slider DOM (saranno binded subito dopo)
@@ -1284,7 +1287,7 @@ async function boot() {
   }, 0);
   // Carica volume signals (opzionale — il mockup funziona anche senza)
   try {
-    state.volumes = await (await fetch('../data/computed/catanzaro-volume-signals.json')).json();
+    state.volumes = await (await fetch('../data/computed/bologna-volume-signals.json')).json();
     // Per zona OLD (codice storico): lookup nel pool zone_volume_metrics (48 OLD entries)
     for (const z of state.volumes.zone_volume_metrics) {
       state.volByZonaOld[z.zona_old] = z;
@@ -1337,7 +1340,7 @@ boot().catch(e => {
   document.body.innerHTML = `<div style="padding:60px;max-width:600px;margin:0 auto;font-family:Fraunces,serif">
     <h2>Errore caricamento</h2>
     <pre style="background:oklch(94% 0.005 80);padding:18px;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:13px">${e.message}</pre>
-    <p style="margin-top:16px">Serve: <code>python3 scripts/compute-catanzaro-compass.py</code> per generare <code>data/computed/catanzaro-compass.json</code>, poi <code>python3 -m http.server 8765</code>.</p>
+    <p style="margin-top:16px">Serve: <code>python3 scripts/compute-bologna-compass.py</code> per generare <code>data/computed/bologna-compass.json</code>, poi <code>python3 -m http.server 8765</code>.</p>
   </div>`;
 });
 </script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Modena · cartografia immobiliare · OMI Agenzia delle Entrate</title>
+<title>Reggio Emilia · Heat Map · OMI 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
 <link href="https://unpkg.com/maplibre-gl@4.5.0/dist/maplibre-gl.css" rel="stylesheet">
 <style>
   :root {
-    --bg:       oklch(95% 0.008 75);  /* warm cream */
+    --bg:       oklch(95% 0.008 75);
     --paper:    oklch(98% 0.005 75);
     --ink:      oklch(15% 0.008 30);
     --ink-mid:  oklch(38% 0.008 30);
@@ -27,7 +27,7 @@
     --down-3:   oklch(82% 0.12 35);
     --flat:     oklch(78% 0.012 80);
 
-    --accent:   oklch(50% 0.18 40);   /* warm terracotta accent */
+    --accent:   oklch(50% 0.18 40);
 
     --serif:    'Fraunces', 'Times New Roman', serif;
     --sans:     'DM Sans', system-ui, sans-serif;
@@ -176,20 +176,20 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Modena in cartografia · banca dati OMI</div>
-    <h1>Il mercato di <em>Modena</em>,<br>letto sul territorio.</h1>
-    <p class="deck">Verde, dove i prezzi salgono; rosso, dove arretrano. Il colore restituisce in un'immagine la geografia di vent'anni di rilevazioni: pianura, capoluogo, Appennino, ciascuno col proprio passo.</p>
+    <div class="eyebrow">Reggio Emilia in cartografia · banca dati OMI</div>
+    <h1>Il mercato di <em>Reggio Emilia</em>,<br>letto sul territorio.</h1>
+    <p class="deck">Verde, dove i prezzi salgono; rosso, dove arretrano. Dall'Appennino reggiano alla pianura del Po, dalla cintura del capoluogo ai poli industriali: il colore mostra dove il valore si è spostato in vent'anni di rilevazioni OMI.</p>
   </header>
 
   <!-- MACRO STRIP -->
   <div class="macro">
-    <div class="macro-headline">
-      Mercato sostanzialmente <em>piatto</em>,<br>asse di valore in <em>migrazione</em>.
+    <div class="macro-headline" id="macro-headline">
+      Capoluogo del <em>Sud</em>,<br>provincia a <em>tre velocità</em>.
     </div>
     <div class="macro-cell">
-      <div class="lbl">CAGR · zone correnti</div>
+      <div class="lbl">CAGR · <span id="m-horizon">…</span> anni</div>
       <div class="val num" id="m-cagr">…</div>
-      <div class="sub">media (max 12 anni, 2014–2026)</div>
+      <div class="sub">media zone correnti</div>
     </div>
     <div class="macro-cell">
       <div class="lbl">Yield lordo</div>
@@ -206,13 +206,13 @@
   <!-- MAP PROVINCIA (zoom-out) -->
   <section>
     <div class="section-eyebrow">Lettura cartografica · scala provincia</div>
-    <h2>La provincia, <em><span id="prov-map-count">47</span> comuni in un colpo d'occhio</em>.</h2>
-    <p class="section-deck">CAGR sul periodo coperto da ciascun comune (dal 2005 dove disponibile, fino a ventidue annate). La pianura urbana cresce, l'Appennino arretra: la stessa quotazione, due cicli che non si parlano. Passare il mouse sopra il poligono per i numeri esatti.</p>
+    <h2>La provincia, <em><span id="h2-prov-count">…</span> comuni in un colpo</em>.</h2>
+    <p class="section-deck">CAGR sull'orizzonte coperto, per ogni comune della provincia di Reggio Emilia. Appennino bolognese, semicintura, pianura, capoluogo. Hover per il dettaglio.</p>
 
     <div class="map-shell">
       <div id="map-prov"></div>
       <div class="map-legend">
-        <div class="lbl">CAGR comune · copertura completa</div>
+        <div class="lbl">CAGR comune</div>
         <div class="legend-row">
           <span class="legend-tick" id="legend-prov-min">…</span>
           <div class="legend-scale"></div>
@@ -222,16 +222,16 @@
     </div>
   </section>
 
-  <!-- MAP ZONE MODENA (zoom-in) -->
+  <!-- MAP ZONE CATANZARO (zoom-in) -->
   <section>
-    <div class="section-eyebrow">Lettura cartografica · scala sub-comunale</div>
-    <h2>Modena dentro le mura, <em><span id="map-h2-count">venti</span> zone OMI</em>.</h2>
-    <p class="section-deck">Stesso indicatore, granularità di quartiere. Poligoni ufficiali GeoPOI dell'Agenzia delle Entrate. Il valore non è uniforme dentro nessuna città: cambia di poche centinaia di metri.</p>
+    <div class="section-eyebrow">Lettura cartografica · scala zone Reggio Emilia città</div>
+    <h2>Reggio Emilia dentro, <em><span id="h2-zone-count">…</span> zone</em>.</h2>
+    <p class="section-deck">Stesso indicatore, scala sub-comunale. Poligoni ufficiali GeoPOI dell'Agenzia delle Entrate, semestre 2025-S2.</p>
 
     <div class="map-shell">
       <div id="map"></div>
       <div class="map-legend">
-        <div class="lbl">CAGR zona · 2014–2026</div>
+        <div class="lbl">CAGR zona</div>
         <div class="legend-row">
           <span class="legend-tick" id="legend-min">…</span>
           <div class="legend-scale"></div>
@@ -243,9 +243,9 @@
 
   <!-- SPARKLINE GRID -->
   <section>
-    <div class="section-eyebrow">Vista zona per zona</div>
-    <h2 id="spark-h2"><span id="spark-h2-count">…</span> quartieri, <em><span id="spark-h2-count2">…</span> curve</em>.</h2>
-    <p class="section-deck">Sparkline normalizzata sull'intero orizzonte: lo stesso dato della mappa, raccontato sulla linea del tempo. Le curve dicono dove l'andamento è stato lineare, dove ci sono stati strappi.</p>
+    <div class="section-eyebrow">Vista zona-per-zona</div>
+    <h2><span id="h2-spark-count">…</span> quartieri, <em><span id="h2-spark-count-2">…</span> curve</em>.</h2>
+    <p class="section-deck">Sparkline normalizzata sull'intero orizzonte. Lo stesso dato della mappa, raccontato con la curva del tempo.</p>
 
     <div class="spark-grid" id="spark-grid"></div>
   </section>
@@ -253,44 +253,42 @@
   <!-- INSIGHTS -->
   <section>
     <div class="section-eyebrow">Tre letture</div>
-    <h2>Quello che <em>serve</em> a chi compra.</h2>
-    <p class="section-deck">Tre evidenze ricavate dai numeri, non dal racconto: ogni cifra qui sotto è un risultato del compute layer, ricalcolabile dalle quotazioni grezze.</p>
+    <h2>Cosa serve <em>davvero</em> a un investitore.</h2>
+    <p class="section-deck">Generate dai dati, non scritte a mano: ogni numero è un risultato del compute layer.</p>
 
     <div class="insights">
       <div class="insight">
         <div class="insight-num"><em>i</em></div>
-        <div class="insight-title">La <em>periferia</em> ha vinto.</div>
+        <div class="insight-title" id="ins-1-title">Centro vs <em>periferia</em>.</div>
         <div class="insight-body" id="ins-1">…</div>
       </div>
       <div class="insight">
         <div class="insight-num"><em>ii</em></div>
-        <div class="insight-title">Cognento, <em>l'unica</em>.</div>
+        <div class="insight-title" id="ins-2-title">L'<em>outlier</em>.</div>
         <div class="insight-body" id="ins-2">…</div>
       </div>
       <div class="insight">
         <div class="insight-num"><em>iii</em></div>
-        <div class="insight-title">Provincia in <em>due metà</em>.</div>
+        <div class="insight-title">Provincia in <em>tre velocità</em>.</div>
         <div class="insight-body" id="ins-3">…</div>
       </div>
     </div>
   </section>
 
   <footer>
-    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona), wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni · GeoPOI reverse-engineered. Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap.
-    <p class="colophon">Cartografia immobiliare Modena · serie OMI Agenzia delle Entrate · MMXXVI</p>
+    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona), wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni · GeoPOI reverse-engineered (semestre 20252). Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap. Compute · <span class="num">scripts/compute-reggio-emilia-signals.py</span>.
+    <p class="colophon">Cartografia immobiliare Reggio Emilia · serie OMI Agenzia delle Entrate · MMXXVI</p>
   </footer>
 
 </div>
 
 <script>
-// Color ramp for CAGR: red (decline) → cream (flat) → green (growth).
-// Returns rgb() — MapLibre paint spec does not accept oklch().
 const RAMP = [
-  { t: 0.00, rgb: [195, 60,  55]  },   // saturated red
-  { t: 0.25, rgb: [222, 132, 92]  },   // muted red
-  { t: 0.50, rgb: [220, 210, 188] },   // cream / flat
-  { t: 0.75, rgb: [144, 188, 122] },   // muted green
-  { t: 1.00, rgb: [60,  140, 80]  },   // saturated green
+  { t: 0.00, rgb: [195, 60,  55]  },
+  { t: 0.25, rgb: [222, 132, 92]  },
+  { t: 0.50, rgb: [220, 210, 188] },
+  { t: 0.75, rgb: [144, 188, 122] },
+  { t: 1.00, rgb: [60,  140, 80]  },
 ];
 function colorForCAGR(cagrPct, lo, hi) {
   if (cagrPct == null) return 'rgb(200, 195, 184)';
@@ -314,6 +312,7 @@ function trendOf(cagrPct) {
 
 function sparkSvg(values, normalized, trend) {
   if (!values || values.length < 2) return '';
+  if (!normalized || normalized.length !== values.length) return '';
   const w = 200, h = 36, pad = 3;
   const xs = values.map((_, i) => pad + (w - 2*pad) * (i / (values.length - 1)));
   const ys = normalized.map(v => h - pad - (h - 2*pad) * v);
@@ -330,19 +329,44 @@ function fmtEuro(n, digits = 0) {
   return '€' + n.toLocaleString('it-IT', { maximumFractionDigits: digits });
 }
 
+function shortDizione(diz) {
+  if (!diz) return '';
+  return diz.split(' - ').slice(-1)[0];
+}
+
 let map = null, mapProv = null;
 
 async function loadAndRender() {
-  const signals = await (await fetch('../data/computed/modena-signals.json')).json();
-  const zonesGeo = await (await fetch('../data/geojson/modena-zone-omi.geojson')).json();
-  const provGeo = await (await fetch('../data/geojson/modena-province-comuni.geojson')).json();
+  const signals = await (await fetch('../data/computed/reggio-emilia-signals.json')).json();
+  const zonesGeo = await (await fetch('../data/geojson/reggio-emilia-zone-omi.geojson')).json();
+  const provGeo = await (await fetch('../data/geojson/reggio-emilia-province-comuni.geojson')).json();
+  // FIX UI-4: carica volume-signals per propagare flag qualità nei tooltip e nelle sparkline
+  let volByZonaNew = {};
+  try {
+    const volSig = await (await fetch('../data/computed/reggio-emilia-volume-signals.json')).json();
+    for (const z of (volSig.aggregated_by_new_zone || [])) volByZonaNew[z.zona_new] = z;
+  } catch (e) {
+    console.warn('volume-signals non caricabile (B-heatmap funziona senza):', e);
+  }
+  function dqBadges(vol) {
+    if (!vol) return '';
+    const parts = [];
+    if (vol.low_sample)             parts.push('<span style="color:oklch(50% 0.12 50);font-family:JetBrains Mono,monospace;font-size:9px;border:1px dashed oklch(70% 0.12 50);padding:1px 5px;border-radius:2px;margin-left:4px" title="NTN_first<5: CAGR statisticamente debole">⚠ micro</span>');
+    if (vol.has_2018_gap)           parts.push('<span style="color:oklch(50% 0.10 250);font-family:JetBrains Mono,monospace;font-size:9px;border:1px dashed oklch(70% 0.10 250);padding:1px 5px;border-radius:2px;margin-left:4px" title="Manca 2018, non ricostruibile">○ gap 18</span>');
+    else if (vol.has_2018_interpolated) parts.push('<span style="color:oklch(45% 0.08 180);font-family:JetBrains Mono,monospace;font-size:9px;border:1px dotted oklch(65% 0.08 180);padding:1px 5px;border-radius:2px;margin-left:4px" title="NTN 2018 stimato via macroaree-downscaling. CAGR invariante.">◐ 2018 stim</span>');
+    if (vol.is_d14_missing_2024)    parts.push('<span style="color:oklch(45% 0.16 30);font-family:JetBrains Mono,monospace;font-size:9px;border:1px dashed oklch(70% 0.15 30);padding:1px 5px;border-radius:2px;margin-left:4px" title="Omessa da AdE SR2025">⊘ no 24</span>');
+    return parts.join('');
+  }
   const h = signals.headline;
 
   // Macro
+  document.getElementById('m-horizon').textContent = h.anni_orizzonte || '—';
   const cagrEl = document.getElementById('m-cagr');
-  cagrEl.textContent = (h.modena_cagr_avg_pct > 0 ? '+' : '') + h.modena_cagr_avg_pct.toFixed(2) + '%';
-  cagrEl.classList.add(h.modena_cagr_avg_pct >= 0 ? 'up' : 'down');
-  document.getElementById('m-yield').textContent = h.yield_medio_pct.toFixed(2) + '%';
+  if (h.cagr_avg_pct != null) {
+    cagrEl.textContent = (h.cagr_avg_pct > 0 ? '+' : '') + h.cagr_avg_pct.toFixed(2) + '%';
+    cagrEl.classList.add(h.cagr_avg_pct >= 0 ? 'up' : 'down');
+  } else cagrEl.textContent = 'n/d';
+  document.getElementById('m-yield').textContent = h.yield_medio_pct != null ? h.yield_medio_pct.toFixed(2) + '%' : 'n/d';
   document.getElementById('m-prezzo').textContent = fmtEuro(h.prezzo_medio_attuale);
 
   // Inject CAGR onto each polygon feature (key by zona)
@@ -351,9 +375,10 @@ async function loadAndRender() {
     if (z.dizione) cagrByZona[z.zona] = z.cagr_full != null ? z.cagr_full * 100 : null;
   }
   const values = Object.values(cagrByZona).filter(v => v != null);
-  const lo = Math.min(...values), hi = Math.max(...values);
-  document.getElementById('legend-min').textContent = lo.toFixed(2) + '%';
-  document.getElementById('legend-max').textContent = '+' + hi.toFixed(2) + '%';
+  const lo = values.length ? Math.min(...values) : -1;
+  const hi = values.length ? Math.max(...values) :  1;
+  document.getElementById('legend-min').textContent = (lo > 0 ? '+' : '') + lo.toFixed(2) + '%';
+  document.getElementById('legend-max').textContent = (hi > 0 ? '+' : '') + hi.toFixed(2) + '%';
 
   zonesGeo.features.forEach(f => {
     const c = cagrByZona[f.properties.zona];
@@ -361,21 +386,23 @@ async function loadAndRender() {
     f.properties._color = colorForCAGR(c, lo, hi);
   });
 
-  // ── PROVINCIA MAP (zoom-out, 47 comuni) ──
+  // ── PROVINCIA MAP (zoom-out, 80 comuni) ──
   const provCagrByCat = {};
-  for (const p of signals.province_ranking) provCagrByCat[p.catasto] = p.cagr * 100;
-  const provMapCount = document.getElementById('prov-map-count');
-  if (provMapCount) provMapCount.textContent = signals.province_ranking.length;
+  for (const p of signals.province_ranking) provCagrByCat[p.catasto] = p.cagr != null ? p.cagr * 100 : null;
   const pVals = Object.values(provCagrByCat).filter(v => v != null);
-  const pLo = Math.min(...pVals), pHi = Math.max(...pVals);
-  document.getElementById('legend-prov-min').textContent = pLo.toFixed(2) + '%';
-  document.getElementById('legend-prov-max').textContent = '+' + pHi.toFixed(2) + '%';
+  const pLo = pVals.length ? Math.min(...pVals) : -1;
+  const pHi = pVals.length ? Math.max(...pVals) :  1;
+  document.getElementById('legend-prov-min').textContent = (pLo > 0 ? '+' : '') + pLo.toFixed(2) + '%';
+  document.getElementById('legend-prov-max').textContent = (pHi > 0 ? '+' : '') + pHi.toFixed(2) + '%';
   provGeo.features.forEach(f => {
     const c = provCagrByCat[f.properties.com_catasto_code];
     f.properties._cagr = c;
     f.properties._color = colorForCAGR(c, pLo, pHi);
   });
 
+  document.getElementById('h2-prov-count').textContent = provGeo.features.length;
+
+  // Reggio Emilia centro città: lon 10.6306, lat 44.6986. Provincia: pianura nord (Bassa Reggiana) + Appennino sud (Val d'Enza, Cerreto), ~80km N-S.
   mapProv = new maplibregl.Map({
     container: 'map-prov',
     style: {
@@ -383,7 +410,7 @@ async function loadAndRender() {
       sources: { 'base': { type: 'raster', tiles: ['https://cartodb-basemaps-a.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap © CARTO' } },
       layers: [{ id: 'base', type: 'raster', source: 'base' }],
     },
-    center: [10.93, 44.55], zoom: 8.6,
+    center: [10.55, 44.65], zoom: 9.3,
     attributionControl: true,
   });
   mapProv.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
@@ -403,10 +430,6 @@ async function loadAndRender() {
       const p = signals.province_ranking.find(x => x.catasto === cat) || {};
       const delta = p.delta_total_pct;
       const eur = p.prezzo_attuale_medio;
-      // Span del Δ derivato dai dati del comune (anni_coperti − 1 = max-min anno).
-      // Era hardcoded "21y" → falsato quando i comuni hanno coperture diverse.
-      const spanYears = (p.anni_coperti != null) ? Math.max(0, p.anni_coperti - 1) : null;
-      const deltaLbl = spanYears != null ? `Δ ${spanYears}y` : 'Δ totale';
       const html = `
         <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(58% 0.008 30);text-transform:uppercase;letter-spacing:0.14em">Comune · ${cat}</div>
         <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:400;line-height:1.2;margin-top:6px;color:oklch(15% 0.008 30)">${f.properties.name}</div>
@@ -416,7 +439,7 @@ async function loadAndRender() {
             <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:${cagr>0?'var(--up)':cagr<0?'var(--down)':'var(--flat)'};margin-top:2px">${cagr!=null?(cagr>0?'+':'')+cagr.toFixed(2)+'%':'—'}</div>
           </div>
           <div>
-            <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">${deltaLbl}</div>
+            <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">Δ tot</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:${delta>0?'var(--up)':delta<0?'var(--down)':'var(--flat)'};margin-top:2px">${delta!=null?(delta>0?'+':'')+delta.toFixed(1)+'%':'—'}</div>
           </div>
           <div>
@@ -433,7 +456,7 @@ async function loadAndRender() {
     });
   });
 
-  // ── ZONE MAP (zoom-in) ──
+  // ── ZONE MAP (zoom-in capoluogo Reggio Emilia, codice H223) ──
   map = new maplibregl.Map({
     container: 'map',
     style: {
@@ -441,8 +464,8 @@ async function loadAndRender() {
       sources: { 'base': { type: 'raster', tiles: ['https://cartodb-basemaps-a.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap © CARTO' } },
       layers: [{ id: 'base', type: 'raster', source: 'base' }],
     },
-    center: [10.92, 44.66],
-    zoom: 11.4,
+    center: [10.6306, 44.6986],
+    zoom: 11.5,
     attributionControl: true,
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
@@ -463,6 +486,25 @@ async function loadAndRender() {
       filter: ['==', 'zona', ''],
     });
 
+    // Auto-fit map zone ai bounds del GeoJSON per gestire capoluoghi di forma irregolare
+    try {
+      const bounds = new maplibregl.LngLatBounds();
+      zonesGeo.features.forEach(f => {
+        const coords = (f.geometry && f.geometry.coordinates) || [];
+        const walk = (arr) => {
+          if (typeof arr[0] === 'number' && typeof arr[1] === 'number') {
+            bounds.extend([arr[0], arr[1]]);
+          } else if (Array.isArray(arr)) {
+            arr.forEach(walk);
+          }
+        };
+        walk(coords);
+      });
+      if (!bounds.isEmpty()) {
+        map.fitBounds(bounds, { padding: 40, animate: false, maxZoom: 13 });
+      }
+    } catch (err) { console.warn('fitBounds skipped', err); }
+
     const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 14 });
     map.on('mousemove', 'zones-fill', e => {
       const f = e.features[0];
@@ -470,8 +512,9 @@ async function loadAndRender() {
       map.setFilter('zones-hover', ['==', 'zona', f.properties.zona]);
       const cagr = f.properties._cagr;
       const z = signals.zone_metrics.find(x => x.zona === f.properties.zona) || {};
+      const vol = volByZonaNew[f.properties.zona];
       const html = `
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(58% 0.008 30);text-transform:uppercase;letter-spacing:0.14em">Zona ${f.properties.zona} · Fascia ${f.properties.fascia || '?'}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(58% 0.008 30);text-transform:uppercase;letter-spacing:0.14em">Zona ${f.properties.zona} · Fascia ${f.properties.fascia || '?'}${dqBadges(vol)}</div>
         <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:400;line-height:1.2;margin-top:6px;color:oklch(15% 0.008 30)">${f.properties.dizione || 'n/d'}</div>
         <div style="display:flex;gap:18px;margin-top:14px;padding-top:12px;border-top:1px solid oklch(86% 0.008 75)">
           <div>
@@ -499,53 +542,73 @@ async function loadAndRender() {
   // Sparkline grid
   const currentZones = signals.zone_metrics.filter(z => z.dizione);
   currentZones.sort((a, b) => (b.cagr_full || -99) - (a.cagr_full || -99));
-  const numToWord = (n) => ({10:'Dieci',11:'Undici',12:'Dodici',13:'Tredici',14:'Quattordici',15:'Quindici',16:'Sedici',17:'Diciassette',18:'Diciotto',19:'Diciannove',20:'Venti',21:'Ventuno',22:'Ventidue',23:'Ventitré',24:'Ventiquattro',25:'Venticinque'}[n] || String(n));
-  const numToWordLower = (n) => ({10:'dieci',11:'undici',12:'dodici',13:'tredici',14:'quattordici',15:'quindici',16:'sedici',17:'diciassette',18:'diciotto',19:'diciannove',20:'venti',21:'ventuno',22:'ventidue',23:'ventitré',24:'ventiquattro',25:'venticinque'}[n] || String(n));
-  document.getElementById('spark-h2-count').textContent = numToWord(currentZones.length);
-  document.getElementById('spark-h2-count2').textContent = numToWordLower(currentZones.length);
-  const mapH2 = document.getElementById('map-h2-count'); if (mapH2) mapH2.textContent = numToWordLower(currentZones.length);
+  document.getElementById('h2-zone-count').textContent = currentZones.length;
+  document.getElementById('h2-spark-count').textContent = currentZones.length;
+  document.getElementById('h2-spark-count-2').textContent = currentZones.length;
+
   const sparkBody = document.getElementById('spark-grid');
   sparkBody.innerHTML = currentZones.map(z => {
     const cagr = z.cagr_full != null ? z.cagr_full * 100 : null;
     const t = trendOf(cagr);
+    const vol = volByZonaNew[z.zona];
     return `<div class="spark-cell">
-      <div class="spark-zona">${z.zona} · fascia ${z.fascia}</div>
-      <div class="spark-name">${z.dizione.split(' - ').slice(-1)[0].slice(0, 38)}</div>
+      <div class="spark-zona">${z.zona} · fascia ${z.fascia || '—'}${dqBadges(vol)}</div>
+      <div class="spark-name">${shortDizione(z.dizione).slice(0, 38)}</div>
       <div class="spark-stat ${t}">${cagr != null ? (cagr > 0 ? '+' : '') + cagr.toFixed(2) + '%' : '—'}</div>
       <div class="spark-meta">${fmtEuro(z.prezzo_acquisto_attuale)} · yield ${z.yield_lordo_pct != null ? z.yield_lordo_pct.toFixed(1) + '%' : '—'}</div>
       ${sparkSvg(z.spark_values, z.spark_normalized, t)}
     </div>`;
   }).join('');
 
-  // Insights
+  // Insights — data-driven, niente narrativa hardcoded di Modena
   const fascia = signals.fascia_metrics;
+  const ins1Title = document.getElementById('ins-1-title');
+  const ins1 = document.getElementById('ins-1');
   if (fascia.B && fascia.R) {
-    const bCagrAbs = Math.abs(fascia.B.cagr * 100);
-    const bSpanYears = (fascia.B.ultimo_anno || 2026) - (fascia.B.primo_anno || 2005);
-    document.getElementById('ins-1').innerHTML =
-      `Fascia <strong>B</strong> (centro storico) cala <strong>${bCagrAbs.toFixed(2)}%/yr</strong> sui ${bSpanYears} anni. Fascia <strong>R</strong> (rurale) cresce <strong>+${(fascia.R.cagr * 100).toFixed(2)}%/yr</strong>. La curva è geografica, non temporale: il valore si è spostato di chilometri, non di anni.`;
+    const bCagr = fascia.B.cagr * 100, rCagr = fascia.R.cagr * 100;
+    const verbo = bCagr >= 0 ? `cresce <strong>+${bCagr.toFixed(2)}%/yr</strong>` : `cala <strong>${bCagr.toFixed(2)}%/yr</strong>`;
+    const verboR = rCagr >= 0 ? `cresce <strong>+${rCagr.toFixed(2)}%/yr</strong>` : `cala <strong>${rCagr.toFixed(2)}%/yr</strong>`;
+    ins1Title.innerHTML = rCagr > bCagr ? 'La <em>periferia</em> ha vinto.' : 'Il <em>centro</em> tiene.';
+    ins1.innerHTML = `Fascia <strong>B</strong> (centro storico) ${verbo} sull'orizzonte coperto. Fascia <strong>R</strong> (rurale) ${verboR}. Il valore si è spostato di chilometri, non di anni.`;
+  } else if (fascia.B || fascia.C) {
+    const f = fascia.B || fascia.C;
+    const lbl = fascia.B ? 'B (centro storico)' : 'C (semicentrale)';
+    ins1Title.innerHTML = 'Centro <em>solo</em>.';
+    ins1.innerHTML = `Solo la fascia <strong>${lbl}</strong> ha dati sufficienti per l'aggregato: ${f.cagr >= 0 ? '+' : ''}<strong>${(f.cagr*100).toFixed(2)}%/yr</strong>. Reggio Emilia città ha un footprint OMI piccolo — la lettura per fascia va incrociata con la mappa zone.`;
+  } else {
+    ins1Title.innerHTML = 'Fasce <em>insufficienti</em>.';
+    ins1.innerHTML = 'Dati di fascia non sufficienti per il confronto centro/rurale.';
   }
-  const tg = signals.top_growth[0];
-  const mediaPct = signals.headline.modena_cagr_avg_pct;
-  if (tg) {
-    const cagrTopPct = tg.cagr_full * 100;
-    const mult = mediaPct > 0 ? (cagrTopPct / mediaPct).toFixed(1) : null;
-    const nPoints = tg.anni_dati_acquisto;
-    const spanYears = (tg.ultimo_anno || 0) - (tg.primo_anno || 0);
-    const multTxt = mult ? `${mult}× la media zone correnti (+${mediaPct.toFixed(2)}%/yr, filtrata su ≥${signals.metadata?.filters?.min_cagr_years || 5} anni)` : `vs media zone correnti`;
-    document.getElementById('ins-2').innerHTML =
-      `<strong>${tg.dizione.split(' - ').slice(-1)[0]}</strong> (zona ${tg.zona}, fascia ${tg.fascia}) cresce <strong>+${cagrTopPct.toFixed(2)}%/yr</strong> su ${nPoints} datapoint, ${spanYears} anni di copertura (${tg.primo_anno}–${tg.ultimo_anno}): ${multTxt}. Top per crescita prezzi nel campione affidabile, con yield <strong>${tg.yield_lordo_pct.toFixed(2)}%</strong>.`;
+
+  const tg = signals.top_growth && signals.top_growth[0];
+  const ins2Title = document.getElementById('ins-2-title');
+  const ins2 = document.getElementById('ins-2');
+  if (tg && tg.cagr_full != null) {
+    const cagrPct = tg.cagr_full * 100;
+    const dz = shortDizione(tg.dizione) || tg.zona;
+    ins2Title.innerHTML = `${dz.split(' ').slice(0,3).join(' ')}, <em>la prima</em>.`;
+    const yld = tg.yield_lordo_pct != null ? `<strong>${tg.yield_lordo_pct.toFixed(2)}%</strong>` : '<strong>n/d</strong>';
+    ins2.innerHTML = `<strong>${dz}</strong> (zona ${tg.zona}, fascia ${tg.fascia || '?'}) ${cagrPct >= 0 ? 'guida la crescita con' : 'è la zona meno cedente con'} <strong>${(cagrPct > 0 ? '+' : '') + cagrPct.toFixed(2)}%/yr</strong> e yield lordo ${yld}. È il punto di partenza naturale per uno screening intra-città.`;
+  } else {
+    ins2Title.innerHTML = 'Nessun <em>outlier</em>.';
+    ins2.innerHTML = 'Nessuna zona corrente con CAGR calcolabile sull\'orizzonte coperto.';
   }
-  const prov = signals.province_ranking;
+
+  const prov = signals.province_ranking || [];
   if (prov.length >= 6) {
     const top3 = prov.slice(0, 3).map(p => p.nome).join(', ');
     const bot3 = prov.slice(-3).map(p => p.nome).join(', ');
     const nGrow = prov.filter(p => p.cagr && p.cagr > 0).length;
     const nDecl = prov.filter(p => p.cagr && p.cagr < 0).length;
     document.getElementById('ins-3').innerHTML =
-      `Su <strong>${prov.length}</strong> comuni: <strong>${nGrow}</strong> in crescita, <strong>${nDecl}</strong> in calo. ` +
-      `<strong>${top3}</strong> guidano la pianura (+${(prov[2].cagr*100).toFixed(1)}–${(prov[0].cagr*100).toFixed(1)}%/yr). ` +
-      `<strong>${bot3}</strong>, comuni montani, in coda. Pattern netto pianura urbana vs Appennino, non binomio nord-sud.`;
+      `Su <strong>${prov.length}</strong> comuni provincia con dati OMI: <strong>${nGrow}</strong> in crescita, <strong>${nDecl}</strong> in calo. ` +
+      `<strong>${top3}</strong> in testa (${(prov[2].cagr*100).toFixed(1)}–${(prov[0].cagr*100).toFixed(1)}%/yr). ` +
+      `<strong>${bot3}</strong> in coda. Appennino, semicintura, pianura e capoluogo si muovono a velocità diverse — il pattern è geografico, non socio-demografico.`;
+  } else if (prov.length >= 1) {
+    document.getElementById('ins-3').innerHTML =
+      `Solo <strong>${prov.length}</strong> comuni della provincia hanno dati OMI sufficienti per un CAGR. Provincia con copertura ancora parziale — la lettura cartografica va calibrata su quel sottocampione.`;
+  } else {
+    document.getElementById('ins-3').textContent = 'Nessun comune della provincia con CAGR calcolabile.';
   }
 }
 
@@ -554,7 +617,7 @@ loadAndRender().catch(e => {
   document.body.innerHTML = `<div style="padding:60px;max-width:600px;margin:0 auto;font-family:Fraunces,serif">
     <h2>Errore caricamento</h2>
     <pre style="background:oklch(94% 0.005 80);padding:18px;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:13px">${e.message}</pre>
-    <p style="margin-top:16px">Servi da <code>opportuni-poc/</code>: <code>python3 -m http.server 8765</code>, poi <a href="http://localhost:8765/mockups/investor-B-heatmap.html">http://localhost:8765/mockups/investor-B-heatmap.html</a></p>
+    <p style="margin-top:16px">Servi da <code>opportuni-poc/</code>: <code>python3 -m http.server 8765</code>, poi <a href="http://localhost:8765/mockups/reggio-emilia-B-heatmap.html">http://localhost:8765/mockups/reggio-emilia-B-heatmap.html</a></p>
   </div>`;
 });
 </script>

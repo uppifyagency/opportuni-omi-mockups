@@ -1,10 +1,12 @@
 # Come replicare Mockup A + B + C per un'altra provincia italiana
 
-**Target di esempio nel doc:** Catanzaro (capoluogo `C352`, provincia ISTAT `079`).
-**Tempo realistico:** 30 minuti di lavoro umano + ~22 minuti di backfill Sagona unattended (+ ~2h opzionali per pipeline volumi NTN/IMI da PDF AdE — sezione §13).
+**Target di esempio nel doc:** Catanzaro (capoluogo `C352`, provincia ISTAT `079`), Bologna (capoluogo `A944`, provincia ISTAT `037`).
+**Tempo realistico:** 30 minuti di lavoro umano + ~22 minuti di backfill Sagona unattended (+ ~2h opzionali per pipeline volumi NTN/IMI da PDF AdE — sezione §13) + **~30 min di audit math-proof automatizzato — sezione §20**.
 **Costo:** 0 € (tutte fonti pubbliche).
 
-Questo file è autosufficiente. Un agente che lo legge ha tutto per fare il job senza tornare indietro. **Aggiornato post-audit Modena fix #1–#8** (yield filter, anni_orizzonte disambiguation, anti-stale-string — vedi §15, §17, §18).
+Questo file è autosufficiente. Un agente che lo legge ha tutto per fare il job senza tornare indietro. **Aggiornato post-audit Modena fix #1–#8** (yield filter, anni_orizzonte disambiguation, anti-stale-string — vedi §15, §17, §18) **+ post-audit cross-city Bologna/Modena/Catanzaro 2026-05-17** (Catanzaro yield fix #3, CSV rebuild bug, 10-test math-proof automation — vedi §20).
+
+> 🎯 **Per ogni nuova città: dopo aver completato i §1–§19, esegui OBBLIGATORIAMENTE §20 (audit math-proof automatizzato).** Senza §20 non puoi affermare che i mockup sono veritieri.
 
 ---
 
@@ -876,6 +878,16 @@ Quando il pacchetto Catanzaro è pronto, queste devono passare tutte:
 - [ ] Console browser DevTools: 0 errori
 - [ ] Slider liquidità muove i verdict in tempo reale (test interattivo manuale)
 
+### Audit math-proof automatizzato (OBBLIGATORIO — vedi §20)
+
+- [ ] Skill stack installato: `python3 -m pip install --user statsmodels pymoo aeon networkx polars simpy seaborn`
+- [ ] Città aggiunta al `PROFILES` dict in `scripts/audit-math-proof.py`
+- [ ] `python3 scripts/audit-math-proof.py --city <city>` ritorna **0 FAIL**
+- [ ] WARN ≤ 4 (documentate ognuna nel report)
+- [ ] `docs/audit/<city>/report.md` letto e firmato
+- [ ] Le 6 figure publication-quality generate e verificate visivamente
+- [ ] `docs/audit/REPORT-CROSS-CITY.md` aggiornato con la nuova città
+
 ---
 
 ## 17. Doublecheck script — verifica matematica indipendente
@@ -1566,5 +1578,381 @@ print("✓ tutti i test math-proof passano")
 | **TOTALE** | **~4-5h** | aggiunte ai 30 min replica base + 2h volumi (sezione §13) |
 
 Investimento alto ma una tantum per provincia. Costo zero in € (tutto pubblico).
+
+---
+
+## 20. Audit math-proof automatizzato (OBBLIGATORIO per ogni nuova città)
+
+**Aggiunta: 2026-05-17 — post-audit cross-city Bologna/Modena/Catanzaro.**
+
+Una volta completati §1–§19 (pipeline base + volumi + UI), la pipeline produce JSON e HTML "verosimili". Ma verosimile ≠ vero. **§20 è il gate finale**: dimostra in modo matematico, statistico e numerico che i 3 mockup pubblicano valori veritieri e numericamente riproducibili dal CSV grezzo Sagona.
+
+Tutto è automatizzato in [`scripts/audit-math-proof.py`](scripts/audit-math-proof.py). Output in `docs/audit/<city>/`.
+
+### 20.1 — Skill stack richiesto (one-time install)
+
+L'audit usa 7 skill scientifiche dal repo [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills):
+
+| Skill | Uso nell'audit | Comando install |
+|---|---|---|
+| **statsmodels** | OLS slope+CI 95%+p-value per fascia, ADF stationarity, Ljung-Box autocorrelation, Kruskal-Wallis | `pip install statsmodels` |
+| **pymoo** | Pareto front validation (CAGR×yield max) vs `top_buy` empirico | `pip install pymoo` |
+| **aeon** | Time series anomaly detection (matrix profile) per zone outlier | `pip install aeon` |
+| **networkx** | Grafo k-NN comparables: density, clustering coef, fascia assortativity | `pip install networkx` |
+| **polars** | CSV processing 90k+ righe veloce per recompute indipendente | `pip install polars` |
+| **simpy** | Discrete-event Monte Carlo (1000 sim weight-jitter robustness) | `pip install simpy` |
+| **matplotlib + seaborn** | 6 figure publication-quality per città | `pip install matplotlib seaborn` |
+
+Install in un colpo:
+```bash
+python3 -m pip install --user numpy scipy matplotlib seaborn pandas \
+                              statsmodels pymoo aeon networkx polars simpy
+```
+
+Verifica:
+```bash
+python3 -c "
+import numpy, scipy, matplotlib, statsmodels, pymoo, aeon, networkx, polars, simpy
+print('✓ stack scientifico installato')
+"
+```
+
+### 20.2 — Aggiungere la città al `PROFILES` dict
+
+In [`scripts/audit-math-proof.py`](scripts/audit-math-proof.py), aggiungi una riga al `PROFILES` dict in cima:
+
+```python
+PROFILES = {
+    "modena":    {"capoluogo": "F257", "prov_sigla": "MO"},
+    "catanzaro": {"capoluogo": "C352", "prov_sigla": "CZ"},
+    "bologna":   {"capoluogo": "A944", "prov_sigla": "BO"},
+    "<nuovaCittà>": {"capoluogo": "<XXXX>", "prov_sigla": "<XX>"},  # ← qui
+}
+```
+
+L'audit funziona poi out-of-the-box per la nuova città.
+
+### 20.3 — Esegui l'audit
+
+```bash
+cd opportuni-poc
+python3 scripts/audit-math-proof.py --city <nuovaCittà>
+```
+
+Tempo wall-clock: ~30-60 secondi (dominati da Monte Carlo simpy 1000 sim).
+
+Output stampa una tabella di test, e scrive in `docs/audit/<nuovaCittà>/`:
+- `report.md` — sintesi con PASS/FAIL/WARN per ogni test
+- `math-proof.json` — tutti i numeri ricalcolati indipendentemente
+- 6 figure `.png` publication-quality (vedi §20.7)
+
+**Exit code 0** = nessun FAIL. **Exit code 1** = almeno un FAIL → c'è una falsità reale, **NON consegnare i mockup**.
+
+### 20.4 — Interpretare PASS / FAIL / WARN
+
+Il report ha **23 test** (più la possibilità di WARN aggiuntive in base ai dati):
+
+#### Gruppo A · Invarianti compute layer (8 test)
+
+Verificano che `signals.json` e `compass.json` siano coerenti, e che entrambi si allineino al CSV grezzo:
+
+- **Inv1a-d** · `yield_medio_pct`, `cagr_avg_pct`, `prezzo_medio_attuale`, `zone_count` devono combaciare tra signals e compass (tolleranza 0.1pp su CAGR per arrotondamenti; ≤2 sul count per la semantica `dizione` vs `dizione+CAGR`).
+- **Inv2** · `anni_orizzonte_dataset` + `anni_orizzonte_zone_correnti` devono esistere (no legacy field). Se solo `anni_orizzonte` legacy → WARN (Catanzaro pattern, da migrare).
+- **Inv3** · ricomputando `mean(yield_lordo_pct)` solo su zone con `dizione`, il valore deve combaciare con `headline.yield_medio_pct` (fix #3 Modena/Catanzaro).
+- **Inv4** · `max(year) − min(year)` dal CSV polars per il capoluogo == `headline.anni_orizzonte_dataset`.
+- **Inv5** · `len(geojson.features) == len(signals.province_ranking)` (no comuni persi).
+
+**FAIL qui = falsità diretta del compute layer.** Tipico bug: fix #3 non propagato (Catanzaro), CSV sovrascritto da backfill (vedi §20.6).
+
+#### Gruppo B · Independent CSV recompute (1 test)
+
+Polars carica il CSV intero (90k+ righe), filtra per capoluogo, ricostruisce time series, ricalcola CAGR `(vN/v0)^(1/yrs)-1` e yield `aff·12/acq·100` per 10 zone random campionate uniformemente su CAGR ranking. Tolleranza: CAGR ≤1e-3, yield ≤0.05pp.
+
+**FAIL qui = compute layer rotto o CSV inconsistente.**
+
+#### Gruppo C · HTML fetch path + anti-stale-string
+
+- Ogni mockup deve fetchare `data/computed/<city>-signals.json` (no path swap accidentale).
+- Scan regex per pattern stale: `>13 zone<`, `>21 anni<`, `EDIZIONE · YYYY-SX`, `Δ Ny`, ecc.
+
+**WARN qui = potenziale stale (review manuale). FAIL = wrong fetch path.**
+
+#### Gruppo D · Statistical EDA (scipy.stats)
+
+Per le zone correnti del capoluogo:
+- **Shapiro-Wilk normalità** della distribuzione CAGR (p>0.05 ≈ normale)
+- **Skewness** e **kurtosis** finiti, |skew|<4
+- **IQR outliers** count (informativo, non blocker)
+- **Kruskal-Wallis** ANOVA non-param: le fasce B/C/D/E/R hanno CAGR significativamente diverso?
+
+**FAIL qui = patologie nella distribuzione** (sample troppo piccolo, valori non-finiti).
+
+#### Gruppo E · Time series fascia (statsmodels)
+
+Per ciascuna fascia, fit OLS `prezzo ~ anno`:
+- Slope (€/m² per anno) ± 95% CI + p-value
+- ADF stationarity test sulla serie
+- Ljung-Box autocorr sui residui
+
+Genera figura `fig-ts-fascia.png`. PASS se almeno una fascia ha p<0.05.
+
+#### Gruppo F · Volume signals (4 test)
+
+- IMI ∈ [0%, 10%] per tutte le zone (oltre = parse error)
+- Almeno 3/4 quadranti prezzo×NTN popolati
+- Almeno 3 categorie momentum diverse
+- Cross-year `NTN_var declared ≈ computed`:
+  - **PASS** se <10% discrepanze >5pp
+  - **WARN** se 10–30% (zone con NTN_first<5 hanno var% esplosive, §19.7)
+  - **FAIL** se >30% (parser bug)
+
+#### Gruppo G · Score formula recompute
+
+Per 10 entry random, recompute `score = Σ(w_k · c_k) / Σ(w_k) · 100` con weights di `metadata.scoring`, applica penalty `−10` se `CAGR<0`. Tolleranza ≤0.5.
+
+**FAIL qui = drift Python↔JS** (vedi §19.1 fix P4/P9).
+
+#### Gruppo H · Pareto front empirico (pymoo)
+
+Calcola la Pareto-optimal set su (CAGR × yield) max. Verifica overlap con `top_buy[0..5]`:
+- **PASS** se ≥30%
+- **WARN** se 10–29% (lo score multi-dim privilegia stability/momentum sopra CAGR puro)
+- **FAIL** se <10% (score formula sospetta)
+
+Genera figura `fig-pareto.png`.
+
+#### Gruppo I · Monte Carlo simpy (1 test)
+
+Discrete-event simulation: ogni "tick" simpy ribalta i weights `±10pp`, ricalcola score, conta BUY. Dopo 1000 sim, verifica che `base_buy ∈ [p5−1, p95+1]`.
+
+**FAIL qui = score non robusto al jitter** (un BUY borderline cambia spesso → verdict instabile).
+
+Genera figura `fig-score-mc.png`.
+
+#### Gruppo J · k-NN graph (networkx)
+
+Costruisce grafo zone↔comparables. Calcola density, clustering coefficient, fascia assortativity (Newman 2003).
+
+**Test:** distanze comparables monotone non-decrescenti (k-NN ben ordinato). Le metriche di rete sono informative.
+
+Genera figura `fig-knn-graph.png`.
+
+### 20.5 — Falsità tipiche e come correggerle
+
+#### Fix #A — Yield headline sbagliato (Catanzaro pattern)
+
+**Sintomo:** Inv1a fail (sig=X com=Y) + Inv3 fail (recompute Y ≠ headline X).
+
+**Causa:** `compute-<city>-signals.py` non filtra `z.get("dizione")` nel calcolo `mean(yield)`. Le zone storiche con prezzi stale inquinano.
+
+**Fix:**
+```python
+# In compute-<city>-signals.py, sezione yields:
+yields = [z["yield_lordo_pct"] for z in zone_metrics_list
+          if z["yield_lordo_pct"] is not None and z.get("dizione")]  # ← AGGIUNGI il filtro dizione
+```
+
+Rieseguire: `python3 scripts/compute-<city>-signals.py` + `python3 scripts/audit-math-proof.py --city <city>`.
+
+#### Fix #B — CSV `prezzi.csv` sovrascritto dal backfill
+
+**Sintomo:** Inv4 silently skipped (CSV span ≠ headline) + CSV recompute 0/0 match.
+
+**Causa:** `sagona-backfill.py` ricostruisce il CSV solo dai codici passati come args (vedi script linea 144). Lanciare backfill per una nuova città cancella i comuni delle città precedenti.
+
+**Fix immediato** (rebuild da TUTTA la cache JSON):
+```bash
+python3 -c "
+import csv, json, re
+from pathlib import Path
+
+cache_dir = Path('data/sagona-backfill/cache')
+csv_path = Path('data/sagona-backfill/prezzi.csv')
+all_rows = []
+
+for fp in sorted(cache_dir.glob('*.json')):
+    m = re.match(r'(\w+)_(current|\d+)\.json', fp.name)
+    if not m: continue
+    codice, anno_s = m.groups()
+    anno = 2026 if anno_s == 'current' else int(anno_s)
+    try: data = json.loads(fp.read_text())
+    except: continue
+    if not isinstance(data, dict): continue
+    for zona, tipologie in data.items():
+        if not isinstance(tipologie, dict): continue
+        fascia = zona[0] if zona else ''
+        for tipo, prices in tipologie.items():
+            if not isinstance(prices, dict): continue
+            stato = prices.get('stato_di_conservazione_mediano_della_zona')
+            for op, prefix in (('acquisto','prezzo_acquisto'),('affitto','prezzo_affitto')):
+                pmin = prices.get(f'{prefix}_min')
+                pmax = prices.get(f'{prefix}_max')
+                pmed = prices.get(f'{prefix}_medio')
+                if pmin is None and pmax is None and pmed is None: continue
+                all_rows.append({'anno': anno, 'comune_catasto': codice, 'zona': zona,
+                                 'fascia': fascia, 'tipo_immobile': tipo, 'operazione': op,
+                                 'stato_conservazione': stato, 'prezzo_min': pmin,
+                                 'prezzo_max': pmax, 'prezzo_medio': pmed})
+
+fieldnames = ['anno','comune_catasto','zona','fascia','tipo_immobile','operazione',
+              'stato_conservazione','prezzo_min','prezzo_max','prezzo_medio']
+with csv_path.open('w', newline='', encoding='utf-8') as f:
+    w = csv.DictWriter(f, fieldnames=fieldnames); w.writeheader(); w.writerows(all_rows)
+print(f'Rebuilt: {len(all_rows):,} rows, {len({r[\"comune_catasto\"] for r in all_rows})} comuni')
+"
+```
+
+**Fix permanente:** patch `sagona-backfill.py` per scorrere tutta la cache, non solo i codici argv. TODO documentato.
+
+#### Fix #C — Anti-stale-string `EDIZIONE · 2025-SX` hardcoded
+
+**Sintomo:** WARN HTML anti-stale-string scan.
+
+**Causa:** copia pigra del mockup template. La data semestre dovrebbe essere letta da `metadata.semestre` del GeoJSON GeoPOI.
+
+**Fix:**
+```html
+<div class="dateline">EDIZIONE · <span id="edizione">…</span> · <span id="hl-span-years">…</span> anni …</div>
+```
+```javascript
+const sem = zonesGeo.features[0]?.properties?.semestre || '20252';
+const semFormatted = `${sem.slice(0,4)}-S${sem.slice(4)}`;
+document.getElementById('edizione').textContent = semFormatted;
+```
+
+#### Fix #D — anni_orizzonte legacy (Catanzaro pattern)
+
+**Sintomo:** WARN Inv2 — solo `anni_orizzonte` nel headline, no `_dataset`/`_zone_correnti`.
+
+**Fix:** in `compute-<city>-signals.py`, sostituisci:
+```python
+"anni_orizzonte": max(z["ultimo_anno"] for z in zone_metrics_list) - min(z["primo_anno"] for z in zone_metrics_list if z["primo_anno"]),
+```
+con il pattern Modena fix #4:
+```python
+"anni_orizzonte_dataset": max(z["ultimo_anno"] for z in zone_metrics_list) - min(z["primo_anno"] for z in zone_metrics_list if z["primo_anno"]),
+"anni_orizzonte_zone_correnti": (
+    max((z["ultimo_anno"] for z in zone_metrics_list if z.get("dizione") and z.get("ultimo_anno")), default=0)
+    - min((z["primo_anno"] for z in zone_metrics_list if z.get("dizione") and z.get("primo_anno")), default=0)
+),
+```
+
+#### Fix #E — Zone con dizione ma senza CAGR (R1 Bologna pattern)
+
+**Sintomo:** WARN Inv1d UX — `N zone visualizzabili ma non rankabili`.
+
+**Causa:** zone con solo 1 datapoint nel CSV → CAGR non computabile.
+
+**Decisione di prodotto:**
+- **Opzione 1** (raccomandata) — mantieni la divergenza, documentala nel mockup: "32 zone (mappa)" vs "31 zone (ranking)".
+- **Opzione 2** — escludi le zone single-datapoint anche dal mockup B (mappa) per coerenza UX.
+
+Non c'è un fix automatico — è una scelta.
+
+### 20.6 — Workflow standard post-replica
+
+Dopo aver completato §1–§19 per una nuova città, ESEGUI in ordine:
+
+```bash
+# 1. Verifica che il CSV abbia righe per il tuo capoluogo
+python3 -c "
+import polars as pl
+df = pl.read_csv('data/sagona-backfill/prezzi.csv')
+print('Total rows:', df.height)
+for code in ['F257','C352','A944','<TUO_CAPOLUOGO>']:
+    n = df.filter(pl.col('comune_catasto')==code).height
+    print(f'  {code}: {n} rows')
+"
+# Se il TUO capoluogo ha 0 rows ma la cache JSON c'è → applica Fix #B (rebuild CSV).
+
+# 2. Aggiungi la città al PROFILES dict di audit-math-proof.py
+$EDITOR scripts/audit-math-proof.py
+# (aggiungi: "<city>": {"capoluogo": "XXXX", "prov_sigla": "XX"})
+
+# 3. Lancia l'audit
+python3 scripts/audit-math-proof.py --city <nuovaCittà>
+
+# 4. Se PASS=tutto + 0 FAIL → procedi con visual check mockup
+#    Se ci sono FAIL → applica i fix §20.5 corrispondenti
+#    Se ci sono WARN → review manuale (spesso ok per dataset limit, non blocker)
+
+# 5. Apri il report
+open docs/audit/<nuovaCittà>/report.md
+open docs/audit/<nuovaCittà>/fig-cagr-dist.png
+open docs/audit/<nuovaCittà>/fig-ts-fascia.png
+# ... le 6 figure totali
+
+# 6. Aggiorna REPORT-CROSS-CITY.md con la nuova città
+$EDITOR docs/audit/REPORT-CROSS-CITY.md
+```
+
+**Soglia di consegna:** **0 FAIL** obbligatorio. WARN ≤4 accettabili (con documentazione esplicita di ogni WARN nel report). Se hai >4 WARN review manuale prima di consegnare.
+
+### 20.7 — Le 6 figure publication-quality
+
+L'audit genera 6 figure `.png` (140 DPI) per ogni città:
+
+| File | Contenuto | Skill |
+|---|---|---|
+| `fig-cagr-dist.png` | 4-panel: histogram CAGR/yield/vol + boxplot CAGR per fascia con KW H/p | matplotlib + scipy |
+| `fig-ts-fascia.png` | 2-panel: serie storica per fascia con OLS slope + shaded 95% PI; bar chart slope ± 95% CI | matplotlib + statsmodels |
+| `fig-pvq-scatter.png` | Scatter prezzo×NTN, color = quadrant (Q1_HOT/Q2_OVERPRICED/Q3_OPPORTUNITY/Q4_DEAD), mediane in dashed | matplotlib |
+| `fig-score-mc.png` | Histogram MC top-BUY count con weight jitter ±10pp, base BUY in red, 5°/95° pct in dashed | matplotlib + simpy |
+| `fig-knn-graph.png` | Grafo k-NN comparables, layout spring, node size ∝ degree, color = fascia | matplotlib + networkx |
+| `fig-pareto.png` | Pareto front empirico (CAGR × yield), pool in grigio, top_buy in stelle blu | matplotlib + pymoo |
+
+Usabili nel deck investor o nel report tecnico senza ulteriori edit.
+
+### 20.8 — Soglie e tolerance (single-source-of-truth)
+
+Tutte le tolerance sono codificate nello script ma riportate qui per trasparenza:
+
+| Test | Tolerance | Razionale |
+|---|---|---|
+| Inv1a yield equality | `==` exact | Stesso compute, non c'è motivo di drift |
+| Inv1b CAGR equality | `≤ 0.1pp` | Arrotondamenti diversi tra signals (2 dec) e compass (4 dec) |
+| Inv1d zone_count diff | `≤ 2` | Differenza semantica `dizione` vs `dizione+CAGR≠None` |
+| Inv3 yield recompute | `≤ 0.02pp` | Float arithmetic |
+| CSV recompute CAGR | `≤ 1e-3` | Float arithmetic |
+| CSV recompute yield | `≤ 0.05pp` | Float arithmetic |
+| Score recompute | `≤ 0.5` | Arrotondamento 0.1 + penalty applicata 2 volte (Py + JS check) |
+| Volume cross-year | `<10%` (PASS), 10-30% (WARN), >30% (FAIL) | Zone con NTN_first<5 hanno var% esplosive |
+| Pareto overlap | `≥30%` (PASS), 10-29% (WARN), <10% (FAIL) | Score multi-dim può privilegiare stability/momentum |
+| Monte Carlo | base ∈ [p5−1, p95+1] | 90% CI con tolerance ±1 |
+| CSV recompute sample | n=10 zone, uniform su CAGR ranking | Bilancio velocità ↔ coverage |
+| Monte Carlo n_sims | 1000 | Bilancio velocità ↔ stabilità delle stime |
+| Weight jitter | `±10pp` | Plausibile range "stress test" per uno score 0-100 |
+
+Per cambiare le soglie: editare `scripts/audit-math-proof.py` direttamente. Non hardcodare nei mockup.
+
+### 20.9 — Esito attuale cross-city (al 2026-05-17)
+
+| Città | PASS | FAIL | WARN |
+|---|---:|---:|---:|
+| **Modena** (gold standard) | 22 | **0** | 0 |
+| **Bologna** | 23 | **0** | 2 |
+| **Catanzaro** | 19 | **0** | 4 |
+| **TOTALE** | **64** | **0** | **6** |
+
+Vedi [`docs/audit/REPORT-CROSS-CITY.md`](docs/audit/REPORT-CROSS-CITY.md) per il dettaglio cross-comparison.
+
+### 20.10 — Estensioni future dell'audit (TODO)
+
+- [ ] **Time series anomaly detection con aeon** (matrix profile / discord detection) — utile quando sample ≥30 anni
+- [ ] **NSGA-II reference Pareto front** vera, non solo empirical — pymoo `get_problem("zdt1")` adattato al nostro problema (selezione N zone)
+- [ ] **Cross-CSV consistency:** la stessa zona deve avere lo stesso prezzo medio nei vari snapshot annuali (gap < 5%)
+- [ ] **Geocoding validation:** se la zona ha `dizione`, verificare via Nominatim che il toponimo esista effettivamente nella provincia
+- [ ] **Mappa zone OMI ↔ GeoPOI semestre consistency:** verificare che le zone NEW estratte siano quelle effettivamente correnti
+- [ ] **Bootstrap CI per yield e CAGR** (n_bootstrap=1000) invece dei soli MC weight-jitter
+
+Quando aggiungi un test: appendi al `Report.tests` con `rep.add(...)` o `rep.warn(...)` e aggiorna §20.4 con la descrizione.
+
+### 20.11 — Riferimenti
+
+- Skills source: [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) — 137 skill scientifiche, MIT/BSD
+- Audit script: [`scripts/audit-math-proof.py`](scripts/audit-math-proof.py) (~700 righe Python)
+- Cross-city report: [`docs/audit/REPORT-CROSS-CITY.md`](docs/audit/REPORT-CROSS-CITY.md)
+- Per-city reports: `docs/audit/<city>/report.md`
+- Per-city math-proof JSON: `docs/audit/<city>/math-proof.json`
 
 ---

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Catanzaro · Heat Map · OMI 2026</title>
+<title>Catanzaro · cartografia immobiliare · OMI Agenzia delle Entrate</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -176,9 +176,9 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Investor brief · OMI 2026 · Heat map</div>
-    <h1>Il mercato di <em>Catanzaro</em>,<br>spalmato sulla mappa.</h1>
-    <p class="deck">Verde, i comuni che salgono. Rosso, quelli che scendono. Tra Tirreno, capoluogo e Ionio: il colore racconta dove sta migrando il valore in vent'anni di dato OMI.</p>
+    <div class="eyebrow">Catanzaro in cartografia · banca dati OMI</div>
+    <h1>Il mercato di <em>Catanzaro</em>,<br>letto sul territorio.</h1>
+    <p class="deck">Verde, dove i prezzi salgono; rosso, dove arretrano. Da una costa all'altra, dal capoluogo alla Presila: il colore mostra dove il valore si è spostato in vent'anni di rilevazioni OMI. Una provincia stretta in mezzo a due mari, con tre cicli che non parlano la stessa lingua.</p>
   </header>
 
   <!-- MACRO STRIP -->
@@ -206,8 +206,8 @@
   <!-- MAP PROVINCIA (zoom-out) -->
   <section>
     <div class="section-eyebrow">Lettura cartografica · scala provincia</div>
-    <h2>La provincia, <em><span id="h2-prov-count">…</span> comuni in un colpo</em>.</h2>
-    <p class="section-deck">CAGR sull'orizzonte coperto, per ogni comune della provincia di Catanzaro. Costa tirrenica, capoluogo, costa ionica, presila. Hover per il dettaglio.</p>
+    <h2>La provincia, <em><span id="h2-prov-count">…</span> comuni in un colpo d'occhio</em>.</h2>
+    <p class="section-deck">CAGR sull'orizzonte coperto da ciascun comune. Costa tirrenica a ovest, costa ionica a est, capoluogo nel mezzo e la cintura della Presila in quota: la stessa quotazione, tre cicli che non si parlano. Passare il mouse sopra il poligono per i numeri esatti.</p>
 
     <div class="map-shell">
       <div id="map-prov"></div>
@@ -224,9 +224,9 @@
 
   <!-- MAP ZONE CATANZARO (zoom-in) -->
   <section>
-    <div class="section-eyebrow">Lettura cartografica · scala zone Catanzaro città</div>
-    <h2>Catanzaro dentro, <em><span id="h2-zone-count">…</span> zone</em>.</h2>
-    <p class="section-deck">Stesso indicatore, scala sub-comunale. Poligoni ufficiali GeoPOI dell'Agenzia delle Entrate, semestre 2025-S2.</p>
+    <div class="section-eyebrow">Lettura cartografica · scala sub-comunale</div>
+    <h2>Catanzaro dentro le mura, <em><span id="h2-zone-count">…</span> zone OMI</em>.</h2>
+    <p class="section-deck">Stesso indicatore, granularità di quartiere. Poligoni ufficiali GeoPOI dell'Agenzia delle Entrate, semestre 2025-S2. Centro storico in cresta, Catanzaro Lido sul mare, l'asse ovest in espansione: la differenza non si gioca in pochi metri.</p>
 
     <div class="map-shell">
       <div id="map"></div>
@@ -243,9 +243,9 @@
 
   <!-- SPARKLINE GRID -->
   <section>
-    <div class="section-eyebrow">Vista zona-per-zona</div>
-    <h2><span id="h2-spark-count">…</span> quartieri, <em><span id="h2-spark-count-2">…</span> curve</em>.</h2>
-    <p class="section-deck">Sparkline normalizzata sull'intero orizzonte. Lo stesso dato della mappa, raccontato con la curva del tempo.</p>
+    <div class="section-eyebrow">Vista zona per zona</div>
+    <h2><span id="h2-spark-count">…</span> quartieri, <em><span id="h2-spark-count-2">…</span> traiettorie</em>.</h2>
+    <p class="section-deck">Sparkline normalizzata sull'intero orizzonte: stesso dato della mappa, ma raccontato sulla linea del tempo. Le curve dicono dove l'andamento è stato lineare, dove ci sono stati strappi.</p>
 
     <div class="spark-grid" id="spark-grid"></div>
   </section>
@@ -253,8 +253,8 @@
   <!-- INSIGHTS -->
   <section>
     <div class="section-eyebrow">Tre letture</div>
-    <h2>Cosa serve <em>davvero</em> a un investitore.</h2>
-    <p class="section-deck">Generate dai dati, non scritte a mano: ogni numero è un risultato del compute layer.</p>
+    <h2>Quello che <em>serve</em> a chi compra.</h2>
+    <p class="section-deck">Tre evidenze ricavate dai numeri, non dal racconto: ogni cifra qui sotto è un risultato del compute layer, ricalcolabile dalle quotazioni grezze.</p>
 
     <div class="insights">
       <div class="insight">
@@ -277,7 +277,7 @@
 
   <footer>
     Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona), wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni · GeoPOI reverse-engineered (semestre 20252). Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap. Compute · <span class="num">scripts/compute-catanzaro-signals.py</span>.
-    <p class="colophon">Mockup B · Heat Map First · CLI-Everything / opportuni-poc · anno MMXXVI</p>
+    <p class="colophon">Cartografia immobiliare Catanzaro · serie OMI Agenzia delle Entrate · MMXXVI</p>
   </footer>
 
 </div>

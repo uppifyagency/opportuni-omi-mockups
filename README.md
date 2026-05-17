@@ -1,8 +1,16 @@
 # Opportuni — OMI Province Mockups
 
-Tre dashboard HTML statiche per analizzare il mercato immobiliare di una **intera provincia italiana**, alimentate da dati pubblici OMI (Agenzia delle Entrate) con 20+ anni di storia. Province incluse in questo repo: **Modena** (F257, ISTAT 036) e **Catanzaro** (C352, ISTAT 079).
+Tre dashboard HTML statiche per analizzare il mercato immobiliare di una **intera provincia italiana**, alimentate da dati pubblici OMI (Agenzia delle Entrate) con 20+ anni di storia.
 
-Stack: solo Python stdlib + HTML/CSS/JS vanilla + MapLibre GL. **Nessun framework**, nessun build step, nessuna API key. Le costi 0€.
+**Province incluse:**
+- **Modena** (`F257`, ISTAT 036) — 47 comuni
+- **Catanzaro** (`C352`, ISTAT 079) — 80 comuni
+- **Bologna** (`A944`, ISTAT 037) — 55 comuni
+- **Reggio Emilia** (`H223`, ISTAT 035) — in lavorazione
+
+Stack: Python stdlib + HTML/CSS/JS vanilla + MapLibre GL per i mockup; per l'audit math-proof, numpy/scipy/statsmodels/pymoo/networkx/polars/simpy/matplotlib. **Nessun framework UI**, nessun build step, nessuna API key. Costo zero.
+
+> **Audit math-proof:** ogni numero esposto è ricalcolabile dal CSV grezzo Sagona. Il protocollo (10 gruppi di test, 6 figure publication-quality per città) è descritto in [`REPLICATE-FOR-OTHER-PROVINCE.md` §20](REPLICATE-FOR-OTHER-PROVINCE.md). Esito attuale: **64 PASS · 0 FAIL · 6 WARN** su 70 test (Modena 22/0/0 · Bologna 23/0/2 · Catanzaro 19/0/4) — vedi [`docs/audit/REPORT-CROSS-CITY.md`](docs/audit/REPORT-CROSS-CITY.md).
 
 ## I tre mockup
 
