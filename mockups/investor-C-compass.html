@@ -519,9 +519,22 @@ const TIPOLOGIE = [
 // (perché solo zone capoluogo Modena hanno dati, comuni provincia hanno liquidity=null).
 const DEFAULT_WEIGHTS = { growth: 30, yield: 25, stability: 15, momentum: 15, level: 5, liquidity: 10 };
 const SCORE_KEYS = ['growth','yield','stability','momentum','level','liquidity'];
-// BUY threshold raised to 70 (was 65) to be more selective.
-const BUY_THRESHOLD = 70;
-const AVOID_THRESHOLD = 35;
+// Fallback thresholds — usate solo se headline.threshold_calibration assente dal JSON.
+// La fonte autoritativa è state.data.by_tipologia[state.tipo].headline.threshold_calibration
+// (Jenks natural breaks k=3 calibrato per-tipologia, vedi scripts/_threshold_lib.py).
+const FALLBACK_BUY_THRESHOLD = 60;
+const FALLBACK_AVOID_THRESHOLD = 35;
+function getThresholds() {
+  const tipo = state.data && state.data.by_tipologia && state.data.by_tipologia[state.tipo];
+  const tc = (tipo && tipo.headline && tipo.headline.threshold_calibration) || {};
+  return {
+    buy:   tc.buy_threshold   != null ? tc.buy_threshold
+         : tipo && tipo.headline && tipo.headline.buy_threshold_computed != null ? tipo.headline.buy_threshold_computed
+         : FALLBACK_BUY_THRESHOLD,
+    avoid: tc.avoid_threshold != null ? tc.avoid_threshold : FALLBACK_AVOID_THRESHOLD,
+    methodUsed: tc.method_used || 'jenks_natural_breaks_k3',
+  };
+}
 // CAGR-negative penalty: a value trap (low €/m² + high yield BUT shrinking market)
 // gets -10 points to its score. Prevents recommending shrinking comuni.
 const CAGR_NEGATIVE_PENALTY = 10;
@@ -712,8 +725,9 @@ function recomputeVerdict(score, entry) {
   // (coverage < MIN_CAGR_YEARS) cannot earn BUY/AVOID — only WATCH. A 2-year
   // CAGR isn't a strong-enough signal for a directional recommendation.
   if (entry && entry.data_quality === 'limited') return 'WATCH';
-  if (score >= BUY_THRESHOLD) return 'BUY';
-  if (score < AVOID_THRESHOLD) return 'AVOID';
+  const t = getThresholds();
+  if (score >= t.buy) return 'BUY';
+  if (score < t.avoid) return 'AVOID';
   return 'WATCH';
 }
 
@@ -812,7 +826,7 @@ function renderKPI() {
   document.getElementById('kpi-buy').textContent = nBuy;
   document.getElementById('kpi-buy-tot').textContent = pool.length;
   const nEmerging = pool.filter(e => e.emerging === true).length;
-  const buyT = d?.headline?.buy_threshold_computed != null ? d.headline.buy_threshold_computed.toFixed(1) : BUY_THRESHOLD;
+  const buyT = d?.headline?.buy_threshold_computed != null ? d.headline.buy_threshold_computed.toFixed(1) : FALLBACK_BUY_THRESHOLD;
   document.getElementById('kpi-buy-sub').textContent = `BUY · ${nEmerging} EMERGENTI · ${nAvoid} AVOID · soglia ≥ ${buyT}`;
 
   // Section header counts — keep static text in sync with the live dataset

@@ -198,13 +198,6 @@
   .dq-no2024     { color: oklch(45% 0.16 30);  border-color: oklch(70% 0.15 30);  background: oklch(97% 0.04 30); }
   .dq-unknown    { color: oklch(40% 0.005 75); border-color: oklch(60% 0.005 75); background: oklch(95% 0.005 75); }
 
-  /* Data-quality panel */
-  .dq-panel { margin-top: 24px; background: oklch(98% 0.005 75); border: 1px solid var(--rule);
-    border-left: 3px solid oklch(70% 0.10 50); border-radius: 4px; padding: 20px 24px; }
-  .dq-panel-title { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--ink); }
-  .dq-panel-body { font-size: 12.5px; color: var(--ink-mid); margin-top: 8px; font-family: var(--sans); line-height: 1.55; }
-  .dq-panel-list { margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px 18px; font-family: var(--mono); font-size: 11.5px; }
-  .dq-panel-list code { color: var(--accent); }
 
   .spark-grid { margin-top: 24px; display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0;
@@ -453,12 +446,6 @@
       <div id="anomalies-list" style="margin-top: 14px"></div>
     </div>
 
-    <!-- FIX UI-3: pannello qualità dati (cleanup P1→P11) -->
-    <div class="dq-panel" id="dq-panel" style="margin-top: 36px">
-      <div class="dq-panel-title">Qualità dati · trasparenza pre-investimento</div>
-      <div class="dq-panel-body" id="dq-panel-body">…</div>
-      <div class="dq-panel-list" id="dq-panel-list"></div>
-    </div>
   </section>
 
   <section id="sec-whatif">
@@ -520,7 +507,7 @@
   </section>
 
   <footer>
-    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona) wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni zone · GeoPOI reverse-engineered (semestre 20252). Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap. Compute · <span class="mono">scripts/compute-reggio-emilia-compass.py</span>.
+    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona) wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni zone · GeoPOI reverse-engineered (semestre 2025-S2). Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap. Compute · <span class="mono">scripts/compute-reggio-emilia-compass.py</span>.
     <p class="colophon">Bussola di investimento Reggio Emilia · serie OMI Agenzia delle Entrate · MMXXVI</p>
   </footer>
 
@@ -540,19 +527,30 @@ const FALLBACK_WEIGHTS = { growth: 35, yield: 30, stability: 15, momentum: 15, l
 const FALLBACK_BUY_THRESHOLD = 70;
 const FALLBACK_AVOID_THRESHOLD = 35;
 const FALLBACK_CAGR_NEGATIVE_PENALTY = 10;
-// Getter dinamici: leggono metadata, fallback solo se assente
+// Getter dinamici: leggono soglie per-tipologia (Jenks-calibrate), fallback solo se assente.
+// FIX 2026-05-17: le soglie BUY/AVOID vivono in by_tipologia[tipo].headline.threshold_calibration,
+// non in metadata.scoring (che era undefined → fallback 70, irraggiungibile per CZ/BO/RE).
 function getScoring() {
   const m = (state.data && state.data.metadata && state.data.metadata.scoring) || {};
-  // metadata.scoring.weights_default usa pesi 0-1 (Python frazione); UI usa 0-100 (slider). Converto.
+  const tipo = state.data && state.data.by_tipologia && state.data.by_tipologia[state.tipo];
+  const tc = (tipo && tipo.headline && tipo.headline.threshold_calibration) || {};
   let weights = FALLBACK_WEIGHTS;
   if (m.weights_default) {
     weights = Object.fromEntries(Object.entries(m.weights_default).map(([k,v]) => [k, Math.round(v * 100)]));
   }
+  const buyT = tc.buy_threshold   != null ? tc.buy_threshold
+             : tipo && tipo.headline && tipo.headline.buy_threshold_computed != null ? tipo.headline.buy_threshold_computed
+             : m.buy_threshold    != null ? m.buy_threshold
+             : FALLBACK_BUY_THRESHOLD;
+  const avoidT = tc.avoid_threshold != null ? tc.avoid_threshold
+               : m.avoid_threshold  != null ? m.avoid_threshold
+               : FALLBACK_AVOID_THRESHOLD;
   return {
     weights,
-    buyThreshold:  m.buy_threshold        != null ? m.buy_threshold        : FALLBACK_BUY_THRESHOLD,
-    avoidThreshold: m.avoid_threshold     != null ? m.avoid_threshold      : FALLBACK_AVOID_THRESHOLD,
-    cagrPenalty:   m.cagr_negative_penalty != null ? m.cagr_negative_penalty : FALLBACK_CAGR_NEGATIVE_PENALTY,
+    buyThreshold:   buyT,
+    avoidThreshold: avoidT,
+    cagrPenalty:    m.cagr_negative_penalty != null ? m.cagr_negative_penalty : FALLBACK_CAGR_NEGATIVE_PENALTY,
+    methodUsed:     tc.method_used || 'jenks_natural_breaks_k3',
   };
 }
 // FIX cromatica 2026-05-17 — scala divergente per CAGR (pivot 0%), sequential
@@ -932,7 +930,7 @@ async function renderZoneMap() {
     try {
       window._zoneGeo = await (await fetch('../data/geojson/reggio-emilia-zone-omi.geojson')).json();
     } catch {
-      document.getElementById('map-zone').innerHTML = '<div style="padding:40px;color:var(--ink-dim);font-family:var(--serif);font-style:italic;text-align:center">Zone OMI capoluogo non ancora estratte. Eseguire scripts/geopoi-zone-extract.py --codcom H223 --prov BO --semestre 20252</div>';
+      document.getElementById('map-zone').innerHTML = '<div style="padding:40px;color:var(--ink-dim);font-family:var(--serif);font-style:italic;text-align:center">Zone OMI capoluogo non ancora estratte. Eseguire scripts/geopoi-zone-extract.py --codcom H223 --prov RE --semestre 20252</div>';
       return;
     }
   }
@@ -1289,40 +1287,6 @@ function bindWeights() {
   });
 }
 
-// FIX UI-3: pannello qualità dati — aggrega flag dal volume-signals + dichiara pool relativo
-function renderDataQualityPanel() {
-  const body = document.getElementById('dq-panel-body');
-  const list = document.getElementById('dq-panel-list');
-  if (!body || !list) return;
-  const vol = state.volumes || {};
-  const agg = vol.aggregated_by_new_zone || [];
-  const lowSample = agg.filter(z => z.low_sample);
-  const gap2018 = agg.filter(z => z.has_2018_gap);
-  const interp2018 = agg.filter(z => z.has_2018_interpolated);
-  const noD14 = agg.filter(z => z.is_d14_missing_2024);
-  const unknown = agg.filter(z => z.rel === 'unknown' || z.confidence === 'none');
-  const anomalies = (vol._anomalies || (state.volumes && state.volumes._anomalies) || {});
-
-  // Anche dal timeseries source se disponibile via state.volumes._anomalies (non c'è di default;
-  // mostro placeholder con le 2 note di audit)
-  const sc = getScoring();
-  body.innerHTML = `
-    BUY/AVOID sono <strong>relativi al pool Reggio Emilia</strong> (capoluogo + provincia, ${state.data?.by_tipologia?.[state.tipo]?.headline?.zone_count || '—'} zone + ${state.data?.by_tipologia?.[state.tipo]?.headline?.comune_count || '—'} comuni).
-    Una zona BUY qui significa "top tier locale", non confrontabile in assoluto con altre province.
-    Soglia BUY ≥ ${sc.buyThreshold}, pesi default ${sc.weights.growth}/${sc.weights.yield}/${sc.weights.stability}/${sc.weights.momentum}/${sc.weights.level} (modificabili).
-    Penalty −${sc.cagrPenalty} su score se CAGR&lt;0.
-  `;
-  const items = [];
-  if (lowSample.length) items.push(`<span><code>⚠ micro</code> · NTN_first&lt;5, CAGR statisticamente debole · ${lowSample.length} zone: ${lowSample.map(z=>z.zona_new).join(', ')}</span>`);
-  if (gap2018.length) items.push(`<span><code>○ gap 2018</code> · ${gap2018.length} zone con buco ineliminabile</span>`);
-  if (interp2018.length) items.push(`<span><code>◐ 2018 stim</code> · ${interp2018.length} zone con NTN 2018 ricostruito via macroaree-downscaling (CAGR matematicamente invariante)</span>`);
-  if (noD14.length) items.push(`<span><code>⊘ no 2024</code> · ${noD14.map(z=>z.zona_new).join(', ')} omessa da AdE SR2025 (soppressione statistica)</span>`);
-  if (unknown.length) items.push(`<span><code>? unknown</code> · mapping OLD→NEW non risolto · ${unknown.map(z=>z.zona_new).join(', ')}</span>`);
-  items.push(`<span><code>FIX P1</code> · parser decontaminato (cross-provincia Cosenza eliminata)</span>`);
-  items.push(`<span><code>FIX P7</code> · 2 righe NTN_var&gt;500% quarantinate (C1/2021, D9/2022)</span>`);
-  list.innerHTML = items.join('');
-}
-
 function updateWeightsCaption() {
   const el = document.getElementById('weights-sub-caption');
   if (!el) return;
@@ -1342,7 +1306,6 @@ function renderAll() {
   renderProvTable();
   renderSparkGrid();
   renderLanes();
-  renderDataQualityPanel();
   updateWeightsCaption();
   buildWhatIfZones();
   computeWhatIf();
