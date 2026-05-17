@@ -141,6 +141,13 @@
   .verdict.BUY { background: var(--up); color: var(--bg); }
   .verdict.WATCH { background: var(--watch); color: var(--bg); }
   .verdict.AVOID { background: var(--down); color: var(--bg); }
+  /* EMERGING — potenziale crescita: zone in P50-P85, prezzo<mediana, CAGR>0. Colore turchese/teal. */
+  .emerging-badge { display: inline-block; padding: 3px 8px; border-radius: 3px;
+    font-family: var(--mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em;
+    background: oklch(94% 0.08 195); color: oklch(38% 0.14 200);
+    border: 1px solid oklch(78% 0.10 195); margin-left: 5px; vertical-align: middle;
+    text-transform: uppercase; cursor: help;
+  }
   .anomaly-icon { display: inline-block; width: 14px; height: 14px;
     background: var(--watch); border-radius: 50%; vertical-align: middle;
     font-family: var(--serif); font-style: italic; color: var(--bg);
@@ -389,7 +396,7 @@
       <div class="weights-head">
         <div>
           <div class="weights-title">Pesi delle componenti</div>
-          <div class="weights-sub" id="weights-sub-caption">Default <strong>35/30/15/15/5</strong> · BUY soglia <strong>≥ 70</strong> · penalty <strong>−10</strong> se CAGR &lt; 0 (anti value-trap)</div>
+          <div class="weights-sub" id="weights-sub-caption">Pesi <strong>35/30/15/15/5</strong> · soglia BUY calibrata · penalty <strong>−10</strong> se CAGR &lt; 0</div>
         </div>
         <button class="reset-btn" id="btn-reset-weights">↺ Default</button>
       </div>
@@ -745,7 +752,9 @@ function renderKPI() {
   const nAvoid = pool.filter(e => recomputeVerdict(recomputeScore(e, state.weights)) === 'AVOID').length;
   document.getElementById('kpi-buy').textContent = nBuy;
   document.getElementById('kpi-buy-tot').textContent = pool.length;
-  document.getElementById('kpi-buy-sub').textContent = `BUY · ${nAvoid} AVOID · soglia ≥ ${getScoring().buyThreshold}`;
+  const nEmerging = pool.filter(e => e.emerging === true).length;
+  const buyT = d?.headline?.buy_threshold_computed != null ? d.headline.buy_threshold_computed.toFixed(1) : getScoring().buyThreshold;
+  document.getElementById('kpi-buy-sub').textContent = `BUY · ${nEmerging} EMERGENTI · ${nAvoid} AVOID · soglia ≥ ${buyT}`;
 
   const ma = document.getElementById('kpi-mood');
   const mb = document.getElementById('kpi-mood-2');
@@ -966,9 +975,12 @@ function popupHtml(f, scope) {
         <div style="font-family:'JetBrains Mono',monospace;font-size:16px;color:oklch(15% 0.008 30);margin-top:2px">${fmtEuro(entry.prezzo_acquisto)}</div>
       </div>
     </div>
-    <div style="margin-top:12px;padding-top:10px;border-top:1px solid oklch(86% 0.008 75);display:flex;justify-content:space-between;align-items:center">
+    <div style="margin-top:12px;padding-top:10px;border-top:1px solid oklch(86% 0.008 75);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
       <span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;color:oklch(15% 0.008 30)">${sc!=null?sc.toFixed(0):'—'}<span style="color:oklch(58% 0.008 30);font-size:12px">/100</span></span>
-      ${vd ? `<span class="verdict ${vd}" style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.06em;font-weight:600;background:${vd==='BUY'?'var(--up)':vd==='WATCH'?'var(--watch)':'var(--down)'};color:var(--bg)">${vd}</span>` : ''}
+      <span>
+        ${vd ? `<span class="verdict ${vd}" style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.06em;font-weight:600;background:${vd==='BUY'?'var(--up)':vd==='WATCH'?'var(--watch)':'var(--down)'};color:var(--bg)">${vd}</span>` : ''}
+        ${entry.emerging ? `<span class="emerging-badge" title="EMERGING: zona ancora accessibile ma in movimento — score in P50-P85 del pool, prezzo sotto la mediana, CAGR > 0%/yr">↑ EMERGENTE</span>` : ''}
+      </span>
     </div>`;
 }
 
@@ -998,7 +1010,7 @@ function renderProvTable() {
       <td class="right num">${p.yield_lordo_pct!=null?p.yield_lordo_pct.toFixed(2)+'%':'—'}</td>
       <td class="right num" style="color:var(--ink-dim)">${p.volatility_pct!=null?p.volatility_pct.toFixed(1)+'%':'—'}</td>
       <td>${scoreBarHtml(p, state.weights)}</td>
-      <td class="right">${vd ? `<span class="verdict ${vd}">${vd}</span>` : '—'}</td>
+      <td class="right">${vd ? `<span class="verdict ${vd}">${vd}</span>` : '—'}${p.emerging ? `<br><span class="emerging-badge" title="EMERGING: zona ancora accessibile ma in movimento — score in P50-P85 del pool, prezzo sotto la mediana, CAGR > 0%/yr">↑ EMERGENTE</span>` : ''}</td>
     </tr>`;
   }).join('');
 }
@@ -1260,7 +1272,11 @@ function updateWeightsCaption() {
   if (!el) return;
   const sc = getScoring();
   const w = sc.weights;
-  el.innerHTML = `Default <strong>${w.growth}/${w.yield}/${w.stability}/${w.momentum}/${w.level}</strong> · BUY soglia <strong>≥ ${sc.buyThreshold}</strong> · penalty <strong>−${sc.cagrPenalty}</strong> se CAGR &lt; 0 (anti value-trap)`;
+  const d = curr();
+  const buyT = d?.headline?.buy_threshold_computed != null ? d.headline.buy_threshold_computed.toFixed(1) : sc.buyThreshold;
+  const method = d?.headline?.threshold_method || 'jenks_natural_breaks_k3';
+  const methodLabel = method === 'jenks_natural_breaks_k3' ? 'Jenks natural breaks (k=3)' : method;
+  el.innerHTML = `Pesi <strong>${w.growth}/${w.yield}/${w.stability}/${w.momentum}/${w.level}</strong> · soglia BUY <strong>≥ ${buyT}</strong> · penalty <strong>−${sc.cagrPenalty}</strong> se CAGR&nbsp;&lt;&nbsp;0 (anti value-trap)<br><span style="font-size:11px;color:var(--ink-dim)">Soglia calibrata via <em>${methodLabel}</em> sul pool zone+comuni · alternative in <code>metadata.scoring</code></span>`;
 }
 
 function renderAll() {

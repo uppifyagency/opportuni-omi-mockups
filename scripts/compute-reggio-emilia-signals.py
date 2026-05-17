@@ -342,12 +342,39 @@ def main():
             "series": {str(y): safe_round(ts[y], 0) for y in years},
         }
 
-    # Headline numbers for hero — CAGR average uses only zones with enough datapoints
-    # to be statistically credible (see MIN_CAGR_YEARS). Yield and price avg use all
-    # current zones because those don't require multi-year coverage to be reliable.
+    # Headline cagr_avg_pct: MEDIA SULLE ZONE CORRENTI (con dizione), SENZA filtro
+    # MIN_CAGR_YEARS. Allineato a compute-compass.py per coerenza signals↔compass
+    # (richiesta da audit §17/§20 Inv1b). Il filtro MIN_CAGR_YEARS viene mantenuto SOLO
+    # per top_growth/top_decline più sotto, perché le classifiche top-N devono evitare
+    # zone con noise da 2-datapoint CAGR.
     cagrs = [z["cagr_full"] for z in zone_metrics_list
-             if z["cagr_full"] is not None and z.get("dizione")
-             and (z.get("anni_dati_acquisto") or 0) >= MIN_CAGR_YEARS]
+             if z["cagr_full"] is not None and z.get("dizione")]
+
+    # Conteggio zone effettivamente affidabili (>= MIN_CAGR_YEARS) — esposto come metric
+    # separato perché informa sul "rischio statistico" del cagr_avg_pct headline.
+    cagrs_reliable_only = [z["cagr_full"] for z in zone_metrics_list
+                            if z["cagr_full"] is not None and z.get("dizione")
+                            and (z.get("anni_dati_acquisto") or 0) >= MIN_CAGR_YEARS]
+
+    # FALLBACK fascia — usato SOLO quando ZERO zone correnti hanno cagr_full valorizzato
+    # (caso estremo: provincia appena estratta senza storia). Per Reggio Emilia 2026 le
+    # 24 zone correnti hanno tutte CAGR su 2024-2026 (debole ma esistente), quindi il
+    # fallback non scatta. Mantengo la logica per robustezza future cities.
+    cagr_source = "zone_correnti"
+    if not cagrs:
+        fascia_cagrs = []
+        for f, ts in fascia_acq.items():
+            if f == "R": continue
+            yrs = sorted(ts.keys())
+            if len(yrs) >= 5:
+                v0, vN = ts[yrs[0]], ts[yrs[-1]]
+                if v0 and vN and v0 > 0:
+                    c = cagr(v0, vN, yrs[-1] - yrs[0])
+                    if c is not None: fascia_cagrs.append(c)
+        if fascia_cagrs:
+            cagrs = fascia_cagrs
+            cagr_source = "fascia_aggregata_BCDE"
+            print(f"  ⚠ Fallback: zero zone con CAGR, uso media CAGR fasce B/C/D/E ({len(cagrs)} fasce, range {min(fascia_cagrs)*100:.2f}%..{max(fascia_cagrs)*100:.2f}%)")
     # Yield medio: SOLO zone correnti (con dizione). Le zone storiche hanno
     # prezzo_acquisto/affitto fermi al loro ultimo anno (es. 2012), il loro yield
     # non rappresenta il mercato di oggi. Includerle alterava la media: 4.99% con
@@ -397,9 +424,17 @@ def main():
         "headline": {
             "zone_count_total": len(zone_metrics_list),
             "zone_count_current": sum(1 for z in zone_metrics_list if z.get("dizione")),
-            "zone_count_cagr_reliable": len(cagrs),
+            "zone_count_cagr": len(cagrs),
+            # Quante zone correnti hanno CAGR statisticamente affidabile (>= MIN_CAGR_YEARS).
+            # Per Reggio Emilia 2026 = 0 (rinumerazione totale 2024) → cagr_avg_pct viene dai
+            # 2-datapoint, da leggersi come "trend recente" non "structural".
+            "zone_count_cagr_reliable": len(cagrs_reliable_only),
             "cagr_avg_pct": safe_round(sum(cagrs) / len(cagrs) * 100, 2) if cagrs else None,
             "cagr_avg_pct_min_years": MIN_CAGR_YEARS,
+            # Sorgente del cagr_avg_pct: "zone_correnti" (default, no filtro MIN) o
+            # "fascia_aggregata_BCDE" (fallback estremo). Per allineamento signals↔compass
+            # (audit Inv1b) entrambi usano zone_correnti senza filtro.
+            "cagr_avg_pct_source": cagr_source,
             "yield_medio_pct": safe_round(sum(yields) / len(yields), 2) if yields else None,
             "prezzo_medio_attuale": safe_round(sum(current_prezzi) / len(current_prezzi), 0) if current_prezzi else None,
             # Due orizzonti diversi, esposti separati per disambiguare:

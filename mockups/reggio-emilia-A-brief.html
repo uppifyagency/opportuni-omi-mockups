@@ -180,7 +180,7 @@
     <div class="eyebrow">Brief immobiliare · banca dati OMI</div>
     <h1>Reggio Emilia in <em>vent'anni</em>:<br>prezzi fermi, volumi raddoppiati.</h1>
     <p class="deck">Il valore al metro quadro si è assestato, le compravendite no. Centro storico in raffreddamento, semicintura che tiene il passo, periferia che lavora. Tre letture, nessuno slogan.</p>
-    <div class="dateline">Edizione · 2025-S2 · <span id="dl">…</span></div>
+    <div class="dateline">Edizione · <span id="hl-edizione">…</span> · <span id="dl">…</span></div>
   </header>
 
   <!-- ─── HEADLINE NUMBERS ─── -->
@@ -359,6 +359,16 @@ async function loadAndRender() {
   const h = d.headline;
 
   document.getElementById('dl').textContent = new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' });
+  // Edizione: caricata da GeoPOI GeoJSON (semestre delle zone OMI correnti).
+  try {
+    const zg = await (await fetch('../data/geojson/reggio-emilia-zone-omi.geojson')).json();
+    const sem = (zg?.features?.[0]?.properties?.semestre) || '';
+    if (sem && sem.length === 5) {
+      document.getElementById('hl-edizione').textContent = `${sem.slice(0,4)}-S${sem.slice(4)}`;
+    } else {
+      document.getElementById('hl-edizione').textContent = '—';
+    }
+  } catch (e) { document.getElementById('hl-edizione').textContent = '—'; }
 
   // KPIs
   document.getElementById('kpi-horizon').textContent = h.anni_orizzonte || '—';

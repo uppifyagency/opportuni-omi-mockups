@@ -218,12 +218,20 @@ def compute_score(z, pool_stats):
     }
 
 
-def verdict_from_score(score):
+def verdict_from_score(score, buy_t, avoid_t):
+    """Soglie data-driven Jenks (vedi _threshold_lib.calibrate_thresholds)."""
     if score is None:
         return None
-    if score >= 65: return "BUY"
-    if score < 35:  return "AVOID"
+    if score >= buy_t: return "BUY"
+    if score < avoid_t: return "AVOID"
     return "WATCH"
+
+
+# FIX threshold-scientific 2026-05-17: Jenks natural breaks (k=3).
+import sys as _sys
+from pathlib import Path as _P
+_sys.path.insert(0, str(_P(__file__).parent))
+from _threshold_lib import calibrate_thresholds  # noqa: E402
 
 
 def detect_anomaly(z, fascia_stats):
@@ -375,10 +383,7 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
             "yield_std": statistics.stdev(yields) if len(yields) > 1 else 0,
         }
 
-    # Compute score + verdict + anomaly + comparables for each entry.
-    # Zones below MIN_CAGR_YEARS get verdict downgraded to WATCH max — a 2-year CAGR
-    # can't justify a BUY recommendation in an investor deck. Their score is still
-    # computed (so the frontend can show it) but the verdict is capped.
+    # Phase 1: compute scores per tutto il pool
     for z in zone_list + prov_list:
         coverage = len(z.get("spark_years") or [])
         z["data_quality"] = "limited" if coverage < MIN_CAGR_YEARS else "ok"
@@ -386,21 +391,46 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
         if sc:
             z["score"] = sc["score"]
             z["score_components"] = sc["components"]
-            raw_verdict = verdict_from_score(sc["score"])
-            if z["data_quality"] == "limited" and raw_verdict == "BUY":
-                z["verdict"] = "WATCH"
-                z["verdict_capped"] = True
-            elif z["data_quality"] == "limited" and raw_verdict == "AVOID":
-                z["verdict"] = "WATCH"
-                z["verdict_capped"] = True
-            else:
-                z["verdict"] = raw_verdict
-                z["verdict_capped"] = False
         else:
             z["score"] = None
             z["score_components"] = None
             z["verdict"] = None
             z["verdict_capped"] = False
+
+    # Phase 2: calibra soglie Jenks-based — FIX threshold-scientific 2026-05-17
+    pool_for_thr = [z["score"] for z in current_zones + prov_list if z.get("score") is not None]
+    calib = calibrate_thresholds(pool_for_thr)
+    buy_t = calib["buy_threshold"]
+    avoid_t = calib["avoid_threshold"]
+
+    # Phase 3: verdict + cap su data_quality limited
+    for z in zone_list + prov_list:
+        if z.get("score") is None:
+            continue
+        raw_verdict = verdict_from_score(z["score"], buy_t, avoid_t)
+        if z.get("data_quality") == "limited" and raw_verdict in ("BUY", "AVOID"):
+            z["verdict"] = "WATCH"
+            z["verdict_capped"] = True
+        else:
+            z["verdict"] = raw_verdict
+            z["verdict_capped"] = False
+
+    # Phase 4: tag EMERGING (potenziale crescita) — FIX 2026-05-17
+    pool_prices = [z.get("prezzo_acquisto") for z in current_zones + prov_list if z.get("prezzo_acquisto") is not None]
+    import numpy as _np2
+    p50_score = float(_np2.percentile(pool_for_thr, 50)) if pool_for_thr else 50.0
+    median_price = float(_np2.median(pool_prices)) if pool_prices else None
+    for z in zone_list + prov_list:
+        z["emerging"] = False
+        if z.get("score") is None or z.get("cagr") is None:
+            continue
+        if z["score"] < p50_score or z["score"] >= buy_t:
+            continue
+        if z["cagr"] <= 0:
+            continue
+        if median_price is not None and z.get("prezzo_acquisto") is not None and z["prezzo_acquisto"] >= median_price:
+            continue
+        z["emerging"] = True
 
     for z in current_zones:
         anom = detect_anomaly(z, fascia_stats)
@@ -461,6 +491,8 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
                         and z.get("cagr") is not None
                         and z["recent_slope_pct"] / 100 > z["cagr"] * 1.5],
                        key=lambda x: -(x.get("recent_slope_pct") or -999))[:6]
+    top_emerging = sorted([z for z in cur + prov_list if z.get("emerging")],
+                          key=lambda x: -(x.get("cagr") or 0))[:6]
     anomalies = [z for z in cur if z.get("anomaly")]
 
     return {
@@ -474,15 +506,17 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
             "zone_count_cagr_reliable": len(cagrs),
             "yield_avg_pct": safe_round(statistics.mean(yields), 2) if yields else None,
             "prezzo_avg": safe_round(statistics.mean(prices), 0) if prices else None,
-            # Orizzonte zone correnti (CAGR window): max - min sui spark_years
-            # delle zone con dizione (es. 2026-2014=12 per abitazioni_civili).
-            # `anni_orizzonte_zone_correnti` rende esplicito il dominio temporale —
-            # sostituisce il vecchio `anni_orizzonte` ambiguo.
             "anni_orizzonte_zone_correnti": (max(years_all) - min(years_all)) if years_all else None,
             "n_buy_zone": sum(1 for z in cur if z.get("verdict") == "BUY"),
             "n_avoid_zone": sum(1 for z in cur if z.get("verdict") == "AVOID"),
             "n_buy_provincia": sum(1 for z in prov_list if z.get("verdict") == "BUY"),
             "n_avoid_provincia": sum(1 for z in prov_list if z.get("verdict") == "AVOID"),
+            "n_emerging_zone": sum(1 for z in cur if z.get("emerging")),
+            "n_emerging_provincia": sum(1 for z in prov_list if z.get("emerging")),
+            "buy_threshold_computed": safe_round(buy_t, 2),
+            "avoid_threshold_computed": safe_round(avoid_t, 2),
+            "threshold_method": calib["method_used"],
+            "threshold_calibration": calib,
         },
         "pool_stats": pool_stats,
         "fascia_stats": fascia_stats,
@@ -492,6 +526,7 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
         "top_buy": top_buy,
         "top_avoid": top_avoid,
         "top_watch": top_watch,
+        "top_emerging": top_emerging,
         "anomalies": anomalies,
     }
 
@@ -562,6 +597,13 @@ def main():
             "filters": {
                 "min_cagr_years": MIN_CAGR_YEARS,
                 "applies_to": "headline.cagr_avg_pct",
+            },
+            # FIX threshold-scientific 2026-05-17: Jenks natural breaks (k=3).
+            "scoring": {
+                "threshold_method_primary": "jenks_natural_breaks_k3",
+                "threshold_method_reason": "k-means 1D ottimo, standard GIS per dati immobiliari",
+                "threshold_methods_compared": ["jenks_k3", "otsu", "gmm_k3", "p85", "p85_bootstrap"],
+                "note": "Soglie BUY/AVOID calibrate per ciascuna tipologia via Jenks (k=3) sul pool zone+comuni. Le soglie effettive sono in by_tipologia.<tipo>.headline.buy_threshold_computed. Alternative in headline.threshold_calibration.alternative_thresholds.",
             },
         },
         "by_tipologia": by_tipologia,

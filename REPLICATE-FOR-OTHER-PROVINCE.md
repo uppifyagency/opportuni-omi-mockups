@@ -1956,3 +1956,152 @@ Quando aggiungi un test: appendi al `Report.tests` con `rep.add(...)` o `rep.war
 - Per-city math-proof JSON: `docs/audit/<city>/math-proof.json`
 
 ---
+
+## 21. Calibrazione scientifica delle soglie BUY/AVOID (Jenks natural breaks)
+
+**Aggiunta: 2026-05-17 — post-diagnosi soglia BUY irraggiungibile.**
+
+### 21.1 — Il problema della soglia assoluta
+
+Le prime tre città (Modena, Catanzaro, Bologna) avevano una soglia BUY fissa hardcoded (`BUY_THRESHOLD = 70`). Diagnosi:
+
+- Lo `score` 0-100 del compass è una **media pesata di componenti normalizzate min-max sul proprio pool**.
+- La distribuzione segue una media di variabili uniformi normalizzate → CLT → ≈ normale centrata su ~50, sd ~10-12.
+- **Soglia 70 = top 5% statistico** (richiede top 30% simultaneo su 5 dimensioni). Per Bologna (max 69.9) e Catanzaro (max 61.1) è **letteralmente irraggiungibile**.
+- Risultato: **0 BUY** in Bologna e Catanzaro → segnale verdict inutile.
+
+### 21.2 — Confronto fra 6 metodi statisticamente fondati
+
+Dopo iterazione critica, sono stati confrontati 6 metodi rigorosi su 4 città:
+
+| Metodo | Cos'è | Skill |
+|---|---|---|
+| **Otsu's method** | Minimizza varianza intra-classe (bipartition) | scipy.stats (manuale) |
+| **Gaussian Mixture Model k=3** | Clustering EM probabilistico → intersezione gaussiane | sklearn.mixture |
+| **Jenks natural breaks k=3** | k-means 1D ottimo, classico GIS immobiliare | jenkspy |
+| **KDE valley detection** | Minimi locali della densità kernel-smoothed | scipy.signal.find_peaks |
+| **Bootstrap CI sul P85** | Quantifica incertezza statistica del percentile | numpy |
+| **P85 baseline** | Percentile arbitrario (euristica) | numpy |
+
+Script di confronto: [`scripts/threshold-scientific-analysis.py`](scripts/threshold-scientific-analysis.py).
+Report: [`docs/audit/THRESHOLD-SCIENTIFIC-ANALYSIS.md`](docs/audit/THRESHOLD-SCIENTIFIC-ANALYSIS.md).
+
+### 21.3 — Decisione finale: Jenks natural breaks (k=3)
+
+**Adottato come metodo principale** in tutti i `compute-<city>-compass.py`.
+
+Razionale matematico:
+- **Ottimo sotto k-means 1D**: minimizza la somma-quadrati intra-classe.
+- **Robusto a distribuzioni sia unimodali sia multi-modali**.
+- **Standard GIS per dati immobiliari** (largamente adottato nella valutazione di portafogli).
+- **Computazionalmente leggero** (~50ms per pool n=130).
+
+Le altre soglie (Otsu, GMM, P85, P85 bootstrap CI 95%) sono esposte in `metadata.scoring.alternative_thresholds` per **trasparenza scientifica**.
+
+### 21.4 — Implementazione (`_threshold_lib.py`)
+
+Helper condiviso fra tutti i compute scripts:
+
+```python
+# scripts/_threshold_lib.py
+from _threshold_lib import calibrate_thresholds
+
+# Nel compute_tipologia():
+pool_scores = [z["score"] for z in current_zones + prov_list if z.get("score") is not None]
+calib = calibrate_thresholds(pool_scores)
+buy_t = calib["buy_threshold"]      # Jenks-derived
+avoid_t = calib["avoid_threshold"]  # Jenks-derived
+# calib["alternative_thresholds"] contiene Otsu, GMM, P85, P85 bootstrap
+
+# Espone nel headline:
+"buy_threshold_computed": buy_t,
+"avoid_threshold_computed": avoid_t,
+"threshold_method": calib["method_used"],          # "jenks_natural_breaks_k3"
+"threshold_calibration": calib,                    # tutto il pacchetto
+```
+
+Fallback automatico a P85/P15 se `jenkspy` non disponibile.
+
+### 21.5 — Tag complementare `EMERGING` (potenziale crescita)
+
+Il verdict BUY identifica i **top performer**. Spesso però sono **già al top** e cari. Per chi cerca **early-entry zone economicamente accessibili in movimento**, è stato aggiunto un tag complementare `emerging` con criteri quant rigorosi:
+
+```python
+# In compute-<city>-compass.py phase 4:
+z["emerging"] = (
+    P50 <= score < buy_threshold  # nel range medio-alto, NON già BUY
+    AND cagr > 0                  # in movimento positivo
+    AND prezzo < median(pool)     # ancora accessibile
+)
+```
+
+Output nel JSON:
+- `headline.n_emerging_zone`, `headline.n_emerging_provincia`
+- `top_emerging` (lista delle top 6 ordinate per CAGR)
+- `emerging: true|false` per ogni entry in `zone_metrics` e `province_ranking`
+
+UI rendering: badge turchese-teal `↑ EMERGENTE` accanto al verdict nel C-compass.
+
+### 21.6 — Risultati Jenks sulle 4 città (abitazioni civili)
+
+| Provincia | Soglia Jenks BUY | Soglia Jenks AVOID | BUY tot | EMERGING tot | AVOID tot |
+|---|---:|---:|---:|---:|---:|
+| **Modena** | 65.5 | 50.1 | 2 | 6 | 25 |
+| **Bologna** | 51.9 | 36.6 | 38 | 2 | 11 |
+| **Catanzaro** | 46.5 | 32.2 | 37 | 9 | 4 |
+| **Reggio Emilia** | 49.3 | 35.8 | 7 | 3 | 40 |
+
+Le soglie sono **per-pool** (BUY a Modena ≠ BUY a Bologna in assoluto). Documentato esplicitamente in `metadata.pool_composition.warning`.
+
+### 21.7 — UI cabling nei 4 mockup C-compass
+
+Dopo la calibrazione, i mockup C-compass sono stati **ricablati** per riflettere il nuovo paradigma:
+
+1. **CSS aggiunto** per `.emerging-badge` (colore turchese OKLCH).
+2. **Rendering tabella province**: ogni riga `EMERGING` mostra `<br>↑ EMERGENTE` accanto al verdict.
+3. **Rendering card popup zona/comune**: stesso badge nel bottom-right della card.
+4. **KPI strip** `kpi-buy-sub`: testo aggiornato da `"BUY · N AVOID · soglia ≥ X"` a `"BUY · N EMERGENTI · M AVOID · soglia ≥ X.X"` con soglia calibrata letta da `headline.buy_threshold_computed`.
+5. **Pannello "Punteggio su misura"** (`weights-sub-caption`): caption aggiornata con metodo (`Jenks natural breaks (k=3)`) letto da `headline.threshold_method`.
+
+### 21.8 — Workflow per una nuova città (post-Jenks)
+
+```bash
+# Dopo aver eseguito i §1-§19 standard:
+
+# 1. Verifica installazione skill stack (jenkspy obbligatorio)
+python3 -m pip install --user jenkspy scikit-learn
+
+# 2. Compute compass userà automaticamente Jenks via _threshold_lib
+python3 scripts/compute-<city>-compass.py
+
+# 3. Verifica le soglie computate
+python3 -c "
+import json
+d = json.load(open('data/computed/<city>-compass.json'))
+h = d['by_tipologia']['abitazioni_civili']['headline']
+print(f'Soglia BUY: {h[\"buy_threshold_computed\"]} (metodo: {h[\"threshold_method\"]})')
+print(f'BUY count: {h[\"n_buy_zone\"]+h[\"n_buy_provincia\"]}  EMERGING: {h[\"n_emerging_zone\"]+h[\"n_emerging_provincia\"]}  AVOID: {h[\"n_avoid_zone\"]+h[\"n_avoid_provincia\"]}')
+"
+
+# 4. Audit math-proof
+python3 scripts/audit-math-proof.py --city <city>
+
+# 5. Analisi comparativa 6 metodi (opzionale, raccomandata)
+python3 scripts/threshold-scientific-analysis.py
+# → docs/audit/THRESHOLD-SCIENTIFIC-ANALYSIS.md viene rigenerato con la nuova città
+```
+
+### 21.9 — Quando NON usare Jenks
+
+- **Pool n < 10**: `_threshold_lib.calibrate_thresholds()` fallback automatico a soglie costanti (60/35).
+- **Distribuzione multi-modale chiara** (es. due cluster nettamente separati): GMM k=3 può essere più appropriato → consulta `THRESHOLD-SCIENTIFIC-ANALYSIS.md` per la città specifica.
+- **Comparabilità inter-provincia richiesta**: Jenks è per-pool, non assoluto. Per ranking cross-city usa il `quant_score` di `top5-investment.py` (vedi §22 se aggiunta).
+
+### 21.10 — Riferimenti
+
+- **Jenks natural breaks**: Jenks, G. F. (1967). "The Data Model Concept in Statistical Mapping". *International Yearbook of Cartography 7*.
+- **Otsu's method**: Otsu, N. (1979). "A Threshold Selection Method from Gray-Level Histograms". *IEEE Trans. Syst., Man, Cybern. 9*.
+- **GMM / EM**: Bishop (2006), *Pattern Recognition and Machine Learning*, cap. 9.
+- **scientific-agent-skills** sklearn.mixture, jenkspy installati via `pip install scikit-learn jenkspy`.
+
+---

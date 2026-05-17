@@ -283,24 +283,51 @@
 </div>
 
 <script>
-const RAMP = [
+// FIX cromatica 2026-05-17: scala DIVERGENTE centrata su 0% (non più lineare min-max).
+// Diagnosi: la rampa lineare causava falsità — un comune con CAGR=0% (neutralità reale)
+// poteva apparire rosso (in declino) se la distribuzione era asimmetrica. Vedi
+// docs/audit/COLORMAP-AUDIT.md per il dettaglio statistico.
+const NEG_RAMP = [
   { t: 0.00, rgb: [195, 60,  55]  },
-  { t: 0.25, rgb: [222, 132, 92]  },
-  { t: 0.50, rgb: [220, 210, 188] },
-  { t: 0.75, rgb: [144, 188, 122] },
+  { t: 0.50, rgb: [222, 132, 92]  },
+  { t: 1.00, rgb: [240, 232, 218] },
+];
+const POS_RAMP = [
+  { t: 0.00, rgb: [240, 232, 218] },
+  { t: 0.50, rgb: [144, 188, 122] },
   { t: 1.00, rgb: [60,  140, 80]  },
 ];
-function colorForCAGR(cagrPct, lo, hi) {
-  if (cagrPct == null) return 'rgb(200, 195, 184)';
-  const t = Math.max(0, Math.min(1, (cagrPct - lo) / (hi - lo || 1)));
-  for (let i = 0; i < RAMP.length - 1; i++) {
-    if (t >= RAMP[i].t && t <= RAMP[i+1].t) {
-      const k = (t - RAMP[i].t) / (RAMP[i+1].t - RAMP[i].t);
-      const c = RAMP[i].rgb.map((v, j) => Math.round(v + k * (RAMP[i+1].rgb[j] - v)));
+function interpRgb(ramp, t) {
+  t = Math.max(0, Math.min(1, t));
+  for (let i = 0; i < ramp.length - 1; i++) {
+    if (t >= ramp[i].t && t <= ramp[i+1].t) {
+      const k = (t - ramp[i].t) / (ramp[i+1].t - ramp[i].t);
+      const c = ramp[i].rgb.map((v, j) => Math.round(v + k * (ramp[i+1].rgb[j] - v)));
       return `rgb(${c[0]},${c[1]},${c[2]})`;
     }
   }
-  return 'rgb(200, 195, 184)';
+  return `rgb(${ramp[ramp.length-1].rgb.join(',')})`;
+}
+function colorForCAGR(cagrPct, negClamp, posClamp) {
+  if (cagrPct == null) return 'rgb(200, 195, 184)';
+  if (cagrPct >= 0) {
+    const denom = (posClamp > 0) ? posClamp : 1;
+    return interpRgb(POS_RAMP, cagrPct / denom);
+  } else {
+    const denom = (negClamp < 0) ? Math.abs(negClamp) : 1;
+    return interpRgb(NEG_RAMP, 1 - Math.abs(cagrPct) / denom);
+  }
+}
+function percentileClamp(values) {
+  if (!values || values.length === 0) return { negClamp: -1, posClamp: 1, p5: -1, p95: 1 };
+  const sorted = [...values].sort((a,b) => a - b);
+  const p5 = sorted[Math.floor(sorted.length * 0.05)];
+  const p95 = sorted[Math.floor(sorted.length * 0.95)];
+  return {
+    negClamp: p5 < 0 ? p5 : -0.5,
+    posClamp: p95 > 0 ? p95 : 0.5,
+    p5: p5, p95: p95,
+  };
 }
 
 function trendOf(cagrPct) {
@@ -375,29 +402,27 @@ async function loadAndRender() {
     if (z.dizione) cagrByZona[z.zona] = z.cagr_full != null ? z.cagr_full * 100 : null;
   }
   const values = Object.values(cagrByZona).filter(v => v != null);
-  const lo = values.length ? Math.min(...values) : -1;
-  const hi = values.length ? Math.max(...values) :  1;
-  document.getElementById('legend-min').textContent = (lo > 0 ? '+' : '') + lo.toFixed(2) + '%';
-  document.getElementById('legend-max').textContent = (hi > 0 ? '+' : '') + hi.toFixed(2) + '%';
+  const clamp = percentileClamp(values);
+  document.getElementById('legend-min').textContent = (clamp.negClamp > 0 ? '+' : '') + clamp.negClamp.toFixed(2) + '%';
+  document.getElementById('legend-max').textContent = (clamp.posClamp > 0 ? '+' : '') + clamp.posClamp.toFixed(2) + '%';
 
   zonesGeo.features.forEach(f => {
     const c = cagrByZona[f.properties.zona];
     f.properties._cagr = c;
-    f.properties._color = colorForCAGR(c, lo, hi);
+    f.properties._color = colorForCAGR(c, clamp.negClamp, clamp.posClamp);
   });
 
   // ── PROVINCIA MAP (zoom-out, 80 comuni) ──
   const provCagrByCat = {};
   for (const p of signals.province_ranking) provCagrByCat[p.catasto] = p.cagr != null ? p.cagr * 100 : null;
   const pVals = Object.values(provCagrByCat).filter(v => v != null);
-  const pLo = pVals.length ? Math.min(...pVals) : -1;
-  const pHi = pVals.length ? Math.max(...pVals) :  1;
-  document.getElementById('legend-prov-min').textContent = (pLo > 0 ? '+' : '') + pLo.toFixed(2) + '%';
-  document.getElementById('legend-prov-max').textContent = (pHi > 0 ? '+' : '') + pHi.toFixed(2) + '%';
+  const pClamp = percentileClamp(pVals);
+  document.getElementById('legend-prov-min').textContent = (pClamp.negClamp > 0 ? '+' : '') + pClamp.negClamp.toFixed(2) + '%';
+  document.getElementById('legend-prov-max').textContent = (pClamp.posClamp > 0 ? '+' : '') + pClamp.posClamp.toFixed(2) + '%';
   provGeo.features.forEach(f => {
     const c = provCagrByCat[f.properties.com_catasto_code];
     f.properties._cagr = c;
-    f.properties._color = colorForCAGR(c, pLo, pHi);
+    f.properties._color = colorForCAGR(c, pClamp.negClamp, pClamp.posClamp);
   });
 
   document.getElementById('h2-prov-count').textContent = provGeo.features.length;

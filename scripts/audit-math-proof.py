@@ -660,7 +660,9 @@ def test_monte_carlo_simpy(rep, com, out_dir, city, n_sims=1000, jitter=0.10):
     abci = com["by_tipologia"]["abitazioni_civili"]
     sc = com["metadata"].get("scoring", {})
     w_default = sc.get("weights_default", {"growth": 0.35, "yield": 0.30, "stability": 0.15, "momentum": 0.15, "level": 0.05})
-    buy_thresh = sc.get("buy_threshold", 70)
+    # FIX threshold-scientific 2026-05-17: usa Jenks-calibrated soglia del headline,
+    # non quella hardcoded del metadata.scoring (che è solo fallback).
+    buy_thresh = abci["headline"].get("buy_threshold_computed") or sc.get("buy_threshold", 70)
     penalty = sc.get("cagr_negative_penalty", 10)
     pool = [z for z in abci["zone_metrics"] + abci["province_ranking"] if z.get("score_components")]
     if not pool:
@@ -824,9 +826,10 @@ def test_html_anti_stale(rep, mockups, sig, city=None):
                 snip = body[max(0, m.start() - 30): m.end() + 30].replace("\n", " ")
                 findings.append(f"{mockup.name}: {label} → ...{snip[:80]}...")
 
-        # Verify fetch path correctness — supporta città multi-word (es. "reggio-emilia")
-        # Regex accetta lettere, cifre e trattini interni nel nome città
-        city_in_path = re.search(r"data/computed/([a-z0-9][a-z0-9\-]*?)-signals\.json", text)
+        # Verify fetch path correctness — supporta città multi-word (es. "reggio-emilia").
+        # Lookbehind negativo `(?<!-volume)` esclude i fetch di "*-volume-signals.json" che
+        # altrimenti farebbero catturare "<city>-volume" come nome città (falso positivo).
+        city_in_path = re.search(r"data/computed/([a-z0-9][a-z0-9\-]*?)(?<!-volume)-signals\.json", text)
         if city_in_path:
             fetched = city_in_path.group(1)
             # Se city è passato esplicito, usalo (gestisce nomi composti). Altrimenti

@@ -50,8 +50,16 @@ TIPOLOGIE_HEADLINE = [
 # Il JS può ricomputare on-the-fly (slider), ma il default deve coincidere.
 WEIGHTS_DEFAULT = {"growth": 0.35, "yield": 0.30, "stability": 0.15,
                    "momentum": 0.15, "level": 0.05}
-BUY_THRESHOLD = 70
-AVOID_THRESHOLD = 35
+# FIX 2026-05-17 (threshold-scientific): Jenks natural breaks (k=3).
+# Vedi docs/audit/THRESHOLD-SCIENTIFIC-ANALYSIS.md per il confronto fra 6 metodi.
+# Il metodo Jenks è il classico GIS per dati immobiliari: minimizza somma-quadrati
+# intra-classe (k-means 1D ottimo). Le soglie alternative (Otsu, GMM k=3, P85 con
+# bootstrap CI 95%) sono esposte in metadata.scoring.alternative_thresholds per
+# trasparenza scientifica.
+import sys as _sys
+from pathlib import Path as _P
+_sys.path.insert(0, str(_P(__file__).parent))
+from _threshold_lib import calibrate_thresholds  # noqa: E402
 CAGR_NEGATIVE_PENALTY = 10  # FIX P4: ora applicata anche in Python (allineata a JS)
 
 
@@ -215,12 +223,12 @@ def compute_score(z, pool_stats):
     }
 
 
-def verdict_from_score(score):
-    """FIX P4: soglie allineate alla UI."""
+def verdict_from_score(score, buy_t, avoid_t):
+    """Soglie data-driven Jenks (vedi _threshold_lib.calibrate_thresholds)."""
     if score is None:
         return None
-    if score >= BUY_THRESHOLD: return "BUY"
-    if score < AVOID_THRESHOLD: return "AVOID"
+    if score >= buy_t: return "BUY"
+    if score < avoid_t: return "AVOID"
     return "WATCH"
 
 
@@ -368,16 +376,60 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
             "yield_std": statistics.stdev(yields) if len(yields) > 1 else 0,
         }
 
+    # Phase 1: compute scores per tutto il pool (zone + comuni)
     for z in zone_list + prov_list:
         sc = compute_score(z, pool_stats)
         if sc:
             z["score"] = sc["score"]
             z["score_components"] = sc["components"]
-            z["verdict"] = verdict_from_score(sc["score"])
         else:
             z["score"] = None
             z["score_components"] = None
             z["verdict"] = None
+
+    # Phase 2: calibra soglie data-driven con Jenks natural breaks (k=3) sul pool
+    # (zone correnti + comuni). Vedi _threshold_lib.calibrate_thresholds() per il
+    # dettaglio del metodo + alternativi (Otsu, GMM, P85, bootstrap CI 95%).
+    pool_for_thresholds = [z["score"] for z in current_zones + prov_list if z.get("score") is not None]
+    calib = calibrate_thresholds(pool_for_thresholds)
+    buy_t = calib["buy_threshold"]
+    avoid_t = calib["avoid_threshold"]
+
+    # Phase 3: applica verdict con le soglie data-driven
+    for z in zone_list + prov_list:
+        if z.get("score") is not None:
+            z["verdict"] = verdict_from_score(z["score"], buy_t, avoid_t)
+
+    # Phase 4: tag EMERGING (potenziale crescita / entry-friendly) — FIX 2026-05-17.
+    # Identifica zone "ancora accessibili ma in movimento":
+    #   - score ≥ P50 del pool (sopra mediana, non scarto)
+    #   - score < P85 del pool (NON già BUY/top — entrarci ancora sensato)
+    #   - prezzo_acquisto < mediana pool (entry accessibile)
+    #   - CAGR > 0 (movimento in atto)
+    #   - momentum NON in {frozen, cooling} (no value-trap)
+    # Tag complementare al verdict, non sostituisce. Permette di leggere il compass
+    # distinguendo "già al top" (BUY) da "da entrare" (EMERGING).
+    pool_for_thr = current_zones + prov_list
+    pool_scores_valid = [z["score"] for z in pool_for_thr if z.get("score") is not None]
+    pool_prices_valid = [z.get("prezzo_acquisto") for z in pool_for_thr if z.get("prezzo_acquisto") is not None]
+    import numpy as _np2
+    p50_score = float(_np2.percentile(pool_scores_valid, 50)) if pool_scores_valid else 50.0
+    median_price = float(_np2.median(pool_prices_valid)) if pool_prices_valid else None
+
+    for z in zone_list + prov_list:
+        z["emerging"] = False  # default
+        if z.get("score") is None or z.get("cagr") is None:
+            continue
+        if z["score"] < p50_score or z["score"] >= buy_t:
+            continue
+        if z["cagr"] <= 0:
+            continue
+        # Filtro momentum: se abbiamo il dato volume, escludi frozen/cooling
+        # (per le zone del compass questo viene attaccato dopo via volume-signals join nel JS,
+        # ma anche senza il momentum, il filtro CAGR>0 + prezzo<med dà già un EMERGING valido)
+        if median_price is not None and z.get("prezzo_acquisto") is not None and z["prezzo_acquisto"] >= median_price:
+            continue
+        z["emerging"] = True
 
     for z in current_zones:
         anom = detect_anomaly(z, fascia_stats)
@@ -434,6 +486,10 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
                         and z.get("cagr") is not None
                         and z["recent_slope_pct"] / 100 > z["cagr"] * 1.5],
                        key=lambda x: -(x.get("recent_slope_pct") or -999))[:6]
+    # FIX 2026-05-17: top_emerging = zone "potenziale crescita" (vedi flag emerging).
+    # Ordinate per CAGR decrescente — chi cresce più forte tra le entry-friendly.
+    top_emerging = sorted([z for z in pool_for_top if z.get("emerging")],
+                          key=lambda x: -(x.get("cagr") or 0))[:6]
     anomalies = [z for z in cur if z.get("anomaly")]
 
     return {
@@ -450,6 +506,12 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
             "n_avoid_zone": sum(1 for z in cur if z.get("verdict") == "AVOID"),
             "n_buy_provincia": sum(1 for z in prov_list if z.get("verdict") == "BUY"),
             "n_avoid_provincia": sum(1 for z in prov_list if z.get("verdict") == "AVOID"),
+            "n_emerging_zone": sum(1 for z in cur if z.get("emerging")),
+            "n_emerging_provincia": sum(1 for z in prov_list if z.get("emerging")),
+            "buy_threshold_computed": safe_round(buy_t, 2),
+            "avoid_threshold_computed": safe_round(avoid_t, 2),
+            "threshold_method": calib["method_used"],
+            "threshold_calibration": calib,
         },
         "pool_stats": pool_stats,
         "fascia_stats": fascia_stats,
@@ -459,6 +521,7 @@ def compute_tipologia(rows, tipo, zone_meta, prov_meta):
         "top_buy": top_buy,
         "top_avoid": top_avoid,
         "top_watch": top_watch,
+        "top_emerging": top_emerging,
         "anomalies": anomalies,
     }
 
@@ -518,13 +581,21 @@ def main():
             "source": "Sagona API + GeoPOI Agenzia Entrate",
             "tipologie": TIPOLOGIE_HEADLINE,
             "default_tipo": "abitazioni_civili",
-            # FIX P4 + P9: single source of truth — JS DEVE leggere da qui
+            # FIX threshold-scientific 2026-05-17: Jenks natural breaks (k=3) come
+            # metodo principale per la soglia BUY/AVOID. Le soglie effettive sono in
+            # headline.buy_threshold_computed di ciascuna tipologia. Le soglie alternative
+            # (Otsu, GMM k=3, P85 con bootstrap CI 95%) sono in
+            # headline.threshold_calibration.alternative_thresholds — esposte per
+            # trasparenza scientifica. Vedi docs/audit/THRESHOLD-SCIENTIFIC-ANALYSIS.md.
             "scoring": {
                 "weights_default": WEIGHTS_DEFAULT,
-                "buy_threshold": BUY_THRESHOLD,
-                "avoid_threshold": AVOID_THRESHOLD,
+                "threshold_method_primary": "jenks_natural_breaks_k3",
+                "threshold_method_reason": "k-means 1D ottimo, standard GIS per dati immobiliari",
+                "threshold_methods_compared": ["jenks_k3", "otsu", "gmm_k3", "p85", "p85_bootstrap"],
+                "buy_threshold_fallback": 60.0,
+                "avoid_threshold_fallback": 35.0,
                 "cagr_negative_penalty": CAGR_NEGATIVE_PENALTY,
-                "note": "Score formula: sum(weights[k]*c[k]) / sum(weights[k] dove c[k] is not None) * 100. Se cagr<0, sottrai CAGR_NEGATIVE_PENALTY (clamped 0-100).",
+                "note": "Score formula: sum(weights[k]*c[k]) / sum(weights[k] dove c[k] is not None) * 100. Se cagr<0, sottrai CAGR_NEGATIVE_PENALTY (clamped 0-100). Verdict: BUY se score>=Jenks_buy_threshold, AVOID se score<Jenks_avoid_threshold, WATCH altrimenti. EMERGING (potenziale crescita): score in (P50, BUY_threshold), prezzo<mediana pool, CAGR>0.",
             },
             # FIX P8: documentazione esplicita del pool eterogeneo
             "pool_composition": {

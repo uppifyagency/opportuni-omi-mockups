@@ -322,7 +322,11 @@ def main():
         }
 
     cagrs = [z["cagr_full"] for z in zone_metrics_list if z["cagr_full"] is not None and z.get("dizione")]
-    yields = [z["yield_lordo_pct"] for z in zone_metrics_list if z["yield_lordo_pct"] is not None]
+    # FIX (audit-math-proof 2026-05-17): aggiunto filtro `z.get("dizione")` per allineare
+    # a Modena fix #3 — yield medio deve includere SOLO zone correnti (con dizione),
+    # le zone storiche hanno prezzi/affitti fermi al loro ultimo anno e inquinerebbero la media.
+    yields = [z["yield_lordo_pct"] for z in zone_metrics_list
+              if z["yield_lordo_pct"] is not None and z.get("dizione")]
     current_prezzi = [z["prezzo_acquisto_attuale"] for z in zone_metrics_list
                       if z["prezzo_acquisto_attuale"] is not None and z.get("dizione")]
 
