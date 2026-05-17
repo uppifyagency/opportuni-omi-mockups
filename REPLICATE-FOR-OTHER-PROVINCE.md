@@ -2374,3 +2374,398 @@ Per i `C-compass` la scala colori è gestita diversamente (gradient sui poligoni
 - **Audit documentato**: [`docs/audit/COLORMAP-AUDIT.md`](docs/audit/COLORMAP-AUDIT.md).
 
 ---
+
+## 23. UI cabling delle soglie BUY/AVOID e cleanup AI-slop (sessione 2026-05-17)
+
+Lezioni dalla sessione che ha scoperto un bug critico: 3 città su 4 mostravano **"0 Top BUY"**
+nei mockup C-compass perché la UI leggeva la soglia dal posto sbagliato. Questa sezione
+documenta come prevenire la stessa classe di errore quando si replica per una nuova provincia.
+
+### 23.1 — Il bug: getScoring() leggeva il campo sbagliato
+
+**Sintomo**: Catanzaro, Bologna, Reggio Emilia mostravano "0 candidati" nel pannello
+"▲ Top BUY", solo Modena mostrava qualche BUY. Le soglie Jenks-calibrate venivano emesse
+correttamente dal compute layer Python ma la UI le ignorava.
+
+**Diagnostica** (riproducibile con `python3` direttamente sui JSON):
+
+```python
+import json
+for city in ['modena', 'bologna', 'catanzaro', 'reggio-emilia']:
+    d = json.loads(open(f'data/computed/{city}-compass.json').read())
+    sc = d.get('metadata', {}).get('scoring', {})
+    h = d['by_tipologia']['abitazioni_civili']['headline']
+    print(f"{city:14}: metadata.scoring.buy_threshold = {sc.get('buy_threshold')}")
+    print(f"{city:14}: headline.buy_threshold_computed = {h.get('buy_threshold_computed')}")
+    print(f"{city:14}: max score = {max((e.get('score') or 0) for e in d['by_tipologia']['abitazioni_civili']['zone_metrics'])}")
+```
+
+Output (semplificato):
+
+```
+modena       : metadata.scoring.buy_threshold = None
+modena       : headline.buy_threshold_computed = 65.5
+modena       : max score = 83.5            ← passa hardcoded 70 marginalmente
+catanzaro    : metadata.scoring.buy_threshold = None
+catanzaro    : headline.buy_threshold_computed = 46.5
+catanzaro    : max score = 61.1            ← NESSUN BUY se fallback hardcoded 70
+bologna      : headline.buy_threshold_computed = 51.9, max 69.9    ← idem
+reggio-emilia: headline.buy_threshold_computed = 49.3, max 70.2    ← 1 BUY su 66
+```
+
+**Root cause** (UI):
+
+```javascript
+// BUG — getScoring() in catanzaro/bologna/reggio-emilia C-compass:
+function getScoring() {
+  const m = (state.data && state.data.metadata && state.data.metadata.scoring) || {};
+  return {
+    buyThreshold: m.buy_threshold != null ? m.buy_threshold : FALLBACK_BUY_THRESHOLD,
+    // ↑ m.buy_threshold è SEMPRE undefined → fallback hardcoded 70 → 0 BUY
+  };
+}
+```
+
+Le soglie BUY/AVOID **non sono globali**: variano per `tipologia` (abitazioni civili
+vs negozi vs uffici vs magazzini), perché Jenks calibra il pool zone+comuni per **ogni
+distribuzione di score**.
+
+**Fix canonico**: leggere la soglia da `state.data.by_tipologia[state.tipo].headline.threshold_calibration`.
+
+```javascript
+// FIX — pattern da replicare per ogni nuova città
+function getScoring() {
+  const m = (state.data && state.data.metadata && state.data.metadata.scoring) || {};
+  const tipo = state.data && state.data.by_tipologia && state.data.by_tipologia[state.tipo];
+  const tc = (tipo && tipo.headline && tipo.headline.threshold_calibration) || {};
+  let weights = FALLBACK_WEIGHTS;
+  if (m.weights_default) {
+    weights = Object.fromEntries(Object.entries(m.weights_default).map(([k,v]) => [k, Math.round(v * 100)]));
+  }
+  const buyT = tc.buy_threshold   != null ? tc.buy_threshold
+             : tipo && tipo.headline && tipo.headline.buy_threshold_computed != null ? tipo.headline.buy_threshold_computed
+             : m.buy_threshold    != null ? m.buy_threshold
+             : FALLBACK_BUY_THRESHOLD;
+  const avoidT = tc.avoid_threshold != null ? tc.avoid_threshold
+               : m.avoid_threshold  != null ? m.avoid_threshold
+               : FALLBACK_AVOID_THRESHOLD;
+  return {
+    weights,
+    buyThreshold:   buyT,
+    avoidThreshold: avoidT,
+    cagrPenalty:    m.cagr_negative_penalty != null ? m.cagr_negative_penalty : FALLBACK_CAGR_NEGATIVE_PENALTY,
+    methodUsed:     tc.method_used || 'jenks_natural_breaks_k3',
+  };
+}
+```
+
+**Modena** ha una variante (`getThresholds()` invece di `getScoring()` perché le soglie
+sono separate dai weights) ma stesso pattern di lookup:
+
+```javascript
+function getThresholds() {
+  const tipo = state.data && state.data.by_tipologia && state.data.by_tipologia[state.tipo];
+  const tc = (tipo && tipo.headline && tipo.headline.threshold_calibration) || {};
+  return {
+    buy:   tc.buy_threshold   != null ? tc.buy_threshold
+         : tipo && tipo.headline && tipo.headline.buy_threshold_computed != null ? tipo.headline.buy_threshold_computed
+         : FALLBACK_BUY_THRESHOLD,
+    avoid: tc.avoid_threshold != null ? tc.avoid_threshold : FALLBACK_AVOID_THRESHOLD,
+    methodUsed: tc.method_used || 'jenks_natural_breaks_k3',
+  };
+}
+```
+
+E poi in `recomputeVerdict()`:
+
+```javascript
+function recomputeVerdict(score, entry) {
+  if (score == null) return null;
+  const t = getThresholds();  // ← legge per-tipologia, non costanti hardcoded
+  if (score >= t.buy) return 'BUY';
+  if (score < t.avoid) return 'AVOID';
+  return 'WATCH';
+}
+```
+
+### 23.2 — Verifica programmatica post-fix (script obbligatorio)
+
+Prima di chiudere la replica per una nuova città, eseguire questo check per simulare
+il conteggio BUY che la UI mostrerà:
+
+```python
+# scripts/check-ui-thresholds.py — verifica che ogni città abbia BUY > 0
+import json
+for city in ['modena', 'bologna', 'catanzaro', 'reggio-emilia', 'NUOVA-CITTA']:
+    d = json.loads(open(f'data/computed/{city}-compass.json').read())
+    tipo = d['by_tipologia']['abitazioni_civili']
+    h = tipo['headline']
+    bt = h.get('buy_threshold_computed')
+    at = h.get('threshold_calibration', {}).get('avoid_threshold')
+    zone = [z for z in tipo.get('zone_metrics', []) if z.get('dizione')]
+    prov = tipo.get('province_ranking', [])
+    pool = zone + prov
+    n_buy   = sum(1 for e in pool if (e.get('score') or 0) >= bt)
+    n_avoid = sum(1 for e in pool if (e.get('score') or 0) < at)
+    n_watch = len(pool) - n_buy - n_avoid
+    status = '❌ ZERO BUY' if n_buy == 0 else '✅ OK'
+    print(f"{city:14}: soglia BUY≥{bt:.1f}, AVOID<{at:.1f} → "
+          f"{n_buy} BUY · {n_watch} WATCH · {n_avoid} AVOID  ({status})")
+```
+
+**Soglia di accettazione**: `n_buy > 0` per tutte le città su `abitazioni_civili`.
+Se anche una sola città ha `n_buy == 0`:
+
+- O la calibrazione Jenks è troppo aggressiva → aprire `headline.threshold_calibration.alternative_thresholds`
+  e considerare `otsu` o `gmm_k3` (soglie tipicamente più basse — vedi §21.3).
+- O il pool è degenere (tutti gli score molto vicini) → il segnale è troppo debole per
+  raccomandazioni direzionali, mostrare solo WATCH (UI già gestisce questo caso con
+  `data_quality === 'limited'` su Modena).
+
+### 23.3 — Anti-pattern: UI hardcoded che ignora il compute layer
+
+**Smell**: vedi una costante numerica nella UI per soglie/pesi/penalty.
+
+```javascript
+// ❌ ANTI-PATTERN — Modena pre-fix
+const BUY_THRESHOLD = 70;
+const AVOID_THRESHOLD = 35;
+function recomputeVerdict(score) {
+  if (score >= BUY_THRESHOLD) return 'BUY';  // ← non sa che ogni tipologia ha la sua soglia
+  ...
+}
+```
+
+Sostituire con un getter dinamico che legge dal JSON (vedi §23.1).
+
+**Solo le costanti di fallback sono accettabili** — e devono chiamarsi `FALLBACK_*` per
+chiarezza, mai `BUY_THRESHOLD` senza prefisso. Il valore di fallback va scelto **basso**
+(60, non 70) perché viene usato solo se manca il dato Jenks, e una soglia troppo alta
+genera lo stesso bug `0 BUY`.
+
+### 23.4 — Pulizia AI-slop nelle UI (sezione "Qualità dati")
+
+Durante l'iterazione veloce si finisce per esporre **debug interno** nei pannelli UI.
+Esempi visti e rimossi (sessione 2026-05-17):
+
+```html
+<!-- ❌ AI-slop — non deve apparire nei mockup user-facing -->
+<div class="dq-panel" id="dq-panel">
+  <div class="dq-panel-title">Qualità dati · trasparenza pre-investimento</div>
+  <div class="dq-panel-body">…</div>
+  <div class="dq-panel-list">
+    <code>FIX P1</code> · parser decontaminato (cross-provincia Cosenza eliminata)
+    <code>FIX P7</code> · 2 righe NTN_var>500% quarantinate
+    <code>⚠ micro</code> · NTN_first<5 · 3 zone: E5, R5, R4
+    <code>◐ 2018 stim</code> · 2 zone con NTN 2018 ricostruito via macroaree-downscaling
+  </div>
+</div>
+```
+
+**Perché è AI-slop**:
+
+- Espone codici interni (`FIX P1`, `FIX P7`) che hanno senso solo per chi ha sviluppato il parser.
+- Aggrega flag debug che dovrebbero stare nel report `docs/audit/`, non nell'UI investitore.
+- Le sigle `⚠ micro`, `◐ 2018 stim`, `⊘ no 2024` sono già presenti **inline su ogni riga**
+  della tabella zone (badge accanto al nome). Duplicare l'informazione nel pannello finale
+  è ridondanza ansiogena.
+
+**Regola**: tutto ciò che è interessante per chi compila l'audit (`scripts/audit-math-proof.py`)
+va in `docs/audit/<città>/report.md`, **non** nel C-compass HTML. La UI mostra solo:
+
+- Il KPI di "qualità del segnale" (es: "soglia BUY calibrata via Jenks su 99 entry")
+- I badge inline accanto ai numeri sospetti (es: badge `◐ 2018 stim` accanto al CAGR
+  di una zona con NTN interpolato — utile contesto, non ridondante).
+- La frase di metodologia in fondo (es: "Soglia calibrata via Jenks natural breaks (k=3)
+  sul pool zone+comuni").
+
+**Pattern di rimozione** (3 file: bologna/catanzaro/reggio-emilia C-compass):
+
+1. **HTML**: rimuovere `<div class="dq-panel">…</div>` (5 righe).
+2. **CSS**: rimuovere `.dq-panel`, `.dq-panel-title`, `.dq-panel-body`, `.dq-panel-list` (7 righe).
+3. **JS**: rimuovere `function renderDataQualityPanel() {…}` (~35 righe).
+4. **JS**: rimuovere `renderDataQualityPanel();` dalla `renderAll()`.
+
+Mantenere il `function dqBadgesHtml(volEntry)` perché serve ai badge inline (non slop).
+
+### 23.5 — Geographic copy-paste pitfall (anti-pattern Italia)
+
+Quando si replica un mockup da una città all'altra, è facile dimenticare di **riscrivere
+i headline localizzati**, perché il testo è dentro `<h2>` / `<div class="macro-headline">`
+e non è un dato calcolato.
+
+**Casi reali trovati nella sessione**:
+
+```html
+<!-- ❌ reggio-emilia-A-brief.html — copy-pasted da catanzaro -->
+<h2><span id="h2-prov-count">…</span> comuni, <em>due Calabrie</em>.</h2>
+
+<!-- ❌ bologna-B-heatmap.html — copy-pasted da catanzaro -->
+<div class="macro-headline">
+  Capoluogo del <em>Sud</em>,<br>provincia a <em>tre velocità</em>.
+</div>
+
+<!-- ❌ reggio-emilia-B-heatmap.html — copy-pasted da catanzaro -->
+<div class="macro-headline">
+  Capoluogo del <em>Sud</em>,<br>provincia a <em>tre velocità</em>.
+</div>
+```
+
+**Pattern di scoperta** (grep mirato):
+
+```bash
+# Cerca headline geografici che potrebbero essere copy-pasted
+grep -nE "<h2>|macro-headline|insight-title" mockups/*-A-brief.html mockups/*-B-heatmap.html
+
+# Cerca terminologia regionale che non c'entra
+grep -nE "(Sud|Nord|Padana|Calabri|Emili|Lombard)" mockups/*.html | grep -v node_modules
+```
+
+**Per ogni nuova città**, prima del push, riscrivere a mano:
+
+- `<div class="macro-headline">` in B-heatmap (h1-like, sopra le KPI macro)
+- `<h2>` in A-brief (titoli di capitolo, es. "X comuni, due geografie")
+- `<div class="insight-title">` (titoli di sotto-sezione, "Provincia in tre velocità")
+- Le `<p class="section-deck">` (deck text sotto i titoli)
+
+Il copy deve essere **specifico alla geografia**: non basta sostituire "Catanzaro" con
+"Bologna", bisogna riformulare se Bologna non è "Sud", non ha la stessa partizione
+"costa/entroterra", ecc. Vedi §15.1 e §23.6 per la stessa lezione su numeri vs testo.
+
+### 23.6 — Format `semestre 20252` (GeoPOI internal code) vs user-facing
+
+Il codice GeoPOI per il semestre OMI è una stringa numerica formato `YYYYS` (es. `20252`
+= anno 2025, secondo semestre). Va usato così solo:
+
+- nei parametri di chiamata API (`?semestre=20252`)
+- nei comandi CLI mostrati nei tooltip (es. `scripts/geopoi-zone-extract.py --semestre 20252`)
+
+**Mai usarlo nel testo user-facing**, perché un investitore non sa decifrare `20252`.
+Convertirlo a `2025-S2` (notazione finanziaria standard) nei footer e nelle didascalie:
+
+```html
+<!-- ❌ user-facing -->
+Poligoni · GeoPOI reverse-engineered (semestre 20252)
+
+<!-- ✅ user-facing -->
+Poligoni · GeoPOI reverse-engineered (semestre 2025-S2)
+```
+
+**Grep di sanità prima del push**:
+
+```bash
+grep -n "semestre 20252" mockups/*.html | grep -v "scripts/geopoi-zone-extract"
+# atteso: 0 risultati (tutti i match devono essere dentro stringhe-script CLI)
+```
+
+### 23.7 — Cross-reference codici provincia nei tooltip script
+
+Negli HTML mockup ci sono tooltip che suggeriscono comandi CLI per rigenerare i dati,
+del tipo:
+
+```javascript
+document.getElementById('map-zone').innerHTML =
+  'Zone OMI capoluogo non ancora estratte. Eseguire ' +
+  'scripts/geopoi-zone-extract.py --codcom H223 --prov RE --semestre 20252';
+```
+
+Quando si copia il mockup da una città all'altra, **tutti e tre i parametri** vanno aggiornati:
+
+- `--codcom`: codice catastale del capoluogo (Modena F257, Bologna A944, Catanzaro C352, RE H223)
+- `--prov`: sigla provincia (MO, BO, CZ, RE) — **questo è quello che si dimentica più spesso**
+- `--semestre`: in genere costante (`20252` per S2 2025), si aggiorna solo a fine semestre
+
+Vedi `reggio-emilia-C-compass.html:933` per un esempio di bug catturato (`--prov BO` su
+mockup RE → corretto in `--prov RE`).
+
+### 23.8 — Checklist UI cabling per una nuova città
+
+Prima di considerare il mockup C-compass "pronto":
+
+```
+[ ] La funzione getScoring() o getThresholds() legge per-tipologia
+    (state.data.by_tipologia[state.tipo].headline.threshold_calibration.buy_threshold)
+
+[ ] Non ci sono costanti hardcoded BUY_THRESHOLD/AVOID_THRESHOLD usate fuori dal fallback
+
+[ ] Sezione "Qualità dati · trasparenza pre-investimento" NON presente
+    (rimossi: HTML, CSS .dq-panel*, JS renderDataQualityPanel + call in renderAll)
+
+[ ] Macro-headline B-heatmap riscritto a mano (no "Capoluogo del Sud" su Emilia)
+
+[ ] <h2> in A-brief riscritto (no "due Calabrie" su Reggio Emilia, ecc.)
+
+[ ] Footer: "semestre 20252" → "semestre 2025-S2" (solo testo user-facing)
+
+[ ] Tooltip script: --prov XX punta alla provincia giusta
+
+[ ] Conteggio simulato: scripts/check-ui-thresholds.py mostra n_buy > 0
+    per tutte le tipologie abitazioni civili
+
+[ ] Audit colormap-veridicity-check.py: 0 falsificazioni / N entry
+```
+
+### 23.9 — Riepilogo nuove convenzioni JSON da emettere obbligatoriamente
+
+Dal compute layer Python, ogni `data/computed/<città>-compass.json` deve esporre:
+
+```json
+{
+  "by_tipologia": {
+    "abitazioni_civili": {
+      "headline": {
+        "buy_threshold_computed": 46.5,
+        "threshold_calibration": {
+          "buy_threshold": 46.5,
+          "avoid_threshold": 32.2,
+          "method_used": "jenks_natural_breaks_k3",
+          "method_reason": "k-means 1D ottimo, standard GIS per dati immobiliari",
+          "alternative_thresholds": {
+            "jenks_k3": {"buy": 46.5, "avoid": 32.2, "n_buy": 37, "n_avoid": 4},
+            "otsu":     {"buy": 46.02, "n_buy": 38},
+            "gmm_k3":   {"buy": 45.26, "n_buy": 39},
+            "p85":      {"buy": 51.96, "avoid": 40.35, "n_buy": 15}
+          },
+          "pool_n": 99,
+          "pool_stats": {"mean": 44.89, "sd": 6.92, "min": 21.7, "max": 61.1, "p50": 43.1}
+        }
+      },
+      "zone_metrics": [...],
+      "province_ranking": [...]
+    },
+    "abitazioni_signorili": { "...idem per ogni tipologia..." },
+    "negozi":               { "..." },
+    "uffici":               { "..." },
+    "magazzini":            { "..." }
+  },
+  "metadata": {
+    "scoring": {
+      "weights_default": {"growth": 0.35, "yield": 0.30, "stability": 0.15, "momentum": 0.15, "level": 0.05},
+      "threshold_method_primary": "jenks_natural_breaks_k3",
+      "cagr_negative_penalty": 10,
+      "note": "Soglie BUY/AVOID calibrate per tipologia via Jenks. Vedi headline.threshold_calibration."
+    }
+  }
+}
+```
+
+**Chi emette cosa**:
+
+- `_threshold_lib.calibrate_thresholds(scores)` → ritorna il dict `threshold_calibration`
+- `compute-<città>-compass.py` → chiama `calibrate_thresholds()` una volta per tipologia
+  e popola `headline.threshold_calibration` + `headline.buy_threshold_computed`
+- Il `metadata.scoring` rimane **globale** e contiene solo i fallback + la doc del metodo;
+  **mai** mettere lì le soglie effettive, perché variano per tipologia.
+
+### 23.10 — Riferimenti
+
+- **Bug originale**: screenshot Catanzaro C-compass "0 Top BUY · 0 Top WATCH" (2026-05-17).
+- **Fix commit**: `d212ed3` su `github.com/uppifyagency/opportuni-omi-mockups`.
+- **Audit post-fix**: 0 falsificazioni cromatiche su 318 entry (8 mappe).
+- **Conteggi attesi abitazioni civili dopo il fix**:
+  - Modena: 5 BUY (soglia 65.5)
+  - Bologna: 38 BUY (soglia 51.9)
+  - Catanzaro: 37 BUY (soglia 46.5)
+  - Reggio Emilia: 7 BUY (soglia 49.3)
+
+---
