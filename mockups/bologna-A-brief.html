@@ -178,15 +178,15 @@
 
   <header>
     <div class="eyebrow">Brief immobiliare · banca dati OMI</div>
-    <h1>Bologna in <em>vent'anni</em>:<br>prezzi fermi, volumi raddoppiati.</h1>
-    <p class="deck">Il valore al metro quadro si è assestato, le compravendite no. Centro storico in raffreddamento, semicintura che tiene il passo, periferia che lavora. Tre letture, nessuno slogan.</p>
+    <h1>Bologna in <em>21 anni</em>:<br>prezzi fermi, volumi in forte espansione.</h1>
+    <p class="deck">Il valore al metro quadro si è assestato, le compravendite no. Centro storico in raffreddamento, semicintura che tiene il passo, frazioni in espansione e rurale in arretramento. Tre letture, nessuno slogan.</p>
     <div class="dateline">Edizione · 2025-S2 · <span id="dl">…</span></div>
   </header>
 
   <!-- ─── HEADLINE NUMBERS ─── -->
   <div class="headline-row">
     <div class="hl">
-      <div class="hl-label">CAGR medio · <span id="kpi-horizon">…</span> anni</div>
+      <div class="hl-label">CAGR medio · dataset <span id="kpi-horizon">…</span> anni</div>
       <div class="hl-value num" id="kpi-cagr">…</div>
       <div class="hl-sub" id="kpi-cagr-sub">…</div>
     </div>
@@ -361,14 +361,17 @@ async function loadAndRender() {
   document.getElementById('dl').textContent = new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' });
 
   // KPIs
-  document.getElementById('kpi-horizon').textContent = h.anni_orizzonte || '—';
+  document.getElementById('kpi-horizon').textContent = h.anni_orizzonte_dataset || h.anni_orizzonte || '—';
   const cagrEl = document.getElementById('kpi-cagr');
   if (h.cagr_avg_pct != null) {
     cagrEl.textContent = (h.cagr_avg_pct > 0 ? '+' : '') + h.cagr_avg_pct.toFixed(2) + '%';
     cagrEl.style.color = h.cagr_avg_pct >= 0 ? 'var(--up)' : 'var(--down)';
     const adj = Math.abs(h.cagr_avg_pct) < 0.5 ? 'mercato piatto' :
-                h.cagr_avg_pct > 0 ? 'crescita reale moderata' : 'mercato in contrazione';
-    document.getElementById('kpi-cagr-sub').innerHTML = `<em>${adj}</em>, su ${h.zone_count_current} zone correnti`;
+                h.cagr_avg_pct > 0 ? 'crescita nominale moderata' : 'mercato in contrazione';
+    const denom = (h.zone_count_cagr_reliable && h.cagr_avg_pct_min_years)
+      ? `${h.zone_count_cagr_reliable} zone con dati ≥${h.cagr_avg_pct_min_years} anni`
+      : `${h.zone_count_current} zone correnti${h.cagr_avg_pct_min_years ? ` (nessuna con orizzonte ≥${h.cagr_avg_pct_min_years} anni)` : ''}`;
+    document.getElementById('kpi-cagr-sub').innerHTML = `<em>${adj}</em>, su ${denom} (valori nominali, non deflazionati)`;
   } else {
     cagrEl.textContent = 'n/d';
   }
@@ -419,20 +422,22 @@ async function loadAndRender() {
   }
 
   // Signal 3: top vs bottom comuni della provincia
-  const pr = d.province_ranking || [];
+  // Escludi entry stale per evitare ranking falsato da serie non aggiornate
+  const pr = (d.province_ranking || []).filter(p => !p.stale);
   if (pr.length >= 6) {
     const top3 = pr.slice(0, 3);
     const bot3 = pr.slice(-3);
-    const nGrow = pr.filter(p => p.cagr && p.cagr > 0).length;
-    const nDecl = pr.filter(p => p.cagr && p.cagr < 0).length;
+    const nGrow = pr.filter(p => p.cagr != null && p.cagr > 0).length;
+    const nDecl = pr.filter(p => p.cagr != null && p.cagr < 0).length;
     const sig3Stat = document.getElementById('sig3-stat');
     const topCagr = top3[0].cagr * 100;
     sig3Stat.textContent = (topCagr > 0 ? '+' : '') + topCagr.toFixed(2) + '%';
     sig3Stat.className = 'signal-stat ' + (topCagr >= 0 ? 'up' : 'down');
+    const nFlat = pr.length - nGrow - nDecl;
     document.getElementById('sig3-body').innerHTML =
       `<strong style="color: var(--up); font-family: var(--mono)">${top3.map(p=>p.nome).join(', ')}</strong> in testa con <span class="num">${(top3[2].cagr*100).toFixed(2)}–${(top3[0].cagr*100).toFixed(2)}%/yr</span>. ` +
       `<strong style="color: var(--down); font-family: var(--mono)">${bot3.map(p=>p.nome).join(', ')}</strong> in coda. ` +
-      `Su <span class="num">${pr.length}</span> comuni provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo.`;
+      `Su <span class="num">${pr.length}</span> comuni provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo${nFlat > 0 ? `, <span class="num">${nFlat}</span> stabili` : ''}.`;
   } else if (pr.length >= 1) {
     document.getElementById('sig3-stat').textContent = (pr[0].cagr * 100 > 0 ? '+' : '') + (pr[0].cagr*100).toFixed(2) + '%';
     document.getElementById('sig3-body').textContent = `Solo ${pr.length} comuni con dati OMI sufficienti — provincia con copertura ancora parziale.`;

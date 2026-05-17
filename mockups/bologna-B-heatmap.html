@@ -178,7 +178,7 @@
   <header>
     <div class="eyebrow">Bologna in cartografia · banca dati OMI</div>
     <h1>Il mercato di <em>Bologna</em>,<br>letto sul territorio.</h1>
-    <p class="deck">Verde, dove i prezzi salgono; rosso, dove arretrano. Dall'Appennino alla Bassa, dalla cintura urbana al capoluogo: il colore mostra dove il valore si è spostato in vent'anni di rilevazioni OMI.</p>
+    <p class="deck">Verde, dove i prezzi salgono; rosso, dove arretrano. Dall'Appennino alla Bassa, dalla cintura urbana al capoluogo: il colore mostra dove il valore si è spostato in 21 anni di rilevazioni OMI.</p>
   </header>
 
   <!-- MACRO STRIP -->
@@ -212,7 +212,7 @@
     <div class="map-shell">
       <div id="map-prov"></div>
       <div class="map-legend">
-        <div class="lbl">CAGR comune</div>
+        <div class="lbl">CAGR comune <span style="color:var(--ink-faint);font-weight:400">· scala P5–P95</span></div>
         <div class="legend-row">
           <span class="legend-tick" id="legend-prov-min">…</span>
           <div class="legend-scale"></div>
@@ -231,7 +231,7 @@
     <div class="map-shell">
       <div id="map"></div>
       <div class="map-legend">
-        <div class="lbl">CAGR zona</div>
+        <div class="lbl">CAGR zona <span style="color:var(--ink-faint);font-weight:400">· scala P5–P95</span></div>
         <div class="legend-row">
           <span class="legend-tick" id="legend-min">…</span>
           <div class="legend-scale"></div>
@@ -325,15 +325,17 @@ function colorForCAGR(cagrPct, negClamp, posClamp) {
 }
 // Helper: calcola P5/P95 da array di valori
 function percentileClamp(values) {
-  if (!values || values.length === 0) return { negClamp: -1, posClamp: 1, p5: -1, p95: 1 };
+  if (!values || values.length === 0) return { negClamp: -1, posClamp: 1, p5: -1, p95: 1, realMin: -1, realMax: 1 };
   const sorted = [...values].sort((a,b) => a - b);
-  // FIX 2026-05-17 v2: P25/P75 (IQR robust) invece di P5/P95.
-  const p5 = sorted[Math.floor(sorted.length * 0.25)];
-  const p95 = sorted[Math.floor(sorted.length * 0.75)];
+  // FIX 2026-05-17 v3: P5/P95 (solo ~10% saturati invece di 50%); espone realMin/realMax per disclosure.
+  const n = sorted.length;
+  const p5 = sorted[Math.max(0, Math.floor(n * 0.05))];
+  const p95 = sorted[Math.min(n - 1, Math.floor(n * 0.95))];
   return {
-    negClamp: p5 < 0 ? p5 : -0.5,   // se la distribuzione è tutta positiva, finta scala "rosso"
+    negClamp: p5 < 0 ? p5 : -0.5,
     posClamp: p95 > 0 ? p95 : 0.5,
     p5: p5, p95: p95,
+    realMin: sorted[0], realMax: sorted[n - 1],
   };
 }
 
@@ -394,7 +396,7 @@ async function loadAndRender() {
   const h = signals.headline;
 
   // Macro
-  document.getElementById('m-horizon').textContent = h.anni_orizzonte || '—';
+  document.getElementById('m-horizon').textContent = h.anni_orizzonte_dataset || h.anni_orizzonte || '—';
   const cagrEl = document.getElementById('m-cagr');
   if (h.cagr_avg_pct != null) {
     cagrEl.textContent = (h.cagr_avg_pct > 0 ? '+' : '') + h.cagr_avg_pct.toFixed(2) + '%';
@@ -411,8 +413,14 @@ async function loadAndRender() {
   const values = Object.values(cagrByZona).filter(v => v != null);
   // FIX cromatica: P5/P95 clamping centrato su 0% (no più scala lineare min-max).
   const clamp = percentileClamp(values);
-  document.getElementById('legend-min').textContent = (clamp.negClamp > 0 ? '+' : '') + clamp.negClamp.toFixed(2) + '%';
-  document.getElementById('legend-max').textContent = (clamp.posClamp > 0 ? '+' : '') + clamp.posClamp.toFixed(2) + '%';
+  const legMin = document.getElementById('legend-min');
+  const legMax = document.getElementById('legend-max');
+  legMin.textContent = (clamp.negClamp > 0 ? '+' : '') + clamp.negClamp.toFixed(2) + '%';
+  legMax.textContent = (clamp.posClamp > 0 ? '+' : '') + clamp.posClamp.toFixed(2) + '%';
+  const nLow = values.filter(v => v < clamp.negClamp).length;
+  const nHigh = values.filter(v => v > clamp.posClamp).length;
+  legMin.title = `5° percentile · veri estremi della distribuzione: ${clamp.realMin.toFixed(2)}% / +${clamp.realMax.toFixed(2)}% (${nLow}+${nHigh} valori saturati su ${values.length})`;
+  legMax.title = legMin.title;
 
   zonesGeo.features.forEach(f => {
     const c = cagrByZona[f.properties.zona];
@@ -426,8 +434,14 @@ async function loadAndRender() {
   const pVals = Object.values(provCagrByCat).filter(v => v != null);
   // FIX cromatica: P5/P95 clamping centrato su 0% per la provincia.
   const pClamp = percentileClamp(pVals);
-  document.getElementById('legend-prov-min').textContent = (pClamp.negClamp > 0 ? '+' : '') + pClamp.negClamp.toFixed(2) + '%';
-  document.getElementById('legend-prov-max').textContent = (pClamp.posClamp > 0 ? '+' : '') + pClamp.posClamp.toFixed(2) + '%';
+  const pLegMin = document.getElementById('legend-prov-min');
+  const pLegMax = document.getElementById('legend-prov-max');
+  pLegMin.textContent = (pClamp.negClamp > 0 ? '+' : '') + pClamp.negClamp.toFixed(2) + '%';
+  pLegMax.textContent = (pClamp.posClamp > 0 ? '+' : '') + pClamp.posClamp.toFixed(2) + '%';
+  const pLow = pVals.filter(v => v < pClamp.negClamp).length;
+  const pHigh = pVals.filter(v => v > pClamp.posClamp).length;
+  pLegMin.title = `5° percentile · veri estremi della distribuzione: ${pClamp.realMin.toFixed(2)}% / +${pClamp.realMax.toFixed(2)}% (${pLow}+${pHigh} valori saturati su ${pVals.length})`;
+  pLegMax.title = pLegMin.title;
   provGeo.features.forEach(f => {
     const c = provCagrByCat[f.properties.com_catasto_code];
     f.properties._cagr = c;
@@ -628,15 +642,17 @@ async function loadAndRender() {
     ins2.innerHTML = 'Nessuna zona corrente con CAGR calcolabile sull\'orizzonte coperto.';
   }
 
-  const prov = signals.province_ranking || [];
+  // Escludi entry stale per evitare ranking falsato da serie non aggiornate
+  const prov = (signals.province_ranking || []).filter(p => !p.stale);
   if (prov.length >= 6) {
     const top3 = prov.slice(0, 3).map(p => p.nome).join(', ');
     const bot3 = prov.slice(-3).map(p => p.nome).join(', ');
-    const nGrow = prov.filter(p => p.cagr && p.cagr > 0).length;
-    const nDecl = prov.filter(p => p.cagr && p.cagr < 0).length;
+    const nGrow = prov.filter(p => p.cagr != null && p.cagr > 0).length;
+    const nDecl = prov.filter(p => p.cagr != null && p.cagr < 0).length;
+    const nFlat = prov.length - nGrow - nDecl;
     document.getElementById('ins-3').innerHTML =
-      `Su <strong>${prov.length}</strong> comuni provincia con dati OMI: <strong>${nGrow}</strong> in crescita, <strong>${nDecl}</strong> in calo. ` +
-      `<strong>${top3}</strong> in testa (${(prov[2].cagr*100).toFixed(1)}–${(prov[0].cagr*100).toFixed(1)}%/yr). ` +
+      `Su <strong>${prov.length}</strong> comuni provincia con dati OMI: <strong>${nGrow}</strong> in crescita, <strong>${nDecl}</strong> in calo${nFlat > 0 ? `, <strong>${nFlat}</strong> stabili` : ''}. ` +
+      `<strong>${top3}</strong> in testa (${(prov[2].cagr*100).toFixed(2)}–${(prov[0].cagr*100).toFixed(2)}%/yr). ` +
       `<strong>${bot3}</strong> in coda. Appennino, semicintura, pianura e capoluogo si muovono a velocità diverse — il pattern è geografico, non socio-demografico.`;
   } else if (prov.length >= 1) {
     document.getElementById('ins-3').innerHTML =

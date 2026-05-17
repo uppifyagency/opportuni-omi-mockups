@@ -4,9 +4,9 @@
 **Tempo realistico:** 30 minuti di lavoro umano + ~22 minuti di backfill Sagona unattended (+ ~2h opzionali per pipeline volumi NTN/IMI da PDF AdE — sezione §13) + **~30 min di audit math-proof automatizzato — sezione §20**.
 **Costo:** 0 € (tutte fonti pubbliche).
 
-Questo file è autosufficiente. Un agente che lo legge ha tutto per fare il job senza tornare indietro. **Aggiornato post-audit Modena fix #1–#8** (yield filter, anni_orizzonte disambiguation, anti-stale-string — vedi §15, §17, §18) **+ post-audit cross-city Bologna/Modena/Catanzaro 2026-05-17** (Catanzaro yield fix #3, CSV rebuild bug, 10-test math-proof automation — vedi §20).
+Questo file è autosufficiente. Un agente che lo legge ha tutto per fare il job senza tornare indietro. **Aggiornato post-audit Modena fix #1–#8** (yield filter, anni_orizzonte disambiguation, anti-stale-string — vedi §15, §17, §18) **+ post-audit cross-city Bologna/Modena/Catanzaro 2026-05-17** (Catanzaro yield fix #3, CSV rebuild bug, 10-test math-proof automation — vedi §20) **+ post-audit math-proof 12-mockup 2026-05-17 v3** (44 bug iniziali, ridotti a 41 reali dopo cross-verify, tutti fixati — vedi §24 per cosa fare/non fare).
 
-> 🎯 **Per ogni nuova città: dopo aver completato i §1–§19, esegui OBBLIGATORIAMENTE §20 (audit math-proof automatizzato).** Senza §20 non puoi affermare che i mockup sono veritieri.
+> 🎯 **Per ogni nuova città: dopo aver completato i §1–§19, esegui OBBLIGATORIAMENTE §20 (audit math-proof automatizzato) + §24 (check anti-pattern post-replica).** Senza §20+§24 non puoi affermare che i mockup sono veritieri.
 
 ---
 
@@ -2767,5 +2767,228 @@ Dal compute layer Python, ogni `data/computed/<città>-compass.json` deve esporr
   - Bologna: 38 BUY (soglia 51.9)
   - Catanzaro: 37 BUY (soglia 46.5)
   - Reggio Emilia: 7 BUY (soglia 49.3)
+
+---
+
+## 24. Post-replica anti-pattern check (audit math-proof 12-mockup, 2026-05-17 v3)
+
+> 🎯 **Da eseguire DOPO §20 su ogni nuova città.** §20 verifica il sorgente (JSON);
+> §24 verifica i 3 mockup HTML rispetto al sorgente e cattura i pattern di slop
+> editoriale e visualizzazione fuorviante che §20 NON cattura. Tempo: ~20 min/città
+> manuali + uso di un sub-agente generic-purpose per parallelizzare la scoperta.
+
+### 24.1 — Cos'è successo (motivazione)
+
+Il 2026-05-17 ho fatto un audit cross-city su 12 mockup (4 città × A/B/C) con 4
+sub-agenti `general-purpose` in parallelo. Hanno trovato **44 candidati bug**.
+Cross-verificandoli matematicamente:
+
+- **3 falsi positivi** (R7, C1, C2): "JSON sorgente vuoto" basato su `wc -l = 0`.
+  In realtà i JSON sono minified su una singola riga (250-400 KB di contenuto
+  valido) → `wc -l` ritorna 0 anche con file pieni. **Lezione**: valida sempre
+  con `stat -f %z file.json` o `python3 -c "import json; json.load(open('file.json'))"`,
+  mai con `wc -l` solo.
+- **2 non-bug** (M1 Carpi BUY+CAGR<0, M2 D26 BUY+dizione=null): il codice C-compass
+  applica già `CAGR_NEGATIVE_PENALTY=−10` a runtime e filtra `z.dizione` dal pool.
+  Il sub-agente ha letto il JSON statico senza considerare la logica runtime.
+  **Lezione**: non fidarsi della "fotografia" del JSON; verifica come il mockup
+  *lo legge*.
+- **39 bug reali** fixati. Pattern ricorrenti documentati sotto.
+
+### 24.2 — Le 7 anti-pattern da prevenire (cosa NON fare)
+
+| # | Anti-pattern | Sintomo | Esempio reale |
+|---|---|---|---|
+| AP1 | **Copy-paste cross-city dimenticato** | Stringa hardcoded che cita la città di partenza nel template della città replicata | `'CATANZARO CAPOLUOGO'` hardcoded in `reggio-emilia-C-compass.html` r.1069 e `bologna-C-compass.html` r.1067 (era il template Modena/CZ → copiato senza sostituire). "Appennino bolognese" deck in `reggio-emilia-B-heatmap.html` r.210. |
+| AP2 | **JSON key sbagliata** (rendering silently undefined) | KPI mostra `—` invece del valore atteso | `h.anni_orizzonte` invece di `h.anni_orizzonte_dataset` (BO, RE). Risultato: "CAGR medio · — anni" anziché "21 anni". Il `\|\| '—'` maschera il bug. |
+| AP3 | **Legenda heatmap che mente** (etichetta vs scala) | Etichetta dice "min/max" ma il rendering usa percentile clamp → 50% dei dati saturati | `percentileClamp` usa P25/P75 ma `legend-min/max` viene letto come "estremi reali". Soluzione: P5/P95 (10% sat) + tooltip onesto con veri min/max. Vedi §22 per la teoria, §24.4 per il template fix. |
+| AP4 | **Aggettivi economici imprecisi** (real vs nominal) | "Crescita reale" applicata a un CAGR nominale | "crescita reale moderata" usato in sub-label CAGR senza deflazionare per CPI. In economia "reale" = deflazionato; CPI IT 2024-26 ≈ +3-4%/yr → CAGR reale probabilmente <0. Sostituire con "nominale" + disclaimer. |
+| AP5 | **Slogan poetici off-by-one** ("vent'anni" su dataset 21y) | Titolo H1 dice "vent'anni" ma il dataset copre 2005-2026 = 21 anni | "Bologna in vent'anni", "due decenni di quotazioni" → ~5% errore di durata. Soluzione: hardcoded "21 anni" o `<span id="kpi-horizon">` dinamico. |
+| AP6 | **Iperbole quantificabile** ("volumi raddoppiati" = +90%) | Claim narrativo che il dato non sostiene | "prezzi fermi, volumi raddoppiati" — ma `ntn_delta_pct` = +90.21% (BO) / +88.40% (RE). +90% ≠ +100%. Soluzione: "in forte espansione" (qualitativo) o "+90%" (preciso). |
+| AP7 | **`slice(-3)` su array con outlier stale appeso in coda** | "Bot3" elenca un comune come PEGGIORE che invece ha il CAGR MIGLIORE | Catanzaro: `province_ranking` sorted DESC ma Martirano (CAGR=+9.05%, ultimo dato 2012, `stale=true`) appeso a fine array. `slice(-3)` pesca Martirano e la presenta "in coda". Soluzione: `.filter(p => !p.stale)` prima di `slice(-3)`. |
+
+### 24.3 — Le 6 anti-pattern math/statistici (cosa NON fare)
+
+| # | Anti-pattern | Sintomo | Esempio reale |
+|---|---|---|---|
+| AS1 | **Sum check fallisce** (filtro `&& > 0` esclude `== 0`) | nGrow + nDecl ≠ totale, lettore nota | "Su 47 comuni: 33 in crescita, 12 in calo" → 33+12=45≠47 (Modena: Bastiglia+Vignola hanno cagr=0.0). Soluzione: `p.cagr != null && p.cagr > 0` + esplicita `nFlat`. |
+| AS2 | **Confronto orizzonti incommensurabili** | "Fascia B cala −0.88%/yr, Fascia R cresce +1.34%/yr" senza menzionare che B=21y e R=2y | RE: B 2005→2026 (21y), R 2024→2026 (2y). I CAGR sono entrambi corretti ma non confrontabili. Soluzione: aggiungere periodo nel testo `B (2005-2026)` + `R nel suo periodo coperto`. |
+| AS3 | **Outlier su n=2 osservazioni presentato come "top growth"** | "Zona X cresce +3.96%/yr" mentre la serie ha 2 punti (errore standard ∞) | CZ E4: 835→902.5 in 2 anni. Matematicamente +3.96%/yr corretto, ma statisticamente debole. Soluzione: disclaimer `(orizzonte breve: N anni di dati, segnale provvisorio)` quando `anni_dati_acquisto < 5`. |
+| AS4 | **Denominatore label ambigua** ("X zone correnti" quando in realtà media è su zone affidabili) | KPI CAGR riporta media calcolata su 30 zone (anni≥5) ma sub-label dice "su 32 zone correnti" | BO: signals.cagr_avg_pct=0.20 (su 30 reliable), zone_count_current=32. Soluzione: usa `zone_count_cagr_reliable` se >0, altrimenti fallback con disclaimer. |
+| AS5 | **Stesso dato precisione diversa A vs B** | `.toFixed(2)` in A, `.toFixed(1)` in B → "1.44%" vs "1.4%" | BO Sant'Agata Bolognese: A mostra "+1.44–3.18%/yr", B mostra "+1.4–3.2%/yr". Soluzione: uniforma a `.toFixed(2)` ovunque. |
+| AS6 | **Narrativa di divergenza con dati non-divergenti** | Titolo "Tre Calabrie" / "velocità diverse — pattern geografico, non socio-demografico" ma nDecl=0 (tutti crescono) | CZ: range 0.29-9.05% ma `nGrow=79/79`. Soluzione: calcolo runtime di `range` e `stdDev`, narrativa data-driven "Range XXpp, stddev YYpp — tutte nello stesso verso". |
+
+### 24.4 — Template fix legenda heatmap (cosa fare)
+
+Il fix più impattante. Sostituisce P25/P75 silenzioso con P5/P95 etichettato + tooltip onesto:
+
+```js
+function percentileClamp(values) {
+  if (!values || values.length === 0) return { negClamp: -1, posClamp: 1, p5: -1, p95: 1, realMin: -1, realMax: 1 };
+  const sorted = [...values].sort((a,b) => a - b);
+  // P5/P95 (solo ~10% saturati invece di 50%); espone realMin/realMax per disclosure
+  const n = sorted.length;
+  const p5 = sorted[Math.max(0, Math.floor(n * 0.05))];
+  const p95 = sorted[Math.min(n - 1, Math.floor(n * 0.95))];
+  return {
+    negClamp: p5 < 0 ? p5 : -0.5,
+    posClamp: p95 > 0 ? p95 : 0.5,
+    p5, p95, realMin: sorted[0], realMax: sorted[n - 1],
+  };
+}
+
+// Rendering legenda con tooltip onesto
+const clamp = percentileClamp(values);
+const legMin = document.getElementById('legend-min');
+const legMax = document.getElementById('legend-max');
+legMin.textContent = (clamp.negClamp > 0 ? '+' : '') + clamp.negClamp.toFixed(2) + '%';
+legMax.textContent = (clamp.posClamp > 0 ? '+' : '') + clamp.posClamp.toFixed(2) + '%';
+const nLow = values.filter(v => v < clamp.negClamp).length;
+const nHigh = values.filter(v => v > clamp.posClamp).length;
+legMin.title = `5° percentile · veri estremi della distribuzione: ${clamp.realMin.toFixed(2)}% / +${clamp.realMax.toFixed(2)}% (${nLow}+${nHigh} valori saturati su ${values.length})`;
+legMax.title = legMin.title;
+```
+
+E label HTML:
+```html
+<div class="lbl">CAGR comune <span style="color:var(--ink-faint);font-weight:400">· scala P5–P95</span></div>
+```
+
+**Impatto matematico verificato** (4 città):
+- Modena n=47: P25/P75 → 47% saturati. P5/P95 → 9% saturati.
+- Bologna n=55: P25/P75 → 47% saturati. P5/P95 → 7% saturati.
+- Catanzaro n=79 (post-stale): P25/P75 → 48%. P5/P95 → 8%.
+- RE n=42: P25/P75 → 48%. P5/P95 → 10%.
+
+Per i **C-compass** mantieni P25/P75 (outlier-resistant per metric `cagr` quando ci sono code lunghe come Martirano), ma etichetta onestamente: "scala IQR (P25–P75)" + stesso tooltip con realMin/realMax.
+
+### 24.5 — Template fix slice(-3) anti-stale
+
+Pattern identico in `*-A-brief.html` (signal 3) e `*-B-heatmap.html` (insight 3):
+
+```js
+// PRIMA (bug)
+const pr = d.province_ranking || [];
+const bot3 = pr.slice(-3);
+const nGrow = pr.filter(p => p.cagr && p.cagr > 0).length;
+const nDecl = pr.filter(p => p.cagr && p.cagr < 0).length;
+
+// DOPO (fix)
+const pr = (d.province_ranking || []).filter(p => !p.stale);
+const bot3 = pr.slice(-3);
+const nGrow = pr.filter(p => p.cagr != null && p.cagr > 0).length;
+const nDecl = pr.filter(p => p.cagr != null && p.cagr < 0).length;
+const nFlat = pr.length - nGrow - nDecl;
+// poi nel template: ${nFlat > 0 ? `, ${nFlat} stabili` : ''}
+```
+
+Tre fix in una patch:
+1. `filter(p => !p.stale)` previene AP7 (Martirano "in coda" CZ)
+2. `p.cagr != null && p.cagr > 0` previene AS1 (Modena 33+12≠47)
+3. `nFlat` espone esplicitamente i comuni con cagr=0
+
+### 24.6 — Checklist anti-pattern per ogni nuova città
+
+Dopo aver completato §1–§20 per la nuova città, esegui questo grep cross-city.
+**Tutti i comandi devono ritornare 0 risultati**:
+
+```bash
+cd opportuni-omi-mockups/mockups
+
+# AP1: nomi macroaree capoluogo hardcoded da template (deve solo matchare la PROPRIA città)
+grep -n "CAPOLUOGO" <city>-*.html | grep -v "$(grep CAPOLUOGO data/computed/<city>-volume-signals.json | head -1 | cut -d'"' -f4)"
+
+# AP1: toponimi/aggettivi della città di partenza nei testi della nuova città
+grep -niE "appennino (bolognese|reggiano|modenese|calabrese)" <city>-*.html
+# (deve matchare solo quello corretto per la tua provincia)
+
+# AP2: JSON key sospette che potrebbero risultare in '—'
+grep -n "h\.anni_orizzonte[^_]" <city>-*.html
+# (atteso: 0; il campo corretto è anni_orizzonte_dataset o anni_orizzonte)
+
+# AP3: P25/P75 senza etichetta IQR
+grep -n "Math.floor(sorted.length \* 0\.25)" <city>-*.html
+# Se >0: verifica che label HTML contenga "P25" o "IQR" o "scala robusta"
+
+# AP5: durata sbagliata
+grep -nE "vent'anni|due decenni|venti anni" <city>-*.html
+# (atteso: 0)
+
+# AP6: iperboli quantificabili
+grep -nE "raddoppi|×2|triplicat" <city>-*.html
+# (atteso: 0 a meno che il valore reale sia esattamente +100% o +200%)
+
+# AP7 + AS1: pattern bug in signal 3
+grep -n "p.cagr && p.cagr" <city>-*.html
+# (atteso: 0; pattern corretto è p.cagr != null && p.cagr > 0)
+
+grep -n "province_ranking || \[\]" <city>-*.html | grep -v "filter(p => !p.stale)"
+# (atteso: 0; dopo i fix tutti i file devono filtrare stale)
+
+# AS4: denominatore CAGR senza qualificatore reliable
+grep -n "zone correnti" <city>-A-brief.html
+# Se >0: verifica che il template usi zone_count_cagr_reliable quando disponibile
+
+# AS5: precisione mista A vs B
+diff <(grep -oE "toFixed\([12]\)" <city>-A-brief.html | sort -u) \
+     <(grep -oE "toFixed\([12]\)" <city>-B-heatmap.html | sort -u)
+# (atteso: 0 diff, stessa precisione in entrambi)
+
+# Anti hardcoded counts (es. <span>80</span> come placeholder)
+grep -nE "h2-prov-count\">[0-9]+<" <city>-C-compass.html
+# (atteso: 0; placeholder corretto è `…`)
+```
+
+### 24.7 — Workflow per cattura sistematica (use sub-agents wisely)
+
+Per ogni nuova città, lancia 1 sub-agente per mockup (3 in parallelo):
+
+```
+Per il prompt sub-agente, includi SEMPRE queste istruzioni:
+1. VALIDA i JSON con json.load() prima di affermare "vuoto". MAI usare wc -l.
+2. Considera la LOGICA RUNTIME del mockup (penalty, filtri runtime) prima di
+   affermare che il JSON sorgente è buggato.
+3. Per OGNI bug, fornisci: file:linea + valore mostrato + valore corretto +
+   calcolo dimostrativo + severità CRITICO/ALTO/MEDIO/BASSO.
+4. Cross-verifica almeno 2 bug per categoria con `python3 -c "..."` su dati reali.
+```
+
+Cross-verifica i finding con la checklist §24.6 prima di applicare fix.
+
+### 24.8 — Quick-summary tabella fix-pattern → file pattern
+
+| Bug pattern | File da fixare | Approccio |
+|---|---|---|
+| AP1 hardcoded macroarea | `<city>-C-compass.html` r.~1067 | Sostituisci con nome corretto da `<city>-volume-signals.json`, usa `(p.nome === '<City>' \|\| p.nome === "<City alt>")` per gestire varianti |
+| AP1 toponimo deck | `<city>-B-heatmap.html` r.~210 | Verifica regional adjective |
+| AP2 anni_orizzonte | `<city>-A-brief.html` + `<city>-B-heatmap.html` | `h.anni_orizzonte_dataset \|\| h.anni_orizzonte \|\| '—'` |
+| AP3 legenda heatmap | `<city>-B-heatmap.html` | Vedi §24.4 template completo |
+| AP3 legenda compass | `<city>-C-compass.html` | Mantieni P25/P75 ma etichetta "scala IQR" + tooltip realMin/realMax |
+| AP4 crescita reale | `<city>-A-brief.html` | `crescita reale` → `crescita nominale` + " (valori nominali, non deflazionati)" |
+| AP5 vent'anni | tutti gli H1 + deck | Sostituisci con "21 anni" o usa span dinamico |
+| AP6 raddoppiati | H1 A-brief | Sostituisci con qualitativo ("in forte espansione") o percentuale precisa |
+| AP7 + AS1 slice + sum | `<city>-A-brief.html` + `<city>-B-heatmap.html` | Vedi §24.5 template completo |
+| AS2 confronto orizzonti | `<city>-A-brief.html` signal 1 | Aggiungi `(YYYY-YYYY)` esplicito per ogni fascia |
+| AS3 outlier breve | `<city>-A-brief.html` signal 2, `<city>-B-heatmap.html` ins-2 | `(orizzonte breve: ${anni} anni, segnale provvisorio)` quando `anni < 5` |
+| AS4 denominatore | tutti gli A-brief | Usa `zone_count_cagr_reliable` se >0 con disclaimer |
+| AS5 precisione | tutti gli A vs B | Uniforma a `.toFixed(2)` ovunque |
+| AS6 narrativa divergenza | `<city>-B-heatmap.html` ins-3 | Calcola runtime `range` e `stdDev`, narrativa data-driven |
+
+### 24.9 — Lesson learned (cosa fare in generale)
+
+1. **Mai fidarsi di `wc -l` per JSON**. Sempre `json.load()` o `stat -f %z`.
+2. **Considera la pipeline runtime, non solo il JSON statico**. I mockup C ricalcolano score/verdict con penalty.
+3. **Cross-verifica matematica obbligatoria** prima di applicare fix proposti da sub-agenti. ~30% dei finding di sub-agenti generic-purpose sono falsi positivi o non-bug.
+4. **Patch chirurgiche > rigenerazione JSON** quando i bug sono nei mockup HTML (blast radius minore, no rischio rumore di micro-precisione Python vs JS).
+5. **Per ogni replica città, esegui §24.6 checklist anti-pattern**. È un grep di 1 minuto che cattura tutti i bug AP1-AS6.
+6. **Tooltip onesti > scale "robuste" senza disclaimer**. Se usi un percentile clamp, esponi sempre i veri min/max via `title=""` HTML.
+7. **Narrativa data-driven > narrativa templatica**. Se hai una stringa "Tirreno/Ionio/Capoluogo si muovono a velocità diverse", calcola runtime `range` e `stdDev` per giustificare l'affermazione.
+
+### 24.10 — Riferimenti
+
+- **Audit cross-mockup eseguito**: 2026-05-17 da 4 sub-agenti `general-purpose` in parallelo (1 per città).
+- **Findings totali**: 44 candidati → 39 reali (3 falsi positivi + 2 non-bug) → tutti fixati nella stessa sessione.
+- **File modificati**: 12 (`{investor,bologna,catanzaro,reggio-emilia}-{A-brief,B-heatmap,C-compass}.html`).
+- **Verifica finale**: 100% dei sum-check matematici (nGrow+nDecl+nFlat = total) + 100% syntax check JS (`node --check`) + verifica manuale via http.server.
 
 ---

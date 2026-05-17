@@ -271,7 +271,7 @@
   <header>
     <div class="eyebrow">Bussola di investimento · banca dati OMI</div>
     <h1>Modena, <em>zona per zona</em>,<br>segnale <em>per segnale</em>.</h1>
-    <p class="deck">Cinque tipologie di immobile, due decenni di quotazioni, un punteggio composito a tre cifre. Bussola di orientamento per chi guarda Modena come patrimonio — non una rivista, non un consiglio.</p>
+    <p class="deck">Cinque tipologie di immobile, 21 anni di quotazioni, un punteggio composito a tre cifre. Bussola di orientamento per chi guarda Modena come patrimonio — non una rivista, non un consiglio.</p>
   </header>
 
   <!-- TOOLBAR -->
@@ -303,7 +303,7 @@
     <div class="kpi"><div class="lbl">CAGR · zone correnti</div><div class="val num" id="kpi-cagr">…</div><div class="sub">media (max 12 anni · 2014–2026)</div></div>
     <div class="kpi"><div class="lbl">Yield lordo</div><div class="val num" id="kpi-yield">…</div><div class="sub">acquisto vs affitto</div></div>
     <div class="kpi"><div class="lbl">€/m² · oggi</div><div class="val num" id="kpi-prezzo">…</div><div class="sub" id="kpi-prezzo-sub">…</div></div>
-    <div class="kpi"><div class="lbl">Comuni</div><div class="val num"><span id="kpi-buy" style="color: var(--up)">…</span><span style="color: var(--ink-faint); font-size: 0.55em">/<span id="kpi-buy-tot">…</span></span></div><div class="sub" id="kpi-buy-sub">in BUY su totale</div></div>
+    <div class="kpi"><div class="lbl">Zone + comuni</div><div class="val num"><span id="kpi-buy" style="color: var(--up)">…</span><span style="color: var(--ink-faint); font-size: 0.55em">/<span id="kpi-buy-tot">…</span></span></div><div class="sub" id="kpi-buy-sub">in BUY su pool valutati</div></div>
   </div>
 
   <!-- § 1 PROVINCIA -->
@@ -602,19 +602,23 @@ function colorByMetric(value, lo, hi, metric) {
   return interpRgb(SEQ_RAMP, Math.max(0, Math.min(1, t)));
 }
 function percentileClampForMetric(values, metric) {
-  if (!values || values.length === 0) return { lo: -1, hi: 1 };
+  if (!values || values.length === 0) return { lo: -1, hi: 1, realMin: -1, realMax: 1, p25: -1, p75: 1 };
   const sorted = [...values].sort((a,b) => a - b);
   // FIX 2026-05-17 v2: P25/P75 (IQR robust) invece di P5/P95 — outlier estremi
   // schiacciavano la rampa anche con P5/P95 (vedi RE: P95=+8.94 per 1 outlier).
-  const p5  = sorted[Math.floor(sorted.length * 0.25)];
-  const p95 = sorted[Math.floor(sorted.length * 0.75)];
+  // v3: aggiunta realMin/realMax per disclosure onesta sulla legenda.
+  const n = sorted.length;
+  const p25 = sorted[Math.floor(n * 0.25)];
+  const p75 = sorted[Math.floor(n * 0.75)];
+  const realMin = sorted[0], realMax = sorted[n - 1];
   if (metric === 'cagr') {
     return {
-      lo: p5 < 0 ? p5 : -0.5,
-      hi: p95 > 0 ? p95 : 0.5,
+      lo: p25 < 0 ? p25 : -0.5,
+      hi: p75 > 0 ? p75 : 0.5,
+      realMin, realMax, p25, p75,
     };
   }
-  return { lo: p5, hi: p95 };
+  return { lo: p25, hi: p75, realMin, realMax, p25, p75 };
 }
 function fmtEuro(n, d=0) { return n == null ? '—' : '€' + n.toLocaleString('it-IT', { maximumFractionDigits: d }); }
 function fmtPct(n, d=2) { return n == null ? '—' : (n > 0 ? '+' : '') + n.toFixed(d) + '%'; }
@@ -852,11 +856,13 @@ function renderKPI() {
 // ─── Maps ─────────────────────────────────────────────────
 function buildPalette(entries, metric) {
   const vals = entries.map(e => e._mapVal).filter(v => v != null);
-  if (!vals.length) return { lo: -1, hi: 1 };
+  if (!vals.length) return { lo: -1, hi: 1, realMin: null, realMax: null, satLow: 0, satHigh: 0, n: 0 };
   // FIX cromatica 2026-05-17: percentile clamp invece di min/max raw.
-  const { lo, hi } = percentileClampForMetric(vals, metric);
-  entries.forEach(e => { e._color = colorByMetric(e._mapVal, lo, hi, metric); });
-  return { lo, hi };
+  const c = percentileClampForMetric(vals, metric);
+  entries.forEach(e => { e._color = colorByMetric(e._mapVal, c.lo, c.hi, metric); });
+  const satLow = vals.filter(v => v < c.lo).length;
+  const satHigh = vals.filter(v => v > c.hi).length;
+  return { lo: c.lo, hi: c.hi, realMin: c.realMin, realMax: c.realMax, satLow, satHigh, n: vals.length };
 }
 
 function applyMetricToFeatures(features, byKey, key, metric, recomputeScoreFn) {
@@ -903,9 +909,16 @@ async function renderProvMap() {
 
   applyMetricToFeatures(window._provGeo.features, byCat, 'com_catasto_code', state.metric, e => recomputeScore(e, state.weights));
   const palette = buildPalette(window._provGeo.features.map(f => f.properties), state.metric);
-  document.getElementById('legend-prov-label').textContent = metricLabel();
-  document.getElementById('legend-prov-min').textContent = metricFmt(palette.lo);
-  document.getElementById('legend-prov-max').textContent = metricFmt(palette.hi);
+  const provLabel = document.getElementById('legend-prov-label');
+  provLabel.innerHTML = `${metricLabel()} <span style="color:var(--ink-faint);font-weight:400">· scala IQR (P25–P75)</span>`;
+  const provMin = document.getElementById('legend-prov-min');
+  const provMax = document.getElementById('legend-prov-max');
+  provMin.textContent = metricFmt(palette.lo);
+  provMax.textContent = metricFmt(palette.hi);
+  if (palette.realMin != null) {
+    provMin.title = `25° percentile · veri estremi: ${metricFmt(palette.realMin)} / ${metricFmt(palette.realMax)} (${palette.satLow}+${palette.satHigh} valori saturati su ${palette.n})`;
+    provMax.title = provMin.title;
+  }
 
   if (!state.mapProv) {
     state.mapProv = new maplibregl.Map({
@@ -935,9 +948,16 @@ async function renderZoneMap() {
 
   applyMetricToFeatures(window._zoneGeo.features, byZ, 'zona', state.metric, e => recomputeScore(e, state.weights));
   const palette = buildPalette(window._zoneGeo.features.map(f => f.properties), state.metric);
-  document.getElementById('legend-zone-label').textContent = metricLabel();
-  document.getElementById('legend-zone-min').textContent = metricFmt(palette.lo);
-  document.getElementById('legend-zone-max').textContent = metricFmt(palette.hi);
+  const zoneLabel = document.getElementById('legend-zone-label');
+  zoneLabel.innerHTML = `${metricLabel()} <span style="color:var(--ink-faint);font-weight:400">· scala IQR (P25–P75)</span>`;
+  const zoneMin = document.getElementById('legend-zone-min');
+  const zoneMax = document.getElementById('legend-zone-max');
+  zoneMin.textContent = metricFmt(palette.lo);
+  zoneMax.textContent = metricFmt(palette.hi);
+  if (palette.realMin != null) {
+    zoneMin.title = `25° percentile · veri estremi: ${metricFmt(palette.realMin)} / ${metricFmt(palette.realMax)} (${palette.satLow}+${palette.satHigh} valori saturati su ${palette.n})`;
+    zoneMax.title = zoneMin.title;
+  }
 
   if (!state.mapZone) {
     state.mapZone = new maplibregl.Map({

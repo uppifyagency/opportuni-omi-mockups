@@ -178,7 +178,7 @@
 
   <header>
     <div class="eyebrow">Brief immobiliare · banca dati OMI</div>
-    <h1>Reggio Emilia in <em>vent'anni</em>:<br>prezzi fermi, volumi raddoppiati.</h1>
+    <h1>Reggio Emilia in <em>21 anni</em>:<br>prezzi fermi, volumi in forte espansione.</h1>
     <p class="deck">Il valore al metro quadro si è assestato, le compravendite no. Centro storico in raffreddamento, semicintura che tiene il passo, periferia che lavora. Tre letture, nessuno slogan.</p>
     <div class="dateline">Edizione · <span id="hl-edizione">…</span> · <span id="dl">…</span></div>
   </header>
@@ -186,7 +186,7 @@
   <!-- ─── HEADLINE NUMBERS ─── -->
   <div class="headline-row">
     <div class="hl">
-      <div class="hl-label">CAGR medio · <span id="kpi-horizon">…</span> anni</div>
+      <div class="hl-label">CAGR medio · dataset <span id="kpi-horizon">…</span> anni</div>
       <div class="hl-value num" id="kpi-cagr">…</div>
       <div class="hl-sub" id="kpi-cagr-sub">…</div>
     </div>
@@ -196,9 +196,9 @@
       <div class="hl-sub italic">acquisto vs affitto annuo</div>
     </div>
     <div class="hl">
-      <div class="hl-label">Prezzo medio attuale</div>
+      <div class="hl-label">Prezzo medio capoluogo</div>
       <div class="hl-value num" id="kpi-prezzo">…</div>
-      <div class="hl-sub italic">€/m² abitazioni civili</div>
+      <div class="hl-sub italic">€/m² abitazioni civili · zone Reggio nell'Emilia</div>
     </div>
     <div class="hl">
       <div class="hl-label">Zone monitorate</div>
@@ -371,14 +371,17 @@ async function loadAndRender() {
   } catch (e) { document.getElementById('hl-edizione').textContent = '—'; }
 
   // KPIs
-  document.getElementById('kpi-horizon').textContent = h.anni_orizzonte || '—';
+  document.getElementById('kpi-horizon').textContent = h.anni_orizzonte_dataset || h.anni_orizzonte || '—';
   const cagrEl = document.getElementById('kpi-cagr');
   if (h.cagr_avg_pct != null) {
     cagrEl.textContent = (h.cagr_avg_pct > 0 ? '+' : '') + h.cagr_avg_pct.toFixed(2) + '%';
     cagrEl.style.color = h.cagr_avg_pct >= 0 ? 'var(--up)' : 'var(--down)';
     const adj = Math.abs(h.cagr_avg_pct) < 0.5 ? 'mercato piatto' :
-                h.cagr_avg_pct > 0 ? 'crescita reale moderata' : 'mercato in contrazione';
-    document.getElementById('kpi-cagr-sub').innerHTML = `<em>${adj}</em>, su ${h.zone_count_current} zone correnti`;
+                h.cagr_avg_pct > 0 ? 'crescita nominale moderata' : 'mercato in contrazione';
+    const denom = (h.zone_count_cagr_reliable && h.cagr_avg_pct_min_years)
+      ? `${h.zone_count_cagr_reliable} zone con dati ≥${h.cagr_avg_pct_min_years} anni`
+      : `${h.zone_count_current} zone correnti${h.cagr_avg_pct_min_years ? ` (nessuna con orizzonte ≥${h.cagr_avg_pct_min_years} anni)` : ''}`;
+    document.getElementById('kpi-cagr-sub').innerHTML = `<em>${adj}</em>, su ${denom} (valori nominali, non deflazionati)`;
   } else {
     cagrEl.textContent = 'n/d';
   }
@@ -408,7 +411,17 @@ async function loadAndRender() {
   }
 
   // Signal 2: top growth zona (data-driven, non più hardcoded "Cognento")
-  const topGrow = d.top_growth && d.top_growth[0];
+  // FIX R4: fallback su zone_metrics se top_growth precomputato è vuoto
+  // (capita quando min_cagr_years=5 ma le zone correnti hanno solo 2 anni di dati)
+  let topGrow = d.top_growth && d.top_growth[0];
+  let shortHorizonWarn = false;
+  if (!topGrow || topGrow.cagr_full == null) {
+    const candidates = (d.zone_metrics || [])
+      .filter(z => z.dizione && z.cagr_full != null)
+      .sort((a, b) => (b.cagr_full || -99) - (a.cagr_full || -99));
+    topGrow = candidates[0];
+    shortHorizonWarn = !!topGrow;
+  }
   const sig2Title = document.getElementById('sig2-title');
   const sig2Stat = document.getElementById('sig2-stat');
   const sig2Body = document.getElementById('sig2-body');
@@ -419,8 +432,11 @@ async function loadAndRender() {
     sig2Stat.textContent = (cagrPct > 0 ? '+' : '') + cagrPct.toFixed(2) + '%';
     sig2Stat.className = 'signal-stat ' + (cagrPct >= 0 ? 'up' : 'down');
     const avgCagr = h.cagr_avg_pct || 0;
-    const ratio = avgCagr ? (cagrPct / avgCagr).toFixed(1) : '∞';
-    sig2Body.innerHTML = `Zona <span class="mono">${topGrow.zona}</span>, fascia ${topGrow.fascia}. La zona con crescita più alta a Reggio Emilia città — <span class="num">${cagrPct >= 0 ? '+' : ''}${cagrPct.toFixed(2)}%/yr</span> contro la media <span class="num">${avgCagr >= 0 ? '+' : ''}${avgCagr.toFixed(2)}%/yr</span>.`;
+    const anniZ = topGrow.anni_dati_acquisto || topGrow.anni || null;
+    const horizonNote = shortHorizonWarn && anniZ
+      ? ` <em style="color: var(--ink-mid)">(orizzonte breve: ${anniZ} anni di dati, segnale provvisorio)</em>`
+      : '';
+    sig2Body.innerHTML = `Zona <span class="mono">${topGrow.zona}</span>, fascia ${topGrow.fascia || '?'}. La zona con crescita più alta a Reggio Emilia città — <span class="num">${cagrPct >= 0 ? '+' : ''}${cagrPct.toFixed(2)}%/yr</span> contro la media <span class="num">${avgCagr >= 0 ? '+' : ''}${avgCagr.toFixed(2)}%/yr</span>.${horizonNote}`;
   } else {
     sig2Title.innerHTML = `Outlier <em>non trovato</em>.`;
     sig2Stat.textContent = 'n/d';
@@ -429,12 +445,14 @@ async function loadAndRender() {
   }
 
   // Signal 3: top vs bottom comuni della provincia
-  const pr = d.province_ranking || [];
+  // Escludi entry stale per evitare ranking falsato da serie non aggiornate
+  const pr = (d.province_ranking || []).filter(p => !p.stale);
   if (pr.length >= 6) {
     const top3 = pr.slice(0, 3);
     const bot3 = pr.slice(-3);
-    const nGrow = pr.filter(p => p.cagr && p.cagr > 0).length;
-    const nDecl = pr.filter(p => p.cagr && p.cagr < 0).length;
+    const nGrow = pr.filter(p => p.cagr != null && p.cagr > 0).length;
+    const nDecl = pr.filter(p => p.cagr != null && p.cagr < 0).length;
+    const nFlat = pr.length - nGrow - nDecl;
     const sig3Stat = document.getElementById('sig3-stat');
     const topCagr = top3[0].cagr * 100;
     sig3Stat.textContent = (topCagr > 0 ? '+' : '') + topCagr.toFixed(2) + '%';
@@ -442,7 +460,7 @@ async function loadAndRender() {
     document.getElementById('sig3-body').innerHTML =
       `<strong style="color: var(--up); font-family: var(--mono)">${top3.map(p=>p.nome).join(', ')}</strong> in testa con <span class="num">${(top3[2].cagr*100).toFixed(2)}–${(top3[0].cagr*100).toFixed(2)}%/yr</span>. ` +
       `<strong style="color: var(--down); font-family: var(--mono)">${bot3.map(p=>p.nome).join(', ')}</strong> in coda. ` +
-      `Su <span class="num">${pr.length}</span> comuni provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo.`;
+      `Su <span class="num">${pr.length}</span> comuni provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo${nFlat > 0 ? `, <span class="num">${nFlat}</span> stabili` : ''}.`;
   } else if (pr.length >= 1) {
     document.getElementById('sig3-stat').textContent = (pr[0].cagr * 100 > 0 ? '+' : '') + (pr[0].cagr*100).toFixed(2) + '%';
     document.getElementById('sig3-body').textContent = `Solo ${pr.length} comuni con dati OMI sufficienti — provincia con copertura ancora parziale.`;

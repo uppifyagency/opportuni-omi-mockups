@@ -219,7 +219,7 @@
         <div class="signal-num"><em>1.</em></div>
         <div class="signal-title">Il centro non <em>guida più</em>.</div>
         <div class="signal-stat down" id="sig1-stat">…</div>
-        <div class="signal-body">Fascia B (centro storico) cala dello <span id="sig1-pct">…</span>% l'anno in vent'anni. Fascia R (rurale) cresce dello <span id="sig1-r">…</span>%. L'asse di valore si è spostato.</div>
+        <div class="signal-body">Fascia B (centro storico) cala dello <span id="sig1-pct">…</span>% l'anno in 21 anni (2005–2026). Fascia R (rurale) cresce dello <span id="sig1-r">…</span>% nel suo periodo coperto. L'asse di valore si è spostato.</div>
       </div>
       <div class="signal">
         <div class="signal-num"><em>2.</em></div>
@@ -240,7 +240,7 @@
   <section>
     <div class="section-eyebrow">Capitolo primo · Modena città</div>
     <h2 id="zone-h2">Le zone OMI del capoluogo, <em>in ordine di crescita</em>.</h2>
-    <p class="section-deck">CAGR sul periodo coperto da ciascuna zona (massimo 2014-2026, sette osservazioni semestrali), yield lordo all'attuale, volatilità annua dei rendimenti. La sparkline è normalizzata: si legge la forma del moto, non l'ampiezza.</p>
+    <p class="section-deck">CAGR sul periodo coperto da ciascuna zona (massimo 2014–2026, sette osservazioni a cadenza biennale), yield lordo all'attuale, volatilità annua dei rendimenti. La sparkline è normalizzata: si legge la forma del moto, non l'ampiezza.</p>
 
     <table id="tbl-zone">
       <thead>
@@ -345,7 +345,10 @@ async function loadAndRender() {
   const cagrEl = document.getElementById('kpi-cagr');
   cagrEl.textContent = (h.modena_cagr_avg_pct > 0 ? '+' : '') + h.modena_cagr_avg_pct.toFixed(2) + '%';
   cagrEl.style.color = h.modena_cagr_avg_pct >= 0 ? 'var(--up)' : 'var(--down)';
-  document.getElementById('kpi-cagr-sub').innerHTML = `<em>mercato piatto</em>, ~zero crescita reale`;
+  const moDenom = (h.zone_count_cagr_reliable && h.modena_cagr_avg_pct_min_years)
+    ? `${h.zone_count_cagr_reliable} zone con dati ≥${h.modena_cagr_avg_pct_min_years} anni`
+    : `${h.zone_count_current} zone correnti`;
+  document.getElementById('kpi-cagr-sub').innerHTML = `<em>mercato piatto</em>, ~zero crescita nominale · su ${moDenom} (non deflazionata)`;
 
   document.getElementById('kpi-yield').textContent = h.yield_medio_pct.toFixed(2) + '%';
   document.getElementById('kpi-prezzo').textContent = fmtEuro(h.prezzo_medio_attuale);
@@ -385,15 +388,18 @@ async function loadAndRender() {
     provH2Anni.textContent = anni;
   }
   if (pr.length >= 6) {
-    const top3 = pr.slice(0, 3);
-    const bot3 = pr.slice(-3);
-    const nGrow = pr.filter(p => p.cagr && p.cagr > 0).length;
-    const nDecl = pr.filter(p => p.cagr && p.cagr < 0).length;
+    // Escludi entry stale per evitare ranking falsato da serie non aggiornate
+    const prClean = pr.filter(p => !p.stale);
+    const top3 = prClean.slice(0, 3);
+    const bot3 = prClean.slice(-3);
+    const nGrow = prClean.filter(p => p.cagr != null && p.cagr > 0).length;
+    const nDecl = prClean.filter(p => p.cagr != null && p.cagr < 0).length;
+    const nFlat = prClean.length - nGrow - nDecl;
     document.getElementById('sig3-stat').textContent = '+' + (top3[0].cagr * 100).toFixed(2) + '%';
     document.getElementById('sig3-body').innerHTML =
       `<strong style="color: var(--up); font-family: var(--mono)">${top3.map(p=>p.nome).join(', ')}</strong> crescono <span class="num">+${(top3[2].cagr*100).toFixed(2)}–${(top3[0].cagr*100).toFixed(2)}%/yr</span>. ` +
       `I comuni montani <strong style="color: var(--down); font-family: var(--mono)">${bot3.map(p=>p.nome).join(', ')}</strong> calano. ` +
-      `Su ${pr.length} comuni della provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo.`;
+      `Su ${prClean.length} comuni della provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo${nFlat > 0 ? `, <span class="num">${nFlat}</span> stabili` : ''}.`;
   }
 
   // Zone table — only current zones (those with dizione)
