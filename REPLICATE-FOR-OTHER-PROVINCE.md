@@ -2105,3 +2105,272 @@ python3 scripts/threshold-scientific-analysis.py
 - **scientific-agent-skills** sklearn.mixture, jenkspy installati via `pip install scikit-learn jenkspy`.
 
 ---
+
+## 22. Veridicità cromatica delle heatmap (audit colori + scala divergente)
+
+**Aggiunta: 2026-05-17 — post-audit cromatico cross-city.**
+
+### 22.1 — Il problema delle scale lineari min-max
+
+I mockup `B-heatmap` (e in parte `C-compass`) usavano una rampa colore lineare basata su `min(values)` e `max(values)` del dataset corrente:
+
+```javascript
+// PRIMA — schema falsificante
+const RAMP = [
+  { t: 0.00, rgb: [195, 60,  55]  },  // rosso = "in declino"
+  { t: 0.50, rgb: [220, 210, 188] },  // beige = "neutro"
+  { t: 1.00, rgb: [60,  140, 80]  },  // verde = "in crescita"
+];
+function colorForCAGR(cagrPct, lo, hi) {
+  const t = (cagrPct - lo) / (hi - lo);  // lineare min-max
+  // → il pivot della rampa beige cade a (lo+hi)/2, NON a 0%
+}
+```
+
+**Conseguenza:** il colore di una zona rappresenta la sua **posizione relativa nel range** della distribuzione, non il suo **valore reale** di crescita/declino. Per distribuzioni asimmetriche o con outlier estremi, questo genera **falsità cromatiche sistematiche**.
+
+### 22.2 — Le 8 mappe diagnosticate (4 città × 2 scope)
+
+Audit eseguito su Modena, Bologna, Catanzaro, Reggio Emilia:
+
+| Città | Scope | Range CAGR | Zero al t= | Diagnosi |
+|---|---|---|---:|---|
+| Modena | zone cap | `[-1.07%, +2.82%]` | `0.28` | ⚠ asimmetria moderata |
+| Modena | provincia | `[-1.19%, +1.94%]` | `0.38` | ok |
+| Bologna | zone cap | `[-2.08%, +1.70%]` | `0.55` | ok |
+| Bologna | provincia | `[-1.29%, +3.18%]` | `0.29` | ⚠ asimmetria moderata |
+| Catanzaro | zone cap | `[-2.77%, +3.96%]` | `0.41` | ok |
+| **Catanzaro** | **provincia** | `[+0.29%, +9.05%]` | **`-0.03`** | 🔴 GRAVE: tutti i comuni in crescita appaiono ROSSI |
+| **Reggio Emilia** | **zone cap** | `[0%, +10.34%]` | **`0.00`** | 🔴 GRAVE: comuni a CAGR positivo basso appaiono ROSSI |
+| Reggio Emilia | provincia | `[-1.31%, +1.08%]` | `0.55` | ok |
+
+Il **caso peggiore** (Catanzaro provincia): un outlier estremo (`+9.05%/yr`) deforma la rampa, comprimendo il 95% dei comuni in una piccola fascia rossa-arancione. Un comune che cresce `+1%/yr` viene mostrato **rosso** come se fosse in declino.
+
+### 22.3 — Diagnostica preliminare (da eseguire per ogni nuova città)
+
+**Script obbligatorio prima di pubblicare le mappe:**
+
+```python
+import json, numpy as np
+
+city = "<nuovacitta>"
+sig = json.load(open(f'data/computed/{city}-signals.json'))
+
+z = [z['cagr_full']*100 for z in sig['zone_metrics']
+     if z.get('dizione') and z.get('cagr_full') is not None]
+p = [p['cagr']*100 for p in sig['province_ranking']
+     if p.get('cagr') is not None]
+
+for label, vals in [('zone_capoluogo', z), ('provincia', p)]:
+    if not vals: continue
+    a = np.array(vals)
+    lo, hi = a.min(), a.max()
+    zero_t = (0 - lo) / (hi - lo) if hi > lo else 0.5
+    ratio = hi / max(abs(lo), 0.01) if lo < 0 else float('inf')
+    iqr_outl = (((a < np.percentile(a,25) - 1.5*(np.percentile(a,75)-np.percentile(a,25)))
+                | (a > np.percentile(a,75) + 1.5*(np.percentile(a,75)-np.percentile(a,25))))).sum()
+    print(f'{label}: range [{lo:+.2f}, {hi:+.2f}]  zero@t={zero_t:.2f}  '
+          f'green/red ratio={ratio:.1f}x  IQR outliers={iqr_outl}')
+    if abs(zero_t - 0.5) > 0.15:
+        print(f'  ⚠ ASIMMETRIA: lo zero NON al centro della rampa')
+    if ratio > 2 or ratio < 0.5:
+        print(f'  ⚠ OUTLIER comprimono la rampa')
+```
+
+**Criteri di accettabilità (rampa lineare min-max):**
+
+- `|zero_t − 0.5| ≤ 0.15` → asimmetria contenuta
+- `0.5 ≤ ratio ≤ 2` → no outlier dominanti
+- `IQR outliers ≤ 5%` del totale
+
+Se **uno qualunque** non passa → applicare il fix §22.4 (scala divergente).
+
+### 22.4 — Fix scientifico: scala divergente con pivot fisso a 0%
+
+```javascript
+// FIX cromatica 2026-05-17 — verità statistica del colore
+const NEG_RAMP = [
+  { t: 0.00, rgb: [195, 60,  55]  },  // rosso scuro
+  { t: 0.50, rgb: [222, 132, 92]  },
+  { t: 1.00, rgb: [240, 232, 218] },  // bianco-beige a 0% (pivot fisso)
+];
+const POS_RAMP = [
+  { t: 0.00, rgb: [240, 232, 218] },  // bianco-beige a 0% (pivot fisso)
+  { t: 0.50, rgb: [144, 188, 122] },
+  { t: 1.00, rgb: [60,  140, 80]  },  // verde scuro
+];
+
+function interpRgb(ramp, t) {
+  t = Math.max(0, Math.min(1, t));
+  for (let i = 0; i < ramp.length - 1; i++) {
+    if (t >= ramp[i].t && t <= ramp[i+1].t) {
+      const k = (t - ramp[i].t) / (ramp[i+1].t - ramp[i].t);
+      const c = ramp[i].rgb.map((v, j) => Math.round(v + k * (ramp[i+1].rgb[j] - v)));
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+  }
+  return `rgb(${ramp[ramp.length-1].rgb.join(',')})`;
+}
+
+function colorForCAGR(cagrPct, negClamp, posClamp) {
+  if (cagrPct == null) return 'rgb(200, 195, 184)';
+  if (cagrPct >= 0) {
+    return interpRgb(POS_RAMP, cagrPct / (posClamp > 0 ? posClamp : 1));
+  } else {
+    return interpRgb(NEG_RAMP, 1 - Math.abs(cagrPct) / (negClamp < 0 ? Math.abs(negClamp) : 1));
+  }
+}
+
+// Helper: clamping ai percentili P5/P95 per neutralizzare outlier
+function percentileClamp(values) {
+  if (!values || values.length === 0) return { negClamp: -1, posClamp: 1, p5: -1, p95: 1 };
+  const sorted = [...values].sort((a,b) => a - b);
+  const p5  = sorted[Math.floor(sorted.length * 0.05)];
+  const p95 = sorted[Math.floor(sorted.length * 0.95)];
+  return {
+    negClamp: p5 < 0 ? p5 : -0.5,   // se distribuzione tutta positiva, finta scala rosso
+    posClamp: p95 > 0 ? p95 : 0.5,
+    p5: p5, p95: p95,
+  };
+}
+```
+
+### 22.5 — Le 3 proprietà del nuovo metodo
+
+1. **Pivot fisso a 0%** — Una zona con CAGR=0% appare sempre bianco-beige. Cross-città e cross-scope coerente.
+2. **Saturazione P5/P95** — Outlier estremi (es. `+9%/yr`) sono saturati al verde scuro; il resto della distribuzione usa tutta la rampa visibile.
+3. **Significato fisso del colore** — rosso = declino (sempre), verde = crescita (sempre), intensità = magnitudine.
+
+### 22.6 — Pattern d'uso (sostituire i punti chiamata)
+
+In ciascun `B-heatmap.html`, sostituire i due punti che computavano `lo/hi`:
+
+```javascript
+// PRIMA:
+const lo = Math.min(...values), hi = Math.max(...values);
+zonesGeo.features.forEach(f => {
+  f.properties._color = colorForCAGR(c, lo, hi);
+});
+
+// DOPO:
+const clamp = percentileClamp(values);
+zonesGeo.features.forEach(f => {
+  f.properties._color = colorForCAGR(c, clamp.negClamp, clamp.posClamp);
+});
+
+// E anche per la mappa provincia:
+const pClamp = percentileClamp(pVals);
+provGeo.features.forEach(f => {
+  f.properties._color = colorForCAGR(c, pClamp.negClamp, pClamp.posClamp);
+});
+
+// Legenda: mostra negClamp/posClamp come limiti della rampa, non più min/max raw
+document.getElementById('legend-min').textContent = (clamp.negClamp > 0 ? '+' : '') + clamp.negClamp.toFixed(2) + '%';
+document.getElementById('legend-max').textContent = (clamp.posClamp > 0 ? '+' : '') + clamp.posClamp.toFixed(2) + '%';
+```
+
+### 22.7 — Verifica veridicità post-fix (visual diff)
+
+Per ogni nuova città, generare la tabella di esempio "PRIMA vs DOPO" per N comuni rappresentativi:
+
+```python
+# scripts/colormap-veridicity-check.py (template)
+import json
+import numpy as np
+
+city = "<nuovacitta>"
+sig = json.load(open(f'data/computed/{city}-signals.json'))
+
+# Per la provincia (caso peggiore tipico):
+p_cagrs = np.array([p['cagr']*100 for p in sig['province_ranking'] if p.get('cagr') is not None])
+nomes = [p['nome'] for p in sig['province_ranking'] if p.get('cagr') is not None]
+
+# Prima (lineare min-max):
+lo, hi = p_cagrs.min(), p_cagrs.max()
+t_pre = (p_cagrs - lo) / (hi - lo)
+
+# Dopo (divergente P5/P95):
+p5, p95 = np.percentile(p_cagrs, 5), np.percentile(p_cagrs, 95)
+negClamp = p5 if p5 < 0 else -0.5
+posClamp = p95 if p95 > 0 else 0.5
+
+def classify_pre(t):
+    return ['rosso scuro', 'rosso', 'beige', 'verde', 'verde scuro'][min(4, int(t*5))]
+
+def classify_post(v):
+    if v >= 0:
+        ratio = v / posClamp
+        return ['beige', 'verde tenue', 'verde medio', 'verde scuro', 'verde scuro'][min(4, int(ratio*5))]
+    else:
+        ratio = abs(v) / abs(negClamp)
+        return ['beige', 'rosso tenue', 'rosso medio', 'rosso scuro', 'rosso scuro'][min(4, int(ratio*5))]
+
+print(f"{'Comune':<25} {'CAGR':>8} {'Colore PRIMA':<15} {'Colore DOPO':<18} {'Veridiero?'}")
+print('-'*80)
+for nome, c, tp in zip(nomes, p_cagrs, t_pre):
+    color_pre = classify_pre(tp)
+    color_post = classify_post(c)
+    # Veridicità: c>0 → deve essere verde-qualunque; c<0 → rosso-qualunque; |c|<0.2 → beige
+    expected_sign = 'verde' if c > 0.2 else 'rosso' if c < -0.2 else 'beige'
+    pre_ok = expected_sign in color_pre
+    post_ok = expected_sign in color_post
+    print(f"{nome[:24]:<25} {c:+.2f}%  {color_pre:<15} {color_post:<18} pre:{'✓' if pre_ok else '✗'} post:{'✓' if post_ok else '✗'}")
+```
+
+Test PASS se **tutti i comuni** hanno colore coerente col segno del CAGR (verde se >0, rosso se <0, beige se ≈0). Eventuali outlier P95/P5 saturati sono accettabili.
+
+### 22.8 — Caveat e limiti
+
+- **Daltonismo**: la coppia rosso-verde è problematica per protanopia/deuteranopia (~5% pop.). Per audience accessible, sostituire con ColorBrewer "RdBu" (rosso-blu) o "PuOr" (viola-arancione).
+- **Confronto cross-città**: il `negClamp`/`posClamp` è per-città. Una zona "verde scuro" a Bologna NON ha lo stesso CAGR assoluto di una "verde scuro" a Catanzaro. La legenda mostra esplicitamente i limiti P5/P95 — quindi l'utente vede sempre il valore reale.
+- **Distribuzioni tutte-positive o tutte-negative**: il clamping fallback `negClamp = -0.5` / `posClamp = +0.5` evita rampa degenere. Documentare nei mockup quando il segnale è solo crescita o solo declino.
+
+### 22.9 — Pattern d'uso (workflow per una nuova città)
+
+```bash
+# 1. Compute signals + compass (genera CAGR per zone + province)
+python3 scripts/compute-<city>-signals.py
+python3 scripts/compute-<city>-compass.py
+
+# 2. Diagnostica cromatica (script §22.3)
+python3 -c "<snippet §22.3 con city='<nuovacitta>'>"
+
+# 3. Se la diagnostica segnala asimmetria/outlier:
+#    Aprire mockups/<city>-B-heatmap.html e sostituire la rampa secondo §22.4-22.6
+#    (template già allineato per le 4 città attuali — clonare invece di riscrivere)
+
+# 4. Verifica veridicità con tabella PRIMA/DOPO (§22.7)
+python3 scripts/colormap-veridicity-check.py --city <nuovacitta>
+
+# 5. Audit visivo: aprire http://localhost:8765/mockups/<city>-B-heatmap.html
+#    e controllare che i comuni in lieve crescita (es. +0.5%/yr) appaiano
+#    chiaramente verdi tenui, non rossi.
+```
+
+### 22.10 — File modificati nel fix 2026-05-17
+
+```
+mockups/investor-B-heatmap.html        (Modena · rampa divergente + percentileClamp)
+mockups/bologna-B-heatmap.html         (idem)
+mockups/catanzaro-B-heatmap.html       (idem)
+mockups/reggio-emilia-B-heatmap.html   (idem)
+docs/audit/COLORMAP-AUDIT.md           (diagnosi + fix documentato)
+```
+
+Per i `C-compass` la scala colori è gestita diversamente (gradient sui poligoni mappa interna) — vedi TODO §22.11.
+
+### 22.11 — TODO future
+
+- [ ] **Applicare lo stesso fix anche nei C-compass** quando colorano i poligoni della mappa provincia (verifica `paint.fill-color` MapLibre).
+- [ ] **Documentare `negClamp`/`posClamp` nel JSON** come `metadata.colormap` per riproducibilità (test deterministico cross-machine).
+- [ ] **Esposizione legenda multipla**: mostrare anche `P5/P50/P95` nella legenda, non solo min/max.
+- [ ] **Switcher daltonismo-safe**: button "modalità accessibile" che usa ColorBrewer RdBu invece di rosso-verde.
+- [ ] **Test automatico**: aggiungere a `audit-math-proof.py` un test cromatico ("colore della zona X coerente col segno del CAGR").
+
+### 22.12 — Riferimenti
+
+- **Diverging color scales**: Brewer, C. A. (1994). *Color Use Guidelines for Mapping and Visualization*. ColorBrewer: [colorbrewer2.org](https://colorbrewer2.org/).
+- **Truncation outlier**: Cleveland (1985), *The Elements of Graphing Data*, cap. 3 (sui percentili come scale-resistant statistics).
+- **Audit documentato**: [`docs/audit/COLORMAP-AUDIT.md`](docs/audit/COLORMAP-AUDIT.md).
+
+---

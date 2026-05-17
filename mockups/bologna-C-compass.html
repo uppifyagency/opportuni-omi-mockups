@@ -555,28 +555,83 @@ function getScoring() {
     cagrPenalty:   m.cagr_negative_penalty != null ? m.cagr_negative_penalty : FALLBACK_CAGR_NEGATIVE_PENALTY,
   };
 }
-const RAMP = [
+// FIX cromatica 2026-05-17 — scala divergente per CAGR (pivot 0%), sequential
+// per le altre metriche. Vedi docs/audit/COLORMAP-AUDIT.md per la diagnosi.
+const NEG_RAMP = [
   { t: 0.00, rgb: [195, 60,  55]  },
-  { t: 0.25, rgb: [222, 132, 92]  },
-  { t: 0.50, rgb: [220, 210, 188] },
-  { t: 0.75, rgb: [144, 188, 122] },
+  { t: 0.50, rgb: [222, 132, 92]  },
+  { t: 1.00, rgb: [240, 232, 218] },
+];
+const POS_RAMP = [
+  { t: 0.00, rgb: [240, 232, 218] },
+  { t: 0.50, rgb: [144, 188, 122] },
   { t: 1.00, rgb: [60,  140, 80]  },
 ];
-function colorRamp(t) {
+const SEQ_RAMP = [
+  { t: 0.00, rgb: [240, 232, 218] },
+  { t: 0.33, rgb: [200, 215, 180] },
+  { t: 0.66, rgb: [144, 188, 122] },
+  { t: 1.00, rgb: [60,  140, 80]  },
+];
+const SEQ_RED_RAMP = [
+  { t: 0.00, rgb: [240, 232, 218] },
+  { t: 0.33, rgb: [222, 200, 180] },
+  { t: 0.66, rgb: [222, 132, 92]  },
+  { t: 1.00, rgb: [195, 60,  55]  },
+];
+function interpRgb(ramp, t) {
   t = Math.max(0, Math.min(1, t));
-  for (let i = 0; i < RAMP.length - 1; i++) {
-    if (t >= RAMP[i].t && t <= RAMP[i+1].t) {
-      const k = (t - RAMP[i].t) / (RAMP[i+1].t - RAMP[i].t);
-      const c = RAMP[i].rgb.map((v, j) => Math.round(v + k * (RAMP[i+1].rgb[j] - v)));
+  for (let i = 0; i < ramp.length - 1; i++) {
+    if (t >= ramp[i].t && t <= ramp[i+1].t) {
+      const k = (t - ramp[i].t) / (ramp[i+1].t - ramp[i].t);
+      const c = ramp[i].rgb.map((v, j) => Math.round(v + k * (ramp[i+1].rgb[j] - v)));
       return `rgb(${c[0]},${c[1]},${c[2]})`;
     }
   }
-  return 'rgb(200,195,184)';
+  return `rgb(${ramp[ramp.length-1].rgb.join(',')})`;
+}
+function colorRamp(t) {
+  const LEGACY = [
+    { t: 0.00, rgb: [195, 60,  55]  },
+    { t: 0.25, rgb: [222, 132, 92]  },
+    { t: 0.50, rgb: [220, 210, 188] },
+    { t: 0.75, rgb: [144, 188, 122] },
+    { t: 1.00, rgb: [60,  140, 80]  },
+  ];
+  return interpRgb(LEGACY, t);
 }
 function colorByMetric(value, lo, hi, metric) {
   if (value == null) return 'rgb(200,195,184)';
+  if (metric === 'cagr') {
+    if (value >= 0) {
+      const posClamp = (hi > 0) ? hi : 1;
+      return interpRgb(POS_RAMP, value / posClamp);
+    } else {
+      const negClamp = (lo < 0) ? Math.abs(lo) : 1;
+      return interpRgb(NEG_RAMP, 1 - Math.abs(value) / negClamp);
+    }
+  }
+  if (metric === 'volatility') {
+    const t = hi === lo ? 0.5 : (value - lo) / (hi - lo);
+    return interpRgb(SEQ_RED_RAMP, Math.max(0, Math.min(1, t)));
+  }
   const t = hi === lo ? 0.5 : (value - lo) / (hi - lo);
-  return colorRamp(metric === 'volatility' ? 1 - t : t);
+  return interpRgb(SEQ_RAMP, Math.max(0, Math.min(1, t)));
+}
+function percentileClampForMetric(values, metric) {
+  if (!values || values.length === 0) return { lo: -1, hi: 1 };
+  const sorted = [...values].sort((a,b) => a - b);
+  // FIX 2026-05-17 v2: P25/P75 (IQR robust) invece di P5/P95 — outlier estremi
+  // schiacciavano la rampa anche con P5/P95 (vedi RE: P95=+8.94 per 1 outlier).
+  const p5  = sorted[Math.floor(sorted.length * 0.25)];
+  const p95 = sorted[Math.floor(sorted.length * 0.75)];
+  if (metric === 'cagr') {
+    return {
+      lo: p5 < 0 ? p5 : -0.5,
+      hi: p95 > 0 ? p95 : 0.5,
+    };
+  }
+  return { lo: p5, hi: p95 };
 }
 function fmtEuro(n, d=0) { return n == null ? '—' : '€' + n.toLocaleString('it-IT', { maximumFractionDigits: d }); }
 function fmtPct(n, d=2) { return n == null ? '—' : (n > 0 ? '+' : '') + n.toFixed(d) + '%'; }
@@ -784,7 +839,8 @@ function renderKPI() {
 function buildPalette(entries, metric) {
   const vals = entries.map(e => e._mapVal).filter(v => v != null);
   if (!vals.length) return { lo: -1, hi: 1 };
-  const lo = Math.min(...vals), hi = Math.max(...vals);
+  // FIX cromatica 2026-05-17: percentile clamp invece di min/max raw.
+  const { lo, hi } = percentileClampForMetric(vals, metric);
   entries.forEach(e => { e._color = colorByMetric(e._mapVal, lo, hi, metric); });
   return { lo, hi };
 }

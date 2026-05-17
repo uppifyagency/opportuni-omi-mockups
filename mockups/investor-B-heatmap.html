@@ -321,8 +321,9 @@ function colorForCAGR(cagrPct, negClamp, posClamp) {
 function percentileClamp(values) {
   if (!values || values.length === 0) return { negClamp: -1, posClamp: 1, p5: -1, p95: 1 };
   const sorted = [...values].sort((a,b) => a - b);
-  const p5 = sorted[Math.floor(sorted.length * 0.05)];
-  const p95 = sorted[Math.floor(sorted.length * 0.95)];
+  // FIX 2026-05-17 v2: P25/P75 (IQR robust) invece di P5/P95.
+  const p5 = sorted[Math.floor(sorted.length * 0.25)];
+  const p95 = sorted[Math.floor(sorted.length * 0.75)];
   return {
     negClamp: p5 < 0 ? p5 : -0.5,
     posClamp: p95 > 0 ? p95 : 0.5,
