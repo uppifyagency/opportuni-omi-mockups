@@ -1,0 +1,92 @@
+═══ PARSE-VOLUMI CATANZARO (Calabria SR 2017→2025) ═══
+PDF count: 9
+
+═══ SR2017 → data_year=2016 ═══
+  pages: prov@14, com@18, boundary@27 (next-province start)
+  ✓ parsed prov=11 (macroaree=10), zone=29, sanity_issues=0
+  ✓ cross-check NTN: sum_macroaree=2211 totale=2209 gap=0.09%
+
+═══ SR2018 → data_year=2017 ═══
+  pages: prov@14, com@17, boundary@25 (next-province start)
+  ✓ parsed prov=11 (macroaree=10), zone=29, sanity_issues=0
+  ✓ cross-check NTN: sum_macroaree=2159 totale=2159 gap=0.00%
+
+═══ SR2019 → data_year=2018 ═══
+  pages: prov@14, com@17, boundary@24 (next-province start)
+  ✓ parsed prov=11 (macroaree=10), zone=0, sanity_issues=0
+  ✓ cross-check NTN: sum_macroaree=2415 totale=2415 gap=0.00%
+
+═══ SR2020 → data_year=2019 ═══
+  pages: prov@14, com@17, boundary@23 (next-province start)
+  ✓ parsed prov=10 (macroaree=10), zone=29, sanity_issues=0
+
+═══ SR2021 → data_year=2020 ═══
+  pages: prov@13, com@16, boundary@24 (next-province start)
+  ✓ parsed prov=10 (macroaree=10), zone=29, sanity_issues=0
+
+═══ SR2022 → data_year=2021 ═══
+  pages: prov@13, com@16, boundary@26 (next-province start)
+    ⚠ NTN_var fuori [-100,500] C1=809.1
+  ✓ parsed prov=11 (macroaree=10), zone=29, sanity_issues=1
+  ✓ cross-check NTN: sum_macroaree=3022 totale=3022 gap=0.00%
+
+═══ SR2023 → data_year=2022 ═══
+  pages: prov@13, com@16, boundary@26 (next-province start)
+    ⚠ NTN_var fuori [-100,500] D9=600.0
+  ✓ parsed prov=11 (macroaree=10), zone=29, sanity_issues=1
+  ✓ cross-check NTN: sum_macroaree=3285 totale=3285 gap=0.00%
+
+═══ SR2024 → data_year=2023 ═══
+  pages: prov@13, com@16, boundary@25 (next-province start)
+  ✓ parsed prov=11 (macroaree=10), zone=29, sanity_issues=0
+  ✓ cross-check NTN: sum_macroaree=3077 totale=3077 gap=0.00%
+
+═══ SR2025 → data_year=2024 ═══
+  pages: prov@14, com@18, boundary@29 (next-province start)
+  ✓ parsed prov=11 (macroaree=10), zone=18, sanity_issues=0
+  ✓ cross-check NTN: sum_macroaree=3201 totale=3200 gap=0.03%
+
+═══ GLOBAL STATS ═══
+Years covered: [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024] (9 years)
+Provincia rows: 97 (avg 10.8/yr)
+Zone rows:      221 (avg 24.6/yr)
+
+Coverage per anno:
+  2016: prov=11 (totale=sì, macroaree=10), zone=29
+  2017: prov=11 (totale=sì, macroaree=10), zone=29
+  2018: prov=11 (totale=sì, macroaree=10), zone=0
+  2019: prov=10 (totale=NO, macroaree=10), zone=29
+  2020: prov=10 (totale=NO, macroaree=10), zone=29
+  2021: prov=11 (totale=sì, macroaree=10), zone=29
+  2022: prov=11 (totale=sì, macroaree=10), zone=29
+  2023: prov=11 (totale=sì, macroaree=10), zone=29
+  2024: prov=11 (totale=sì, macroaree=10), zone=18
+
+Macroaree distinte (10): ['ASSE S. EUFEMIA - CZ', 'BASSO IONIO CATANZARESE', 'CATANZARO CAPOLUOGO', 'COSTA DI CAPO SUVERO', 'COSTA DI SOVERATO', 'FOCI TACINA, CORACE E VALLE SIMERI', 'GOLFO DI SQUILLACE - ZONA MONTANA', 'LAMEZIA TERME', 'PRESILA - REVENTINO', 'ZONA PARCO ARCHEOLOGICO "SCHILLACIUM"']
+
+Zone OMI distinte (47): ['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'C1', 'C2', 'C3', 'C4', 'C5', 'C7', 'C8', 'C9', 'D1', 'D10', 'D11', 'D12', 'D13', 'D15', 'D16', 'D18', 'D19', 'D2', 'D20', 'D21', 'D22', 'D23', 'D24', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'E3', 'E4', 'E5', 'R1', 'R2', 'R3', 'R4', 'R5']
+
+Value ranges:
+  ntn: min=0.00 max=3285.00 (n=318)
+  imi_pct: min=0.00 max=8.63 (n=316)
+  ntn_var_pct: min=-86.30 max=809.10 (n=305)
+  quotazione_eur_mq: min=439.00 max=1658.00 (n=221)
+
+═══ CROSS-YEAR VALIDATION (var % YoY consistency) ═══
+  ⚠ ASSE S. EUFEMIA - CZ 2016→2017: declared=-2.6% computed=-13.1% gap=10.5pp
+  ⚠ BASSO IONIO CATANZARESE 2016→2017: declared=+6.9% computed=-8.1% gap=15.0pp
+  ⚠ CATANZARO 2018→2022: declared=+8.6% computed=+36.0% gap=27.4pp
+  ⚠ B1 2017→2019: declared=-19.9% computed=+5.0% gap=24.9pp
+  ⚠ B2 2016→2017: declared=+59.6% computed=+71.4% gap=11.8pp
+  ⚠ B2 2017→2019: declared=+42.9% computed=-16.7% gap=59.6pp
+  ⚠ B3 2017→2019: declared=-57.9% computed=+50.0% gap=107.9pp
+  ⚠ B4 2017→2019: declared=-52.9% computed=-33.3% gap=19.6pp
+  ⚠ B5 2017→2019: declared=+1.8% computed=+41.2% gap=39.4pp
+  ⚠ B6 2017→2019: declared=-0.3% computed=+75.0% gap=75.3pp
+  Total var-consistency issues (>8pp gap): 38
+
+═══ FIX P7: QUARANTINE NTN_VAR > 500.0% ═══
+  Zone anomalies (mantenute in _anomalies, escluse da zone_series): 2
+    C1/2021: NTN=3.0 var=809.1%
+    D9/2022: NTN=7.0 var=600.0%
+  Prov anomalies: 0

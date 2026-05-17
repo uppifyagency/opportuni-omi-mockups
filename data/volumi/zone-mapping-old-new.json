@@ -1,0 +1,88 @@
+{
+  "_doc": "Mapping codici zona OMI Modena: OLD codification (SR2019-SR2024 PDF AdE, dati 2018-2023) → NEW codification (Sagona current, semestre 20251+). Costruito per ispezione manuale denominazioni. 13/19 zone hanno codice INVARIATO; 4 zone rinominate; 2 zone splittate in più zone nuove.",
+  "_method": "Match by denominazione (stable across time) + spatial knowledge of Modena.",
+  "_legend": {
+    "direct": "stesso codice, stessa zona — join 1:1",
+    "renamed": "codice cambiato ma zona unica — join 1:1 con remap",
+    "split": "una zona OLD diventa N zone NEW — join 1:N (assegna volumi storici a tutte le NEW, oppure split proporzionale)",
+    "merged": "N zone OLD diventano 1 zona NEW — join N:1 (somma NTN, media pesata quotazioni)"
+  },
+  "mapping": [
+    {
+      "old": "B3",  "old_name": "CAPOLUOGO CENTRO STORICO",
+      "new": ["B3"], "new_names": ["CAPOLUOGO - CENTRO STORICO"],
+      "rel": "direct"
+    },
+    {
+      "old": "C7",  "old_name": "CAPOLUOGO STAZ. AUTOCORRIERE, STADIO, TEMPIO, MUSICISTI",
+      "new": ["C9", "C11"],
+      "new_names": ["CAPOLUOGO - SAN FAUSTINO, STAZIONE AUTOCORRIERE", "MUSICISTI - TEMPIO"],
+      "rel": "split",
+      "notes": "OLD C7 conteneva 2 sotto-aree (stazione autocorriere/stadio + tempio/musicisti); le NEW C9 e C11 le separano. Per join temporale: replicare volumi C7 su entrambe (proxy) o usare media."
+    },
+    {
+      "old": "C8",  "old_name": "CAPOLUOGO VIA DELLA PACE, VIA SASSI, VIA GOBETTI, VIA CUCCHIARI",
+      "new": ["C10"],
+      "new_names": ["CAPOLUOGO - BUON PASTORE, SANT`AGNESE"],
+      "rel": "renamed",
+      "notes": "C8 rinominata e ricomposta in C10 (zona limitrofa centro storico est)"
+    },
+    {
+      "old": "D26", "old_name": "CAPOLUOGO IPERCOOP, UNIVERSITA`, POLICLINICO, AERONAUTICA",
+      "new": ["D36"],
+      "new_names": ["CAPOLUOGO - SAN LAZZARO, POLICLINICO, UNIVERSITA`, VIGNOLESE"],
+      "rel": "renamed",
+      "notes": "Stessa zona (Universita+Policlinico) ricodificata D26→D36"
+    },
+    {
+      "old": "D27", "old_name": "CAPOLUOGO MORANE, SANT`AGNESE, STAZ. PICCOLA, BUON PASTORE, PARCO AMENDOLA",
+      "new": ["D34", "D35"],
+      "new_names": ["CAPOLUOGO - MORANE, VACIGLIO, IPPODROMO", "CAPOLUOGO - PARCO AMENDOLA, FRATELLI ROSSELLI"],
+      "rel": "split",
+      "notes": "Macro-zona D27 spezzata in Morane (D34) + Parco Amendola (D35)"
+    },
+    {
+      "old": "D28", "old_name": "CAPOLUOGO SAN FAUSTINO, WINDSOR PARK, PARCO AMENDOLA",
+      "new": ["D35"],
+      "new_names": ["CAPOLUOGO - PARCO AMENDOLA, FRATELLI ROSSELLI"],
+      "rel": "renamed",
+      "notes": "D28 (Parco Amendola/Windsor Park) ricodificata D35; San Faustino è ora in C9"
+    },
+    { "old": "D29", "old_name": "CAPOLUOGO VILLAGGIO GIARDINO, VIA SCHIOCCHI, VILLAGGIO ZETA",
+      "new": ["D29"], "new_names": ["CAPOLUOGO - VILLAGGIO GIARDINO, VIA SCHIOCCHI, VILLAGGIO ZETA"], "rel": "direct" },
+    { "old": "D30", "old_name": "CAPOLUOGO EX AUTODROMO, SAN FAUSTINO, VIA COSTA",
+      "new": ["D30"], "new_names": ["CAPOLUOGO - EX AUTODROMO, SAN FAUSTINO, VIA COSTA"], "rel": "direct" },
+    { "old": "D31", "old_name": "CAPOLUOGO QUARTIERE MADONNINA",
+      "new": ["D31"], "new_names": ["CAPOLUOGO - QUARTIERE MADONNINA"], "rel": "direct" },
+    { "old": "D32", "old_name": "CAPOLUOGO QUARTIERE SACCA, STRADA NAZIONALE CANALETTO",
+      "new": ["D32"], "new_names": ["CAPOLUOGO - QUARTIERE SACCA, STRADA NAZIONALE CANALETTO"], "rel": "direct" },
+    { "old": "D33", "old_name": "CAPOLUOGO SANTA CATERINA, CROCETTA, VIALE GRAMSCI, EX MACELLO",
+      "new": ["D33"], "new_names": ["CAPOLUOGO - SANTA CATERINA, CROCETTA, VIALE GRAMSCI, EX MACELLO"], "rel": "direct" },
+    { "old": "E10", "old_name": "CAPOLUOGO QUARTIERE MODENA EST",
+      "new": ["E10"], "new_names": ["CAPOLUOGO - QUARTIERE MODENA EST"], "rel": "direct" },
+    { "old": "E4",  "old_name": "FRAZIONE DI COGNENTO",
+      "new": ["E4"], "new_names": ["FRAZIONE DI COGNENTO"], "rel": "direct" },
+    { "old": "E5",  "old_name": "FRAZIONE DI BAGGIOVARA",
+      "new": ["E5"], "new_names": ["FRAZIONE DI BAGGIOVARA"], "rel": "direct" },
+    { "old": "E6",  "old_name": "FRAZIONE DI SAN DAMASO",
+      "new": ["E6"], "new_names": ["FRAZIONE DI SAN DAMASO"], "rel": "direct" },
+    { "old": "E7",  "old_name": "INDUSTRIALE OVEST GRAND`EMILIA",
+      "new": ["E11"], "new_names": ["INDUSTRIALE OVEST - GRAND`EMILIA - CITTANOVA"], "rel": "renamed",
+      "notes": "E7→E11 con estensione perimetro a Cittanova" },
+    { "old": "E8",  "old_name": "INDUSTRIALE NORD VIALE NAZIONI",
+      "new": ["E8"], "new_names": ["INDUSTRIALE NORD VIALE NAZIONI"], "rel": "direct" },
+    { "old": "E9",  "old_name": "INDUSTRIALE TORRAZZI",
+      "new": ["E9"], "new_names": ["INDUSTRIALE TORRAZZI"], "rel": "direct" },
+    { "old": "R3",  "old_name": "ZONA AGRICOLA",
+      "new": ["R3"], "new_names": ["ZONA AGRICOLA"], "rel": "direct" }
+  ],
+  "summary": {
+    "total_old": 19,
+    "direct_matches": 13,
+    "renamed": 4,
+    "split": 2,
+    "merged": 0,
+    "new_only_no_history": ["B2","C5","C6","C7","C8","D2","D3","D6","D9","D10","D11","D12","D13","D14","D15","D16","D17","D18","D19","D20","D21","D23","D25","D26","D27","D28","E2","E3","E7","R1","R2"],
+    "_note_new_only": "Le zone NEW senza storico OLD sono o (a) zone fascia D/E/R fuori capoluogo (frazioni/industriali altre città) che nelle SR Modena provincia non erano dettagliate, oppure (b) codici riassegnati."
+  }
+}

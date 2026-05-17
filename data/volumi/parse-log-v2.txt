@@ -1,0 +1,51 @@
+PARSE-VOLUMI v2 (pdfplumber)
+PDF count: 6
+
+═══ sr2019_emilia_romagna.pdf → data_year=2018 ═══
+  Modena pages: provincia=34, comune=37
+  parsed: provincia=8 rows, zone=19 rows
+  ⚠ IMI fuori range [0,10]%: PEDEMONTANA = 25.5
+  ⚠ IMI fuori range [0,10]%: PIANURA PANARO = 11.0
+  ⚠ IMI fuori range [0,10]%: PIANURA SECCHIA = 16.6
+  ⚠ IMI fuori range [0,10]%: MODENA CAPOLUOGO = 28.1
+
+═══ sr2020_emilia_romagna.pdf → data_year=2019 ═══
+  Modena pages: provincia=34, comune=37
+  parsed: provincia=7 rows, zone=19 rows
+  ⚠ IMI fuori range [0,10]%: PEDEMONTANA = 25.8
+  ⚠ IMI fuori range [0,10]%: PIANURA PANARO = 10.6
+  ⚠ IMI fuori range [0,10]%: PIANURA SECCHIA = 16.4
+
+═══ sr2021_emilia_romagna.pdf → data_year=2020 ═══
+  Modena pages: provincia=36, comune=39
+  parsed: provincia=8 rows, zone=19 rows
+
+═══ sr2022_emilia_romagna.pdf → data_year=2021 ═══
+  Modena pages: provincia=35, comune=38
+  parsed: provincia=8 rows, zone=19 rows
+
+═══ sr2023_emilia_romagna.pdf → data_year=2022 ═══
+  Modena pages: provincia=35, comune=38
+  parsed: provincia=9 rows, zone=19 rows
+  cross-check NTN: somma macroaree = 10772, totale = 10772, gap = 0.00%
+
+═══ sr2024_emilia_romagna.pdf → data_year=2023 ═══
+  Modena pages: provincia=35, comune=38
+  parsed: provincia=9 rows, zone=19 rows
+  cross-check NTN: somma macroaree = 9572, totale = 9572, gap = 0.00%
+
+═══ GLOBAL VALIDATION ═══
+Years parsed: [2018, 2019, 2020, 2021, 2022, 2023]
+Total provincia rows: 49 (8.2/yr, expected 9)
+Total zone rows:      114 (19.0/yr, expected ~19)
+Macroaree found: ['APPENNINO PANARO', 'APPENNINO SECCHIA', 'BASSA MODENESE', 'FRIGNANO', 'MODENA CAPOLUOGO', 'PEDEMONTANA', 'PIANURA PANARO', 'PIANURA SECCHIA']
+Macroaree missing: []
+Distinct zone codes: ['B3', 'C7', 'C8', 'D26', 'D27', 'D28', 'D29', 'D30', 'D31', 'D32', 'D33', 'E10', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'R3']
+
+Coverage per year:
+  2018: provincia=8 rows, zone=19 rows
+  2019: provincia=7 rows, zone=19 rows
+  2020: provincia=8 rows, zone=19 rows
+  2021: provincia=8 rows, zone=19 rows
+  2022: provincia=9 rows, zone=19 rows
+  2023: provincia=9 rows, zone=19 rows

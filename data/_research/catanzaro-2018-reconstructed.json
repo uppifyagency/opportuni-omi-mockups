@@ -1,0 +1,241 @@
+{
+  "_doc": "Ricostruzione NTN 2018 per zona OLD via macroaree-downscaling. AdE SR2019 ha pubblicato Catanzaro come 5 macroaree urbane comunali (NTN totale 439, vs 340 nel 2017 = +29%). Ogni zona OLD viene scalata col fattore della propria macroarea.",
+  "_method": "NTN_2018(zona) = NTN_2017(zona) × (NTN_2018(macroarea)/NTN_2017(macroarea)). Fallback fattore TOTALE comune (1.2912) per zone Lido/rurali non coperte dalle 5 macroaree.",
+  "macroaree": {
+    "CENTRO": {
+      "ntn_2017": 116,
+      "ntn_2018": 177,
+      "factor": 1.5258620689655173
+    },
+    "PRIMA PERIFERIA": {
+      "ntn_2017": 49,
+      "ntn_2018": 102,
+      "factor": 2.0816326530612246
+    },
+    "SEMICENTRO": {
+      "ntn_2017": 7,
+      "ntn_2018": 8,
+      "factor": 1.1428571428571428
+    },
+    "ZONA NORD": {
+      "ntn_2017": 15,
+      "ntn_2018": 13,
+      "factor": 0.8666666666666667
+    },
+    "ZONA OVEST": {
+      "ntn_2017": 153,
+      "ntn_2018": 139,
+      "factor": 0.9084967320261438
+    },
+    "TOTALE": {
+      "ntn_2017": 340,
+      "ntn_2018": 439,
+      "factor": 1.2911764705882354
+    }
+  },
+  "zone_2018_estimated": {
+    "B1": {
+      "macro": "CENTRO",
+      "factor": 1.5258620689655173,
+      "ntn_17": 40.0,
+      "ntn_18_stim": 61.0,
+      "ntn_19_real": 42.0
+    },
+    "B2": {
+      "macro": "CENTRO",
+      "factor": 1.5258620689655173,
+      "ntn_17": 12.0,
+      "ntn_18_stim": 18.3,
+      "ntn_19_real": 10.0
+    },
+    "B3": {
+      "macro": "CENTRO",
+      "factor": 1.5258620689655173,
+      "ntn_17": 10.0,
+      "ntn_18_stim": 15.3,
+      "ntn_19_real": 15.0
+    },
+    "B4": {
+      "macro": "CENTRO",
+      "factor": 1.5258620689655173,
+      "ntn_17": 12.0,
+      "ntn_18_stim": 18.3,
+      "ntn_19_real": 8.0
+    },
+    "B5": {
+      "macro": "CENTRO",
+      "factor": 1.5258620689655173,
+      "ntn_17": 17.0,
+      "ntn_18_stim": 25.9,
+      "ntn_19_real": 24.0
+    },
+    "B6": {
+      "macro": "CENTRO",
+      "factor": 1.5258620689655173,
+      "ntn_17": 16.0,
+      "ntn_18_stim": 24.4,
+      "ntn_19_real": 28.0
+    },
+    "B7": {
+      "macro": "CENTRO",
+      "factor": 1.5258620689655173,
+      "ntn_17": 8.0,
+      "ntn_18_stim": 12.2,
+      "ntn_19_real": 7.0
+    },
+    "C1": {
+      "macro": "SEMICENTRO",
+      "factor": 1.1428571428571428,
+      "ntn_17": 4.0,
+      "ntn_18_stim": 4.6,
+      "ntn_19_real": 1.0
+    },
+    "C2": {
+      "macro": "SEMICENTRO",
+      "factor": 1.1428571428571428,
+      "ntn_17": 43.0,
+      "ntn_18_stim": 49.1,
+      "ntn_19_real": 40.0
+    },
+    "C3": {
+      "macro": "SEMICENTRO",
+      "factor": 1.1428571428571428,
+      "ntn_17": 84.0,
+      "ntn_18_stim": 96.0,
+      "ntn_19_real": 107.0
+    },
+    "C4": {
+      "macro": "SEMICENTRO",
+      "factor": 1.1428571428571428,
+      "ntn_17": 3.0,
+      "ntn_18_stim": 3.4,
+      "ntn_19_real": 6.0
+    },
+    "C5": {
+      "macro": "SEMICENTRO",
+      "factor": 1.1428571428571428,
+      "ntn_17": 7.0,
+      "ntn_18_stim": 8.0,
+      "ntn_19_real": 7.0
+    },
+    "D1": {
+      "macro": "ZONA OVEST",
+      "factor": 0.9084967320261438,
+      "ntn_17": 16.0,
+      "ntn_18_stim": 14.5,
+      "ntn_19_real": 28.0
+    },
+    "D10": {
+      "macro": "TOTALE",
+      "factor": 1.2911764705882354,
+      "ntn_17": 22.0,
+      "ntn_18_stim": 28.4,
+      "ntn_19_real": 22.0
+    },
+    "D11": {
+      "macro": "ZONA NORD",
+      "factor": 0.8666666666666667,
+      "ntn_17": 21.0,
+      "ntn_18_stim": 18.2,
+      "ntn_19_real": 14.0
+    },
+    "D12": {
+      "macro": "PRIMA PERIFERIA",
+      "factor": 2.0816326530612246,
+      "ntn_17": 4.0,
+      "ntn_18_stim": 8.3,
+      "ntn_19_real": 3.0
+    },
+    "D13": {
+      "macro": "TOTALE",
+      "factor": 1.2911764705882354,
+      "ntn_17": 11.0,
+      "ntn_18_stim": 14.2,
+      "ntn_19_real": 7.0
+    },
+    "D2": {
+      "macro": "PRIMA PERIFERIA",
+      "factor": 2.0816326530612246,
+      "ntn_17": 15.0,
+      "ntn_18_stim": 31.2,
+      "ntn_19_real": 18.0
+    },
+    "D3": {
+      "macro": "PRIMA PERIFERIA",
+      "factor": 2.0816326530612246,
+      "ntn_17": 11.0,
+      "ntn_18_stim": 22.9,
+      "ntn_19_real": 10.0
+    },
+    "D4": {
+      "macro": "PRIMA PERIFERIA",
+      "factor": 2.0816326530612246,
+      "ntn_17": 5.0,
+      "ntn_18_stim": 10.4,
+      "ntn_19_real": 9.0
+    },
+    "D5": {
+      "macro": "PRIMA PERIFERIA",
+      "factor": 2.0816326530612246,
+      "ntn_17": 8.0,
+      "ntn_18_stim": 16.7,
+      "ntn_19_real": 7.0
+    },
+    "D6": {
+      "macro": "PRIMA PERIFERIA",
+      "factor": 2.0816326530612246,
+      "ntn_17": 46.0,
+      "ntn_18_stim": 95.8,
+      "ntn_19_real": 57.0
+    },
+    "D7": {
+      "macro": "PRIMA PERIFERIA",
+      "factor": 2.0816326530612246,
+      "ntn_17": 34.0,
+      "ntn_18_stim": 70.8,
+      "ntn_19_real": 77.0
+    },
+    "D8": {
+      "macro": "TOTALE",
+      "factor": 1.2911764705882354,
+      "ntn_17": 126.0,
+      "ntn_18_stim": 162.7,
+      "ntn_19_real": 155.0
+    },
+    "D9": {
+      "macro": "TOTALE",
+      "factor": 1.2911764705882354,
+      "ntn_17": 1.0,
+      "ntn_18_stim": 1.3,
+      "ntn_19_real": 2.0
+    },
+    "E3": {
+      "macro": "ZONA OVEST",
+      "factor": 0.9084967320261438,
+      "ntn_17": 0.0,
+      "ntn_18_stim": 0.0,
+      "ntn_19_real": 1.0
+    },
+    "R1": {
+      "macro": "TOTALE",
+      "factor": 1.2911764705882354,
+      "ntn_17": 0.0,
+      "ntn_18_stim": 0.0,
+      "ntn_19_real": 2.0
+    },
+    "R2": {
+      "macro": "PRIMA PERIFERIA",
+      "factor": 2.0816326530612246,
+      "ntn_17": 0.0,
+      "ntn_18_stim": 0.0,
+      "ntn_19_real": 1.0
+    },
+    "R3": {
+      "macro": "TOTALE",
+      "factor": 1.2911764705882354,
+      "ntn_17": 5.0,
+      "ntn_18_stim": 6.5,
+      "ntn_19_real": 10.0
+    }
+  }
+}

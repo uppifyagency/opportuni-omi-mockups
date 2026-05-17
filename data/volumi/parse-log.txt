@@ -1,0 +1,59 @@
+PARSE-VOLUMI AdE — generato per Modena (Emilia-Romagna)
+PDF directory: /Users/vladvrinceanu/Desktop/PROGETTI ANTYGRAVITY/CLI-Everything/opportuni-poc/data/volumi
+PDF trovati: 6
+  - sr2019_emilia_romagna.pdf (4300 KB)
+  - sr2020_emilia_romagna.pdf (1564 KB)
+  - sr2021_emilia_romagna.pdf (4413 KB)
+  - sr2022_emilia_romagna.pdf (4149 KB)
+  - sr2023_emilia_romagna.pdf (4206 KB)
+  - sr2024_emilia_romagna.pdf (4008 KB)
+
+═══ Parse sr2019_emilia_romagna.pdf (anno dati = 2018) ═══
+  pagine totali: 66
+  pagina provincia: 34
+  pagina comune:    37
+  righe provincia parsate: 0
+  righe comune parsate:    10
+
+═══ Parse sr2020_emilia_romagna.pdf (anno dati = 2019) ═══
+  pagine totali: 65
+  pagina provincia: 34
+  pagina comune:    37
+  righe provincia parsate: 0
+  righe comune parsate:    10
+
+═══ Parse sr2021_emilia_romagna.pdf (anno dati = 2020) ═══
+  pagine totali: 67
+  pagina provincia: 36
+  pagina comune:    39
+  righe provincia parsate: 8
+  righe comune parsate:    10
+
+═══ Parse sr2022_emilia_romagna.pdf (anno dati = 2021) ═══
+  pagine totali: 68
+  pagina provincia: 35
+  pagina comune:    38
+  righe provincia parsate: 8
+  righe comune parsate:    10
+
+═══ Parse sr2023_emilia_romagna.pdf (anno dati = 2022) ═══
+  pagine totali: 70
+  pagina provincia: 35
+  pagina comune:    38
+  righe provincia parsate: 9
+  righe comune parsate:    10
+  cross-check: somma macroaree NTN = 10772, totale provincia = 10772, gap = 0.00%
+
+═══ Parse sr2024_emilia_romagna.pdf (anno dati = 2023) ═══
+  pagine totali: 69
+  pagina provincia: 35
+  pagina comune:    38
+  righe provincia parsate: 9
+  righe comune parsate:    10
+  cross-check: somma macroaree NTN = 9572, totale provincia = 9572, gap = 0.00%
+
+═══ VALIDATION GLOBALE ═══
+Totale righe provincia: 34
+Totale righe zone:      60
+Media righe zona/anno:  10.0 (atteso ~19)
+Media righe prov/anno:  5.7 (atteso 9 = 8 macro + 1 tot)

@@ -1,0 +1,37 @@
+{
+  "D2_cava": {
+    "lat": 38.8935968,
+    "lon": 16.6228991,
+    "name": "Cava, Dulcino, Catanzaro, Calabria, 88100, Italia"
+  },
+  "D2_campagnella": {
+    "lat": 38.8933751,
+    "lon": 16.6038127,
+    "name": "Scuola Elementare Sala Campagnella, Via degli Svevi, Dulcino, Catanzaro, Calabria, 88100, "
+  },
+  "D13_soverito": null,
+  "D13_visconte": null,
+  "D13_cuticchietto": null,
+  "D10_giovino": {
+    "lat": 38.835065,
+    "lon": 16.6445758,
+    "name": "Giovino, Catanzaro Lido, Catanzaro, Calabria, 88100, Italia"
+  },
+  "D10_bellino": {
+    "lat": 38.8500273,
+    "lon": 16.6567856,
+    "name": "Via Bellino, Catanzaro Lido, Catanzaro, Calabria, 88100, Italia"
+  },
+  "D10_giovino2": {
+    "lat": 38.8318319,
+    "lon": 16.6398956,
+    "name": "Polizia di Stato Commissariato Sezionale \"Catanzaro Lido\", Via Carlo Pisacane, Giovino, Ca"
+  },
+  "D8_lungomare": {
+    "lat": 38.8274562,
+    "lon": 16.630036,
+    "name": "Via Lungomare Stefano Pugliese, Catanzaro Lido, Catanzaro, Calabria, 88100, Italia"
+  },
+  "D16_fascia": null,
+  "D22_santo_janni": null
+}

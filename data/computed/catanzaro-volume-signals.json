@@ -1,0 +1,7294 @@
+{
+  "metadata": {
+    "generated_at": "2026-05-14",
+    "source": "data/volumi/catanzaro-volumi-timeseries.json (PDF AdE Statistiche Regionali) + data/computed/catanzaro-signals.json (Sagona OMI quotazioni)",
+    "years_covered": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "scoring": {
+      "liquidity_score": "50 + 25*z(imi_last) + 15*z(ntn_cagr) + 10*z(ntn_recent_slope), clamped [0,100]",
+      "momentum_tag_thresholds": {
+        "rocket": "cagr > +8%/yr AND imi_trend_slope > 0",
+        "growing": "cagr > +2%/yr",
+        "stable": "-2% ≤ cagr ≤ +2%",
+        "cooling": "-8% ≤ cagr < -2%",
+        "frozen": "cagr < -8% OR imi_last < 1.0%"
+      },
+      "quadrant_legend": {
+        "Q1_HOT": "prezzo>=median AND volume>=median (premium liquido)",
+        "Q2_OVERPRICED": "prezzo>=median AND volume<median (premium illiquido - cautela)",
+        "Q3_OPPORTUNITY": "prezzo<median AND volume>=median (cheap & active - BUY)",
+        "Q4_DEAD": "prezzo<median AND volume<median (cheap & illiquid - RISCHIO)"
+      }
+    },
+    "distribution_stats": {
+      "imi_last_pct": {
+        "mean": 1.6,
+        "sd": 1.22,
+        "n": 47
+      },
+      "ntn_cagr_pct": {
+        "mean": 5.07,
+        "sd": 6.75,
+        "n": 27
+      },
+      "ntn_recent_slope": {
+        "mean": -0.43,
+        "sd": 3.9,
+        "n": 47
+      },
+      "price_median_eur_mq": 1092.0,
+      "volume_median_ntn": 22.0
+    }
+  },
+  "zone_volume_metrics": [
+    {
+      "zona_old": "B6",
+      "zona_new": [
+        "B9"
+      ],
+      "denominazione": "VIA CASE ARSE, VIA S. MARIA DI MEZZOGIORNO, VIA XX SETTEMBRE, VIA ASSANTI",
+      "rel": "merged_into",
+      "confidence": "high",
+      "mapping_notes": "S. Maria di Mezzogiorno è una delle chiese più antiche di Catanzaro. Case Arse, XX Settembre nel cuore storico.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 18.0,
+          "ntn_var_pct": -22.65,
+          "imi_pct": 0.89,
+          "quotazione_eur_mq": 918.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 16.0,
+          "ntn_var_pct": -9.1,
+          "imi_pct": 0.8,
+          "quotazione_eur_mq": 918.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 24.4,
+          "ntn_var_pct": 52.5,
+          "imi_pct": 1.075,
+          "quotazione_eur_mq": 918.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 28.0,
+          "ntn_var_pct": -0.3,
+          "imi_pct": 1.35,
+          "quotazione_eur_mq": 918.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 24.0,
+          "ntn_var_pct": -16.4,
+          "imi_pct": 1.19,
+          "quotazione_eur_mq": 918.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 29.0,
+          "ntn_var_pct": 22.4,
+          "imi_pct": 1.46,
+          "quotazione_eur_mq": 918.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 35.0,
+          "ntn_var_pct": 20.2,
+          "imi_pct": 1.63,
+          "quotazione_eur_mq": 908.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 45.0,
+          "ntn_var_pct": 30.6,
+          "imi_pct": 2.14,
+          "quotazione_eur_mq": 889.0,
+          "quotazione_var_pct": -2.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 18.0,
+      "ntn_last": 45.0,
+      "ntn_cagr_pct": 13.99,
+      "ntn_delta_pct": 150.0,
+      "ntn_recent_slope": 8.0,
+      "ntn_volatility_cv_pct": 34.0,
+      "imi_avg_pct": 1.32,
+      "imi_first_pct": 0.89,
+      "imi_last_pct": 2.14,
+      "imi_trend_slope": 0.165,
+      "momentum_tag": "rocket",
+      "liquidity_score": 100,
+      "_z_components": {
+        "z_imi": 0.44,
+        "z_cagr": 1.32,
+        "z_slope": 2.16
+      },
+      "prezzo_attuale_eur_mq": 1300.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D9",
+      "zona_new": [],
+      "denominazione": "CZ LIDO ZONA A MONTE DELLA STATALE-PASSO DI SALTO",
+      "rel": "unknown",
+      "confidence": "none",
+      "mapping_notes": "RICLASSIFICATO 2026-05-14 da renamed/low → unknown. Prova matematica (FIX P2): q(D9 2023)=763€/m² vs q(D15 2024)=1103 = +44.6%; vs q(D22 2024)=1054 = +38.1%. Nessuna NEW 2024 ha quotazione coerente con D9 (la più vicina geograficamente, D16 Fascia Litoranea, ha q=1506). D9 era zona micro a monte SS106 (NTN single-digit 2016-2023); probabilmente smembrata in più NEW, non riassorbita 1:1. Lascia D9 senza join NEW per non gonfiare D15/D22 con CAGR artefatti.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 6.0,
+          "ntn_var_pct": -42.86,
+          "imi_pct": 2.23,
+          "quotazione_eur_mq": 793.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 1.0,
+          "ntn_var_pct": -83.3,
+          "imi_pct": 0.37,
+          "quotazione_eur_mq": 782.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 1.3,
+          "ntn_var_pct": 30.0,
+          "imi_pct": 1.205,
+          "quotazione_eur_mq": 782.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 2.0,
+          "ntn_var_pct": -57.9,
+          "imi_pct": 2.04,
+          "quotazione_eur_mq": 782.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": null,
+          "quotazione_eur_mq": 782.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 1.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.98,
+          "quotazione_eur_mq": 782.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 7.0,
+          "ntn_var_pct": 600.0,
+          "imi_pct": 5.93,
+          "quotazione_eur_mq": 772.0,
+          "quotazione_var_pct": -1.3,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 10.0,
+          "ntn_var_pct": 45.4,
+          "imi_pct": 8.63,
+          "quotazione_eur_mq": 763.0,
+          "quotazione_var_pct": -1.2,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 6.0,
+      "ntn_last": 10.0,
+      "ntn_cagr_pct": 7.57,
+      "ntn_delta_pct": 66.67,
+      "ntn_recent_slope": 4.5,
+      "ntn_volatility_cv_pct": 102.8,
+      "imi_avg_pct": 3.06,
+      "imi_first_pct": 2.23,
+      "imi_last_pct": 8.63,
+      "imi_trend_slope": 0.874,
+      "momentum_tag": "growing",
+      "liquidity_score": 100,
+      "_z_components": {
+        "z_imi": 5.75,
+        "z_cagr": 0.37,
+        "z_slope": 1.26
+      },
+      "price_volume_quadrant": "unknown"
+    },
+    {
+      "zona_old": "B5",
+      "zona_new": [
+        "B8"
+      ],
+      "denominazione": "VIA NUOVA, VIA ITALIA, VIA MILELLI, VIA ACRI, VIA PAPARO, VIA EROI 1799",
+      "rel": "merged_into",
+      "confidence": "high",
+      "mapping_notes": "Via Italia, Eroi 1799, Milelli sono vie del centro città lato est.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 24.0,
+          "ntn_var_pct": 67.86,
+          "imi_pct": 1.66,
+          "quotazione_eur_mq": 1238.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 17.0,
+          "ntn_var_pct": -27.7,
+          "imi_pct": 1.21,
+          "quotazione_eur_mq": 1238.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 25.9,
+          "ntn_var_pct": 52.4,
+          "imi_pct": 1.45,
+          "quotazione_eur_mq": 1230.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 24.0,
+          "ntn_var_pct": 1.8,
+          "imi_pct": 1.69,
+          "quotazione_eur_mq": 1223.0,
+          "quotazione_var_pct": -0.2,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 22.0,
+          "ntn_var_pct": -8.3,
+          "imi_pct": 2.21,
+          "quotazione_eur_mq": 1223.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 24.0,
+          "ntn_var_pct": 9.1,
+          "imi_pct": 2.41,
+          "quotazione_eur_mq": 1249.0,
+          "quotazione_var_pct": 2.1,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 26.0,
+          "ntn_var_pct": 6.3,
+          "imi_pct": 1.68,
+          "quotazione_eur_mq": 1216.0,
+          "quotazione_var_pct": -2.6,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 38.0,
+          "ntn_var_pct": 50.7,
+          "imi_pct": 2.52,
+          "quotazione_eur_mq": 1195.0,
+          "quotazione_var_pct": -1.7,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 24.0,
+      "ntn_last": 38.0,
+      "ntn_cagr_pct": 6.79,
+      "ntn_delta_pct": 58.33,
+      "ntn_recent_slope": 7.0,
+      "ntn_volatility_cv_pct": 23.6,
+      "imi_avg_pct": 1.85,
+      "imi_first_pct": 1.66,
+      "imi_last_pct": 2.52,
+      "imi_trend_slope": 0.14,
+      "momentum_tag": "growing",
+      "liquidity_score": 91.7,
+      "_z_components": {
+        "z_imi": 0.75,
+        "z_cagr": 0.25,
+        "z_slope": 1.91
+      },
+      "prezzo_attuale_eur_mq": 1425.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "R1",
+      "zona_new": [
+        "R4"
+      ],
+      "denominazione": "ZONA RURALE EST",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Denominazione semanticamente identica. Solo codice cambiato R1→R4.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 1.0,
+          "ntn_var_pct": -66.67,
+          "imi_pct": 0.44,
+          "quotazione_eur_mq": 473.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.0,
+          "quotazione_eur_mq": 473.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.43,
+          "quotazione_eur_mq": 461.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 2.0,
+          "ntn_var_pct": 100.0,
+          "imi_pct": 0.86,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": -5.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 3.0,
+          "ntn_var_pct": 50.0,
+          "imi_pct": 1.29,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 3.0,
+          "ntn_var_pct": 0.0,
+          "imi_pct": 1.29,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 5.0,
+          "ntn_var_pct": 166.7,
+          "imi_pct": 1.96,
+          "quotazione_eur_mq": 444.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 4.0,
+          "ntn_var_pct": -20.0,
+          "imi_pct": 1.59,
+          "quotazione_eur_mq": 439.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 1.0,
+      "ntn_last": 4.0,
+      "ntn_cagr_pct": 21.9,
+      "ntn_delta_pct": 300.0,
+      "ntn_recent_slope": 0.5,
+      "ntn_volatility_cv_pct": 81.4,
+      "imi_avg_pct": 0.98,
+      "imi_first_pct": 0.44,
+      "imi_last_pct": 1.59,
+      "imi_trend_slope": 0.248,
+      "momentum_tag": "rocket",
+      "liquidity_score": 89.6,
+      "_z_components": {
+        "z_imi": -0.01,
+        "z_cagr": 2.49,
+        "z_slope": 0.24
+      },
+      "prezzo_attuale_eur_mq": 817.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "C1",
+      "zona_new": [
+        "C9"
+      ],
+      "denominazione": "VIA CARLO V",
+      "rel": "merged_into",
+      "confidence": "medium",
+      "mapping_notes": "Via Carlo V si sviluppa a valle del centro storico, tra Fiumarella e Musofalo.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 3.0,
+          "ntn_var_pct": -57.14,
+          "imi_pct": 1.38,
+          "quotazione_eur_mq": 845.0,
+          "quotazione_var_pct": -0.6,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 4.0,
+          "ntn_var_pct": 16.7,
+          "imi_pct": 1.61,
+          "quotazione_eur_mq": 818.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 4.6,
+          "ntn_var_pct": 15.0,
+          "imi_pct": 1.005,
+          "quotazione_eur_mq": 829.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 1.0,
+          "ntn_var_pct": -74.5,
+          "imi_pct": 0.4,
+          "quotazione_eur_mq": 840.0,
+          "quotazione_var_pct": 3.4,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 0.0,
+          "ntn_var_pct": -67.0,
+          "imi_pct": 0.14,
+          "quotazione_eur_mq": 821.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 3.0,
+          "ntn_var_pct": 809.1,
+          "imi_pct": 1.24,
+          "quotazione_eur_mq": 823.0,
+          "quotazione_var_pct": 0.2,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 7.0,
+          "ntn_var_pct": 133.3,
+          "imi_pct": 2.22,
+          "quotazione_eur_mq": 809.0,
+          "quotazione_var_pct": -1.7,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 7.0,
+          "ntn_var_pct": 0.0,
+          "imi_pct": 2.22,
+          "quotazione_eur_mq": 780.0,
+          "quotazione_var_pct": -3.6,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 3.0,
+      "ntn_last": 7.0,
+      "ntn_cagr_pct": 12.87,
+      "ntn_delta_pct": 133.33,
+      "ntn_recent_slope": 2.0,
+      "ntn_volatility_cv_pct": 68.3,
+      "imi_avg_pct": 1.28,
+      "imi_first_pct": 1.38,
+      "imi_last_pct": 2.22,
+      "imi_trend_slope": 0.112,
+      "momentum_tag": "rocket",
+      "liquidity_score": 86.3,
+      "_z_components": {
+        "z_imi": 0.51,
+        "z_cagr": 1.16,
+        "z_slope": 0.62
+      },
+      "prezzo_attuale_eur_mq": 1092.5,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "B3",
+      "zona_new": [
+        "B9"
+      ],
+      "denominazione": "VIA M. GRECO, VIA SCHIPANI",
+      "rel": "merged_into",
+      "confidence": "high",
+      "mapping_notes": "Via M. Greco e Schipani sono vie centro storico.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 26.0,
+          "ntn_var_pct": 63.06,
+          "imi_pct": 1.57,
+          "quotazione_eur_mq": 1309.0,
+          "quotazione_var_pct": 0.4,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 10.0,
+          "ntn_var_pct": -60.4,
+          "imi_pct": 0.61,
+          "quotazione_eur_mq": 1317.0,
+          "quotazione_var_pct": 0.6,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 15.3,
+          "ntn_var_pct": 53.0,
+          "imi_pct": 0.715,
+          "quotazione_eur_mq": 1312.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 15.0,
+          "ntn_var_pct": -57.9,
+          "imi_pct": 0.82,
+          "quotazione_eur_mq": 1308.0,
+          "quotazione_var_pct": -0.6,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 27.0,
+          "ntn_var_pct": 87.2,
+          "imi_pct": 1.54,
+          "quotazione_eur_mq": 1308.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 35.0,
+          "ntn_var_pct": 27.6,
+          "imi_pct": 1.97,
+          "quotazione_eur_mq": 1308.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 27.0,
+          "ntn_var_pct": -23.2,
+          "imi_pct": 1.49,
+          "quotazione_eur_mq": 1239.0,
+          "quotazione_var_pct": -5.3,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 42.0,
+          "ntn_var_pct": 56.0,
+          "imi_pct": 2.31,
+          "quotazione_eur_mq": 1223.0,
+          "quotazione_var_pct": -1.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 26.0,
+      "ntn_last": 42.0,
+      "ntn_cagr_pct": 7.09,
+      "ntn_delta_pct": 61.54,
+      "ntn_recent_slope": 3.5,
+      "ntn_volatility_cv_pct": 43.8,
+      "imi_avg_pct": 1.38,
+      "imi_first_pct": 1.57,
+      "imi_last_pct": 2.31,
+      "imi_trend_slope": 0.167,
+      "momentum_tag": "growing",
+      "liquidity_score": 79.1,
+      "_z_components": {
+        "z_imi": 0.58,
+        "z_cagr": 0.3,
+        "z_slope": 1.01
+      },
+      "prezzo_attuale_eur_mq": 1300.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D16",
+      "zona_new": [
+        "D16"
+      ],
+      "denominazione": "'CZ LIDO- FASCIA LITORANEA'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 61.0,
+          "ntn_var_pct": 82.1,
+          "imi_pct": 2.81,
+          "quotazione_eur_mq": 1506.0,
+          "quotazione_var_pct": -4.5,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 61.0,
+      "ntn_last": 61.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 2.81,
+      "imi_first_pct": 2.81,
+      "imi_last_pct": 2.81,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 75.9,
+      "_z_components": {
+        "z_imi": 0.99,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1500.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D1",
+      "zona_new": [
+        "D23"
+      ],
+      "denominazione": "PIANO CASA, CATANZARO SALA-",
+      "rel": "renamed",
+      "confidence": "medium",
+      "mapping_notes": "Catanzaro Sala è il quartiere ovest in basso. NEW D23 copre tutta Catanzaro Ovest.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 28.0,
+          "ntn_var_pct": 132.13,
+          "imi_pct": 1.43,
+          "quotazione_eur_mq": 1048.0,
+          "quotazione_var_pct": -2.9,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 16.0,
+          "ntn_var_pct": -45.3,
+          "imi_pct": 0.84,
+          "quotazione_eur_mq": 1003.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 14.5,
+          "ntn_var_pct": -9.4,
+          "imi_pct": 1.155,
+          "quotazione_eur_mq": 987.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 28.0,
+          "ntn_var_pct": 31.9,
+          "imi_pct": 1.47,
+          "quotazione_eur_mq": 972.0,
+          "quotazione_var_pct": -3.6,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 29.0,
+          "ntn_var_pct": 1.0,
+          "imi_pct": 1.49,
+          "quotazione_eur_mq": 972.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 27.0,
+          "ntn_var_pct": -3.6,
+          "imi_pct": 1.43,
+          "quotazione_eur_mq": 972.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 34.0,
+          "ntn_var_pct": 22.2,
+          "imi_pct": 1.73,
+          "quotazione_eur_mq": 923.0,
+          "quotazione_var_pct": -5.1,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 38.0,
+          "ntn_var_pct": 13.2,
+          "imi_pct": 1.96,
+          "quotazione_eur_mq": 901.0,
+          "quotazione_var_pct": -2.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 28.0,
+      "ntn_last": 38.0,
+      "ntn_cagr_pct": 4.46,
+      "ntn_delta_pct": 35.71,
+      "ntn_recent_slope": 5.5,
+      "ntn_volatility_cv_pct": 30.0,
+      "imi_avg_pct": 1.44,
+      "imi_first_pct": 1.43,
+      "imi_last_pct": 1.96,
+      "imi_trend_slope": 0.107,
+      "momentum_tag": "growing",
+      "liquidity_score": 71.3,
+      "_z_components": {
+        "z_imi": 0.3,
+        "z_cagr": -0.09,
+        "z_slope": 1.52
+      },
+      "prezzo_attuale_eur_mq": 1040.0,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "D11",
+      "zona_new": [
+        "D24"
+      ],
+      "denominazione": "GAGLIANO",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Gagliano match diretto in NEW D24.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 17.0,
+          "ntn_var_pct": -15.08,
+          "imi_pct": 0.91,
+          "quotazione_eur_mq": 825.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 21.0,
+          "ntn_var_pct": 22.1,
+          "imi_pct": 1.11,
+          "quotazione_eur_mq": 825.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 18.2,
+          "ntn_var_pct": -13.3,
+          "imi_pct": 0.93,
+          "quotazione_eur_mq": 825.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 14.0,
+          "ntn_var_pct": -39.1,
+          "imi_pct": 0.75,
+          "quotazione_eur_mq": 825.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 9.0,
+          "ntn_var_pct": -39.3,
+          "imi_pct": 0.44,
+          "quotazione_eur_mq": 825.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 14.0,
+          "ntn_var_pct": 64.7,
+          "imi_pct": 0.72,
+          "quotazione_eur_mq": 825.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 19.0,
+          "ntn_var_pct": 33.4,
+          "imi_pct": 0.94,
+          "quotazione_eur_mq": 818.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 28.0,
+          "ntn_var_pct": 30.8,
+          "imi_pct": 1.43,
+          "quotazione_eur_mq": 812.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 17.0,
+      "ntn_last": 28.0,
+      "ntn_cagr_pct": 7.39,
+      "ntn_delta_pct": 64.71,
+      "ntn_recent_slope": 7.0,
+      "ntn_volatility_cv_pct": 32.2,
+      "imi_avg_pct": 0.9,
+      "imi_first_pct": 0.91,
+      "imi_last_pct": 1.43,
+      "imi_trend_slope": 0.022,
+      "momentum_tag": "growing",
+      "liquidity_score": 70.8,
+      "_z_components": {
+        "z_imi": -0.14,
+        "z_cagr": 0.34,
+        "z_slope": 1.91
+      },
+      "prezzo_attuale_eur_mq": 910.0,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "D12",
+      "zona_new": [
+        "D19"
+      ],
+      "denominazione": "SANT ELIA",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "S.Elia match diretto in NEW D19.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 2.0,
+          "ntn_var_pct": -76.89,
+          "imi_pct": 0.24,
+          "quotazione_eur_mq": 969.0,
+          "quotazione_var_pct": -0.9,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 4.0,
+          "ntn_var_pct": 166.7,
+          "imi_pct": 0.63,
+          "quotazione_eur_mq": 962.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 8.3,
+          "ntn_var_pct": 107.5,
+          "imi_pct": 0.51,
+          "quotazione_eur_mq": 970.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 3.0,
+          "ntn_var_pct": -60.5,
+          "imi_pct": 0.39,
+          "quotazione_eur_mq": 978.0,
+          "quotazione_var_pct": 1.7,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 4.0,
+          "ntn_var_pct": 55.6,
+          "imi_pct": 0.61,
+          "quotazione_eur_mq": 979.0,
+          "quotazione_var_pct": 0.1,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 2.0,
+          "ntn_var_pct": -48.6,
+          "imi_pct": 0.31,
+          "quotazione_eur_mq": 980.0,
+          "quotazione_var_pct": 0.1,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 2.0,
+          "ntn_var_pct": 0.0,
+          "imi_pct": 0.31,
+          "quotazione_eur_mq": 963.0,
+          "quotazione_var_pct": -1.8,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 6.0,
+          "ntn_var_pct": 200.0,
+          "imi_pct": 0.93,
+          "quotazione_eur_mq": 953.0,
+          "quotazione_var_pct": -1.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 2.0,
+      "ntn_last": 6.0,
+      "ntn_cagr_pct": 16.99,
+      "ntn_delta_pct": 200.0,
+      "ntn_recent_slope": 2.0,
+      "ntn_volatility_cv_pct": 57.5,
+      "imi_avg_pct": 0.49,
+      "imi_first_pct": 0.24,
+      "imi_last_pct": 0.93,
+      "imi_trend_slope": 0.034,
+      "momentum_tag": "frozen",
+      "liquidity_score": 69.1,
+      "_z_components": {
+        "z_imi": -0.55,
+        "z_cagr": 1.77,
+        "z_slope": 0.62
+      },
+      "prezzo_attuale_eur_mq": 922.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "B2",
+      "zona_new": [
+        "B9"
+      ],
+      "denominazione": "VIA PASCALI, VIA DE RISO, VIA PUGLIESE V.",
+      "rel": "merged_into",
+      "confidence": "high",
+      "mapping_notes": "Via Pascali è nel nucleo del centro storico, parallela a Corso Mazzini.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 7.0,
+          "ntn_var_pct": 48.4,
+          "imi_pct": 1.33,
+          "quotazione_eur_mq": 1282.0,
+          "quotazione_var_pct": 0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 12.0,
+          "ntn_var_pct": 59.6,
+          "imi_pct": 2.12,
+          "quotazione_eur_mq": 1275.0,
+          "quotazione_var_pct": -0.5,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 18.3,
+          "ntn_var_pct": 52.5,
+          "imi_pct": 1.96,
+          "quotazione_eur_mq": 1265.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 10.0,
+          "ntn_var_pct": 42.9,
+          "imi_pct": 1.8,
+          "quotazione_eur_mq": 1255.0,
+          "quotazione_var_pct": -1.6,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 9.0,
+          "ntn_var_pct": -15.0,
+          "imi_pct": 1.53,
+          "quotazione_eur_mq": 1247.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 11.0,
+          "ntn_var_pct": 23.5,
+          "imi_pct": 1.89,
+          "quotazione_eur_mq": 1269.0,
+          "quotazione_var_pct": 1.8,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 15.0,
+          "ntn_var_pct": 42.9,
+          "imi_pct": 2.68,
+          "quotazione_eur_mq": 1272.0,
+          "quotazione_var_pct": 0.2,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 11.0,
+          "ntn_var_pct": -25.6,
+          "imi_pct": 2.01,
+          "quotazione_eur_mq": 1253.0,
+          "quotazione_var_pct": -1.4,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 7.0,
+      "ntn_last": 11.0,
+      "ntn_cagr_pct": 6.67,
+      "ntn_delta_pct": 57.14,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": 30.4,
+      "imi_avg_pct": 1.92,
+      "imi_first_pct": 1.33,
+      "imi_last_pct": 2.01,
+      "imi_trend_slope": 0.084,
+      "momentum_tag": "growing",
+      "liquidity_score": 63.1,
+      "_z_components": {
+        "z_imi": 0.34,
+        "z_cagr": 0.24,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1300.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "D20",
+      "zona_new": [
+        "D20"
+      ],
+      "denominazione": "'LUNGO MARE CATANZARO LIDO'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 96.0,
+          "ntn_var_pct": 33.0,
+          "imi_pct": 2.11,
+          "quotazione_eur_mq": 1521.0,
+          "quotazione_var_pct": -4.2,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 96.0,
+      "ntn_last": 96.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 2.11,
+      "imi_first_pct": 2.11,
+      "imi_last_pct": 2.11,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 61.6,
+      "_z_components": {
+        "z_imi": 0.42,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1525.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "B9",
+      "zona_new": [
+        "B9"
+      ],
+      "denominazione": "'CENTRO STORICO'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 103.0,
+          "ntn_var_pct": -3.9,
+          "imi_pct": 2.1,
+          "quotazione_eur_mq": 1096.0,
+          "quotazione_var_pct": 4.8,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 103.0,
+      "ntn_last": 103.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 2.1,
+      "imi_first_pct": 2.1,
+      "imi_last_pct": 2.1,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 61.4,
+      "_z_components": {
+        "z_imi": 0.41,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1300.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "C9",
+      "zona_new": [
+        "C9"
+      ],
+      "denominazione": "'QUARTIERI A VALLE CENTRO STORICO FRA TORRENTI FIUMARELLA E MUSOFALO'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 49.0,
+          "ntn_var_pct": -3.0,
+          "imi_pct": 2.04,
+          "quotazione_eur_mq": 984.0,
+          "quotazione_var_pct": 9.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 49.0,
+      "ntn_last": 49.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 2.04,
+      "imi_first_pct": 2.04,
+      "imi_last_pct": 2.04,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 60.1,
+      "_z_components": {
+        "z_imi": 0.36,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1092.5,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "C8",
+      "zona_new": [
+        "C8"
+      ],
+      "denominazione": "'ZONA MATERDOMINI E RIONE DE FILIPPIS'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 96.0,
+          "ntn_var_pct": 16.9,
+          "imi_pct": 2.01,
+          "quotazione_eur_mq": 1084.0,
+          "quotazione_var_pct": -6.9,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 96.0,
+      "ntn_last": 96.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 2.01,
+      "imi_first_pct": 2.01,
+      "imi_last_pct": 2.01,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 59.5,
+      "_z_components": {
+        "z_imi": 0.34,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 985.0,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "C7",
+      "zona_new": [
+        "C7"
+      ],
+      "denominazione": "'ZONA OSPEDALE - PONTEPICCOLO- PONTEGRANDE'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 95.0,
+          "ntn_var_pct": 3.8,
+          "imi_pct": 1.87,
+          "quotazione_eur_mq": 1071.0,
+          "quotazione_var_pct": -0.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 95.0,
+      "ntn_last": 95.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.87,
+      "imi_first_pct": 1.87,
+      "imi_last_pct": 1.87,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 56.7,
+      "_z_components": {
+        "z_imi": 0.22,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1092.5,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D18",
+      "zona_new": [
+        "D18"
+      ],
+      "denominazione": "'CORVO-ARANCETO -PISTOIA'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 22.0,
+          "ntn_var_pct": 207.1,
+          "imi_pct": 1.79,
+          "quotazione_eur_mq": 1086.0,
+          "quotazione_var_pct": 9.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 22.0,
+      "ntn_last": 22.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.79,
+      "imi_first_pct": 1.79,
+      "imi_last_pct": 1.79,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 55.0,
+      "_z_components": {
+        "z_imi": 0.16,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1215.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D15",
+      "zona_new": [
+        "D15"
+      ],
+      "denominazione": "'CATANZARO EST FRA TORRENTE FIUMARELLA E VIALE FIUME BUSENTO E DA LOC. SANTO JANNI FINO A SS106/VAR A'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 32.0,
+          "ntn_var_pct": 25.3,
+          "imi_pct": 1.78,
+          "quotazione_eur_mq": 1103.0,
+          "quotazione_var_pct": -1.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 32.0,
+      "ntn_last": 32.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.78,
+      "imi_first_pct": 1.78,
+      "imi_last_pct": 1.78,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 54.8,
+      "_z_components": {
+        "z_imi": 0.15,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1115.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "C2",
+      "zona_new": [
+        "C7"
+      ],
+      "denominazione": "VIALE PIO X, PONTEPICCOLO",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Pontepiccolo match diretto con NEW C7. Viale Pio X è arteria dell'area ospedaliera.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 35.0,
+          "ntn_var_pct": -2.39,
+          "imi_pct": 1.31,
+          "quotazione_eur_mq": 1180.0,
+          "quotazione_var_pct": 1.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 43.0,
+          "ntn_var_pct": 24.1,
+          "imi_pct": 1.62,
+          "quotazione_eur_mq": 1190.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 49.1,
+          "ntn_var_pct": 14.2,
+          "imi_pct": 1.515,
+          "quotazione_eur_mq": 1178.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 40.0,
+          "ntn_var_pct": -15.8,
+          "imi_pct": 1.41,
+          "quotazione_eur_mq": 1167.0,
+          "quotazione_var_pct": -2.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 42.0,
+          "ntn_var_pct": 2.1,
+          "imi_pct": 1.48,
+          "quotazione_eur_mq": 1165.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 71.0,
+          "ntn_var_pct": 70.8,
+          "imi_pct": 2.52,
+          "quotazione_eur_mq": 1141.0,
+          "quotazione_var_pct": -2.1,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 60.0,
+          "ntn_var_pct": -16.0,
+          "imi_pct": 1.98,
+          "quotazione_eur_mq": 1058.0,
+          "quotazione_var_pct": -7.2,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 61.0,
+          "ntn_var_pct": 0.4,
+          "imi_pct": 2.01,
+          "quotazione_eur_mq": 1045.0,
+          "quotazione_var_pct": -1.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 35.0,
+      "ntn_last": 61.0,
+      "ntn_cagr_pct": 8.26,
+      "ntn_delta_pct": 74.29,
+      "ntn_recent_slope": -5.0,
+      "ntn_volatility_cv_pct": 25.0,
+      "imi_avg_pct": 1.73,
+      "imi_first_pct": 1.31,
+      "imi_last_pct": 2.01,
+      "imi_trend_slope": 0.116,
+      "momentum_tag": "rocket",
+      "liquidity_score": 53.8,
+      "_z_components": {
+        "z_imi": 0.34,
+        "z_cagr": 0.47,
+        "z_slope": -1.17
+      },
+      "prezzo_attuale_eur_mq": 1092.5,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "B8",
+      "zona_new": [
+        "B8"
+      ],
+      "denominazione": "'CENTRO CITTA''",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 60.0,
+          "ntn_var_pct": -9.0,
+          "imi_pct": 1.59,
+          "quotazione_eur_mq": 1393.0,
+          "quotazione_var_pct": 2.5,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 60.0,
+      "ntn_last": 60.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.59,
+      "imi_first_pct": 1.59,
+      "imi_last_pct": 1.59,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 50.9,
+      "_z_components": {
+        "z_imi": -0.01,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1425.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D23",
+      "zona_new": [
+        "D23"
+      ],
+      "denominazione": "'CATANZARO OVEST DA VIA MOLE' LUNGO VIALE LUCREZIA DELLA VALLE, VIALE DEI CONTI FALLUC, VIALE ISONZO FINO A SS106/VAR. A'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 39.0,
+          "ntn_var_pct": 32.6,
+          "imi_pct": 1.57,
+          "quotazione_eur_mq": 1068.0,
+          "quotazione_var_pct": 1.5,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 39.0,
+      "ntn_last": 39.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.57,
+      "imi_first_pct": 1.57,
+      "imi_last_pct": 1.57,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 50.5,
+      "_z_components": {
+        "z_imi": -0.02,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1040.0,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "D3",
+      "zona_new": [
+        "D21"
+      ],
+      "denominazione": "SIANO",
+      "rel": "renamed",
+      "confidence": "medium",
+      "mapping_notes": "Siano è frazione di Catanzaro a est. NEW D21 copre Catanzaro Est verso Via Alli.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 7.0,
+          "ntn_var_pct": 180.0,
+          "imi_pct": 0.41,
+          "quotazione_eur_mq": 1143.0,
+          "quotazione_var_pct": -1.9,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 11.0,
+          "ntn_var_pct": 50.0,
+          "imi_pct": 0.61,
+          "quotazione_eur_mq": 1122.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 22.9,
+          "ntn_var_pct": 108.2,
+          "imi_pct": 0.6,
+          "quotazione_eur_mq": 1114.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 10.0,
+          "ntn_var_pct": -82.1,
+          "imi_pct": 0.59,
+          "quotazione_eur_mq": 1107.0,
+          "quotazione_var_pct": -1.3,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 4.0,
+          "ntn_var_pct": -60.7,
+          "imi_pct": 0.23,
+          "quotazione_eur_mq": 1112.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 15.0,
+          "ntn_var_pct": 275.0,
+          "imi_pct": 0.86,
+          "quotazione_eur_mq": 1132.0,
+          "quotazione_var_pct": 1.8,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 18.0,
+          "ntn_var_pct": 16.7,
+          "imi_pct": 0.98,
+          "quotazione_eur_mq": 1131.0,
+          "quotazione_var_pct": -0.1,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 15.0,
+          "ntn_var_pct": -17.1,
+          "imi_pct": 0.81,
+          "quotazione_eur_mq": 1118.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 7.0,
+      "ntn_last": 15.0,
+      "ntn_cagr_pct": 11.5,
+      "ntn_delta_pct": 114.29,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": 47.5,
+      "imi_avg_pct": 0.64,
+      "imi_first_pct": 0.41,
+      "imi_last_pct": 0.81,
+      "imi_trend_slope": 0.06,
+      "momentum_tag": "frozen",
+      "liquidity_score": 49.3,
+      "_z_components": {
+        "z_imi": -0.64,
+        "z_cagr": 0.95,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1010.0,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "D24",
+      "zona_new": [
+        "D24"
+      ],
+      "denominazione": "'CATANZARO NORD OVEST LUNGO VIALE TOMMASO CAMPANELLA - QUARTIERE GAGLIANO'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 29.0,
+          "ntn_var_pct": -1.2,
+          "imi_pct": 1.39,
+          "quotazione_eur_mq": 874.0,
+          "quotazione_var_pct": 6.2,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 29.0,
+      "ntn_last": 29.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.39,
+      "imi_first_pct": 1.39,
+      "imi_last_pct": 1.39,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 46.8,
+      "_z_components": {
+        "z_imi": -0.17,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 910.0,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "E4",
+      "zona_new": [
+        "E4"
+      ],
+      "denominazione": "'CATANZARO OVEST FRA FIUME CORACE E TORRENTE FIUMARELLA, DA SS106/VAR A FINO A INGRESSO CATANZARO LIDO'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 59.0,
+          "ntn_var_pct": -9.1,
+          "imi_pct": 1.38,
+          "quotazione_eur_mq": 972.0,
+          "quotazione_var_pct": -4.2,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 59.0,
+      "ntn_last": 59.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.38,
+      "imi_first_pct": 1.38,
+      "imi_last_pct": 1.38,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 46.6,
+      "_z_components": {
+        "z_imi": -0.18,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 902.5,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "C5",
+      "zona_new": [
+        "C7"
+      ],
+      "denominazione": "VIA LUCREZIA DELLA VALLE -DAL PONTE PER CZ SALA SINO AL MERCATONE",
+      "rel": "renamed",
+      "confidence": "medium",
+      "mapping_notes": "Lucrezia della Valle attraversa la zona Pontepiccolo verso il Mercatone (area ospedaliera).",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 7.0,
+          "ntn_var_pct": -28.35,
+          "imi_pct": 1.06,
+          "quotazione_eur_mq": 893.0,
+          "quotazione_var_pct": 0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 7.0,
+          "ntn_var_pct": 0.0,
+          "imi_pct": 1.04,
+          "quotazione_eur_mq": 912.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 8.0,
+          "ntn_var_pct": 14.3,
+          "imi_pct": 1.03,
+          "quotazione_eur_mq": 922.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 7.0,
+          "ntn_var_pct": 250.0,
+          "imi_pct": 1.02,
+          "quotazione_eur_mq": 933.0,
+          "quotazione_var_pct": 1.8,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 6.0,
+          "ntn_var_pct": -14.3,
+          "imi_pct": 0.87,
+          "quotazione_eur_mq": 933.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 6.0,
+          "ntn_var_pct": 0.0,
+          "imi_pct": 0.87,
+          "quotazione_eur_mq": 933.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 8.0,
+          "ntn_var_pct": 33.3,
+          "imi_pct": 1.18,
+          "quotazione_eur_mq": 874.0,
+          "quotazione_var_pct": -6.3,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 9.0,
+          "ntn_var_pct": 12.5,
+          "imi_pct": 1.33,
+          "quotazione_eur_mq": 856.0,
+          "quotazione_var_pct": -2.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 7.0,
+      "ntn_last": 9.0,
+      "ntn_cagr_pct": 3.66,
+      "ntn_delta_pct": 28.57,
+      "ntn_recent_slope": 1.5,
+      "ntn_volatility_cv_pct": 14.3,
+      "imi_avg_pct": 1.05,
+      "imi_first_pct": 1.06,
+      "imi_last_pct": 1.33,
+      "imi_trend_slope": 0.023,
+      "momentum_tag": "growing",
+      "liquidity_score": 46.3,
+      "_z_components": {
+        "z_imi": -0.22,
+        "z_cagr": -0.21,
+        "z_slope": 0.49
+      },
+      "prezzo_attuale_eur_mq": 1092.5,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "B7",
+      "zona_new": [
+        "B8"
+      ],
+      "denominazione": "ZONA GRECIA",
+      "rel": "merged_into",
+      "confidence": "high",
+      "mapping_notes": "Zona Grecìa è quartiere nel centro città.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 10.0,
+          "ntn_var_pct": 56.08,
+          "imi_pct": 1.15,
+          "quotazione_eur_mq": 1174.0,
+          "quotazione_var_pct": -4.2,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 8.0,
+          "ntn_var_pct": -26.5,
+          "imi_pct": 0.93,
+          "quotazione_eur_mq": 1120.0,
+          "quotazione_var_pct": -4.6,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 12.2,
+          "ntn_var_pct": 52.5,
+          "imi_pct": 0.855,
+          "quotazione_eur_mq": 1125.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 7.0,
+          "ntn_var_pct": -52.5,
+          "imi_pct": 0.78,
+          "quotazione_eur_mq": 1131.0,
+          "quotazione_var_pct": 1.9,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 17.0,
+          "ntn_var_pct": 152.1,
+          "imi_pct": 1.97,
+          "quotazione_eur_mq": 1111.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 19.0,
+          "ntn_var_pct": 11.6,
+          "imi_pct": 2.2,
+          "quotazione_eur_mq": 1110.0,
+          "quotazione_var_pct": -0.1,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 23.0,
+          "ntn_var_pct": 19.3,
+          "imi_pct": 2.61,
+          "quotazione_eur_mq": 1065.0,
+          "quotazione_var_pct": -4.1,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 14.0,
+          "ntn_var_pct": -37.5,
+          "imi_pct": 1.64,
+          "quotazione_eur_mq": 1043.0,
+          "quotazione_var_pct": -2.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 10.0,
+      "ntn_last": 14.0,
+      "ntn_cagr_pct": 4.92,
+      "ntn_delta_pct": 40.0,
+      "ntn_recent_slope": -2.5,
+      "ntn_volatility_cv_pct": 40.6,
+      "imi_avg_pct": 1.52,
+      "imi_first_pct": 1.15,
+      "imi_last_pct": 1.64,
+      "imi_trend_slope": 0.203,
+      "momentum_tag": "growing",
+      "liquidity_score": 45.2,
+      "_z_components": {
+        "z_imi": 0.03,
+        "z_cagr": -0.02,
+        "z_slope": -0.53
+      },
+      "prezzo_attuale_eur_mq": 1425.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "D22",
+      "zona_new": [
+        "D22"
+      ],
+      "denominazione": "'CATANZARO EST FRA TORRENTE MUSOFALO, FIUMARELLA, VIA COSCO, VIA DEI TULIPANI FINO A LOC. SANTO JANNI'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 32.0,
+          "ntn_var_pct": 61.7,
+          "imi_pct": 1.22,
+          "quotazione_eur_mq": 1054.0,
+          "quotazione_var_pct": -0.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 32.0,
+      "ntn_last": 32.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.22,
+      "imi_first_pct": 1.22,
+      "imi_last_pct": 1.22,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 43.4,
+      "_z_components": {
+        "z_imi": -0.31,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1067.5,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "C4",
+      "zona_new": [
+        "C9"
+      ],
+      "denominazione": "VIALE DEI NORMANNI, VIA CILEA",
+      "rel": "merged_into",
+      "confidence": "medium",
+      "mapping_notes": "Normanni e Cilea sono nei quartieri semicentrali a valle del centro storico.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 12.0,
+          "ntn_var_pct": 213.35,
+          "imi_pct": 3.22,
+          "quotazione_eur_mq": 908.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 3.0,
+          "ntn_var_pct": -73.9,
+          "imi_pct": 0.74,
+          "quotazione_eur_mq": 900.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 3.4,
+          "ntn_var_pct": 13.3,
+          "imi_pct": 1.11,
+          "quotazione_eur_mq": 886.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 6.0,
+          "ntn_var_pct": 50.0,
+          "imi_pct": 1.48,
+          "quotazione_eur_mq": 873.0,
+          "quotazione_var_pct": -1.7,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 10.0,
+          "ntn_var_pct": 59.2,
+          "imi_pct": 2.09,
+          "quotazione_eur_mq": 878.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 14.0,
+          "ntn_var_pct": 42.4,
+          "imi_pct": 2.98,
+          "quotazione_eur_mq": 883.0,
+          "quotazione_var_pct": 0.6,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 8.0,
+          "ntn_var_pct": -38.8,
+          "imi_pct": 1.82,
+          "quotazione_eur_mq": 861.0,
+          "quotazione_var_pct": -2.4,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 10.0,
+          "ntn_var_pct": 24.1,
+          "imi_pct": 2.26,
+          "quotazione_eur_mq": 859.0,
+          "quotazione_var_pct": -0.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 12.0,
+      "ntn_last": 10.0,
+      "ntn_cagr_pct": -2.57,
+      "ntn_delta_pct": -16.67,
+      "ntn_recent_slope": -2.0,
+      "ntn_volatility_cv_pct": 47.6,
+      "imi_avg_pct": 1.96,
+      "imi_first_pct": 3.22,
+      "imi_last_pct": 2.26,
+      "imi_trend_slope": 0.058,
+      "momentum_tag": "cooling",
+      "liquidity_score": 42.5,
+      "_z_components": {
+        "z_imi": 0.54,
+        "z_cagr": -1.13,
+        "z_slope": -0.4
+      },
+      "prezzo_attuale_eur_mq": 1092.5,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "D2",
+      "zona_new": [
+        "D22"
+      ],
+      "denominazione": "CAVA, CAMPAGNELLA",
+      "rel": "renamed",
+      "confidence": "medium",
+      "mapping_notes": "RISOLTO 2026-05-14 (era unknown). Evidenza spaziale Nominatim + point-in-polygon: 'Cava' @(38.8936,16.6229) e 'Campagnella' @(38.8934,16.6038) entrambi cadono dentro poligono NEW D22. Confidence:medium perché due toponimi geocodano alla stessa NEW ma non c'è verifica documentale AdE.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 8.0,
+          "ntn_var_pct": 4.13,
+          "imi_pct": 0.43,
+          "quotazione_eur_mq": 1001.0,
+          "quotazione_var_pct": -1.9,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 15.0,
+          "ntn_var_pct": 80.1,
+          "imi_pct": 0.76,
+          "quotazione_eur_mq": 975.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 31.2,
+          "ntn_var_pct": 108.0,
+          "imi_pct": 0.82,
+          "quotazione_eur_mq": 1025.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 18.0,
+          "ntn_var_pct": -20.5,
+          "imi_pct": 0.88,
+          "quotazione_eur_mq": 1076.0,
+          "quotazione_var_pct": 10.3,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 21.0,
+          "ntn_var_pct": 20.0,
+          "imi_pct": 1.05,
+          "quotazione_eur_mq": 1055.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 19.0,
+          "ntn_var_pct": -8.7,
+          "imi_pct": 0.96,
+          "quotazione_eur_mq": 1055.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 36.0,
+          "ntn_var_pct": 85.2,
+          "imi_pct": 1.75,
+          "quotazione_eur_mq": 1073.0,
+          "quotazione_var_pct": 1.7,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 16.0,
+          "ntn_var_pct": -56.2,
+          "imi_pct": 0.78,
+          "quotazione_eur_mq": 1069.0,
+          "quotazione_var_pct": -0.3,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 8.0,
+      "ntn_last": 16.0,
+      "ntn_cagr_pct": 10.41,
+      "ntn_delta_pct": 100.0,
+      "ntn_recent_slope": -1.5,
+      "ntn_volatility_cv_pct": 44.0,
+      "imi_avg_pct": 0.93,
+      "imi_first_pct": 0.43,
+      "imi_last_pct": 0.78,
+      "imi_trend_slope": 0.095,
+      "momentum_tag": "frozen",
+      "liquidity_score": 42.4,
+      "_z_components": {
+        "z_imi": -0.67,
+        "z_cagr": 0.79,
+        "z_slope": -0.28
+      },
+      "prezzo_attuale_eur_mq": 1067.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "B1",
+      "zona_new": [
+        "B8"
+      ],
+      "denominazione": "VIA VERCILLO, VIA A. DE GASPERI, VIA BUCCARELLI, QUART. S. LEONARDO",
+      "rel": "merged_into",
+      "confidence": "high",
+      "mapping_notes": "Quartiere S. Leonardo è propaggine nord-est del centro città. Via De Gasperi e Buccarelli sono arterie del centro città.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 34.0,
+          "ntn_var_pct": -18.35,
+          "imi_pct": 1.45,
+          "quotazione_eur_mq": 1546.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 40.0,
+          "ntn_var_pct": 16.9,
+          "imi_pct": 1.7,
+          "quotazione_eur_mq": 1525.0,
+          "quotazione_var_pct": -1.3,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 61.0,
+          "ntn_var_pct": 52.5,
+          "imi_pct": 1.725,
+          "quotazione_eur_mq": 1516.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 42.0,
+          "ntn_var_pct": -19.9,
+          "imi_pct": 1.75,
+          "quotazione_eur_mq": 1508.0,
+          "quotazione_var_pct": -1.4,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 47.0,
+          "ntn_var_pct": 11.5,
+          "imi_pct": 1.95,
+          "quotazione_eur_mq": 1492.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 40.0,
+          "ntn_var_pct": -15.6,
+          "imi_pct": 1.65,
+          "quotazione_eur_mq": 1450.0,
+          "quotazione_var_pct": -2.8,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 48.0,
+          "ntn_var_pct": 22.1,
+          "imi_pct": 2.01,
+          "quotazione_eur_mq": 1429.0,
+          "quotazione_var_pct": -1.4,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 38.0,
+          "ntn_var_pct": -22.4,
+          "imi_pct": 1.56,
+          "quotazione_eur_mq": 1408.0,
+          "quotazione_var_pct": -1.5,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 34.0,
+      "ntn_last": 38.0,
+      "ntn_cagr_pct": 1.6,
+      "ntn_delta_pct": 11.76,
+      "ntn_recent_slope": -1.0,
+      "ntn_volatility_cv_pct": 19.0,
+      "imi_avg_pct": 1.72,
+      "imi_first_pct": 1.45,
+      "imi_last_pct": 1.56,
+      "imi_trend_slope": 0.027,
+      "momentum_tag": "stable",
+      "liquidity_score": 40.0,
+      "_z_components": {
+        "z_imi": -0.03,
+        "z_cagr": -0.51,
+        "z_slope": -0.15
+      },
+      "prezzo_attuale_eur_mq": 1425.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D19",
+      "zona_new": [
+        "D19"
+      ],
+      "denominazione": "'S.ELIA - PITERA - JANO'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 15.0,
+          "ntn_var_pct": 37.9,
+          "imi_pct": 1.05,
+          "quotazione_eur_mq": 845.0,
+          "quotazione_var_pct": 9.2,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 15.0,
+      "ntn_last": 15.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.05,
+      "imi_first_pct": 1.05,
+      "imi_last_pct": 1.05,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 39.9,
+      "_z_components": {
+        "z_imi": -0.45,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 922.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "E5",
+      "zona_new": [
+        "E5"
+      ],
+      "denominazione": "'CATANZARO OVEST - CENTRO DIREZIONALE - UNIVERSITA''",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 1.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.97,
+          "quotazione_eur_mq": 710.0,
+          "quotazione_var_pct": -5.2,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 1.0,
+      "ntn_last": 1.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 0.97,
+      "imi_first_pct": 0.97,
+      "imi_last_pct": 0.97,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 38.3,
+      "_z_components": {
+        "z_imi": -0.51,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 667.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "R2",
+      "zona_new": [
+        "D14"
+      ],
+      "denominazione": "ZONA RURALE TRA BARONE E S.MARIA",
+      "rel": "reclassified",
+      "confidence": "medium",
+      "mapping_notes": "Territorialmente coincide con NEW D14. Zona RIDOTTA DI FASCIA da R (rurale) a D (semi-urbana) per via dello sviluppo commerciale Le Fontane.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.0,
+          "quotazione_eur_mq": 473.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.0,
+          "quotazione_eur_mq": 473.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.625,
+          "quotazione_eur_mq": 461.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 1.0,
+          "ntn_var_pct": null,
+          "imi_pct": 1.25,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": -5.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 2.0,
+          "ntn_var_pct": 100.0,
+          "imi_pct": 2.5,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 3.0,
+          "ntn_var_pct": 50.0,
+          "imi_pct": 3.75,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 5.0,
+          "ntn_var_pct": 166.7,
+          "imi_pct": 2.56,
+          "quotazione_eur_mq": 444.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 2.0,
+          "ntn_var_pct": -60.0,
+          "imi_pct": 0.98,
+          "quotazione_eur_mq": 439.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 0.0,
+      "ntn_last": 2.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": null,
+      "ntn_recent_slope": -0.5,
+      "ntn_volatility_cv_pct": 108.8,
+      "imi_avg_pct": 1.46,
+      "imi_first_pct": 0.0,
+      "imi_last_pct": 0.98,
+      "imi_trend_slope": 0.361,
+      "momentum_tag": "unknown",
+      "liquidity_score": 37.2,
+      "_z_components": {
+        "z_imi": -0.51,
+        "z_cagr": 0.0,
+        "z_slope": -0.02
+      },
+      "prezzo_attuale_eur_mq": 1300.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "D7",
+      "zona_new": [
+        "D18"
+      ],
+      "denominazione": "CORVO",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Corvo match diretto in NEW D18.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 38.0,
+          "ntn_var_pct": -11.07,
+          "imi_pct": 1.12,
+          "quotazione_eur_mq": 963.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 34.0,
+          "ntn_var_pct": -9.8,
+          "imi_pct": 1.0,
+          "quotazione_eur_mq": 963.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 70.8,
+          "ntn_var_pct": 108.2,
+          "imi_pct": 1.63,
+          "quotazione_eur_mq": 963.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 77.0,
+          "ntn_var_pct": 78.9,
+          "imi_pct": 2.26,
+          "quotazione_eur_mq": 963.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 43.0,
+          "ntn_var_pct": -45.8,
+          "imi_pct": 1.25,
+          "quotazione_eur_mq": 963.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 55.0,
+          "ntn_var_pct": 27.5,
+          "imi_pct": 1.6,
+          "quotazione_eur_mq": 963.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 51.0,
+          "ntn_var_pct": -6.1,
+          "imi_pct": 1.46,
+          "quotazione_eur_mq": 958.0,
+          "quotazione_var_pct": -0.6,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 49.0,
+          "ntn_var_pct": -3.7,
+          "imi_pct": 1.4,
+          "quotazione_eur_mq": 952.0,
+          "quotazione_var_pct": -0.6,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 38.0,
+      "ntn_last": 49.0,
+      "ntn_cagr_pct": 3.7,
+      "ntn_delta_pct": 28.95,
+      "ntn_recent_slope": -3.0,
+      "ntn_volatility_cv_pct": 28.9,
+      "imi_avg_pct": 1.46,
+      "imi_first_pct": 1.12,
+      "imi_last_pct": 1.4,
+      "imi_trend_slope": 0.038,
+      "momentum_tag": "growing",
+      "liquidity_score": 36.3,
+      "_z_components": {
+        "z_imi": -0.16,
+        "z_cagr": -0.2,
+        "z_slope": -0.66
+      },
+      "prezzo_attuale_eur_mq": 1215.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "R5",
+      "zona_new": [
+        "R5"
+      ],
+      "denominazione": "'TERRITORIO RURALE OVEST'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 3.0,
+          "ntn_var_pct": 0.0,
+          "imi_pct": 0.76,
+          "quotazione_eur_mq": 591.0,
+          "quotazione_var_pct": 9.4,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 3.0,
+      "ntn_last": 3.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 0.76,
+      "imi_first_pct": 0.76,
+      "imi_last_pct": 0.76,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 34.0,
+      "_z_components": {
+        "z_imi": -0.69,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 702.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "D21",
+      "zona_new": [
+        "D21"
+      ],
+      "denominazione": "'CATANZARO EST LUNGO VIALE FERDINANDO GALIANI, VIA DEI TULIPANI FINO A VIA ALLI'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 10.0,
+          "ntn_var_pct": -39.4,
+          "imi_pct": 0.65,
+          "quotazione_eur_mq": 1068.0,
+          "quotazione_var_pct": -3.6,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 10.0,
+      "ntn_last": 10.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 0.65,
+      "imi_first_pct": 0.65,
+      "imi_last_pct": 0.65,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 31.7,
+      "_z_components": {
+        "z_imi": -0.77,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1010.0,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "C3",
+      "zona_new": [
+        "C8"
+      ],
+      "denominazione": "VIA G. DA FIORE, VIA L. DELLA VALLE, VIALE DE FILIPPIS, RIONE SANT ANTONIO",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Viale De Filippis match diretto con NEW C8.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 95.0,
+          "ntn_var_pct": 82.61,
+          "imi_pct": 2.05,
+          "quotazione_eur_mq": 1146.0,
+          "quotazione_var_pct": 1.3,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 84.0,
+          "ntn_var_pct": -10.6,
+          "imi_pct": 1.81,
+          "quotazione_eur_mq": 1154.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 96.0,
+          "ntn_var_pct": 14.3,
+          "imi_pct": 2.04,
+          "quotazione_eur_mq": 1157.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 107.0,
+          "ntn_var_pct": 57.8,
+          "imi_pct": 2.27,
+          "quotazione_eur_mq": 1160.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 73.0,
+          "ntn_var_pct": -31.6,
+          "imi_pct": 1.55,
+          "quotazione_eur_mq": 1165.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 91.0,
+          "ntn_var_pct": 24.5,
+          "imi_pct": 1.93,
+          "quotazione_eur_mq": 1168.0,
+          "quotazione_var_pct": 0.3,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 108.0,
+          "ntn_var_pct": 19.3,
+          "imi_pct": 2.21,
+          "quotazione_eur_mq": 1164.0,
+          "quotazione_var_pct": -0.4,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 84.0,
+          "ntn_var_pct": -22.3,
+          "imi_pct": 1.72,
+          "quotazione_eur_mq": 1166.0,
+          "quotazione_var_pct": 0.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 95.0,
+      "ntn_last": 84.0,
+      "ntn_cagr_pct": -1.74,
+      "ntn_delta_pct": -11.58,
+      "ntn_recent_slope": -3.5,
+      "ntn_volatility_cv_pct": 12.9,
+      "imi_avg_pct": 1.95,
+      "imi_first_pct": 2.05,
+      "imi_last_pct": 1.72,
+      "imi_trend_slope": -0.016,
+      "momentum_tag": "stable",
+      "liquidity_score": 29.5,
+      "_z_components": {
+        "z_imi": 0.1,
+        "z_cagr": -1.01,
+        "z_slope": -0.79
+      },
+      "prezzo_attuale_eur_mq": 985.0,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "D6",
+      "zona_new": [
+        "D14"
+      ],
+      "denominazione": "S.MARIA CENTRO",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "S.Maria match diretto in NEW D14.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 33.0,
+          "ntn_var_pct": 6.78,
+          "imi_pct": 0.91,
+          "quotazione_eur_mq": 1152.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 46.0,
+          "ntn_var_pct": 39.7,
+          "imi_pct": 1.27,
+          "quotazione_eur_mq": 1160.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 95.8,
+          "ntn_var_pct": 108.3,
+          "imi_pct": 1.415,
+          "quotazione_eur_mq": 1149.5,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 57.0,
+          "ntn_var_pct": 20.0,
+          "imi_pct": 1.56,
+          "quotazione_eur_mq": 1139.0,
+          "quotazione_var_pct": -1.8,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 28.0,
+          "ntn_var_pct": -50.6,
+          "imi_pct": 0.77,
+          "quotazione_eur_mq": 1133.0,
+          "quotazione_var_pct": -0.5,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 56.0,
+          "ntn_var_pct": 98.4,
+          "imi_pct": 1.52,
+          "quotazione_eur_mq": 1173.0,
+          "quotazione_var_pct": 3.5,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 65.0,
+          "ntn_var_pct": 16.5,
+          "imi_pct": 1.75,
+          "quotazione_eur_mq": 1139.0,
+          "quotazione_var_pct": -2.9,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 45.0,
+          "ntn_var_pct": -32.7,
+          "imi_pct": 1.21,
+          "quotazione_eur_mq": 1125.0,
+          "quotazione_var_pct": -1.2,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 33.0,
+      "ntn_last": 45.0,
+      "ntn_cagr_pct": 4.53,
+      "ntn_delta_pct": 36.36,
+      "ntn_recent_slope": -5.5,
+      "ntn_volatility_cv_pct": 39.8,
+      "imi_avg_pct": 1.3,
+      "imi_first_pct": 0.91,
+      "imi_last_pct": 1.21,
+      "imi_trend_slope": 0.048,
+      "momentum_tag": "growing",
+      "liquidity_score": 27.8,
+      "_z_components": {
+        "z_imi": -0.32,
+        "z_cagr": -0.08,
+        "z_slope": -1.3
+      },
+      "prezzo_attuale_eur_mq": 1300.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "R4",
+      "zona_new": [
+        "R4"
+      ],
+      "denominazione": "'TERRITORIO RURALE EST'",
+      "rel": "direct",
+      "confidence": "high",
+      "mapping_notes": "",
+      "years_covered": [
+        2024
+      ],
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "years_span": null,
+      "has_2018_gap": false,
+      "has_2018_interpolated": false,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 1.0,
+          "ntn_var_pct": -83.3,
+          "imi_pct": 0.1,
+          "quotazione_eur_mq": 774.0,
+          "quotazione_var_pct": -3.6,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 1.0,
+      "ntn_last": 1.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 0.1,
+      "imi_first_pct": 0.1,
+      "imi_last_pct": 0.1,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "liquidity_score": 20.5,
+      "_z_components": {
+        "z_imi": -1.22,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 817.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "D13",
+      "zona_new": [],
+      "denominazione": "SOVERITO - VISCONTE - CUTICCHIETTO",
+      "rel": "unknown",
+      "confidence": "none",
+      "mapping_notes": "Soverito è frazione costiera al confine con Sellia Marina; Visconte e Cuticchietto sono località interne. Non sufficienti match.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 4.0,
+          "ntn_var_pct": 49.81,
+          "imi_pct": 0.49,
+          "quotazione_eur_mq": 608.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 11.0,
+          "ntn_var_pct": 266.7,
+          "imi_pct": 1.34,
+          "quotazione_eur_mq": 608.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 14.2,
+          "ntn_var_pct": 29.1,
+          "imi_pct": 1.07,
+          "quotazione_eur_mq": 608.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 7.0,
+          "ntn_var_pct": -7.1,
+          "imi_pct": 0.8,
+          "quotazione_eur_mq": 608.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 10.0,
+          "ntn_var_pct": 46.2,
+          "imi_pct": 1.17,
+          "quotazione_eur_mq": 608.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 10.0,
+          "ntn_var_pct": 5.3,
+          "imi_pct": 1.23,
+          "quotazione_eur_mq": 608.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 11.0,
+          "ntn_var_pct": 10.0,
+          "imi_pct": 1.35,
+          "quotazione_eur_mq": 602.0,
+          "quotazione_var_pct": -1.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 5.0,
+          "ntn_var_pct": -54.5,
+          "imi_pct": 0.61,
+          "quotazione_eur_mq": 596.0,
+          "quotazione_var_pct": -1.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 4.0,
+      "ntn_last": 5.0,
+      "ntn_cagr_pct": 3.24,
+      "ntn_delta_pct": 25.0,
+      "ntn_recent_slope": -2.5,
+      "ntn_volatility_cv_pct": 37.9,
+      "imi_avg_pct": 1.01,
+      "imi_first_pct": 0.49,
+      "imi_last_pct": 0.61,
+      "imi_trend_slope": 0.021,
+      "momentum_tag": "frozen",
+      "liquidity_score": 20.4,
+      "_z_components": {
+        "z_imi": -0.81,
+        "z_cagr": -0.27,
+        "z_slope": -0.53
+      },
+      "price_volume_quadrant": "unknown"
+    },
+    {
+      "zona_old": "E3",
+      "zona_new": [
+        "E5"
+      ],
+      "denominazione": "INSEDIAMENTI PRODUTTIVI - VIALE EUROPA- UNIVERSITA'",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Università e Centro Direzionale (Viale Europa) sono area univoca. Match diretto.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.0,
+          "quotazione_eur_mq": 915.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.0,
+          "quotazione_eur_mq": 915.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.47,
+          "quotazione_eur_mq": 915.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 1.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.94,
+          "quotazione_eur_mq": 915.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 4.0,
+          "ntn_var_pct": 300.0,
+          "imi_pct": 3.51,
+          "quotazione_eur_mq": 915.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": null,
+          "quotazione_eur_mq": 915.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.0,
+          "quotazione_eur_mq": 908.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 0.0,
+          "ntn_var_pct": null,
+          "imi_pct": 0.0,
+          "quotazione_eur_mq": 900.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 0.0,
+      "ntn_last": 0.0,
+      "ntn_cagr_pct": null,
+      "ntn_delta_pct": null,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": 225.3,
+      "imi_avg_pct": 0.7,
+      "imi_first_pct": 0.0,
+      "imi_last_pct": 0.0,
+      "imi_trend_slope": 0.041,
+      "momentum_tag": "unknown",
+      "liquidity_score": 18.4,
+      "_z_components": {
+        "z_imi": -1.31,
+        "z_cagr": 0.0,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 667.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "D10",
+      "zona_new": [
+        "D20"
+      ],
+      "denominazione": "GIOVINO - BELLINO",
+      "rel": "renamed",
+      "confidence": "medium",
+      "mapping_notes": "CORRETTO 2026-05-14: era mappato a D22 per pura coincidenza di quotazione. Evidenza spaziale Nominatim + point-in-polygon: 'Giovino' @(38.8351,16.6446) cade dentro NEW D20 (Lungomare CZ Lido); 'Bellino' @(38.8500,16.6568) cade dentro R4 (Territorio Rurale Est). D10 era split fra zona marina (Giovino, ~50%) e rurale est (Bellino, ~50%). Mantengo D20 come target primario (toponimo dominante=Giovino, più scambi attesi) con confidence:medium. ATTENZIONE: ~50% del volume D10 sarebbe correttamente in R4 ma il framework non supporta split pesato N:M.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 16.0,
+          "ntn_var_pct": -23.81,
+          "imi_pct": 1.39,
+          "quotazione_eur_mq": 1213.0,
+          "quotazione_var_pct": 0.3,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 22.0,
+          "ntn_var_pct": 37.5,
+          "imi_pct": 1.85,
+          "quotazione_eur_mq": 1217.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 28.4,
+          "ntn_var_pct": 29.1,
+          "imi_pct": 1.785,
+          "quotazione_eur_mq": 1193.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 22.0,
+          "ntn_var_pct": -20.4,
+          "imi_pct": 1.72,
+          "quotazione_eur_mq": 1169.0,
+          "quotazione_var_pct": -3.9,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 28.0,
+          "ntn_var_pct": 30.2,
+          "imi_pct": 2.19,
+          "quotazione_eur_mq": 1183.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 27.0,
+          "ntn_var_pct": -3.6,
+          "imi_pct": 2.11,
+          "quotazione_eur_mq": 1200.0,
+          "quotazione_var_pct": 1.4,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 31.0,
+          "ntn_var_pct": 14.8,
+          "imi_pct": 2.29,
+          "quotazione_eur_mq": 1198.0,
+          "quotazione_var_pct": -0.1,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 16.0,
+          "ntn_var_pct": -47.8,
+          "imi_pct": 1.19,
+          "quotazione_eur_mq": 1185.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 16.0,
+      "ntn_last": 16.0,
+      "ntn_cagr_pct": 0.0,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": -5.5,
+      "ntn_volatility_cv_pct": 24.0,
+      "imi_avg_pct": 1.82,
+      "imi_first_pct": 1.39,
+      "imi_last_pct": 1.19,
+      "imi_trend_slope": 0.027,
+      "momentum_tag": "stable",
+      "liquidity_score": 17.4,
+      "_z_components": {
+        "z_imi": -0.33,
+        "z_cagr": -0.75,
+        "z_slope": -1.3
+      },
+      "prezzo_attuale_eur_mq": 1525.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "D4",
+      "zona_new": [
+        "D19"
+      ],
+      "denominazione": "PONTEGRANDE - PITERA",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Pitera match diretto in NEW D19. Pontegrande è limitrofa.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 5.0,
+          "ntn_var_pct": 36.24,
+          "imi_pct": 0.89,
+          "quotazione_eur_mq": 978.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 5.0,
+          "ntn_var_pct": 0.0,
+          "imi_pct": 0.87,
+          "quotazione_eur_mq": 978.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 10.4,
+          "ntn_var_pct": 108.0,
+          "imi_pct": 1.23,
+          "quotazione_eur_mq": 978.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 9.0,
+          "ntn_var_pct": 355.5,
+          "imi_pct": 1.59,
+          "quotazione_eur_mq": 978.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 1.0,
+          "ntn_var_pct": -86.3,
+          "imi_pct": 0.22,
+          "quotazione_eur_mq": 978.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 7.0,
+          "ntn_var_pct": 420.0,
+          "imi_pct": 1.14,
+          "quotazione_eur_mq": 978.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 9.0,
+          "ntn_var_pct": 42.3,
+          "imi_pct": 1.61,
+          "quotazione_eur_mq": 970.0,
+          "quotazione_var_pct": -0.9,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 4.0,
+          "ntn_var_pct": -56.8,
+          "imi_pct": 0.71,
+          "quotazione_eur_mq": 962.0,
+          "quotazione_var_pct": -0.9,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 5.0,
+      "ntn_last": 4.0,
+      "ntn_cagr_pct": -3.14,
+      "ntn_delta_pct": -20.0,
+      "ntn_recent_slope": -1.5,
+      "ntn_volatility_cv_pct": 49.7,
+      "imi_avg_pct": 1.03,
+      "imi_first_pct": 0.89,
+      "imi_last_pct": 0.71,
+      "imi_trend_slope": 0.01,
+      "momentum_tag": "frozen",
+      "liquidity_score": 10.9,
+      "_z_components": {
+        "z_imi": -0.73,
+        "z_cagr": -1.22,
+        "z_slope": -0.28
+      },
+      "prezzo_attuale_eur_mq": 922.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "D5",
+      "zona_new": [
+        "D18"
+      ],
+      "denominazione": "PISTOIA",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Pistoia match diretto in NEW D18.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 11.0,
+          "ntn_var_pct": 120.0,
+          "imi_pct": 1.11,
+          "quotazione_eur_mq": 574.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 8.0,
+          "ntn_var_pct": -16.7,
+          "imi_pct": 0.75,
+          "quotazione_eur_mq": 574.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 16.7,
+          "ntn_var_pct": 108.7,
+          "imi_pct": 0.72,
+          "quotazione_eur_mq": 574.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 7.0,
+          "ntn_var_pct": -65.0,
+          "imi_pct": 0.69,
+          "quotazione_eur_mq": 574.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 13.0,
+          "ntn_var_pct": 85.7,
+          "imi_pct": 1.28,
+          "quotazione_eur_mq": 574.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 7.0,
+          "ntn_var_pct": -46.2,
+          "imi_pct": 0.69,
+          "quotazione_eur_mq": 574.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 6.0,
+          "ntn_var_pct": -14.3,
+          "imi_pct": 0.58,
+          "quotazione_eur_mq": 569.0,
+          "quotazione_var_pct": -0.9,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 7.0,
+          "ntn_var_pct": 16.7,
+          "imi_pct": 0.67,
+          "quotazione_eur_mq": 564.0,
+          "quotazione_var_pct": -0.9,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 11.0,
+      "ntn_last": 7.0,
+      "ntn_cagr_pct": -6.25,
+      "ntn_delta_pct": -36.36,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": 39.9,
+      "imi_avg_pct": 0.81,
+      "imi_first_pct": 1.11,
+      "imi_last_pct": 0.67,
+      "imi_trend_slope": -0.041,
+      "momentum_tag": "frozen",
+      "liquidity_score": 7.0,
+      "_z_components": {
+        "z_imi": -0.76,
+        "z_cagr": -1.68,
+        "z_slope": 0.11
+      },
+      "prezzo_attuale_eur_mq": 1215.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "R3",
+      "zona_new": [
+        "R5"
+      ],
+      "denominazione": "ZONA RURALE OVEST",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "Denominazione semanticamente identica (Zona Rurale Ovest = Territorio Rurale Ovest).",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": true,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 4.0,
+          "ntn_var_pct": 100.0,
+          "imi_pct": 0.67,
+          "quotazione_eur_mq": 473.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 5.0,
+          "ntn_var_pct": 25.0,
+          "imi_pct": 0.82,
+          "quotazione_eur_mq": 473.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 6.5,
+          "ntn_var_pct": 30.0,
+          "imi_pct": 1.255,
+          "quotazione_eur_mq": 461.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 10.0,
+          "ntn_var_pct": 150.0,
+          "imi_pct": 1.69,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": -5.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 4.0,
+          "ntn_var_pct": -60.8,
+          "imi_pct": 0.71,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 6.0,
+          "ntn_var_pct": 53.1,
+          "imi_pct": 1.08,
+          "quotazione_eur_mq": 449.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 8.0,
+          "ntn_var_pct": 33.3,
+          "imi_pct": 1.4,
+          "quotazione_eur_mq": 444.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 3.0,
+          "ntn_var_pct": -62.5,
+          "imi_pct": 0.52,
+          "quotazione_eur_mq": 439.0,
+          "quotazione_var_pct": -1.1,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 4.0,
+      "ntn_last": 3.0,
+      "ntn_cagr_pct": -4.03,
+      "ntn_delta_pct": -25.0,
+      "ntn_recent_slope": -1.5,
+      "ntn_volatility_cv_pct": 40.1,
+      "imi_avg_pct": 1.02,
+      "imi_first_pct": 0.67,
+      "imi_last_pct": 0.52,
+      "imi_trend_slope": 0.004,
+      "momentum_tag": "frozen",
+      "liquidity_score": 5.0,
+      "_z_components": {
+        "z_imi": -0.88,
+        "z_cagr": -1.35,
+        "z_slope": -0.28
+      },
+      "prezzo_attuale_eur_mq": 702.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "D8",
+      "zona_new": [
+        "D16"
+      ],
+      "denominazione": "CZ LIDO- FASCIA LITOR.-P.ZZA GARIBALDI- LUNGOMARE-P.ZZA DOGANA",
+      "rel": "renamed",
+      "confidence": "high",
+      "mapping_notes": "CZ Lido Fascia Litoranea: match diretto (denominazione quasi identica). P.zza Garibaldi/Dogana sono nel lungomare.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 128.0,
+          "ntn_var_pct": 39.29,
+          "imi_pct": 2.2,
+          "quotazione_eur_mq": 1521.0,
+          "quotazione_var_pct": 3.4,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 126.0,
+          "ntn_var_pct": -1.4,
+          "imi_pct": 2.15,
+          "quotazione_eur_mq": 1529.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 162.7,
+          "ntn_var_pct": 29.1,
+          "imi_pct": 2.34,
+          "quotazione_eur_mq": 1525.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 155.0,
+          "ntn_var_pct": 23.8,
+          "imi_pct": 2.53,
+          "quotazione_eur_mq": 1521.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 108.0,
+          "ntn_var_pct": -30.5,
+          "imi_pct": 1.72,
+          "quotazione_eur_mq": 1538.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 128.0,
+          "ntn_var_pct": 18.2,
+          "imi_pct": 2.04,
+          "quotazione_eur_mq": 1658.0,
+          "quotazione_var_pct": 7.9,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 167.0,
+          "ntn_var_pct": 30.8,
+          "imi_pct": 2.65,
+          "quotazione_eur_mq": 1658.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 104.0,
+          "ntn_var_pct": -38.2,
+          "imi_pct": 1.64,
+          "quotazione_eur_mq": 1658.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 128.0,
+      "ntn_last": 104.0,
+      "ntn_cagr_pct": -2.92,
+      "ntn_delta_pct": -18.75,
+      "ntn_recent_slope": -12.0,
+      "ntn_volatility_cv_pct": 17.9,
+      "imi_avg_pct": 2.16,
+      "imi_first_pct": 2.2,
+      "imi_last_pct": 1.64,
+      "imi_trend_slope": -0.037,
+      "momentum_tag": "cooling",
+      "liquidity_score": 3.4,
+      "_z_components": {
+        "z_imi": 0.03,
+        "z_cagr": -1.18,
+        "z_slope": -2.97
+      },
+      "prezzo_attuale_eur_mq": 1500.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "B4",
+      "zona_new": [
+        "B8"
+      ],
+      "denominazione": "VIA INDIPENDENZA, PIAZZA MATTEOTTI, CORSO MAZZINI, PIAZZA S. CATERINA",
+      "rel": "merged_into",
+      "confidence": "high",
+      "mapping_notes": "Corso Mazzini è la spina del centro città amministrativo. P.zza Matteotti e S.Caterina sono ancore del centro.",
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "years_span": 7,
+      "has_2018_gap": true,
+      "has_2018_interpolated": true,
+      "low_sample": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 7.0,
+          "ntn_var_pct": -26.32,
+          "imi_pct": 1.09,
+          "quotazione_eur_mq": 1613.0,
+          "quotazione_var_pct": -0.8,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 12.0,
+          "ntn_var_pct": 72.3,
+          "imi_pct": 1.9,
+          "quotazione_eur_mq": 1588.0,
+          "quotazione_var_pct": -1.6,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 18.3,
+          "ntn_var_pct": 52.5,
+          "imi_pct": 1.57,
+          "quotazione_eur_mq": 1588.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 8.0,
+          "ntn_var_pct": -52.9,
+          "imi_pct": 1.24,
+          "quotazione_eur_mq": 1588.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 19.0,
+          "ntn_var_pct": 137.4,
+          "imi_pct": 1.62,
+          "quotazione_eur_mq": 1588.0,
+          "quotazione_var_pct": null,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 35.0,
+          "ntn_var_pct": 82.6,
+          "imi_pct": 2.95,
+          "quotazione_eur_mq": 1588.0,
+          "quotazione_var_pct": 0.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 18.0,
+          "ntn_var_pct": -49.1,
+          "imi_pct": 2.87,
+          "quotazione_eur_mq": 1500.0,
+          "quotazione_var_pct": -5.5,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 7.0,
+          "ntn_var_pct": -60.4,
+          "imi_pct": 1.13,
+          "quotazione_eur_mq": 1456.0,
+          "quotazione_var_pct": -2.9,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 7.0,
+      "ntn_last": 7.0,
+      "ntn_cagr_pct": 0.0,
+      "ntn_delta_pct": 0.0,
+      "ntn_recent_slope": -14.0,
+      "ntn_volatility_cv_pct": 60.6,
+      "imi_avg_pct": 1.8,
+      "imi_first_pct": 1.09,
+      "imi_last_pct": 1.13,
+      "imi_trend_slope": 0.115,
+      "momentum_tag": "stable",
+      "liquidity_score": 0,
+      "_z_components": {
+        "z_imi": -0.38,
+        "z_cagr": -0.75,
+        "z_slope": -3.48
+      },
+      "prezzo_attuale_eur_mq": 1425.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    }
+  ],
+  "aggregated_by_new_zone": [
+    {
+      "zona_new": "D20",
+      "fascia": "D",
+      "denominazione": "LUNGO MARE CATANZARO LIDO",
+      "olds_merged": [
+        "D10",
+        "D20"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "medium",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 16.0,
+          "imi_pct": 1.39,
+          "quotazione_eur_mq": 1213.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 22.0,
+          "imi_pct": 1.85,
+          "quotazione_eur_mq": 1217.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 28.4,
+          "imi_pct": 1.785,
+          "quotazione_eur_mq": 1193.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 22.0,
+          "imi_pct": 1.72,
+          "quotazione_eur_mq": 1169.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 28.0,
+          "imi_pct": 2.19,
+          "quotazione_eur_mq": 1183.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 27.0,
+          "imi_pct": 2.11,
+          "quotazione_eur_mq": 1200.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 31.0,
+          "imi_pct": 2.29,
+          "quotazione_eur_mq": 1198.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 16.0,
+          "imi_pct": 1.19,
+          "quotazione_eur_mq": 1185.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 96.0,
+          "imi_pct": 2.11,
+          "quotazione_eur_mq": 1521.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 16.0,
+      "ntn_last": 96.0,
+      "ntn_cagr_pct": 25.1,
+      "ntn_recent_slope": 32.5,
+      "ntn_volatility_cv_pct": 77.5,
+      "imi_avg_pct": 1.85,
+      "imi_last_pct": 2.11,
+      "imi_trend_slope": 0.038,
+      "momentum_tag": "rocket",
+      "prezzo_attuale_eur_mq": 1525.0,
+      "liquidity_score": 100,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_new": "C9",
+      "fascia": "C",
+      "denominazione": "QUARTIERI A VALLE CENTRO STORICO FRA TORRENTI FIUMARELLA E MUSOFALO",
+      "olds_merged": [
+        "C1",
+        "C4",
+        "C9"
+      ],
+      "n_olds_merged": 3,
+      "rel": "merged_into",
+      "confidence": "medium",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 15.0,
+          "imi_pct": 2.852,
+          "quotazione_eur_mq": 876.5,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 7.0,
+          "imi_pct": 1.237,
+          "quotazione_eur_mq": 859.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 8.0,
+          "imi_pct": 1.05,
+          "quotazione_eur_mq": 857.8,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 7.0,
+          "imi_pct": 1.326,
+          "quotazione_eur_mq": 856.5,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 10.0,
+          "imi_pct": 2.09,
+          "quotazione_eur_mq": 849.5,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 17.0,
+          "imi_pct": 2.673,
+          "quotazione_eur_mq": 853.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 15.0,
+          "imi_pct": 2.007,
+          "quotazione_eur_mq": 835.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 17.0,
+          "imi_pct": 2.244,
+          "quotazione_eur_mq": 819.5,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 49.0,
+          "imi_pct": 2.04,
+          "quotazione_eur_mq": 984.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 15.0,
+      "ntn_last": 49.0,
+      "ntn_cagr_pct": 15.95,
+      "ntn_recent_slope": 17.0,
+      "ntn_volatility_cv_pct": 80.8,
+      "imi_avg_pct": 1.95,
+      "imi_last_pct": 2.04,
+      "imi_trend_slope": 0.051,
+      "momentum_tag": "rocket",
+      "prezzo_attuale_eur_mq": 1092.5,
+      "liquidity_score": 98.7,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_new": "B9",
+      "fascia": "B",
+      "denominazione": "CENTRO STORICO",
+      "olds_merged": [
+        "B2",
+        "B3",
+        "B6",
+        "B9"
+      ],
+      "n_olds_merged": 4,
+      "rel": "merged_into",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 51.0,
+          "imi_pct": 1.297,
+          "quotazione_eur_mq": 1169.7,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 38.0,
+          "imi_pct": 1.167,
+          "quotazione_eur_mq": 1170.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 58.0,
+          "imi_pct": 1.259,
+          "quotazione_eur_mq": 1165.2,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 53.0,
+          "imi_pct": 1.285,
+          "quotazione_eur_mq": 1160.3,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 60.0,
+          "imi_pct": 1.398,
+          "quotazione_eur_mq": 1157.7,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 75.0,
+          "imi_pct": 1.761,
+          "quotazione_eur_mq": 1165.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 77.0,
+          "imi_pct": 1.785,
+          "quotazione_eur_mq": 1139.7,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 98.0,
+          "imi_pct": 2.198,
+          "quotazione_eur_mq": 1121.7,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 103.0,
+          "imi_pct": 2.1,
+          "quotazione_eur_mq": 1096.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 51.0,
+      "ntn_last": 103.0,
+      "ntn_cagr_pct": 9.18,
+      "ntn_recent_slope": 13.0,
+      "ntn_volatility_cv_pct": 32.1,
+      "imi_avg_pct": 1.58,
+      "imi_last_pct": 2.1,
+      "imi_trend_slope": 0.131,
+      "momentum_tag": "rocket",
+      "prezzo_attuale_eur_mq": 1300.0,
+      "liquidity_score": 88.2,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_new": "C7",
+      "fascia": "C",
+      "denominazione": "ZONA OSPEDALE - PONTEPICCOLO-PONTEGRANDE",
+      "olds_merged": [
+        "C2",
+        "C5",
+        "C7"
+      ],
+      "n_olds_merged": 3,
+      "rel": "renamed",
+      "confidence": "medium",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 42.0,
+          "imi_pct": 1.268,
+          "quotazione_eur_mq": 1036.5,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 50.0,
+          "imi_pct": 1.539,
+          "quotazione_eur_mq": 1051.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 57.1,
+          "imi_pct": 1.447,
+          "quotazione_eur_mq": 1050.5,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 47.0,
+          "imi_pct": 1.352,
+          "quotazione_eur_mq": 1050.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 48.0,
+          "imi_pct": 1.404,
+          "quotazione_eur_mq": 1049.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 77.0,
+          "imi_pct": 2.391,
+          "quotazione_eur_mq": 1037.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 68.0,
+          "imi_pct": 1.886,
+          "quotazione_eur_mq": 966.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 70.0,
+          "imi_pct": 1.923,
+          "quotazione_eur_mq": 950.5,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 95.0,
+          "imi_pct": 1.87,
+          "quotazione_eur_mq": 1071.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 42.0,
+      "ntn_last": 95.0,
+      "ntn_cagr_pct": 10.74,
+      "ntn_recent_slope": 13.5,
+      "ntn_volatility_cv_pct": 28.1,
+      "imi_avg_pct": 1.68,
+      "imi_last_pct": 1.87,
+      "imi_trend_slope": 0.091,
+      "momentum_tag": "rocket",
+      "prezzo_attuale_eur_mq": 1092.5,
+      "liquidity_score": 81.9,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_new": "D15",
+      "fascia": "D",
+      "denominazione": "CATANZARO EST FRA TORRENTE FIUMARELLA E VIALE FIUME BUSENTO E DA LOC. SANTO JANNI FINO A SS106/VAR A",
+      "olds_merged": [
+        "D15"
+      ],
+      "n_olds_merged": 1,
+      "rel": "direct",
+      "confidence": "high",
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "has_2018_interpolated": false,
+      "years_covered": [
+        2024
+      ],
+      "years_covered_real": [
+        2024
+      ],
+      "years_span": null,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 32.0,
+          "imi_pct": 1.78,
+          "quotazione_eur_mq": 1103.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 32.0,
+      "ntn_last": 32.0,
+      "ntn_cagr_pct": null,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.78,
+      "imi_last_pct": 1.78,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "prezzo_attuale_eur_mq": 1115.0,
+      "liquidity_score": 62.3,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_new": "D22",
+      "fascia": "D",
+      "denominazione": "CATANZARO EST FRA TORRENTE MUSOFALO, FIUMARELLA, VIA COSCO, VIA DEI TULIPANI FINO A LOC. SANTO JANNI",
+      "olds_merged": [
+        "D2",
+        "D22"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "medium",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 8.0,
+          "imi_pct": 0.43,
+          "quotazione_eur_mq": 1001.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 15.0,
+          "imi_pct": 0.76,
+          "quotazione_eur_mq": 975.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 31.2,
+          "imi_pct": 0.82,
+          "quotazione_eur_mq": 1025.5,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 18.0,
+          "imi_pct": 0.88,
+          "quotazione_eur_mq": 1076.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 21.0,
+          "imi_pct": 1.05,
+          "quotazione_eur_mq": 1055.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 19.0,
+          "imi_pct": 0.96,
+          "quotazione_eur_mq": 1055.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 36.0,
+          "imi_pct": 1.75,
+          "quotazione_eur_mq": 1073.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 16.0,
+          "imi_pct": 0.78,
+          "quotazione_eur_mq": 1069.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 32.0,
+          "imi_pct": 1.22,
+          "quotazione_eur_mq": 1054.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 8.0,
+      "ntn_last": 32.0,
+      "ntn_cagr_pct": 18.92,
+      "ntn_recent_slope": -2.0,
+      "ntn_volatility_cv_pct": 42.5,
+      "imi_avg_pct": 0.96,
+      "imi_last_pct": 1.22,
+      "imi_trend_slope": 0.086,
+      "momentum_tag": "rocket",
+      "prezzo_attuale_eur_mq": 1067.5,
+      "liquidity_score": 60.2,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_new": "C8",
+      "fascia": "C",
+      "denominazione": "ZONA MATERDOMINI E RIONE DE FILIPPIS",
+      "olds_merged": [
+        "C3",
+        "C8"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 95.0,
+          "imi_pct": 2.05,
+          "quotazione_eur_mq": 1146.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 84.0,
+          "imi_pct": 1.81,
+          "quotazione_eur_mq": 1154.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 96.0,
+          "imi_pct": 2.04,
+          "quotazione_eur_mq": 1157.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 107.0,
+          "imi_pct": 2.27,
+          "quotazione_eur_mq": 1160.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 73.0,
+          "imi_pct": 1.55,
+          "quotazione_eur_mq": 1165.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 91.0,
+          "imi_pct": 1.93,
+          "quotazione_eur_mq": 1168.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 108.0,
+          "imi_pct": 2.21,
+          "quotazione_eur_mq": 1164.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 84.0,
+          "imi_pct": 1.72,
+          "quotazione_eur_mq": 1166.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 96.0,
+          "imi_pct": 2.01,
+          "quotazione_eur_mq": 1084.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 95.0,
+      "ntn_last": 96.0,
+      "ntn_cagr_pct": 0.13,
+      "ntn_recent_slope": -6.0,
+      "ntn_volatility_cv_pct": 12.1,
+      "imi_avg_pct": 1.95,
+      "imi_last_pct": 2.01,
+      "imi_trend_slope": -0.007,
+      "momentum_tag": "stable",
+      "prezzo_attuale_eur_mq": 985.0,
+      "liquidity_score": 59.8,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_new": "D23",
+      "fascia": "D",
+      "denominazione": "CATANZARO OVEST DA VIA MOLE` LUNGO VIALE LUCREZIA DELLA VALLE, VIALE DEI CONTI FALLUC , VIALE ISONZO FINO A SS106/VAR. A",
+      "olds_merged": [
+        "D1",
+        "D23"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "medium",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 28.0,
+          "imi_pct": 1.43,
+          "quotazione_eur_mq": 1048.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 16.0,
+          "imi_pct": 0.84,
+          "quotazione_eur_mq": 1003.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 14.5,
+          "imi_pct": 1.155,
+          "quotazione_eur_mq": 987.5,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 28.0,
+          "imi_pct": 1.47,
+          "quotazione_eur_mq": 972.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 29.0,
+          "imi_pct": 1.49,
+          "quotazione_eur_mq": 972.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 27.0,
+          "imi_pct": 1.43,
+          "quotazione_eur_mq": 972.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 34.0,
+          "imi_pct": 1.73,
+          "quotazione_eur_mq": 923.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 38.0,
+          "imi_pct": 1.96,
+          "quotazione_eur_mq": 901.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 39.0,
+          "imi_pct": 1.57,
+          "quotazione_eur_mq": 1068.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 28.0,
+      "ntn_last": 39.0,
+      "ntn_cagr_pct": 4.23,
+      "ntn_recent_slope": 2.5,
+      "ntn_volatility_cv_pct": 30.4,
+      "imi_avg_pct": 1.45,
+      "imi_last_pct": 1.57,
+      "imi_trend_slope": 0.084,
+      "momentum_tag": "growing",
+      "prezzo_attuale_eur_mq": 1040.0,
+      "liquidity_score": 53.6,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_new": "D24",
+      "fascia": "D",
+      "denominazione": "CATANZARO NORD OVEST LUNGO VIALE TOMMASO CAMPANELLA - QUARTIERE GAGLIANO",
+      "olds_merged": [
+        "D11",
+        "D24"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 17.0,
+          "imi_pct": 0.91,
+          "quotazione_eur_mq": 825.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 21.0,
+          "imi_pct": 1.11,
+          "quotazione_eur_mq": 825.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 18.2,
+          "imi_pct": 0.93,
+          "quotazione_eur_mq": 825.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 14.0,
+          "imi_pct": 0.75,
+          "quotazione_eur_mq": 825.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 9.0,
+          "imi_pct": 0.44,
+          "quotazione_eur_mq": 825.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 14.0,
+          "imi_pct": 0.72,
+          "quotazione_eur_mq": 825.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 19.0,
+          "imi_pct": 0.94,
+          "quotazione_eur_mq": 818.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 28.0,
+          "imi_pct": 1.43,
+          "quotazione_eur_mq": 812.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 29.0,
+          "imi_pct": 1.39,
+          "quotazione_eur_mq": 874.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 17.0,
+      "ntn_last": 29.0,
+      "ntn_cagr_pct": 6.9,
+      "ntn_recent_slope": 5.0,
+      "ntn_volatility_cv_pct": 34.6,
+      "imi_avg_pct": 0.96,
+      "imi_last_pct": 1.39,
+      "imi_trend_slope": 0.048,
+      "momentum_tag": "growing",
+      "prezzo_attuale_eur_mq": 910.0,
+      "liquidity_score": 52.1,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_new": "D16",
+      "fascia": "D",
+      "denominazione": "CZ LIDO- FASCIA LITORANEA",
+      "olds_merged": [
+        "D16",
+        "D8"
+      ],
+      "n_olds_merged": 2,
+      "rel": "direct",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 128.0,
+          "imi_pct": 2.2,
+          "quotazione_eur_mq": 1521.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 126.0,
+          "imi_pct": 2.15,
+          "quotazione_eur_mq": 1529.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 162.7,
+          "imi_pct": 2.34,
+          "quotazione_eur_mq": 1525.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 155.0,
+          "imi_pct": 2.53,
+          "quotazione_eur_mq": 1521.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 108.0,
+          "imi_pct": 1.72,
+          "quotazione_eur_mq": 1538.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 128.0,
+          "imi_pct": 2.04,
+          "quotazione_eur_mq": 1658.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 167.0,
+          "imi_pct": 2.65,
+          "quotazione_eur_mq": 1658.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 104.0,
+          "imi_pct": 1.64,
+          "quotazione_eur_mq": 1658.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 61.0,
+          "imi_pct": 2.81,
+          "quotazione_eur_mq": 1506.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 128.0,
+      "ntn_last": 61.0,
+      "ntn_cagr_pct": -8.85,
+      "ntn_recent_slope": -53.0,
+      "ntn_volatility_cv_pct": 26.3,
+      "imi_avg_pct": 2.23,
+      "imi_last_pct": 2.81,
+      "imi_trend_slope": 0.017,
+      "momentum_tag": "frozen",
+      "prezzo_attuale_eur_mq": 1500.0,
+      "liquidity_score": 50.8,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_new": "E4",
+      "fascia": "E",
+      "denominazione": "CATANZARO OVEST FRA FIUME CORACE E TORRENTE FIUMARELLA, DA SS106/VAR A FINO A INGRESSO CATANZARO LIDO",
+      "olds_merged": [
+        "E4"
+      ],
+      "n_olds_merged": 1,
+      "rel": "direct",
+      "confidence": "high",
+      "n_obs": 1,
+      "n_obs_real": 1,
+      "n_obs_interpolated": 0,
+      "has_2018_interpolated": false,
+      "years_covered": [
+        2024
+      ],
+      "years_covered_real": [
+        2024
+      ],
+      "years_span": null,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2024,
+          "ntn": 59.0,
+          "imi_pct": 1.38,
+          "quotazione_eur_mq": 972.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 59.0,
+      "ntn_last": 59.0,
+      "ntn_cagr_pct": null,
+      "ntn_recent_slope": 0.0,
+      "ntn_volatility_cv_pct": null,
+      "imi_avg_pct": 1.38,
+      "imi_last_pct": 1.38,
+      "imi_trend_slope": 0.0,
+      "momentum_tag": "unknown",
+      "prezzo_attuale_eur_mq": 902.5,
+      "liquidity_score": 46.5,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_new": "D19",
+      "fascia": "D",
+      "denominazione": "S.ELIA -PITERA - JANO",
+      "olds_merged": [
+        "D12",
+        "D19",
+        "D4"
+      ],
+      "n_olds_merged": 3,
+      "rel": "renamed",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 7.0,
+          "imi_pct": 0.704,
+          "quotazione_eur_mq": 973.5,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 9.0,
+          "imi_pct": 0.763,
+          "quotazione_eur_mq": 970.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 18.700000000000003,
+          "imi_pct": 0.91,
+          "quotazione_eur_mq": 974.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 12.0,
+          "imi_pct": 1.29,
+          "quotazione_eur_mq": 978.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 5.0,
+          "imi_pct": 0.532,
+          "quotazione_eur_mq": 978.5,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 9.0,
+          "imi_pct": 0.956,
+          "quotazione_eur_mq": 979.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 11.0,
+          "imi_pct": 1.374,
+          "quotazione_eur_mq": 966.5,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 10.0,
+          "imi_pct": 0.842,
+          "quotazione_eur_mq": 957.5,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 15.0,
+          "imi_pct": 1.05,
+          "quotazione_eur_mq": 845.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 7.0,
+      "ntn_last": 15.0,
+      "ntn_cagr_pct": 10.0,
+      "ntn_recent_slope": 2.0,
+      "ntn_volatility_cv_pct": 38.5,
+      "imi_avg_pct": 0.94,
+      "imi_last_pct": 1.05,
+      "imi_trend_slope": 0.037,
+      "momentum_tag": "rocket",
+      "prezzo_attuale_eur_mq": 922.5,
+      "liquidity_score": 41.8,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_new": "D14",
+      "fascia": "D",
+      "denominazione": "ZONA TRA S.MARIA E CENTRO COMMERIALE LE FONTANE ( BARONE)",
+      "olds_merged": [
+        "D6",
+        "R2"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "medium",
+      "n_obs": 8,
+      "n_obs_real": 7,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "years_span": 7,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": true,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 33.0,
+          "imi_pct": 0.91,
+          "quotazione_eur_mq": 812.5,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 46.0,
+          "imi_pct": 1.27,
+          "quotazione_eur_mq": 816.5,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 95.8,
+          "imi_pct": 1.415,
+          "quotazione_eur_mq": 805.2,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 58.0,
+          "imi_pct": 1.555,
+          "quotazione_eur_mq": 794.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 30.0,
+          "imi_pct": 0.885,
+          "quotazione_eur_mq": 791.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 59.0,
+          "imi_pct": 1.633,
+          "quotazione_eur_mq": 811.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 70.0,
+          "imi_pct": 1.808,
+          "quotazione_eur_mq": 791.5,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 47.0,
+          "imi_pct": 1.2,
+          "quotazione_eur_mq": 782.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 33.0,
+      "ntn_last": 47.0,
+      "ntn_cagr_pct": 5.18,
+      "ntn_recent_slope": -6.0,
+      "ntn_volatility_cv_pct": 38.8,
+      "imi_avg_pct": 1.33,
+      "imi_last_pct": 1.2,
+      "imi_trend_slope": 0.056,
+      "momentum_tag": "growing",
+      "prezzo_attuale_eur_mq": 1300.0,
+      "liquidity_score": 35.7,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_new": "E5",
+      "fascia": "E",
+      "denominazione": "CATANZARO OVEST - CENTRO DIREZIONALE - UNIVERSITA`",
+      "olds_merged": [
+        "E3",
+        "E5"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": true,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 0.0,
+          "imi_pct": null,
+          "quotazione_eur_mq": 915.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 0.0,
+          "imi_pct": null,
+          "quotazione_eur_mq": 915.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 0.0,
+          "imi_pct": null,
+          "quotazione_eur_mq": 915.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 1.0,
+          "imi_pct": 0.94,
+          "quotazione_eur_mq": 915.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 4.0,
+          "imi_pct": 3.51,
+          "quotazione_eur_mq": 915.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 0.0,
+          "imi_pct": null,
+          "quotazione_eur_mq": 915.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 0.0,
+          "imi_pct": null,
+          "quotazione_eur_mq": 908.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 0.0,
+          "imi_pct": null,
+          "quotazione_eur_mq": 900.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 1.0,
+          "imi_pct": 0.97,
+          "quotazione_eur_mq": 710.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 0.0,
+      "ntn_last": 1.0,
+      "ntn_cagr_pct": null,
+      "ntn_recent_slope": 0.5,
+      "ntn_volatility_cv_pct": 198.4,
+      "imi_avg_pct": 1.81,
+      "imi_last_pct": 0.97,
+      "imi_trend_slope": -0.177,
+      "momentum_tag": "unknown",
+      "prezzo_attuale_eur_mq": 667.5,
+      "liquidity_score": 30.6,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_new": "D18",
+      "fascia": "D",
+      "denominazione": "CORVO-ARANCETO -PISTOIA",
+      "olds_merged": [
+        "D18",
+        "D5",
+        "D7"
+      ],
+      "n_olds_merged": 3,
+      "rel": "renamed",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 49.0,
+          "imi_pct": 1.118,
+          "quotazione_eur_mq": 768.5,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 42.0,
+          "imi_pct": 0.952,
+          "quotazione_eur_mq": 768.5,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 87.5,
+          "imi_pct": 1.456,
+          "quotazione_eur_mq": 768.5,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 84.0,
+          "imi_pct": 2.129,
+          "quotazione_eur_mq": 768.5,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 56.0,
+          "imi_pct": 1.257,
+          "quotazione_eur_mq": 768.5,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 62.0,
+          "imi_pct": 1.497,
+          "quotazione_eur_mq": 768.5,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 57.0,
+          "imi_pct": 1.367,
+          "quotazione_eur_mq": 763.5,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 56.0,
+          "imi_pct": 1.309,
+          "quotazione_eur_mq": 758.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 22.0,
+          "imi_pct": 1.79,
+          "quotazione_eur_mq": 1086.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 49.0,
+      "ntn_last": 22.0,
+      "ntn_cagr_pct": -9.53,
+      "ntn_recent_slope": -17.5,
+      "ntn_volatility_cv_pct": 34.9,
+      "imi_avg_pct": 1.43,
+      "imi_last_pct": 1.79,
+      "imi_trend_slope": 0.049,
+      "momentum_tag": "frozen",
+      "prezzo_attuale_eur_mq": 1215.0,
+      "liquidity_score": 29.5,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_new": "B8",
+      "fascia": "B",
+      "denominazione": "CENTRO CITTA`",
+      "olds_merged": [
+        "B1",
+        "B4",
+        "B5",
+        "B7",
+        "B8"
+      ],
+      "n_olds_merged": 5,
+      "rel": "merged_into",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 75.0,
+          "imi_pct": 1.444,
+          "quotazione_eur_mq": 1392.8,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 77.0,
+          "imi_pct": 1.543,
+          "quotazione_eur_mq": 1367.8,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 117.39999999999999,
+          "imi_pct": 1.55,
+          "quotazione_eur_mq": 1365.1,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 81.0,
+          "imi_pct": 1.598,
+          "quotazione_eur_mq": 1362.5,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 105.0,
+          "imi_pct": 1.948,
+          "quotazione_eur_mq": 1353.5,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 118.0,
+          "imi_pct": 2.279,
+          "quotazione_eur_mq": 1349.2,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 115.0,
+          "imi_pct": 2.19,
+          "quotazione_eur_mq": 1302.5,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 97.0,
+          "imi_pct": 1.917,
+          "quotazione_eur_mq": 1275.5,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 60.0,
+          "imi_pct": 1.59,
+          "quotazione_eur_mq": 1393.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 75.0,
+      "ntn_last": 60.0,
+      "ntn_cagr_pct": -2.75,
+      "ntn_recent_slope": -27.5,
+      "ntn_volatility_cv_pct": 22.8,
+      "imi_avg_pct": 1.78,
+      "imi_last_pct": 1.59,
+      "imi_trend_slope": 0.061,
+      "momentum_tag": "cooling",
+      "prezzo_attuale_eur_mq": 1425.0,
+      "liquidity_score": 26.5,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_new": "D21",
+      "fascia": "D",
+      "denominazione": "CATANZARO EST LUNGO VIALE FERDINANDO GALIANI, VIA DEI TULIPANI FINO A VIA ALLI",
+      "olds_merged": [
+        "D21",
+        "D3"
+      ],
+      "n_olds_merged": 2,
+      "rel": "direct",
+      "confidence": "medium",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": false,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 7.0,
+          "imi_pct": 0.41,
+          "quotazione_eur_mq": 1143.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 11.0,
+          "imi_pct": 0.61,
+          "quotazione_eur_mq": 1122.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 22.9,
+          "imi_pct": 0.6,
+          "quotazione_eur_mq": 1114.5,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 10.0,
+          "imi_pct": 0.59,
+          "quotazione_eur_mq": 1107.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 4.0,
+          "imi_pct": 0.23,
+          "quotazione_eur_mq": 1112.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 15.0,
+          "imi_pct": 0.86,
+          "quotazione_eur_mq": 1132.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 18.0,
+          "imi_pct": 0.98,
+          "quotazione_eur_mq": 1131.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 15.0,
+          "imi_pct": 0.81,
+          "quotazione_eur_mq": 1118.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 10.0,
+          "imi_pct": 0.65,
+          "quotazione_eur_mq": 1068.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 7.0,
+      "ntn_last": 10.0,
+      "ntn_cagr_pct": 4.56,
+      "ntn_recent_slope": -4.0,
+      "ntn_volatility_cv_pct": 46.2,
+      "imi_avg_pct": 0.64,
+      "imi_last_pct": 0.65,
+      "imi_trend_slope": 0.043,
+      "momentum_tag": "frozen",
+      "prezzo_attuale_eur_mq": 1010.0,
+      "liquidity_score": 14.1,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_new": "R5",
+      "fascia": "R",
+      "denominazione": "TERRITORIO RURALE OVEST",
+      "olds_merged": [
+        "R3",
+        "R5"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": true,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 4.0,
+          "imi_pct": 0.67,
+          "quotazione_eur_mq": 473.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 5.0,
+          "imi_pct": 0.82,
+          "quotazione_eur_mq": 473.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 6.5,
+          "imi_pct": 1.255,
+          "quotazione_eur_mq": 461.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 10.0,
+          "imi_pct": 1.69,
+          "quotazione_eur_mq": 449.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 4.0,
+          "imi_pct": 0.71,
+          "quotazione_eur_mq": 449.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 6.0,
+          "imi_pct": 1.08,
+          "quotazione_eur_mq": 449.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 8.0,
+          "imi_pct": 1.4,
+          "quotazione_eur_mq": 444.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 3.0,
+          "imi_pct": 0.52,
+          "quotazione_eur_mq": 439.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 3.0,
+          "imi_pct": 0.76,
+          "quotazione_eur_mq": 591.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 4.0,
+      "ntn_last": 3.0,
+      "ntn_cagr_pct": -3.53,
+      "ntn_recent_slope": -2.5,
+      "ntn_volatility_cv_pct": 43.1,
+      "imi_avg_pct": 0.99,
+      "imi_last_pct": 0.76,
+      "imi_trend_slope": -0.014,
+      "momentum_tag": "frozen",
+      "prezzo_attuale_eur_mq": 702.5,
+      "liquidity_score": 6.7,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_new": "R4",
+      "fascia": "R",
+      "denominazione": "TERRITORIO RURALE EST",
+      "olds_merged": [
+        "R1",
+        "R4"
+      ],
+      "n_olds_merged": 2,
+      "rel": "renamed",
+      "confidence": "high",
+      "n_obs": 9,
+      "n_obs_real": 8,
+      "n_obs_interpolated": 1,
+      "has_2018_interpolated": true,
+      "years_covered": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_covered_real": [
+        2016,
+        2017,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "years_span": 8,
+      "has_2018_gap": false,
+      "low_sample": true,
+      "is_d14_missing_2024": false,
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 1.0,
+          "imi_pct": 0.44,
+          "quotazione_eur_mq": 473.0,
+          "interpolated": false
+        },
+        {
+          "year": 2017,
+          "ntn": 0.0,
+          "imi_pct": null,
+          "quotazione_eur_mq": 473.0,
+          "interpolated": false
+        },
+        {
+          "year": 2018,
+          "ntn": 0.0,
+          "imi_pct": null,
+          "quotazione_eur_mq": 461.0,
+          "interpolated": true
+        },
+        {
+          "year": 2019,
+          "ntn": 2.0,
+          "imi_pct": 0.86,
+          "quotazione_eur_mq": 449.0,
+          "interpolated": false
+        },
+        {
+          "year": 2020,
+          "ntn": 3.0,
+          "imi_pct": 1.29,
+          "quotazione_eur_mq": 449.0,
+          "interpolated": false
+        },
+        {
+          "year": 2021,
+          "ntn": 3.0,
+          "imi_pct": 1.29,
+          "quotazione_eur_mq": 449.0,
+          "interpolated": false
+        },
+        {
+          "year": 2022,
+          "ntn": 5.0,
+          "imi_pct": 1.96,
+          "quotazione_eur_mq": 444.0,
+          "interpolated": false
+        },
+        {
+          "year": 2023,
+          "ntn": 4.0,
+          "imi_pct": 1.59,
+          "quotazione_eur_mq": 439.0,
+          "interpolated": false
+        },
+        {
+          "year": 2024,
+          "ntn": 1.0,
+          "imi_pct": 0.1,
+          "quotazione_eur_mq": 774.0,
+          "interpolated": false
+        }
+      ],
+      "ntn_first": 1.0,
+      "ntn_last": 1.0,
+      "ntn_cagr_pct": 0.0,
+      "ntn_recent_slope": -2.0,
+      "ntn_volatility_cv_pct": 83.6,
+      "imi_avg_pct": 1.08,
+      "imi_last_pct": 0.1,
+      "imi_trend_slope": 0.055,
+      "momentum_tag": "frozen",
+      "prezzo_attuale_eur_mq": 817.5,
+      "liquidity_score": 0,
+      "price_volume_quadrant": "Q4_DEAD"
+    }
+  ],
+  "macroaree_volume_metrics": [
+    {
+      "name": "CATANZARO CAPOLUOGO",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 605.0,
+          "imi_pct": 1.31,
+          "quota_pct": 27.4
+        },
+        {
+          "year": 2017,
+          "ntn": 619.0,
+          "imi_pct": 1.33,
+          "quota_pct": 28.7
+        },
+        {
+          "year": 2018,
+          "ntn": 743.0,
+          "imi_pct": 1.6,
+          "quota_pct": 30.8
+        },
+        {
+          "year": 2019,
+          "ntn": 751.0,
+          "imi_pct": 1.61,
+          "quota_pct": 30.0
+        },
+        {
+          "year": 2020,
+          "ntn": 617.0,
+          "imi_pct": 1.3,
+          "quota_pct": 28.4
+        },
+        {
+          "year": 2021,
+          "ntn": 780.0,
+          "imi_pct": 0.34,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 894.0,
+          "imi_pct": 1.89,
+          "quota_pct": 27.2
+        },
+        {
+          "year": 2023,
+          "ntn": 739.0,
+          "imi_pct": 1.56,
+          "quota_pct": 24.0
+        },
+        {
+          "year": 2024,
+          "ntn": 825.0,
+          "imi_pct": 1.7,
+          "quota_pct": 25.8
+        }
+      ],
+      "ntn_first": 605.0,
+      "ntn_last": 825.0,
+      "ntn_cagr_pct": 3.95,
+      "imi_last_pct": 1.7,
+      "imi_trend_slope": 0.026,
+      "quota_last_pct": 25.8,
+      "momentum_tag": "growing"
+    },
+    {
+      "name": "LAMEZIA TERME",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 291.0,
+          "imi_pct": 0.81,
+          "quota_pct": 13.17
+        },
+        {
+          "year": 2017,
+          "ntn": 296.0,
+          "imi_pct": 0.82,
+          "quota_pct": 13.7
+        },
+        {
+          "year": 2018,
+          "ntn": 328.0,
+          "imi_pct": 0.91,
+          "quota_pct": 13.6
+        },
+        {
+          "year": 2019,
+          "ntn": 355.0,
+          "imi_pct": 0.98,
+          "quota_pct": 14.2
+        },
+        {
+          "year": 2020,
+          "ntn": 279.0,
+          "imi_pct": 0.8,
+          "quota_pct": 12.8
+        },
+        {
+          "year": 2021,
+          "ntn": 419.0,
+          "imi_pct": 0.38,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 443.0,
+          "imi_pct": 1.21,
+          "quota_pct": 13.5
+        },
+        {
+          "year": 2023,
+          "ntn": 464.0,
+          "imi_pct": 1.26,
+          "quota_pct": 15.1
+        },
+        {
+          "year": 2024,
+          "ntn": 483.0,
+          "imi_pct": 1.3,
+          "quota_pct": 15.1
+        }
+      ],
+      "ntn_first": 291.0,
+      "ntn_last": 483.0,
+      "ntn_cagr_pct": 6.54,
+      "imi_last_pct": 1.3,
+      "imi_trend_slope": 0.055,
+      "quota_last_pct": 15.1,
+      "momentum_tag": "growing"
+    },
+    {
+      "name": "PRESILA - REVENTINO",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 242.0,
+          "imi_pct": 0.57,
+          "quota_pct": 10.95
+        },
+        {
+          "year": 2017,
+          "ntn": 206.0,
+          "imi_pct": 0.48,
+          "quota_pct": 9.5
+        },
+        {
+          "year": 2018,
+          "ntn": 212.0,
+          "imi_pct": 0.5,
+          "quota_pct": 8.8
+        },
+        {
+          "year": 2019,
+          "ntn": 213.0,
+          "imi_pct": 0.5,
+          "quota_pct": 8.5
+        },
+        {
+          "year": 2020,
+          "ntn": 218.0,
+          "imi_pct": 0.5,
+          "quota_pct": 10.0
+        },
+        {
+          "year": 2021,
+          "ntn": 286.0,
+          "imi_pct": 0.16,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 319.0,
+          "imi_pct": 0.74,
+          "quota_pct": 9.7
+        },
+        {
+          "year": 2023,
+          "ntn": 320.0,
+          "imi_pct": 0.75,
+          "quota_pct": 10.4
+        },
+        {
+          "year": 2024,
+          "ntn": 324.0,
+          "imi_pct": 0.8,
+          "quota_pct": 10.1
+        }
+      ],
+      "ntn_first": 242.0,
+      "ntn_last": 324.0,
+      "ntn_cagr_pct": 3.71,
+      "imi_last_pct": 0.8,
+      "imi_trend_slope": 0.031,
+      "quota_last_pct": 10.1,
+      "momentum_tag": "frozen"
+    },
+    {
+      "name": "BASSO IONIO CATANZARESE",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 186.0,
+          "imi_pct": 0.85,
+          "quota_pct": 8.42
+        },
+        {
+          "year": 2017,
+          "ntn": 171.0,
+          "imi_pct": 0.78,
+          "quota_pct": 7.9
+        },
+        {
+          "year": 2018,
+          "ntn": 190.0,
+          "imi_pct": 0.86,
+          "quota_pct": 7.8
+        },
+        {
+          "year": 2019,
+          "ntn": 210.0,
+          "imi_pct": 0.96,
+          "quota_pct": 8.4
+        },
+        {
+          "year": 2020,
+          "ntn": 192.0,
+          "imi_pct": 0.9,
+          "quota_pct": 8.8
+        },
+        {
+          "year": 2021,
+          "ntn": 261.0,
+          "imi_pct": 0.31,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 270.0,
+          "imi_pct": 1.21,
+          "quota_pct": 8.2
+        },
+        {
+          "year": 2023,
+          "ntn": 266.0,
+          "imi_pct": 1.19,
+          "quota_pct": 8.6
+        },
+        {
+          "year": 2024,
+          "ntn": 316.0,
+          "imi_pct": 1.4,
+          "quota_pct": 9.9
+        }
+      ],
+      "ntn_first": 186.0,
+      "ntn_last": 316.0,
+      "ntn_cagr_pct": 6.85,
+      "imi_last_pct": 1.4,
+      "imi_trend_slope": 0.058,
+      "quota_last_pct": 9.9,
+      "momentum_tag": "growing"
+    },
+    {
+      "name": "COSTA DI SOVERATO",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 259.0,
+          "imi_pct": 1.49,
+          "quota_pct": 11.71
+        },
+        {
+          "year": 2017,
+          "ntn": 237.0,
+          "imi_pct": 1.36,
+          "quota_pct": 11.0
+        },
+        {
+          "year": 2018,
+          "ntn": 238.0,
+          "imi_pct": 1.37,
+          "quota_pct": 9.9
+        },
+        {
+          "year": 2019,
+          "ntn": 257.0,
+          "imi_pct": 1.47,
+          "quota_pct": 10.3
+        },
+        {
+          "year": 2020,
+          "ntn": 241.0,
+          "imi_pct": 1.4,
+          "quota_pct": 11.1
+        },
+        {
+          "year": 2021,
+          "ntn": 320.0,
+          "imi_pct": 0.44,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 378.0,
+          "imi_pct": 2.14,
+          "quota_pct": 11.5
+        },
+        {
+          "year": 2023,
+          "ntn": 311.0,
+          "imi_pct": 1.76,
+          "quota_pct": 10.1
+        },
+        {
+          "year": 2024,
+          "ntn": 312.0,
+          "imi_pct": 1.8,
+          "quota_pct": 9.8
+        }
+      ],
+      "ntn_first": 259.0,
+      "ntn_last": 312.0,
+      "ntn_cagr_pct": 2.35,
+      "imi_last_pct": 1.8,
+      "imi_trend_slope": 0.049,
+      "quota_last_pct": 9.8,
+      "momentum_tag": "growing"
+    },
+    {
+      "name": "FOCI TACINA, CORACE E VALLE SIMERI",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 187.0,
+          "imi_pct": 0.86,
+          "quota_pct": 8.44
+        },
+        {
+          "year": 2017,
+          "ntn": 172.0,
+          "imi_pct": 0.79,
+          "quota_pct": 8.0
+        },
+        {
+          "year": 2018,
+          "ntn": 202.0,
+          "imi_pct": 0.93,
+          "quota_pct": 8.4
+        },
+        {
+          "year": 2019,
+          "ntn": 196.0,
+          "imi_pct": 0.9,
+          "quota_pct": 7.8
+        },
+        {
+          "year": 2020,
+          "ntn": 208.0,
+          "imi_pct": 1.0,
+          "quota_pct": 9.6
+        },
+        {
+          "year": 2021,
+          "ntn": 283.0,
+          "imi_pct": 0.34,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 289.0,
+          "imi_pct": 1.31,
+          "quota_pct": 8.8
+        },
+        {
+          "year": 2023,
+          "ntn": 274.0,
+          "imi_pct": 1.24,
+          "quota_pct": 8.9
+        },
+        {
+          "year": 2024,
+          "ntn": 276.0,
+          "imi_pct": 1.2,
+          "quota_pct": 8.6
+        }
+      ],
+      "ntn_first": 187.0,
+      "ntn_last": 276.0,
+      "ntn_cagr_pct": 4.99,
+      "imi_last_pct": 1.2,
+      "imi_trend_slope": 0.048,
+      "quota_last_pct": 8.6,
+      "momentum_tag": "growing"
+    },
+    {
+      "name": "COSTA DI CAPO SUVERO",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 148.0,
+          "imi_pct": 0.79,
+          "quota_pct": 6.71
+        },
+        {
+          "year": 2017,
+          "ntn": 147.0,
+          "imi_pct": 0.78,
+          "quota_pct": 6.8
+        },
+        {
+          "year": 2018,
+          "ntn": 183.0,
+          "imi_pct": 0.97,
+          "quota_pct": 7.6
+        },
+        {
+          "year": 2019,
+          "ntn": 160.0,
+          "imi_pct": 0.84,
+          "quota_pct": 6.4
+        },
+        {
+          "year": 2020,
+          "ntn": 138.0,
+          "imi_pct": 0.7,
+          "quota_pct": 6.3
+        },
+        {
+          "year": 2021,
+          "ntn": 259.0,
+          "imi_pct": 0.63,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 269.0,
+          "imi_pct": 1.41,
+          "quota_pct": 8.2
+        },
+        {
+          "year": 2023,
+          "ntn": 254.0,
+          "imi_pct": 1.33,
+          "quota_pct": 8.3
+        },
+        {
+          "year": 2024,
+          "ntn": 239.0,
+          "imi_pct": 1.2,
+          "quota_pct": 7.5
+        }
+      ],
+      "ntn_first": 148.0,
+      "ntn_last": 239.0,
+      "ntn_cagr_pct": 6.17,
+      "imi_last_pct": 1.2,
+      "imi_trend_slope": 0.066,
+      "quota_last_pct": 7.5,
+      "momentum_tag": "growing"
+    },
+    {
+      "name": "GOLFO DI SQUILLACE - ZONA MONTANA",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 127.0,
+          "imi_pct": 0.45,
+          "quota_pct": 5.73
+        },
+        {
+          "year": 2017,
+          "ntn": 139.0,
+          "imi_pct": 0.49,
+          "quota_pct": 6.4
+        },
+        {
+          "year": 2018,
+          "ntn": 145.0,
+          "imi_pct": 0.51,
+          "quota_pct": 6.0
+        },
+        {
+          "year": 2019,
+          "ntn": 147.0,
+          "imi_pct": 0.52,
+          "quota_pct": 5.9
+        },
+        {
+          "year": 2020,
+          "ntn": 126.0,
+          "imi_pct": 0.4,
+          "quota_pct": 5.8
+        },
+        {
+          "year": 2021,
+          "ntn": 186.0,
+          "imi_pct": 0.21,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 191.0,
+          "imi_pct": 0.67,
+          "quota_pct": 5.8
+        },
+        {
+          "year": 2023,
+          "ntn": 232.0,
+          "imi_pct": 0.81,
+          "quota_pct": 7.5
+        },
+        {
+          "year": 2024,
+          "ntn": 197.0,
+          "imi_pct": 0.7,
+          "quota_pct": 6.1
+        }
+      ],
+      "ntn_first": 127.0,
+      "ntn_last": 197.0,
+      "ntn_cagr_pct": 5.64,
+      "imi_last_pct": 0.7,
+      "imi_trend_slope": 0.033,
+      "quota_last_pct": 6.1,
+      "momentum_tag": "frozen"
+    },
+    {
+      "name": "ASSE S. EUFEMIA - CZ",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 99.0,
+          "imi_pct": 0.67,
+          "quota_pct": 4.46
+        },
+        {
+          "year": 2017,
+          "ntn": 86.0,
+          "imi_pct": 0.59,
+          "quota_pct": 4.0
+        },
+        {
+          "year": 2018,
+          "ntn": 112.0,
+          "imi_pct": 0.76,
+          "quota_pct": 4.6
+        },
+        {
+          "year": 2019,
+          "ntn": 124.0,
+          "imi_pct": 0.84,
+          "quota_pct": 5.0
+        },
+        {
+          "year": 2020,
+          "ntn": 75.0,
+          "imi_pct": 0.5,
+          "quota_pct": 3.5
+        },
+        {
+          "year": 2021,
+          "ntn": 133.0,
+          "imi_pct": 0.39,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 130.0,
+          "imi_pct": 0.87,
+          "quota_pct": 3.9
+        },
+        {
+          "year": 2023,
+          "ntn": 118.0,
+          "imi_pct": 0.79,
+          "quota_pct": 3.8
+        },
+        {
+          "year": 2024,
+          "ntn": 138.0,
+          "imi_pct": 0.9,
+          "quota_pct": 4.3
+        }
+      ],
+      "ntn_first": 99.0,
+      "ntn_last": 138.0,
+      "ntn_cagr_pct": 4.24,
+      "imi_last_pct": 0.9,
+      "imi_trend_slope": 0.022,
+      "quota_last_pct": 4.3,
+      "momentum_tag": "frozen"
+    },
+    {
+      "name": "ZONA PARCO ARCHEOLOGICO \"SCHILLACIUM\"",
+      "ntn_series": [
+        {
+          "year": 2016,
+          "ntn": 67.0,
+          "imi_pct": 0.89,
+          "quota_pct": 3.01
+        },
+        {
+          "year": 2017,
+          "ntn": 86.0,
+          "imi_pct": 1.15,
+          "quota_pct": 4.0
+        },
+        {
+          "year": 2018,
+          "ntn": 62.0,
+          "imi_pct": 0.83,
+          "quota_pct": 2.6
+        },
+        {
+          "year": 2019,
+          "ntn": 90.0,
+          "imi_pct": 1.2,
+          "quota_pct": 3.6
+        },
+        {
+          "year": 2020,
+          "ntn": 81.0,
+          "imi_pct": 1.1,
+          "quota_pct": 3.7
+        },
+        {
+          "year": 2021,
+          "ntn": 95.0,
+          "imi_pct": 0.19,
+          "quota_pct": null
+        },
+        {
+          "year": 2022,
+          "ntn": 102.0,
+          "imi_pct": 1.36,
+          "quota_pct": 3.1
+        },
+        {
+          "year": 2023,
+          "ntn": 99.0,
+          "imi_pct": 1.31,
+          "quota_pct": 3.2
+        },
+        {
+          "year": 2024,
+          "ntn": 91.0,
+          "imi_pct": 1.2,
+          "quota_pct": 2.8
+        }
+      ],
+      "ntn_first": 67.0,
+      "ntn_last": 91.0,
+      "ntn_cagr_pct": 3.9,
+      "imi_last_pct": 1.2,
+      "imi_trend_slope": 0.03,
+      "quota_last_pct": 2.8,
+      "momentum_tag": "growing"
+    }
+  ],
+  "totale_provincia_metrics": {
+    "_method": "ntn_sum_macroaree (sum 8 macroaree per anno) + imi_weighted_avg (weighted by NTN)",
+    "ntn_series": [
+      {
+        "year": 2016,
+        "ntn_sum_macroaree": 2211.0,
+        "ntn_declared_totale": 2209.0,
+        "imi_weighted_avg_pct": 0.98,
+        "imi_declared_totale_pct": 0.87,
+        "n_macroaree": 10
+      },
+      {
+        "year": 2017,
+        "ntn_sum_macroaree": 2159.0,
+        "ntn_declared_totale": 2159.0,
+        "imi_weighted_avg_pct": 0.97,
+        "imi_declared_totale_pct": 0.84,
+        "n_macroaree": 10
+      },
+      {
+        "year": 2018,
+        "ntn_sum_macroaree": 2415.0,
+        "ntn_declared_totale": 2415.0,
+        "imi_weighted_avg_pct": 1.1,
+        "imi_declared_totale_pct": 0.94,
+        "n_macroaree": 10
+      },
+      {
+        "year": 2019,
+        "ntn_sum_macroaree": 2503.0,
+        "ntn_declared_totale": null,
+        "imi_weighted_avg_pct": 1.14,
+        "imi_declared_totale_pct": null,
+        "n_macroaree": 10
+      },
+      {
+        "year": 2020,
+        "ntn_sum_macroaree": 2175.0,
+        "ntn_declared_totale": null,
+        "imi_weighted_avg_pct": 0.98,
+        "imi_declared_totale_pct": null,
+        "n_macroaree": 10
+      },
+      {
+        "year": 2021,
+        "ntn_sum_macroaree": 3022.0,
+        "ntn_declared_totale": 3022.0,
+        "imi_weighted_avg_pct": 0.35,
+        "imi_declared_totale_pct": 0.32,
+        "n_macroaree": 10
+      },
+      {
+        "year": 2022,
+        "ntn_sum_macroaree": 3285.0,
+        "ntn_declared_totale": 3285.0,
+        "imi_weighted_avg_pct": 1.44,
+        "imi_declared_totale_pct": 1.27,
+        "n_macroaree": 10
+      },
+      {
+        "year": 2023,
+        "ntn_sum_macroaree": 3077.0,
+        "ntn_declared_totale": 3077.0,
+        "imi_weighted_avg_pct": 1.28,
+        "imi_declared_totale_pct": 1.19,
+        "n_macroaree": 10
+      },
+      {
+        "year": 2024,
+        "ntn_sum_macroaree": 3201.0,
+        "ntn_declared_totale": 3200.0,
+        "imi_weighted_avg_pct": 1.34,
+        "imi_declared_totale_pct": 1.2,
+        "n_macroaree": 10
+      }
+    ],
+    "ntn_first": 2211.0,
+    "ntn_last": 3201.0,
+    "ntn_cagr_pct": 4.73,
+    "ntn_delta_pct": 44.78,
+    "ntn_peak": 3285.0,
+    "ntn_peak_year": 2022,
+    "imi_last_pct": 1.34,
+    "imi_avg_pct": 1.06
+  },
+  "summary": {
+    "n_zone": 47,
+    "n_macroaree": 10,
+    "tag_distribution": {
+      "rocket": 4,
+      "growing": 10,
+      "stable": 4,
+      "cooling": 2,
+      "frozen": 7,
+      "unknown": 20
+    },
+    "quadrant_distribution": {
+      "Q1_HOT": 16,
+      "Q2_OVERPRICED": 9,
+      "Q3_OPPORTUNITY": 8,
+      "Q4_DEAD": 12,
+      "unknown": 2
+    }
+  }
+}

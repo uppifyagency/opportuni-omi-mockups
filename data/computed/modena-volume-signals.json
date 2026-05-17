@@ -1,0 +1,2138 @@
+{
+  "metadata": {
+    "generated_at": "2026-05-14",
+    "source": "data/volumi/modena-volumi-timeseries.json (PDF AdE Statistiche Regionali) + data/computed/modena-signals.json (Sagona OMI quotazioni)",
+    "years_covered": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "scoring": {
+      "liquidity_score": "50 + 25*z(imi_last) + 15*z(ntn_cagr) + 10*z(ntn_recent_slope), clamped [0,100]",
+      "momentum_tag_thresholds": {
+        "rocket": "cagr > +8%/yr AND imi_trend_slope > 0",
+        "growing": "cagr > +2%/yr",
+        "stable": "-2% ≤ cagr ≤ +2%",
+        "cooling": "-8% ≤ cagr < -2%",
+        "frozen": "cagr < -8% OR imi_last < 1.0%"
+      },
+      "quadrant_legend": {
+        "Q1_HOT": "prezzo>=median AND volume>=median (premium liquido)",
+        "Q2_OVERPRICED": "prezzo>=median AND volume<median (premium illiquido - cautela)",
+        "Q3_OPPORTUNITY": "prezzo<median AND volume>=median (cheap & active - BUY)",
+        "Q4_DEAD": "prezzo<median AND volume<median (cheap & illiquid - RISCHIO)"
+      }
+    },
+    "distribution_stats": {
+      "imi_last_pct": {
+        "mean": 2.66,
+        "sd": 1.01,
+        "n": 19
+      },
+      "ntn_cagr_pct": {
+        "mean": 4.03,
+        "sd": 10.35,
+        "n": 19
+      },
+      "ntn_recent_slope": {
+        "mean": -14.05,
+        "sd": 19.97,
+        "n": 19
+      },
+      "price_median_eur_mq": 1750.0,
+      "volume_median_ntn": 98.0
+    }
+  },
+  "zone_volume_metrics": [
+    {
+      "zona_old": "E4",
+      "zona_new": [
+        "E4"
+      ],
+      "denominazione": "FRAZIONE DI COGNENTO",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 15.0,
+          "ntn_var_pct": -37.0,
+          "imi_pct": 1.39,
+          "quotazione_eur_mq": 1563.0,
+          "quotazione_var_pct": -2.0
+        },
+        {
+          "year": 2019,
+          "ntn": 9.0,
+          "ntn_var_pct": -37.9,
+          "imi_pct": 0.86,
+          "quotazione_eur_mq": 1550.0,
+          "quotazione_var_pct": -0.8
+        },
+        {
+          "year": 2020,
+          "ntn": 16.0,
+          "ntn_var_pct": 79.7,
+          "imi_pct": 1.55,
+          "quotazione_eur_mq": 1550.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2021,
+          "ntn": 16.0,
+          "ntn_var_pct": -1.7,
+          "imi_pct": 1.52,
+          "quotazione_eur_mq": 1550.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2022,
+          "ntn": 27.0,
+          "ntn_var_pct": 70.9,
+          "imi_pct": 2.55,
+          "quotazione_eur_mq": 1594.0,
+          "quotazione_var_pct": 2.8
+        },
+        {
+          "year": 2023,
+          "ntn": 36.0,
+          "ntn_var_pct": 32.5,
+          "imi_pct": 3.4,
+          "quotazione_eur_mq": 1619.0,
+          "quotazione_var_pct": 1.6
+        }
+      ],
+      "ntn_first": 15.0,
+      "ntn_last": 36.0,
+      "ntn_cagr_pct": 19.14,
+      "ntn_delta_pct": 140.0,
+      "ntn_recent_slope": 10.0,
+      "ntn_volatility_cv_pct": 49.5,
+      "imi_avg_pct": 1.88,
+      "imi_first_pct": 1.39,
+      "imi_last_pct": 3.4,
+      "imi_trend_slope": 0.431,
+      "momentum_tag": "rocket",
+      "liquidity_score": 100,
+      "_z_components": {
+        "z_imi": 0.73,
+        "z_cagr": 1.46,
+        "z_slope": 1.2
+      },
+      "prezzo_attuale_eur_mq": 1875.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "E7",
+      "zona_new": [
+        "E11"
+      ],
+      "denominazione": "INDUSTRIALE OVEST - GRAND'EMILIA",
+      "rel": "renamed",
+      "mapping_notes": "E7→E11 con estensione perimetro a Cittanova",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 3.0,
+          "ntn_var_pct": 50.0,
+          "imi_pct": 1.71,
+          "quotazione_eur_mq": 1238.0,
+          "quotazione_var_pct": -2.4
+        },
+        {
+          "year": 2019,
+          "ntn": 2.0,
+          "ntn_var_pct": -33.3,
+          "imi_pct": 1.15,
+          "quotazione_eur_mq": 1238.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2020,
+          "ntn": 8.0,
+          "ntn_var_pct": 300.0,
+          "imi_pct": 4.6,
+          "quotazione_eur_mq": 1238.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2021,
+          "ntn": 9.0,
+          "ntn_var_pct": 12.5,
+          "imi_pct": 5.17,
+          "quotazione_eur_mq": 1238.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2022,
+          "ntn": 11.0,
+          "ntn_var_pct": 22.2,
+          "imi_pct": 6.29,
+          "quotazione_eur_mq": 1283.0,
+          "quotazione_var_pct": 3.6
+        }
+      ],
+      "ntn_first": 3.0,
+      "ntn_last": 11.0,
+      "ntn_cagr_pct": 38.38,
+      "ntn_delta_pct": 266.67,
+      "ntn_recent_slope": 1.5,
+      "ntn_volatility_cv_pct": 59.3,
+      "imi_avg_pct": 3.78,
+      "imi_first_pct": 1.71,
+      "imi_last_pct": 6.29,
+      "imi_trend_slope": 1.318,
+      "momentum_tag": "rocket",
+      "liquidity_score": 100,
+      "_z_components": {
+        "z_imi": 3.58,
+        "z_cagr": 3.32,
+        "z_slope": 0.78
+      },
+      "prezzo_attuale_eur_mq": 1400.0,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "E8",
+      "zona_new": [
+        "E8"
+      ],
+      "denominazione": "INDUSTRIALE NORD VIALE NAZIONI",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 5.0,
+          "ntn_var_pct": 50.0,
+          "imi_pct": 1.57,
+          "quotazione_eur_mq": 1295.0,
+          "quotazione_var_pct": -1.3
+        },
+        {
+          "year": 2019,
+          "ntn": 8.0,
+          "ntn_var_pct": 66.7,
+          "imi_pct": 2.61,
+          "quotazione_eur_mq": 1295.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2020,
+          "ntn": 6.0,
+          "ntn_var_pct": -25.3,
+          "imi_pct": 1.96,
+          "quotazione_eur_mq": 1295.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2021,
+          "ntn": 15.0,
+          "ntn_var_pct": 167.9,
+          "imi_pct": 5.24,
+          "quotazione_eur_mq": 1295.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2022,
+          "ntn": 8.0,
+          "ntn_var_pct": -46.7,
+          "imi_pct": 2.68,
+          "quotazione_eur_mq": 1325.0,
+          "quotazione_var_pct": 2.3
+        },
+        {
+          "year": 2023,
+          "ntn": 11.0,
+          "ntn_var_pct": 37.5,
+          "imi_pct": 3.64,
+          "quotazione_eur_mq": 1306.0,
+          "quotazione_var_pct": -1.4
+        }
+      ],
+      "ntn_first": 5.0,
+      "ntn_last": 11.0,
+      "ntn_cagr_pct": 17.08,
+      "ntn_delta_pct": 120.0,
+      "ntn_recent_slope": -2.0,
+      "ntn_volatility_cv_pct": 41.4,
+      "imi_avg_pct": 2.95,
+      "imi_first_pct": 1.57,
+      "imi_last_pct": 3.64,
+      "imi_trend_slope": 0.395,
+      "momentum_tag": "rocket",
+      "liquidity_score": 99.0,
+      "_z_components": {
+        "z_imi": 0.96,
+        "z_cagr": 1.26,
+        "z_slope": 0.6
+      },
+      "prezzo_attuale_eur_mq": 1362.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "D33",
+      "zona_new": [
+        "D33"
+      ],
+      "denominazione": "CAPOLUOGO - SANTA CATERINA, CROCETTA, VIALE GRAMSCI, EX MACELLO",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 156.0,
+          "ntn_var_pct": -9.0,
+          "imi_pct": 2.22,
+          "quotazione_eur_mq": 1388.0,
+          "quotazione_var_pct": -4.0
+        },
+        {
+          "year": 2019,
+          "ntn": 204.0,
+          "ntn_var_pct": 30.7,
+          "imi_pct": 2.9,
+          "quotazione_eur_mq": 1367.0,
+          "quotazione_var_pct": -1.5
+        },
+        {
+          "year": 2020,
+          "ntn": 158.0,
+          "ntn_var_pct": -22.5,
+          "imi_pct": 2.25,
+          "quotazione_eur_mq": 1371.0,
+          "quotazione_var_pct": 0.3
+        },
+        {
+          "year": 2021,
+          "ntn": 187.0,
+          "ntn_var_pct": 18.5,
+          "imi_pct": 2.67,
+          "quotazione_eur_mq": 1404.0,
+          "quotazione_var_pct": 2.4
+        },
+        {
+          "year": 2022,
+          "ntn": 241.0,
+          "ntn_var_pct": 28.9,
+          "imi_pct": 3.41,
+          "quotazione_eur_mq": 1446.0,
+          "quotazione_var_pct": 3.0
+        },
+        {
+          "year": 2023,
+          "ntn": 193.0,
+          "ntn_var_pct": -20.0,
+          "imi_pct": 2.72,
+          "quotazione_eur_mq": 1467.0,
+          "quotazione_var_pct": 1.4
+        }
+      ],
+      "ntn_first": 156.0,
+      "ntn_last": 193.0,
+      "ntn_cagr_pct": 4.35,
+      "ntn_delta_pct": 23.72,
+      "ntn_recent_slope": 3.0,
+      "ntn_volatility_cv_pct": 16.6,
+      "imi_avg_pct": 2.7,
+      "imi_first_pct": 2.22,
+      "imi_last_pct": 2.72,
+      "imi_trend_slope": 0.127,
+      "momentum_tag": "growing",
+      "liquidity_score": 60.4,
+      "_z_components": {
+        "z_imi": 0.05,
+        "z_cagr": 0.03,
+        "z_slope": 0.85
+      },
+      "prezzo_attuale_eur_mq": 1562.5,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "D28",
+      "zona_new": [
+        "D35"
+      ],
+      "denominazione": "CAPOLUOGO - SAN FAUSTINO, WINDSOR PARK, PARCO AMENDOLA",
+      "rel": "renamed",
+      "mapping_notes": "D28 (Parco Amendola/Windsor Park) ricodificata D35; San Faustino è ora in C9",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 222.0,
+          "ntn_var_pct": 6.2,
+          "imi_pct": 2.46,
+          "quotazione_eur_mq": 1588.0,
+          "quotazione_var_pct": -4.8
+        },
+        {
+          "year": 2019,
+          "ntn": 234.0,
+          "ntn_var_pct": 5.6,
+          "imi_pct": 2.59,
+          "quotazione_eur_mq": 1567.0,
+          "quotazione_var_pct": -1.3
+        },
+        {
+          "year": 2020,
+          "ntn": 227.0,
+          "ntn_var_pct": -3.1,
+          "imi_pct": 2.51,
+          "quotazione_eur_mq": 1571.0,
+          "quotazione_var_pct": 0.3
+        },
+        {
+          "year": 2021,
+          "ntn": 262.0,
+          "ntn_var_pct": 15.5,
+          "imi_pct": 2.9,
+          "quotazione_eur_mq": 1633.0,
+          "quotazione_var_pct": 4.0
+        },
+        {
+          "year": 2022,
+          "ntn": 257.0,
+          "ntn_var_pct": -2.3,
+          "imi_pct": 2.83,
+          "quotazione_eur_mq": 1713.0,
+          "quotazione_var_pct": 4.8
+        },
+        {
+          "year": 2023,
+          "ntn": 257.0,
+          "ntn_var_pct": 0.0,
+          "imi_pct": 2.83,
+          "quotazione_eur_mq": 1742.0,
+          "quotazione_var_pct": 1.7
+        }
+      ],
+      "ntn_first": 222.0,
+      "ntn_last": 257.0,
+      "ntn_cagr_pct": 2.97,
+      "ntn_delta_pct": 15.77,
+      "ntn_recent_slope": -2.5,
+      "ntn_volatility_cv_pct": 7.2,
+      "imi_avg_pct": 2.69,
+      "imi_first_pct": 2.46,
+      "imi_last_pct": 2.83,
+      "imi_trend_slope": 0.085,
+      "momentum_tag": "growing",
+      "liquidity_score": 58.3,
+      "_z_components": {
+        "z_imi": 0.16,
+        "z_cagr": -0.1,
+        "z_slope": 0.58
+      },
+      "prezzo_attuale_eur_mq": 1875.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "E5",
+      "zona_new": [
+        "E5"
+      ],
+      "denominazione": "FRAZIONE DI BAGGIOVARA",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 28.0,
+          "ntn_var_pct": -13.5,
+          "imi_pct": 2.63,
+          "quotazione_eur_mq": 1483.0,
+          "quotazione_var_pct": -3.0
+        },
+        {
+          "year": 2019,
+          "ntn": 26.0,
+          "ntn_var_pct": -9.3,
+          "imi_pct": 2.47,
+          "quotazione_eur_mq": 1475.0,
+          "quotazione_var_pct": -0.6
+        },
+        {
+          "year": 2020,
+          "ntn": 34.0,
+          "ntn_var_pct": 27.0,
+          "imi_pct": 3.13,
+          "quotazione_eur_mq": 1475.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2021,
+          "ntn": 40.0,
+          "ntn_var_pct": 19.9,
+          "imi_pct": 3.75,
+          "quotazione_eur_mq": 1475.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2022,
+          "ntn": 16.0,
+          "ntn_var_pct": -60.2,
+          "imi_pct": 1.45,
+          "quotazione_eur_mq": 1521.0,
+          "quotazione_var_pct": 3.1
+        },
+        {
+          "year": 2023,
+          "ntn": 30.0,
+          "ntn_var_pct": 85.4,
+          "imi_pct": 2.69,
+          "quotazione_eur_mq": 1525.0,
+          "quotazione_var_pct": 0.3
+        }
+      ],
+      "ntn_first": 28.0,
+      "ntn_last": 30.0,
+      "ntn_cagr_pct": 1.39,
+      "ntn_delta_pct": 7.14,
+      "ntn_recent_slope": -5.0,
+      "ntn_volatility_cv_pct": 27.8,
+      "imi_avg_pct": 2.69,
+      "imi_first_pct": 2.63,
+      "imi_last_pct": 2.69,
+      "imi_trend_slope": -0.061,
+      "momentum_tag": "stable",
+      "liquidity_score": 51.3,
+      "_z_components": {
+        "z_imi": 0.02,
+        "z_cagr": -0.26,
+        "z_slope": 0.45
+      },
+      "prezzo_attuale_eur_mq": 1800.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "C7",
+      "zona_new": [
+        "C9",
+        "C11"
+      ],
+      "denominazione": "CAPOLUOGO - STAZ. AUTOCORRIERE, STADIO, TEMPIO, MUSICISTI",
+      "rel": "split",
+      "mapping_notes": "OLD C7 conteneva 2 sotto-aree (stazione autocorriere/stadio + tempio/musicisti); le NEW C9 e C11 le separano. Per join temporale: replicare volumi C7 su entrambe (proxy) o usare media.",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 212.0,
+          "ntn_var_pct": 20.6,
+          "imi_pct": 2.86,
+          "quotazione_eur_mq": 1754.0,
+          "quotazione_var_pct": -2.1
+        },
+        {
+          "year": 2019,
+          "ntn": 203.0,
+          "ntn_var_pct": -5.7,
+          "imi_pct": 2.73,
+          "quotazione_eur_mq": 1763.0,
+          "quotazione_var_pct": 0.5
+        },
+        {
+          "year": 2020,
+          "ntn": 177.0,
+          "ntn_var_pct": -12.5,
+          "imi_pct": 2.39,
+          "quotazione_eur_mq": 1750.0,
+          "quotazione_var_pct": -0.7
+        },
+        {
+          "year": 2021,
+          "ntn": 209.0,
+          "ntn_var_pct": 17.9,
+          "imi_pct": 2.82,
+          "quotazione_eur_mq": 1763.0,
+          "quotazione_var_pct": 0.7
+        },
+        {
+          "year": 2022,
+          "ntn": 204.0,
+          "ntn_var_pct": -2.6,
+          "imi_pct": 2.74,
+          "quotazione_eur_mq": 1871.0,
+          "quotazione_var_pct": 6.1
+        },
+        {
+          "year": 2023,
+          "ntn": 200.0,
+          "ntn_var_pct": -1.8,
+          "imi_pct": 2.69,
+          "quotazione_eur_mq": 1954.0,
+          "quotazione_var_pct": 4.5
+        }
+      ],
+      "ntn_first": 212.0,
+      "ntn_last": 200.0,
+      "ntn_cagr_pct": -1.16,
+      "ntn_delta_pct": -5.66,
+      "ntn_recent_slope": -4.5,
+      "ntn_volatility_cv_pct": 6.2,
+      "imi_avg_pct": 2.71,
+      "imi_first_pct": 2.86,
+      "imi_last_pct": 2.69,
+      "imi_trend_slope": -0.011,
+      "momentum_tag": "stable",
+      "liquidity_score": 47.9,
+      "_z_components": {
+        "z_imi": 0.02,
+        "z_cagr": -0.5,
+        "z_slope": 0.48
+      },
+      "prezzo_attuale_eur_mq": 1875.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "B3",
+      "zona_new": [
+        "B3"
+      ],
+      "denominazione": "CAPOLUOGO - CENTRO STORICO",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 246.0,
+          "ntn_var_pct": 28.9,
+          "imi_pct": 2.95,
+          "quotazione_eur_mq": 2703.0,
+          "quotazione_var_pct": -2.6
+        },
+        {
+          "year": 2019,
+          "ntn": 268.0,
+          "ntn_var_pct": 8.9,
+          "imi_pct": 3.2,
+          "quotazione_eur_mq": 2716.0,
+          "quotazione_var_pct": 0.5
+        },
+        {
+          "year": 2020,
+          "ntn": 200.0,
+          "ntn_var_pct": -25.4,
+          "imi_pct": 2.38,
+          "quotazione_eur_mq": 2719.0,
+          "quotazione_var_pct": 0.1
+        },
+        {
+          "year": 2021,
+          "ntn": 255.0,
+          "ntn_var_pct": 28.0,
+          "imi_pct": 3.05,
+          "quotazione_eur_mq": 2703.0,
+          "quotazione_var_pct": -0.6
+        },
+        {
+          "year": 2022,
+          "ntn": 256.0,
+          "ntn_var_pct": 0.2,
+          "imi_pct": 3.04,
+          "quotazione_eur_mq": 2756.0,
+          "quotazione_var_pct": 2.0
+        },
+        {
+          "year": 2023,
+          "ntn": 227.0,
+          "ntn_var_pct": -11.6,
+          "imi_pct": 2.67,
+          "quotazione_eur_mq": 2841.0,
+          "quotazione_var_pct": 3.1
+        }
+      ],
+      "ntn_first": 246.0,
+      "ntn_last": 227.0,
+      "ntn_cagr_pct": -1.59,
+      "ntn_delta_pct": -7.72,
+      "ntn_recent_slope": -14.0,
+      "ntn_volatility_cv_pct": 10.2,
+      "imi_avg_pct": 2.88,
+      "imi_first_pct": 2.95,
+      "imi_last_pct": 2.67,
+      "imi_trend_slope": -0.035,
+      "momentum_tag": "stable",
+      "liquidity_score": 42.0,
+      "_z_components": {
+        "z_imi": 0.01,
+        "z_cagr": -0.54,
+        "z_slope": 0.0
+      },
+      "prezzo_attuale_eur_mq": 2500.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D31",
+      "zona_new": [
+        "D31"
+      ],
+      "denominazione": "CAPOLUOGO - QUARTIERE MADONNINA",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 95.0,
+          "ntn_var_pct": 65.8,
+          "imi_pct": 2.43,
+          "quotazione_eur_mq": 1371.0,
+          "quotazione_var_pct": -0.3
+        },
+        {
+          "year": 2019,
+          "ntn": 89.0,
+          "ntn_var_pct": -5.9,
+          "imi_pct": 2.29,
+          "quotazione_eur_mq": 1329.0,
+          "quotazione_var_pct": -3.0
+        },
+        {
+          "year": 2020,
+          "ntn": 96.0,
+          "ntn_var_pct": 7.9,
+          "imi_pct": 2.47,
+          "quotazione_eur_mq": 1333.0,
+          "quotazione_var_pct": 0.3
+        },
+        {
+          "year": 2021,
+          "ntn": 135.0,
+          "ntn_var_pct": 40.9,
+          "imi_pct": 3.48,
+          "quotazione_eur_mq": 1358.0,
+          "quotazione_var_pct": 1.9
+        },
+        {
+          "year": 2022,
+          "ntn": 114.0,
+          "ntn_var_pct": -15.8,
+          "imi_pct": 2.92,
+          "quotazione_eur_mq": 1404.0,
+          "quotazione_var_pct": 3.4
+        },
+        {
+          "year": 2023,
+          "ntn": 98.0,
+          "ntn_var_pct": -14.3,
+          "imi_pct": 2.5,
+          "quotazione_eur_mq": 1442.0,
+          "quotazione_var_pct": 2.7
+        }
+      ],
+      "ntn_first": 95.0,
+      "ntn_last": 98.0,
+      "ntn_cagr_pct": 0.62,
+      "ntn_delta_pct": 3.16,
+      "ntn_recent_slope": -18.5,
+      "ntn_volatility_cv_pct": 16.4,
+      "imi_avg_pct": 2.68,
+      "imi_first_pct": 2.43,
+      "imi_last_pct": 2.5,
+      "imi_trend_slope": 0.093,
+      "momentum_tag": "stable",
+      "liquidity_score": 38.8,
+      "_z_components": {
+        "z_imi": -0.16,
+        "z_cagr": -0.33,
+        "z_slope": -0.22
+      },
+      "prezzo_attuale_eur_mq": 1575.0,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "D30",
+      "zona_new": [
+        "D30"
+      ],
+      "denominazione": "CAPOLUOGO - EX AUTODROMO, SAN FAUSTINO, VIA COSTA",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 86.0,
+          "ntn_var_pct": 8.0,
+          "imi_pct": 2.6,
+          "quotazione_eur_mq": 1496.0,
+          "quotazione_var_pct": 3.0
+        },
+        {
+          "year": 2019,
+          "ntn": 81.0,
+          "ntn_var_pct": -5.9,
+          "imi_pct": 2.41,
+          "quotazione_eur_mq": 1475.0,
+          "quotazione_var_pct": -1.4
+        },
+        {
+          "year": 2020,
+          "ntn": 94.0,
+          "ntn_var_pct": 10.6,
+          "imi_pct": 2.79,
+          "quotazione_eur_mq": 1467.0,
+          "quotazione_var_pct": -0.6
+        },
+        {
+          "year": 2021,
+          "ntn": 115.0,
+          "ntn_var_pct": 22.1,
+          "imi_pct": 3.4,
+          "quotazione_eur_mq": 1508.0,
+          "quotazione_var_pct": 2.8
+        },
+        {
+          "year": 2022,
+          "ntn": 89.0,
+          "ntn_var_pct": -23.0,
+          "imi_pct": 2.61,
+          "quotazione_eur_mq": 1575.0,
+          "quotazione_var_pct": 4.4
+        },
+        {
+          "year": 2023,
+          "ntn": 83.0,
+          "ntn_var_pct": -6.9,
+          "imi_pct": 2.43,
+          "quotazione_eur_mq": 1600.0,
+          "quotazione_var_pct": 1.6
+        }
+      ],
+      "ntn_first": 86.0,
+      "ntn_last": 83.0,
+      "ntn_cagr_pct": -0.71,
+      "ntn_delta_pct": -3.49,
+      "ntn_recent_slope": -16.0,
+      "ntn_volatility_cv_pct": 13.7,
+      "imi_avg_pct": 2.71,
+      "imi_first_pct": 2.6,
+      "imi_last_pct": 2.43,
+      "imi_trend_slope": 0.01,
+      "momentum_tag": "stable",
+      "liquidity_score": 36.4,
+      "_z_components": {
+        "z_imi": -0.23,
+        "z_cagr": -0.46,
+        "z_slope": -0.1
+      },
+      "prezzo_attuale_eur_mq": 1750.0,
+      "price_volume_quadrant": "Q2_OVERPRICED"
+    },
+    {
+      "zona_old": "D26",
+      "zona_new": [
+        "D36"
+      ],
+      "denominazione": "CAPOLUOGO - IPERCOOP, UNIVERSITA`, POLICLINICO, AERONAUTICA",
+      "rel": "renamed",
+      "mapping_notes": "Stessa zona (Universita+Policlinico) ricodificata D26→D36",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 164.0,
+          "ntn_var_pct": 5.2,
+          "imi_pct": 2.24,
+          "quotazione_eur_mq": 1488.0,
+          "quotazione_var_pct": -3.0
+        },
+        {
+          "year": 2019,
+          "ntn": 186.0,
+          "ntn_var_pct": 13.5,
+          "imi_pct": 2.54,
+          "quotazione_eur_mq": 1467.0,
+          "quotazione_var_pct": -1.4
+        },
+        {
+          "year": 2020,
+          "ntn": 141.0,
+          "ntn_var_pct": -24.3,
+          "imi_pct": 1.92,
+          "quotazione_eur_mq": 1475.0,
+          "quotazione_var_pct": 0.6
+        },
+        {
+          "year": 2021,
+          "ntn": 214.0,
+          "ntn_var_pct": 52.1,
+          "imi_pct": 2.92,
+          "quotazione_eur_mq": 1525.0,
+          "quotazione_var_pct": 3.4
+        },
+        {
+          "year": 2022,
+          "ntn": 196.0,
+          "ntn_var_pct": -8.3,
+          "imi_pct": 2.68,
+          "quotazione_eur_mq": 1596.0,
+          "quotazione_var_pct": 4.6
+        },
+        {
+          "year": 2023,
+          "ntn": 173.0,
+          "ntn_var_pct": -12.8,
+          "imi_pct": 2.35,
+          "quotazione_eur_mq": 1625.0,
+          "quotazione_var_pct": 1.8
+        }
+      ],
+      "ntn_first": 164.0,
+      "ntn_last": 173.0,
+      "ntn_cagr_pct": 1.07,
+      "ntn_delta_pct": 5.49,
+      "ntn_recent_slope": -20.5,
+      "ntn_volatility_cv_pct": 14.3,
+      "imi_avg_pct": 2.44,
+      "imi_first_pct": 2.24,
+      "imi_last_pct": 2.35,
+      "imi_trend_slope": 0.056,
+      "momentum_tag": "stable",
+      "liquidity_score": 34.7,
+      "_z_components": {
+        "z_imi": -0.31,
+        "z_cagr": -0.29,
+        "z_slope": -0.32
+      },
+      "prezzo_attuale_eur_mq": 1950.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D29",
+      "zona_new": [
+        "D29"
+      ],
+      "denominazione": "CAPOLUOGO - VILLAGGIO GIARDINO, VIA SCHIOCCHI, VILLAGGIO ZETA",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 146.0,
+          "ntn_var_pct": 60.8,
+          "imi_pct": 2.75,
+          "quotazione_eur_mq": 1658.0,
+          "quotazione_var_pct": -1.5
+        },
+        {
+          "year": 2019,
+          "ntn": 137.0,
+          "ntn_var_pct": -6.2,
+          "imi_pct": 2.58,
+          "quotazione_eur_mq": 1646.0,
+          "quotazione_var_pct": -0.8
+        },
+        {
+          "year": 2020,
+          "ntn": 102.0,
+          "ntn_var_pct": -25.4,
+          "imi_pct": 1.92,
+          "quotazione_eur_mq": 1642.0,
+          "quotazione_var_pct": -0.3
+        },
+        {
+          "year": 2021,
+          "ntn": 148.0,
+          "ntn_var_pct": 44.6,
+          "imi_pct": 2.78,
+          "quotazione_eur_mq": 1663.0,
+          "quotazione_var_pct": 1.3
+        },
+        {
+          "year": 2022,
+          "ntn": 118.0,
+          "ntn_var_pct": -20.3,
+          "imi_pct": 2.18,
+          "quotazione_eur_mq": 1729.0,
+          "quotazione_var_pct": 4.0
+        },
+        {
+          "year": 2023,
+          "ntn": 127.0,
+          "ntn_var_pct": 8.2,
+          "imi_pct": 2.35,
+          "quotazione_eur_mq": 1708.0,
+          "quotazione_var_pct": -1.2
+        }
+      ],
+      "ntn_first": 146.0,
+      "ntn_last": 127.0,
+      "ntn_cagr_pct": -2.75,
+      "ntn_delta_pct": -13.01,
+      "ntn_recent_slope": -10.5,
+      "ntn_volatility_cv_pct": 13.6,
+      "imi_avg_pct": 2.43,
+      "imi_first_pct": 2.75,
+      "imi_last_pct": 2.35,
+      "imi_trend_slope": -0.067,
+      "momentum_tag": "cooling",
+      "liquidity_score": 34.2,
+      "_z_components": {
+        "z_imi": -0.31,
+        "z_cagr": -0.66,
+        "z_slope": 0.18
+      },
+      "prezzo_attuale_eur_mq": 1925.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "E6",
+      "zona_new": [
+        "E6"
+      ],
+      "denominazione": "FRAZIONE DI SAN DAMASO",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 22.0,
+          "ntn_var_pct": -14.0,
+          "imi_pct": 1.63,
+          "quotazione_eur_mq": 1408.0,
+          "quotazione_var_pct": -2.0
+        },
+        {
+          "year": 2019,
+          "ntn": 19.0,
+          "ntn_var_pct": -14.0,
+          "imi_pct": 1.41,
+          "quotazione_eur_mq": 1400.0,
+          "quotazione_var_pct": -0.6
+        },
+        {
+          "year": 2020,
+          "ntn": 30.0,
+          "ntn_var_pct": 60.5,
+          "imi_pct": 2.24,
+          "quotazione_eur_mq": 1400.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2021,
+          "ntn": 32.0,
+          "ntn_var_pct": 8.0,
+          "imi_pct": 2.42,
+          "quotazione_eur_mq": 1400.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2022,
+          "ntn": 28.0,
+          "ntn_var_pct": -13.7,
+          "imi_pct": 2.08,
+          "quotazione_eur_mq": 1446.0,
+          "quotazione_var_pct": 3.3
+        },
+        {
+          "year": 2023,
+          "ntn": 24.0,
+          "ntn_var_pct": -11.9,
+          "imi_pct": 1.83,
+          "quotazione_eur_mq": 1458.0,
+          "quotazione_var_pct": 0.9
+        }
+      ],
+      "ntn_first": 22.0,
+      "ntn_last": 24.0,
+      "ntn_cagr_pct": 1.76,
+      "ntn_delta_pct": 9.09,
+      "ntn_recent_slope": -4.0,
+      "ntn_volatility_cv_pct": 19.3,
+      "imi_avg_pct": 1.94,
+      "imi_first_pct": 1.63,
+      "imi_last_pct": 1.83,
+      "imi_trend_slope": 0.091,
+      "momentum_tag": "stable",
+      "liquidity_score": 31.2,
+      "_z_components": {
+        "z_imi": -0.82,
+        "z_cagr": -0.22,
+        "z_slope": 0.5
+      },
+      "prezzo_attuale_eur_mq": 1700.0,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "E9",
+      "zona_new": [
+        "E9"
+      ],
+      "denominazione": "INDUSTRIALE TORRAZZI",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 13.0,
+          "ntn_var_pct": 26.7,
+          "imi_pct": 1.99,
+          "quotazione_eur_mq": 1267.0,
+          "quotazione_var_pct": -1.6
+        },
+        {
+          "year": 2019,
+          "ntn": 15.0,
+          "ntn_var_pct": 14.4,
+          "imi_pct": 2.28,
+          "quotazione_eur_mq": 1267.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2020,
+          "ntn": 12.0,
+          "ntn_var_pct": -16.1,
+          "imi_pct": 1.91,
+          "quotazione_eur_mq": 1267.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2021,
+          "ntn": 17.0,
+          "ntn_var_pct": 37.0,
+          "imi_pct": 2.62,
+          "quotazione_eur_mq": 1267.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2022,
+          "ntn": 23.0,
+          "ntn_var_pct": 35.0,
+          "imi_pct": 3.54,
+          "quotazione_eur_mq": 1305.0,
+          "quotazione_var_pct": 3.0
+        },
+        {
+          "year": 2023,
+          "ntn": 12.0,
+          "ntn_var_pct": -46.7,
+          "imi_pct": 1.89,
+          "quotazione_eur_mq": 1297.0,
+          "quotazione_var_pct": -0.6
+        }
+      ],
+      "ntn_first": 13.0,
+      "ntn_last": 12.0,
+      "ntn_cagr_pct": -1.59,
+      "ntn_delta_pct": -7.69,
+      "ntn_recent_slope": -2.5,
+      "ntn_volatility_cv_pct": 27.6,
+      "imi_avg_pct": 2.37,
+      "imi_first_pct": 1.99,
+      "imi_last_pct": 1.89,
+      "imi_trend_slope": 0.114,
+      "momentum_tag": "stable",
+      "liquidity_score": 28.5,
+      "_z_components": {
+        "z_imi": -0.76,
+        "z_cagr": -0.54,
+        "z_slope": 0.58
+      },
+      "prezzo_attuale_eur_mq": 1387.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "C8",
+      "zona_new": [
+        "C10"
+      ],
+      "denominazione": "CAPOLUOGO - VIA DELLA PACE, VIA SASSI, VIA GOBETTI, VIA CUCCHIARI",
+      "rel": "renamed",
+      "mapping_notes": "C8 rinominata e ricomposta in C10 (zona limitrofa centro storico est)",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 265.0,
+          "ntn_var_pct": 12.6,
+          "imi_pct": 2.47,
+          "quotazione_eur_mq": 1981.0,
+          "quotazione_var_pct": -2.2
+        },
+        {
+          "year": 2019,
+          "ntn": 238.0,
+          "ntn_var_pct": -10.3,
+          "imi_pct": 2.21,
+          "quotazione_eur_mq": 1972.0,
+          "quotazione_var_pct": -0.5
+        },
+        {
+          "year": 2020,
+          "ntn": 266.0,
+          "ntn_var_pct": 11.8,
+          "imi_pct": 2.47,
+          "quotazione_eur_mq": 1975.0,
+          "quotazione_var_pct": 0.2
+        },
+        {
+          "year": 2021,
+          "ntn": 354.0,
+          "ntn_var_pct": 32.8,
+          "imi_pct": 3.29,
+          "quotazione_eur_mq": 2016.0,
+          "quotazione_var_pct": 2.1
+        },
+        {
+          "year": 2022,
+          "ntn": 299.0,
+          "ntn_var_pct": -15.4,
+          "imi_pct": 2.76,
+          "quotazione_eur_mq": 2063.0,
+          "quotazione_var_pct": 2.3
+        },
+        {
+          "year": 2023,
+          "ntn": 267.0,
+          "ntn_var_pct": -10.9,
+          "imi_pct": 2.46,
+          "quotazione_eur_mq": 2094.0,
+          "quotazione_var_pct": 1.5
+        }
+      ],
+      "ntn_first": 265.0,
+      "ntn_last": 267.0,
+      "ntn_cagr_pct": 0.15,
+      "ntn_delta_pct": 0.75,
+      "ntn_recent_slope": -43.5,
+      "ntn_volatility_cv_pct": 14.4,
+      "imi_avg_pct": 2.61,
+      "imi_first_pct": 2.47,
+      "imi_last_pct": 2.46,
+      "imi_trend_slope": 0.069,
+      "momentum_tag": "stable",
+      "liquidity_score": 24.6,
+      "_z_components": {
+        "z_imi": -0.2,
+        "z_cagr": -0.38,
+        "z_slope": -1.47
+      },
+      "prezzo_attuale_eur_mq": 1975.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "D32",
+      "zona_new": [
+        "D32"
+      ],
+      "denominazione": "CAPOLUOGO - QUARTIERE SACCA, STRADA NAZIONALE CANALETTO",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 45.0,
+          "ntn_var_pct": -17.4,
+          "imi_pct": 1.99,
+          "quotazione_eur_mq": 1333.0,
+          "quotazione_var_pct": -3.9
+        },
+        {
+          "year": 2019,
+          "ntn": 59.0,
+          "ntn_var_pct": 31.6,
+          "imi_pct": 2.62,
+          "quotazione_eur_mq": 1329.0,
+          "quotazione_var_pct": -0.3
+        },
+        {
+          "year": 2020,
+          "ntn": 40.0,
+          "ntn_var_pct": -32.2,
+          "imi_pct": 1.78,
+          "quotazione_eur_mq": 1342.0,
+          "quotazione_var_pct": 0.9
+        },
+        {
+          "year": 2021,
+          "ntn": 68.0,
+          "ntn_var_pct": 68.0,
+          "imi_pct": 2.99,
+          "quotazione_eur_mq": 1379.0,
+          "quotazione_var_pct": 2.8
+        },
+        {
+          "year": 2022,
+          "ntn": 66.0,
+          "ntn_var_pct": -3.8,
+          "imi_pct": 2.91,
+          "quotazione_eur_mq": 1408.0,
+          "quotazione_var_pct": 2.1
+        },
+        {
+          "year": 2023,
+          "ntn": 43.0,
+          "ntn_var_pct": -35.6,
+          "imi_pct": 1.88,
+          "quotazione_eur_mq": 1408.0,
+          "quotazione_var_pct": 0.0
+        }
+      ],
+      "ntn_first": 45.0,
+      "ntn_last": 43.0,
+      "ntn_cagr_pct": -0.91,
+      "ntn_delta_pct": -4.44,
+      "ntn_recent_slope": -12.5,
+      "ntn_volatility_cv_pct": 23.1,
+      "imi_avg_pct": 2.36,
+      "imi_first_pct": 1.99,
+      "imi_last_pct": 1.88,
+      "imi_trend_slope": 0.044,
+      "momentum_tag": "stable",
+      "liquidity_score": 24.3,
+      "_z_components": {
+        "z_imi": -0.77,
+        "z_cagr": -0.48,
+        "z_slope": 0.08
+      },
+      "prezzo_attuale_eur_mq": 1662.5,
+      "price_volume_quadrant": "Q4_DEAD"
+    },
+    {
+      "zona_old": "D27",
+      "zona_new": [
+        "D34",
+        "D35"
+      ],
+      "denominazione": "CAPOLUOGO - MORANE, SANT`AGNESE, STAZ. PICCOLA, BUON PASTORE, PARCO AMENDOLA",
+      "rel": "split",
+      "mapping_notes": "Macro-zona D27 spezzata in Morane (D34) + Parco Amendola (D35)",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 292.0,
+          "ntn_var_pct": 22.0,
+          "imi_pct": 2.23,
+          "quotazione_eur_mq": 1704.0,
+          "quotazione_var_pct": 2.2
+        },
+        {
+          "year": 2019,
+          "ntn": 331.0,
+          "ntn_var_pct": 13.6,
+          "imi_pct": 2.53,
+          "quotazione_eur_mq": 1794.0,
+          "quotazione_var_pct": 5.3
+        },
+        {
+          "year": 2020,
+          "ntn": 248.0,
+          "ntn_var_pct": -25.1,
+          "imi_pct": 1.9,
+          "quotazione_eur_mq": 1794.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2021,
+          "ntn": 350.0,
+          "ntn_var_pct": 41.1,
+          "imi_pct": 2.67,
+          "quotazione_eur_mq": 1859.0,
+          "quotazione_var_pct": 3.7
+        },
+        {
+          "year": 2022,
+          "ntn": 280.0,
+          "ntn_var_pct": -20.0,
+          "imi_pct": 2.13,
+          "quotazione_eur_mq": 1944.0,
+          "quotazione_var_pct": 4.5
+        },
+        {
+          "year": 2023,
+          "ntn": 276.0,
+          "ntn_var_pct": -1.5,
+          "imi_pct": 2.1,
+          "quotazione_eur_mq": 1950.0,
+          "quotazione_var_pct": 0.3
+        }
+      ],
+      "ntn_first": 292.0,
+      "ntn_last": 276.0,
+      "ntn_cagr_pct": -1.12,
+      "ntn_delta_pct": -5.48,
+      "ntn_recent_slope": -37.0,
+      "ntn_volatility_cv_pct": 12.7,
+      "imi_avg_pct": 2.26,
+      "imi_first_pct": 2.23,
+      "imi_last_pct": 2.1,
+      "imi_trend_slope": -0.031,
+      "momentum_tag": "stable",
+      "liquidity_score": 17.1,
+      "_z_components": {
+        "z_imi": -0.56,
+        "z_cagr": -0.5,
+        "z_slope": -1.15
+      },
+      "prezzo_attuale_eur_mq": 1850.0,
+      "price_volume_quadrant": "Q1_HOT"
+    },
+    {
+      "zona_old": "R3",
+      "zona_new": [
+        "R3"
+      ],
+      "denominazione": "ZONA AGRICOLA",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 185.0,
+          "ntn_var_pct": 16.3,
+          "imi_pct": 1.88,
+          "quotazione_eur_mq": 1277.0,
+          "quotazione_var_pct": -0.1
+        },
+        {
+          "year": 2019,
+          "ntn": 201.0,
+          "ntn_var_pct": 2.0,
+          "imi_pct": 2.04,
+          "quotazione_eur_mq": 1260.0,
+          "quotazione_var_pct": -1.3
+        },
+        {
+          "year": 2020,
+          "ntn": 200.0,
+          "ntn_var_pct": -0.7,
+          "imi_pct": 2.02,
+          "quotazione_eur_mq": 1260.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2021,
+          "ntn": 389.0,
+          "ntn_var_pct": 95.0,
+          "imi_pct": 3.95,
+          "quotazione_eur_mq": 1260.0,
+          "quotazione_var_pct": 0.0
+        },
+        {
+          "year": 2022,
+          "ntn": 241.0,
+          "ntn_var_pct": -38.1,
+          "imi_pct": 2.39,
+          "quotazione_eur_mq": 1317.0,
+          "quotazione_var_pct": 4.5
+        },
+        {
+          "year": 2023,
+          "ntn": 236.0,
+          "ntn_var_pct": -2.0,
+          "imi_pct": 2.33,
+          "quotazione_eur_mq": 1317.0,
+          "quotazione_var_pct": 0.0
+        }
+      ],
+      "ntn_first": 185.0,
+      "ntn_last": 236.0,
+      "ntn_cagr_pct": 4.99,
+      "ntn_delta_pct": 27.57,
+      "ntn_recent_slope": -76.5,
+      "ntn_volatility_cv_pct": 31.1,
+      "imi_avg_pct": 2.44,
+      "imi_first_pct": 1.88,
+      "imi_last_pct": 2.33,
+      "imi_trend_slope": 0.149,
+      "momentum_tag": "growing",
+      "liquidity_score": 11.9,
+      "_z_components": {
+        "z_imi": -0.33,
+        "z_cagr": 0.09,
+        "z_slope": -3.13
+      },
+      "prezzo_attuale_eur_mq": 1550.0,
+      "price_volume_quadrant": "Q3_OPPORTUNITY"
+    },
+    {
+      "zona_old": "E10",
+      "zona_new": [
+        "E10"
+      ],
+      "denominazione": "CAPOLUOGO - QUARTIERE MODENA EST",
+      "rel": "direct",
+      "mapping_notes": "",
+      "years_covered": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 70.0,
+          "ntn_var_pct": 28.8,
+          "imi_pct": 2.09,
+          "quotazione_eur_mq": 1450.0,
+          "quotazione_var_pct": -2.0
+        },
+        {
+          "year": 2019,
+          "ntn": 58.0,
+          "ntn_var_pct": -17.8,
+          "imi_pct": 1.72,
+          "quotazione_eur_mq": 1433.0,
+          "quotazione_var_pct": -1.1
+        },
+        {
+          "year": 2020,
+          "ntn": 83.0,
+          "ntn_var_pct": 44.7,
+          "imi_pct": 2.48,
+          "quotazione_eur_mq": 1425.0,
+          "quotazione_var_pct": -0.6
+        },
+        {
+          "year": 2021,
+          "ntn": 77.0,
+          "ntn_var_pct": -7.3,
+          "imi_pct": 2.3,
+          "quotazione_eur_mq": 1421.0,
+          "quotazione_var_pct": -0.3
+        },
+        {
+          "year": 2022,
+          "ntn": 80.0,
+          "ntn_var_pct": 4.0,
+          "imi_pct": 2.38,
+          "quotazione_eur_mq": 1483.0,
+          "quotazione_var_pct": 4.4
+        },
+        {
+          "year": 2023,
+          "ntn": 53.0,
+          "ntn_var_pct": -33.7,
+          "imi_pct": 1.58,
+          "quotazione_eur_mq": 1517.0,
+          "quotazione_var_pct": 2.2
+        }
+      ],
+      "ntn_first": 70.0,
+      "ntn_last": 53.0,
+      "ntn_cagr_pct": -5.41,
+      "ntn_delta_pct": -24.29,
+      "ntn_recent_slope": -12.0,
+      "ntn_volatility_cv_pct": 17.5,
+      "imi_avg_pct": 2.09,
+      "imi_first_pct": 2.09,
+      "imi_last_pct": 1.58,
+      "imi_trend_slope": -0.021,
+      "momentum_tag": "cooling",
+      "liquidity_score": 10.6,
+      "_z_components": {
+        "z_imi": -1.07,
+        "z_cagr": -0.91,
+        "z_slope": 0.1
+      },
+      "prezzo_attuale_eur_mq": 1675.0,
+      "price_volume_quadrant": "Q4_DEAD"
+    }
+  ],
+  "macroaree_volume_metrics": [
+    {
+      "name": "MODENA CAPOLUOGO",
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 2287.0,
+          "imi_pct": 2.39,
+          "quota_pct": 28.1
+        },
+        {
+          "year": 2020,
+          "ntn": 2149.0,
+          "imi_pct": 2.2,
+          "quota_pct": 26.9
+        },
+        {
+          "year": 2021,
+          "ntn": 2894.0,
+          "imi_pct": 3.01,
+          "quota_pct": 26.1
+        },
+        {
+          "year": 2022,
+          "ntn": 2559.0,
+          "imi_pct": 2.66,
+          "quota_pct": 23.8
+        },
+        {
+          "year": 2023,
+          "ntn": 2346.0,
+          "imi_pct": 2.43,
+          "quota_pct": 24.5
+        }
+      ],
+      "ntn_first": 2287.0,
+      "ntn_last": 2346.0,
+      "ntn_cagr_pct": 0.51,
+      "imi_last_pct": 2.43,
+      "imi_trend_slope": 0.046,
+      "quota_last_pct": 24.5,
+      "momentum_tag": "stable"
+    },
+    {
+      "name": "PEDEMONTANA",
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 2077.0,
+          "imi_pct": 2.3,
+          "quota_pct": 25.5
+        },
+        {
+          "year": 2019,
+          "ntn": 2212.0,
+          "imi_pct": 2.44,
+          "quota_pct": 25.8
+        },
+        {
+          "year": 2020,
+          "ntn": 1960.0,
+          "imi_pct": 2.2,
+          "quota_pct": 24.5
+        },
+        {
+          "year": 2021,
+          "ntn": 2724.0,
+          "imi_pct": 2.99,
+          "quota_pct": 24.6
+        },
+        {
+          "year": 2022,
+          "ntn": 2634.0,
+          "imi_pct": 2.88,
+          "quota_pct": 24.5
+        },
+        {
+          "year": 2023,
+          "ntn": 2246.0,
+          "imi_pct": 2.45,
+          "quota_pct": 23.5
+        }
+      ],
+      "ntn_first": 2077.0,
+      "ntn_last": 2246.0,
+      "ntn_cagr_pct": 1.58,
+      "imi_last_pct": 2.45,
+      "imi_trend_slope": 0.082,
+      "quota_last_pct": 23.5,
+      "momentum_tag": "stable"
+    },
+    {
+      "name": "PIANURA SECCHIA",
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 1352.0,
+          "imi_pct": 2.66,
+          "quota_pct": 16.6
+        },
+        {
+          "year": 2019,
+          "ntn": 1408.0,
+          "imi_pct": 2.77,
+          "quota_pct": 16.4
+        },
+        {
+          "year": 2020,
+          "ntn": 1261.0,
+          "imi_pct": 2.5,
+          "quota_pct": 15.8
+        },
+        {
+          "year": 2021,
+          "ntn": 1643.0,
+          "imi_pct": 3.2,
+          "quota_pct": 14.8
+        },
+        {
+          "year": 2022,
+          "ntn": 1671.0,
+          "imi_pct": 3.25,
+          "quota_pct": 15.5
+        },
+        {
+          "year": 2023,
+          "ntn": 1501.0,
+          "imi_pct": 2.9,
+          "quota_pct": 15.7
+        }
+      ],
+      "ntn_first": 1352.0,
+      "ntn_last": 1501.0,
+      "ntn_cagr_pct": 2.11,
+      "imi_last_pct": 2.9,
+      "imi_trend_slope": 0.095,
+      "quota_last_pct": 15.7,
+      "momentum_tag": "growing"
+    },
+    {
+      "name": "BASSA MODENESE",
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 759.0,
+          "imi_pct": 1.74,
+          "quota_pct": 9.3
+        },
+        {
+          "year": 2019,
+          "ntn": 839.0,
+          "imi_pct": 1.92,
+          "quota_pct": 9.8
+        },
+        {
+          "year": 2020,
+          "ntn": 812.0,
+          "imi_pct": 1.9,
+          "quota_pct": 10.1
+        },
+        {
+          "year": 2021,
+          "ntn": 1272.0,
+          "imi_pct": 2.9,
+          "quota_pct": 11.5
+        },
+        {
+          "year": 2022,
+          "ntn": 1219.0,
+          "imi_pct": 2.77,
+          "quota_pct": 11.3
+        },
+        {
+          "year": 2023,
+          "ntn": 1168.0,
+          "imi_pct": 2.65,
+          "quota_pct": 12.2
+        }
+      ],
+      "ntn_first": 759.0,
+      "ntn_last": 1168.0,
+      "ntn_cagr_pct": 9.0,
+      "imi_last_pct": 2.65,
+      "imi_trend_slope": 0.231,
+      "quota_last_pct": 12.2,
+      "momentum_tag": "rocket"
+    },
+    {
+      "name": "PIANURA PANARO",
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 894.0,
+          "imi_pct": 2.47,
+          "quota_pct": 11.0
+        },
+        {
+          "year": 2019,
+          "ntn": 907.0,
+          "imi_pct": 2.5,
+          "quota_pct": 10.6
+        },
+        {
+          "year": 2020,
+          "ntn": 849.0,
+          "imi_pct": 2.3,
+          "quota_pct": 10.6
+        },
+        {
+          "year": 2021,
+          "ntn": 1197.0,
+          "imi_pct": 3.28,
+          "quota_pct": 10.8
+        },
+        {
+          "year": 2022,
+          "ntn": 1287.0,
+          "imi_pct": 3.5,
+          "quota_pct": 11.9
+        },
+        {
+          "year": 2023,
+          "ntn": 1099.0,
+          "imi_pct": 2.98,
+          "quota_pct": 11.5
+        }
+      ],
+      "ntn_first": 894.0,
+      "ntn_last": 1099.0,
+      "ntn_cagr_pct": 4.22,
+      "imi_last_pct": 2.98,
+      "imi_trend_slope": 0.187,
+      "quota_last_pct": 11.5,
+      "momentum_tag": "growing"
+    },
+    {
+      "name": "FRIGNANO",
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 507.0,
+          "imi_pct": 1.24,
+          "quota_pct": 6.2
+        },
+        {
+          "year": 2019,
+          "ntn": 544.0,
+          "imi_pct": 1.33,
+          "quota_pct": 6.4
+        },
+        {
+          "year": 2020,
+          "ntn": 626.0,
+          "imi_pct": 1.5,
+          "quota_pct": 7.8
+        },
+        {
+          "year": 2021,
+          "ntn": 857.0,
+          "imi_pct": 2.1,
+          "quota_pct": 7.7
+        },
+        {
+          "year": 2022,
+          "ntn": 933.0,
+          "imi_pct": 2.28,
+          "quota_pct": 8.7
+        },
+        {
+          "year": 2023,
+          "ntn": 794.0,
+          "imi_pct": 1.94,
+          "quota_pct": 8.3
+        }
+      ],
+      "ntn_first": 507.0,
+      "ntn_last": 794.0,
+      "ntn_cagr_pct": 9.39,
+      "imi_last_pct": 1.94,
+      "imi_trend_slope": 0.199,
+      "quota_last_pct": 8.3,
+      "momentum_tag": "rocket"
+    },
+    {
+      "name": "APPENNINO PANARO",
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 140.0,
+          "imi_pct": 1.12,
+          "quota_pct": 1.7
+        },
+        {
+          "year": 2019,
+          "ntn": 145.0,
+          "imi_pct": 1.16,
+          "quota_pct": 1.7
+        },
+        {
+          "year": 2020,
+          "ntn": 204.0,
+          "imi_pct": 1.6,
+          "quota_pct": 2.5
+        },
+        {
+          "year": 2021,
+          "ntn": 291.0,
+          "imi_pct": 2.34,
+          "quota_pct": 2.6
+        },
+        {
+          "year": 2022,
+          "ntn": 275.0,
+          "imi_pct": 2.21,
+          "quota_pct": 2.6
+        },
+        {
+          "year": 2023,
+          "ntn": 252.0,
+          "imi_pct": 2.03,
+          "quota_pct": 2.6
+        }
+      ],
+      "ntn_first": 140.0,
+      "ntn_last": 252.0,
+      "ntn_cagr_pct": 12.47,
+      "imi_last_pct": 2.03,
+      "imi_trend_slope": 0.241,
+      "quota_last_pct": 2.6,
+      "momentum_tag": "rocket"
+    },
+    {
+      "name": "APPENNINO SECCHIA",
+      "ntn_series": [
+        {
+          "year": 2018,
+          "ntn": 119.0,
+          "imi_pct": 0.93,
+          "quota_pct": 1.5
+        },
+        {
+          "year": 2019,
+          "ntn": 128.0,
+          "imi_pct": 1.01,
+          "quota_pct": 1.5
+        },
+        {
+          "year": 2020,
+          "ntn": 138.0,
+          "imi_pct": 1.1,
+          "quota_pct": 1.7
+        },
+        {
+          "year": 2021,
+          "ntn": 207.0,
+          "imi_pct": 1.62,
+          "quota_pct": 1.9
+        },
+        {
+          "year": 2022,
+          "ntn": 194.0,
+          "imi_pct": 1.52,
+          "quota_pct": 1.8
+        },
+        {
+          "year": 2023,
+          "ntn": 166.0,
+          "imi_pct": 1.3,
+          "quota_pct": 1.7
+        }
+      ],
+      "ntn_first": 119.0,
+      "ntn_last": 166.0,
+      "ntn_cagr_pct": 6.88,
+      "imi_last_pct": 1.3,
+      "imi_trend_slope": 0.111,
+      "quota_last_pct": 1.7,
+      "momentum_tag": "growing"
+    }
+  ],
+  "totale_provincia_metrics": {
+    "_method": "ntn_sum_macroaree (sum 8 macroaree per anno) + imi_weighted_avg (weighted by NTN)",
+    "ntn_series": [
+      {
+        "year": 2018,
+        "ntn_sum_macroaree": 8135.0,
+        "ntn_declared_totale": null,
+        "imi_weighted_avg_pct": 2.25,
+        "imi_declared_totale_pct": null,
+        "n_macroaree": 8
+      },
+      {
+        "year": 2019,
+        "ntn_sum_macroaree": 6183.0,
+        "ntn_declared_totale": null,
+        "imi_weighted_avg_pct": 2.3,
+        "imi_declared_totale_pct": null,
+        "n_macroaree": 7
+      },
+      {
+        "year": 2020,
+        "ntn_sum_macroaree": 7999.0,
+        "ntn_declared_totale": null,
+        "imi_weighted_avg_pct": 2.14,
+        "imi_declared_totale_pct": null,
+        "n_macroaree": 8
+      },
+      {
+        "year": 2021,
+        "ntn_sum_macroaree": 11085.0,
+        "ntn_declared_totale": null,
+        "imi_weighted_avg_pct": 2.94,
+        "imi_declared_totale_pct": null,
+        "n_macroaree": 8
+      },
+      {
+        "year": 2022,
+        "ntn_sum_macroaree": 10772.0,
+        "ntn_declared_totale": 10772.0,
+        "imi_weighted_avg_pct": 2.85,
+        "imi_declared_totale_pct": 2.79,
+        "n_macroaree": 8
+      },
+      {
+        "year": 2023,
+        "ntn_sum_macroaree": 9572.0,
+        "ntn_declared_totale": 9572.0,
+        "imi_weighted_avg_pct": 2.53,
+        "imi_declared_totale_pct": 2.47,
+        "n_macroaree": 8
+      }
+    ],
+    "ntn_first": 8135.0,
+    "ntn_last": 9572.0,
+    "ntn_cagr_pct": 3.31,
+    "ntn_delta_pct": 17.66,
+    "ntn_peak": 11085.0,
+    "ntn_peak_year": 2021,
+    "imi_last_pct": 2.53,
+    "imi_avg_pct": 2.5
+  },
+  "summary": {
+    "n_zone": 19,
+    "n_macroaree": 8,
+    "tag_distribution": {
+      "rocket": 3,
+      "growing": 3,
+      "stable": 11,
+      "cooling": 2,
+      "frozen": 0,
+      "unknown": 0
+    },
+    "quadrant_distribution": {
+      "Q1_HOT": 7,
+      "Q2_OVERPRICED": 3,
+      "Q3_OPPORTUNITY": 3,
+      "Q4_DEAD": 6,
+      "unknown": 0
+    }
+  }
+}

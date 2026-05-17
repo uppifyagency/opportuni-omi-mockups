@@ -1,0 +1,30 @@
+.env
+.env.local
+.env.*.local
+*.log
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+.coverage
+.tox/
+htmlcov/
+.idea/
+.vscode/
+*.swp
+*.swo
+.claude/
+.nwave/
+.gbrain/
+.gstack/
+
+# Output rigenerabili dei mockup (commentati: i mockup ne hanno bisogno per girare out-of-the-box)
+# data/computed/
+# data/sagona-backfill/cache/
+
+# File grandi non versionati
+*.kmz.bak
+*.geojson.bak-*

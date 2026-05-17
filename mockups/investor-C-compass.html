@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Modena · Investment Compass · OMI 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.5.0/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.5.0/dist/maplibre-gl.css" rel="stylesheet">
+<style>
+  :root {
+    --bg:        oklch(96% 0.008 75);
+    --paper:     oklch(99% 0.005 75);
+    --paper-2:   oklch(94% 0.008 75);
+    --ink:       oklch(15% 0.008 30);
+    --ink-mid:   oklch(38% 0.008 30);
+    --ink-dim:   oklch(58% 0.008 30);
+    --ink-faint: oklch(72% 0.006 75);
+    --rule:      oklch(86% 0.008 75);
+    --rule-mid:  oklch(76% 0.008 75);
+
+    --up:        oklch(50% 0.16 145);
+    --up-soft:   oklch(94% 0.05 145);
+    --down:      oklch(52% 0.20 25);
+    --down-soft: oklch(94% 0.05 25);
+    --watch:     oklch(63% 0.16 75);
+    --watch-soft:oklch(94% 0.06 75);
+    --flat:      oklch(72% 0.012 80);
+    --accent:    oklch(50% 0.18 40);
+    --accent-2:  oklch(38% 0.16 250);
+
+    --serif:     'Fraunces', 'Times New Roman', serif;
+    --sans:      'DM Sans', system-ui, sans-serif;
+    --mono:      'JetBrains Mono', 'SF Mono', monospace;
+  }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  html, body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.55; margin: 0; }
+  body { padding-bottom: 80px; }
+  .serif  { font-family: var(--serif); font-feature-settings: "ss01"; }
+  .italic { font-family: var(--serif); font-style: italic; }
+  .mono   { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .num    { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .wrap   { max-width: 1320px; margin: 0 auto; padding: 0 36px; }
+  .upper  { text-transform: uppercase; letter-spacing: 0.14em; }
+
+  /* HEADER */
+  header { padding: 64px 0 28px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--accent); font-weight: 500;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--accent); border-radius: 1px; }
+  h1 {
+    font-family: var(--serif); font-weight: 350;
+    font-size: clamp(48px, 6vw, 80px); line-height: 0.98; letter-spacing: -0.025em;
+    margin: 18px 0 0; color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+  h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .deck { font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.45;
+    color: var(--ink-mid); max-width: 720px; margin-top: 24px; font-weight: 350; }
+
+  /* TOOLBAR sticky */
+  .toolbar {
+    position: sticky; top: 0; z-index: 100;
+    background: oklch(96% 0.008 75 / 0.92); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    padding: 14px 0; margin: 36px 0 0;
+  }
+  .toolbar-inner { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .tb-group { display: flex; align-items: center; gap: 8px; }
+  .tb-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-dim); font-weight: 500; }
+  .pill {
+    background: transparent; border: 1px solid var(--rule-mid); border-radius: 999px;
+    padding: 6px 14px; cursor: pointer; transition: all 0.15s;
+    font-size: 12px; font-weight: 500; color: var(--ink-mid); white-space: nowrap;
+  }
+  .pill:hover { background: var(--paper); border-color: var(--ink-faint); color: var(--ink); }
+  .pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  /* HEADLINE KPI strip */
+  .kpi-row { margin-top: 36px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    gap: 28px; align-items: end; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+  .kpi-headline { font-family: var(--serif); font-style: italic; font-size: 23px; line-height: 1.25; color: var(--ink); font-weight: 350; }
+  .kpi-headline em { color: var(--accent); font-style: normal; font-weight: 500; }
+  .kpi { text-align: right; }
+  .kpi .lbl { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-dim); margin-bottom: 8px; }
+  .kpi .val { font-family: var(--mono); font-size: 28px; font-weight: 500; letter-spacing: -0.04em; color: var(--ink); }
+  .kpi .sub { font-family: var(--serif); font-style: italic; font-size: 12px; color: var(--ink-mid); margin-top: 4px; }
+  .val.up { color: var(--up); }
+  .val.down { color: var(--down); }
+
+  /* SECTIONS */
+  section { margin-top: 64px; }
+  .sec-eye { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); font-weight: 500; }
+  h2 { font-family: var(--serif); font-weight: 350; font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.05; letter-spacing: -0.015em; margin: 12px 0 0; max-width: 800px; }
+  h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .sec-deck { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--ink-mid);
+    margin-top: 12px; max-width: 640px; line-height: 1.5; font-weight: 350; }
+
+  /* MAPS */
+  .map-shell { margin-top: 24px; background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden; position: relative; }
+  #map-prov, #map-zone { height: 520px; }
+  .map-legend {
+    position: absolute; left: 16px; bottom: 16px;
+    background: oklch(99% 0.005 75 / 0.94); backdrop-filter: blur(8px);
+    padding: 12px 16px; border: 1px solid var(--rule); border-radius: 4px; z-index: 5; font-size: 11px;
+  }
+  .map-legend .ll { font-family: var(--mono); color: var(--ink-dim); font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 6px; }
+  .legend-row { display: flex; align-items: center; gap: 12px; }
+  .legend-scale { width: 200px; height: 8px; border-radius: 2px;
+    background: linear-gradient(90deg, rgb(195,60,55) 0%, rgb(222,132,92) 25%, rgb(220,210,188) 50%, rgb(144,188,122) 75%, rgb(60,140,80) 100%); }
+  .legend-tick { font-family: var(--mono); font-size: 10.5px; color: var(--ink-mid); }
+  .maplibregl-popup-content { background: var(--paper); border: 1px solid var(--rule-mid); border-radius: 4px;
+    box-shadow: 0 8px 24px oklch(15% 0 0 / 0.08); padding: 14px 16px; min-width: 220px; font-family: var(--sans); }
+  .maplibregl-popup-tip { display: none; }
+  .maplibregl-ctrl-attrib { background: oklch(98% 0.005 75 / 0.8) !important; font-family: var(--mono) !important; font-size: 9px !important; color: var(--ink-dim) !important; }
+  .maplibregl-ctrl-group { background: var(--paper) !important; border: 1px solid var(--rule) !important; box-shadow: 0 2px 6px oklch(15% 0 0 / 0.05) !important; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 13px; }
+  thead th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-dim); padding: 12px 12px 12px 0; font-weight: 500; border-bottom: 1px solid var(--rule-mid); }
+  thead th.right { text-align: right; padding-right: 0; }
+  tbody td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--rule); font-family: var(--mono); vertical-align: middle; }
+  tbody td:first-child { font-weight: 600; }
+  tbody td.name { font-family: var(--serif); font-size: 15px; font-weight: 400; color: var(--ink); font-variant-numeric: normal; }
+  tbody td.right { text-align: right; padding-right: 0; }
+  tbody tr:hover { background: oklch(95% 0.01 75); }
+  tbody tr.row-buy { background: var(--up-soft); }
+  tbody tr.row-buy:hover { background: oklch(91% 0.06 145); }
+  tbody tr.row-avoid { background: var(--down-soft); }
+  tbody tr.row-avoid:hover { background: oklch(91% 0.06 25); }
+
+  .pill-pct { display: inline-block; padding: 3px 8px; border-radius: 3px;
+    font-family: var(--mono); font-size: 11.5px; font-weight: 500; letter-spacing: -0.01em; }
+  .pill-pct.up { background: var(--up-soft); color: var(--up); }
+  .pill-pct.down { background: var(--down-soft); color: var(--down); }
+  .pill-pct.flat { background: oklch(92% 0.005 75); color: var(--ink-dim); }
+  .verdict { display: inline-block; padding: 4px 10px; border-radius: 3px;
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; }
+  .verdict.BUY { background: var(--up); color: var(--bg); }
+  .verdict.WATCH { background: var(--watch); color: var(--bg); }
+  .verdict.AVOID { background: var(--down); color: var(--bg); }
+  .anomaly-icon { display: inline-block; width: 14px; height: 14px;
+    background: var(--watch); border-radius: 50%; vertical-align: middle;
+    font-family: var(--serif); font-style: italic; color: var(--bg);
+    text-align: center; font-size: 10px; line-height: 14px; margin-left: 6px; }
+
+  /* Context badge — qualitative tag, not in score */
+  .ctx { display: inline-block; padding: 2px 8px; border-radius: 2px;
+    font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-left: 6px;
+    vertical-align: middle; }
+  .ctx-urban    { background: oklch(92% 0.04 250); color: oklch(35% 0.16 250); }
+  .ctx-cintura  { background: oklch(94% 0.06 140); color: oklch(40% 0.14 140); }
+  .ctx-frazione { background: oklch(94% 0.05 110); color: oklch(42% 0.12 110); }
+  .ctx-rurale   { background: oklch(93% 0.04 70);  color: oklch(40% 0.10 70); }
+  .ctx-bassa    { background: oklch(93% 0.04 60);  color: oklch(40% 0.12 60); }
+  .ctx-montano  { background: oklch(94% 0.06 35);  color: oklch(45% 0.16 35); }
+  .ctx-industriale { background: oklch(93% 0.03 30); color: oklch(38% 0.10 30); }
+
+  /* SPARKLINE */
+  .spark-grid { margin-top: 24px; display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0;
+    border-top: 1px solid var(--rule); }
+  .spark-cell { padding: 20px 20px 20px 0; border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule); transition: background 0.15s; cursor: pointer; }
+  .spark-cell:hover { background: oklch(94% 0.01 75); }
+  .spark-cell:last-child { border-right: none; }
+  .spark-cell.is-buy { background: var(--up-soft); }
+  .spark-cell.is-avoid { background: var(--down-soft); }
+  .spark-zona { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
+  .spark-name { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.2; color: var(--ink); margin-top: 4px; min-height: 38px; }
+  .spark-stat { font-family: var(--mono); font-size: 22px; font-weight: 500; letter-spacing: -0.03em; margin-top: 10px; }
+  .spark-stat.up { color: var(--up); }
+  .spark-stat.down { color: var(--down); }
+  .spark-stat.flat { color: var(--flat); }
+  .spark-meta { font-size: 11px; color: var(--ink-dim); margin-top: 4px; font-family: var(--mono); }
+  .spark-svg { width: 100%; height: 32px; margin-top: 12px; }
+  .spark-svg path.line { fill: none; stroke-width: 1.8; }
+  .spark-svg path.area { fill-opacity: 0.10; stroke: none; }
+  .spark-svg.up path.line { stroke: var(--up); }
+  .spark-svg.up path.area { fill: var(--up); }
+  .spark-svg.down path.line { stroke: var(--down); }
+  .spark-svg.down path.area { fill: var(--down); }
+  .spark-svg.flat path.line { stroke: var(--flat); }
+  .spark-svg.flat path.area { fill: var(--flat); }
+  .spark-svg circle { stroke: var(--paper); stroke-width: 1.5; }
+
+  /* SIGNALS LANES */
+  .lanes { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--rule); }
+  .lane { padding: 24px 24px 24px 0; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .lane:last-child { border-right: none; padding-right: 0; }
+  .lane-head { display: flex; align-items: baseline; justify-content: space-between; }
+  .lane-title { font-family: var(--serif); font-style: italic; font-size: 22px; }
+  .lane-title.BUY { color: var(--up); }
+  .lane-title.WATCH { color: var(--watch); }
+  .lane-title.AVOID { color: var(--down); }
+  .lane-count { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
+  .lane-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 12.5px; align-items: center; }
+  .lane-row:last-child { border-bottom: none; }
+  .lane-row .nm { font-family: var(--sans); font-size: 13px; color: var(--ink); }
+  .lane-row .nm em { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--ink-mid); }
+  .lane-row .stat { color: var(--ink-mid); }
+
+  /* SCORE COMPONENTS bar */
+  .score-bar { display: inline-flex; height: 8px; width: 80px; border-radius: 2px; overflow: hidden; vertical-align: middle; }
+  .score-seg { flex: 1; min-width: 1px; }
+
+  /* WHAT-IF */
+  .whatif { margin-top: 24px; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  .wf-inputs { display: flex; flex-direction: column; gap: 20px; }
+  .wf-input-row { display: flex; flex-direction: column; gap: 6px; }
+  .wf-input-row label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-dim); font-weight: 500; }
+  .wf-input-row input { font-family: var(--mono); font-size: 18px; padding: 10px 14px; border: 1px solid var(--rule);
+    background: var(--bg); border-radius: 4px; outline: none; transition: border-color 0.2s; }
+  .wf-input-row input:focus { border-color: var(--accent); }
+  .wf-input-row select { font-family: var(--mono); font-size: 14px; padding: 10px 14px; border: 1px solid var(--rule);
+    background: var(--bg); border-radius: 4px; outline: none; }
+  .wf-outputs { display: flex; flex-direction: column; gap: 16px; padding-left: 28px; border-left: 1px solid var(--rule); }
+  .wf-out { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .wf-out:last-child { border-bottom: none; }
+  .wf-out .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-dim); }
+  .wf-out .val { font-family: var(--mono); font-size: 26px; font-weight: 500; letter-spacing: -0.03em; margin-top: 4px; }
+  .wf-out .delta { font-family: var(--mono); font-size: 12px; margin-top: 4px; }
+
+  /* WEIGHT SLIDERS */
+  .weights { margin-top: 24px; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 24px 28px; }
+  .weights-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+  .weights-title { font-family: var(--serif); font-style: italic; font-size: 18px; }
+  .weights-sub { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--ink-mid); }
+  .weights-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  .w-row { display: flex; flex-direction: column; gap: 6px; }
+  .w-row label { font-size: 11px; color: var(--ink-mid); display: flex; justify-content: space-between; align-items: baseline; }
+  .w-row label .nm { font-weight: 500; color: var(--ink); }
+  .w-row label .pct { font-family: var(--mono); color: var(--accent); font-weight: 600; }
+  .w-row input[type=range] { accent-color: var(--accent); }
+
+  .reset-btn { background: transparent; border: 1px solid var(--rule-mid); padding: 4px 10px; border-radius: 999px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-mid); cursor: pointer; transition: all 0.15s; }
+  .reset-btn:hover { background: var(--paper); color: var(--ink); border-color: var(--ink-faint); }
+
+  /* FOOTER */
+  footer { margin-top: 100px; padding-top: 28px; border-top: 1px solid var(--rule); font-size: 11.5px; color: var(--ink-dim); }
+  footer a { color: var(--ink-mid); text-decoration-color: var(--rule-mid); text-underline-offset: 3px; }
+  .colophon { font-family: var(--serif); font-style: italic; color: var(--ink-mid); margin-top: 12px; font-size: 14px; }
+
+  .skel { height: 18px; background: var(--rule); border-radius: 2px; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Investment compass · OMI · Agenzia delle Entrate</div>
+    <h1>Modena: zona <em>per zona</em>,<br>segnale <em>per segnale</em>.</h1>
+    <p class="deck">Cinque tipologie di immobile, due decenni di prezzi, score composito a tre cifre. Bussola d'orientamento per un investitore, non rivista.</p>
+  </header>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="toolbar-inner wrap" style="max-width: 1320px; margin: 0 auto; padding: 0 36px">
+      <div class="tb-group">
+        <span class="tb-label">Tipologia</span>
+        <div class="tb-group" id="pillsTipo"></div>
+      </div>
+      <div class="tb-group">
+        <span class="tb-label">Operazione</span>
+        <div class="pill active" data-op="acquisto">Acquisto</div>
+        <div class="pill" data-op="affitto">Affitto</div>
+      </div>
+      <div class="tb-group">
+        <span class="tb-label">Mappa</span>
+        <div class="pill active" data-metric="cagr">CAGR</div>
+        <div class="pill" data-metric="yield">Yield</div>
+        <div class="pill" data-metric="score">Score</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADLINE KPI -->
+  <div class="kpi-row">
+    <div class="kpi-headline">
+      Mercato <em id="kpi-mood">sostanzialmente piatto</em>,<br>asse di valore in <em id="kpi-mood-2">migrazione</em>.
+    </div>
+    <div class="kpi"><div class="lbl">CAGR · zone correnti</div><div class="val num" id="kpi-cagr">…</div><div class="sub">media (max 12 anni · 2014–2026)</div></div>
+    <div class="kpi"><div class="lbl">Yield lordo</div><div class="val num" id="kpi-yield">…</div><div class="sub">acquisto vs affitto</div></div>
+    <div class="kpi"><div class="lbl">€/m² · oggi</div><div class="val num" id="kpi-prezzo">…</div><div class="sub" id="kpi-prezzo-sub">…</div></div>
+    <div class="kpi"><div class="lbl">Comuni</div><div class="val num"><span id="kpi-buy" style="color: var(--up)">…</span><span style="color: var(--ink-faint); font-size: 0.55em">/<span id="kpi-buy-tot">…</span></span></div><div class="sub" id="kpi-buy-sub">in BUY su totale</div></div>
+  </div>
+
+  <!-- § 1 PROVINCIA -->
+  <section id="sec-prov">
+    <div class="sec-eye">§ I · Scala provincia</div>
+    <h2>Provincia di Modena, <em><span id="prov-h2-count">…</span> comuni</em>.</h2>
+    <p class="sec-deck">Color = indicatore selezionato in toolbar. Hover per dettaglio, click su una riga della tabella per il drill-down zona.</p>
+
+    <div class="map-shell">
+      <div id="map-prov"></div>
+      <div class="map-legend">
+        <div class="ll" id="legend-prov-label">CAGR · per comune</div>
+        <div class="legend-row">
+          <span class="legend-tick" id="legend-prov-min">…</span>
+          <div class="legend-scale"></div>
+          <span class="legend-tick" id="legend-prov-max">…</span>
+        </div>
+      </div>
+    </div>
+
+    <table id="tbl-prov">
+      <thead>
+        <tr>
+          <th style="width: 5%">Cat.</th>
+          <th style="width: 28%">Comune</th>
+          <th class="right" style="width: 12%">€/m² oggi</th>
+          <th class="right" style="width: 12%">CAGR</th>
+          <th class="right" style="width: 11%">Yield</th>
+          <th class="right" style="width: 11%">Volatilità</th>
+          <th style="width: 11%">Score</th>
+          <th class="right" style="width: 10%">Verdict</th>
+        </tr>
+      </thead>
+      <tbody id="tbl-prov-body"><tr><td colspan="8"><div class="skel"></div></td></tr></tbody>
+    </table>
+  </section>
+
+  <!-- § 2 MODENA CITY ZONE -->
+  <section id="sec-zone">
+    <div class="sec-eye">§ II · Scala zona · Modena città</div>
+    <h2><span id="zone-h2-count">…</span> zone OMI, <em>una mappa, una griglia</em>.</h2>
+    <p class="sec-deck">Stessa metrica della mappa provincia, scala sub-comunale. La griglia sotto la mappa permette il colpo d'occhio sequenziale.</p>
+
+    <div class="map-shell">
+      <div id="map-zone"></div>
+      <div class="map-legend">
+        <div class="ll" id="legend-zone-label">CAGR · per zona</div>
+        <div class="legend-row">
+          <span class="legend-tick" id="legend-zone-min">…</span>
+          <div class="legend-scale"></div>
+          <span class="legend-tick" id="legend-zone-max">…</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spark-grid" id="spark-grid"></div>
+  </section>
+
+  <!-- § 3 SCORE & SIGNALS -->
+  <section id="sec-signals">
+    <div class="sec-eye">§ III · Score & segnali</div>
+    <h2>Punteggio <em>componibile</em>.</h2>
+    <p class="sec-deck">Score 0-100 calcolato come media pesata di sei componenti normalizzate (crescita, yield, stabilità, momentum, convenienza, liquidità). I pesi sono modificabili: tutti i ranking, verdict e segnali si ricomputano in tempo reale.</p>
+
+    <div class="weights">
+      <div class="weights-head">
+        <div>
+          <div class="weights-title">Pesi delle componenti</div>
+          <div class="weights-sub">Default <strong>30/25/15/15/5/10</strong> (crescita/yield/stabilità/momentum/convenienza/liquidità) · BUY soglia <strong>≥ 70</strong> · penalty <strong>−10</strong> se CAGR &lt; 0 (anti value-trap) · zone con &lt; 5 anni di storia capped a WATCH (anti thin-data)</div>
+        </div>
+        <button class="reset-btn" id="btn-reset-weights">↺ Default</button>
+      </div>
+      <div class="weights-grid">
+        <div class="w-row">
+          <label><span class="nm">Crescita</span><span class="pct" id="w-growth-pct">30%</span></label>
+          <input type="range" min="0" max="60" value="30" id="w-growth">
+        </div>
+        <div class="w-row">
+          <label><span class="nm">Yield</span><span class="pct" id="w-yield-pct">25%</span></label>
+          <input type="range" min="0" max="60" value="25" id="w-yield">
+        </div>
+        <div class="w-row">
+          <label><span class="nm">Stabilità</span><span class="pct" id="w-stability-pct">15%</span></label>
+          <input type="range" min="0" max="60" value="15" id="w-stability">
+        </div>
+        <div class="w-row">
+          <label><span class="nm">Momentum</span><span class="pct" id="w-momentum-pct">15%</span></label>
+          <input type="range" min="0" max="60" value="15" id="w-momentum">
+        </div>
+        <div class="w-row">
+          <label><span class="nm">Convenienza</span><span class="pct" id="w-level-pct">5%</span></label>
+          <input type="range" min="0" max="60" value="5" id="w-level">
+        </div>
+        <div class="w-row">
+          <label><span class="nm">Liquidità <span style="font-size:9px;color:var(--ink-dim);font-weight:400;letter-spacing:0">NTN/IMI · solo zone Modena</span></span><span class="pct" id="w-liquidity-pct">10%</span></label>
+          <input type="range" min="0" max="60" value="10" id="w-liquidity">
+        </div>
+      </div>
+      <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--ink-mid); line-height: 1.55; font-family: var(--serif); font-style: italic;">
+        <strong style="font-style:normal;font-family:var(--sans);font-weight:600">Cosa c'è dentro il punteggio.</strong>
+        <span class="mono not-italic">Crescita</span> = CAGR full-span normalizzato.
+        <span class="mono not-italic">Yield</span> = canone annuo / prezzo acquisto.
+        <span class="mono not-italic">Stabilità</span> = inverso della volatilità (stdev dei rendimenti annui).
+        <span class="mono not-italic">Momentum</span> = slope ultimi 5 anni / CAGR full-span (catch inflection points).
+        <span class="mono not-italic">Convenienza</span> = inverso del prezzo €/m² (più basso = più investibile relativamente).
+        <span class="mono not-italic">Liquidità</span> = score 0-100 derivato da NTN (volumi scambi PDF AdE 2018-2023) + IMI attuale (intensità mercato). Solo zone Modena.
+        Il <strong style="font-style:normal;font-family:var(--sans);font-weight:600">tag contestuale</strong> nelle tabelle (montano, cintura, capoluogo) non entra nello score: serve per leggere il numero in modo qualitativo.
+      </div>
+    </div>
+
+    <div class="lanes">
+      <div class="lane">
+        <div class="lane-head"><span class="lane-title BUY">▲ Top BUY</span><span class="lane-count" id="lane-buy-count">…</span></div>
+        <div id="lane-buy"></div>
+      </div>
+      <div class="lane">
+        <div class="lane-head"><span class="lane-title WATCH">◆ Top WATCH</span><span class="lane-count" id="lane-watch-count">…</span></div>
+        <div id="lane-watch"></div>
+      </div>
+      <div class="lane">
+        <div class="lane-head"><span class="lane-title AVOID">▼ Top AVOID</span><span class="lane-count" id="lane-avoid-count">…</span></div>
+        <div id="lane-avoid"></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 36px">
+      <div class="sec-eye">Anomalie · zone che divergono dalla loro fascia &gt; 1.5σ</div>
+      <div id="anomalies-list" style="margin-top: 14px"></div>
+    </div>
+  </section>
+
+  <!-- § 4 WHAT-IF -->
+  <section id="sec-whatif">
+    <div class="sec-eye">§ IV · What-if · simulatore</div>
+    <h2>Se compri <em>oggi</em>, in dieci anni…</h2>
+    <p class="sec-deck">Stima nominale lordo. Niente tasse, manutenzione, sfitto. È un ordine di grandezza, non un'analisi di banca. Cambia gli input — il risultato si aggiorna live.</p>
+
+    <div class="whatif">
+      <div class="wf-inputs">
+        <div class="wf-input-row">
+          <label>Zona di riferimento</label>
+          <select id="wf-zone"></select>
+        </div>
+        <div class="wf-input-row">
+          <label>Superficie commerciale (m²)</label>
+          <input type="number" id="wf-mq" value="80" step="5" min="10">
+        </div>
+        <div class="wf-input-row">
+          <label>Prezzo acquisto (€)</label>
+          <input type="number" id="wf-prezzo" value="200000" step="5000">
+        </div>
+        <div class="wf-input-row">
+          <label>Canone affitto (€ / mese)</label>
+          <input type="number" id="wf-canone" value="800" step="50">
+        </div>
+        <div class="wf-input-row">
+          <label>Orizzonte (anni)</label>
+          <input type="number" id="wf-anni" value="10" step="1" min="1" max="30">
+        </div>
+      </div>
+      <div class="wf-outputs">
+        <div class="wf-out">
+          <div class="lbl">€/m² acquisto</div>
+          <div class="val num" id="wf-emq">…</div>
+          <div class="delta" id="wf-emq-delta">…</div>
+        </div>
+        <div class="wf-out">
+          <div class="lbl">Yield lordo annuo</div>
+          <div class="val num" id="wf-yield">…</div>
+          <div class="delta" id="wf-yield-delta">…</div>
+        </div>
+        <div class="wf-out">
+          <div class="lbl">Cashflow affitti (orizzonte)</div>
+          <div class="val num" id="wf-cashflow">…</div>
+          <div class="delta">somma canoni × 12 × anni</div>
+        </div>
+        <div class="wf-out">
+          <div class="lbl">Apprezzamento capitale stimato</div>
+          <div class="val num" id="wf-cap">…</div>
+          <div class="delta" id="wf-cap-delta">su CAGR zona</div>
+        </div>
+        <div class="wf-out">
+          <div class="lbl">ROI nominale lordo (orizzonte)</div>
+          <div class="val num" id="wf-roi">…</div>
+          <div class="delta">apprezzamento + affitti / capitale iniziale</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona) wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni zone · GeoPOI reverse-engineered. Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap.
+    <p class="colophon">Mockup C · Investment Compass · CLI-Everything / opportuni-poc · anno MMXXVI</p>
+  </footer>
+
+</div>
+
+<script>
+// ─── Constants ────────────────────────────────────────────
+const TIPOLOGIE = [
+  { key: 'abitazioni_civili',      label: 'Abitazioni civili' },
+  { key: 'abitazioni_signorili',   label: 'Signorili' },
+  { key: 'negozi',                 label: 'Negozi' },
+  { key: 'uffici',                 label: 'Uffici' },
+  { key: 'magazzini',              label: 'Magazzini' },
+];
+// Default weights tuned for real-world investor signal:
+//   growth/yield dominate (55%), stability protects from volatile entry,
+//   momentum catches inflection, level (cheap entry) intentionally muted
+//   to avoid value-trap (low-price illiquid markets in structural decline).
+//   Liquidity (NTN/IMI from PDF AdE 2018-2023) adds a 6th dimension at 10%.
+// Default weights: 30/25/15/15/5/10. Liquidity at 10% — significant ma non dominante
+// (perché solo zone capoluogo Modena hanno dati, comuni provincia hanno liquidity=null).
+const DEFAULT_WEIGHTS = { growth: 30, yield: 25, stability: 15, momentum: 15, level: 5, liquidity: 10 };
+const SCORE_KEYS = ['growth','yield','stability','momentum','level','liquidity'];
+// BUY threshold raised to 70 (was 65) to be more selective.
+const BUY_THRESHOLD = 70;
+const AVOID_THRESHOLD = 35;
+// CAGR-negative penalty: a value trap (low €/m² + high yield BUT shrinking market)
+// gets -10 points to its score. Prevents recommending shrinking comuni.
+const CAGR_NEGATIVE_PENALTY = 10;
+const RAMP = [
+  { t: 0.00, rgb: [195, 60,  55]  },
+  { t: 0.25, rgb: [222, 132, 92]  },
+  { t: 0.50, rgb: [220, 210, 188] },
+  { t: 0.75, rgb: [144, 188, 122] },
+  { t: 1.00, rgb: [60,  140, 80]  },
+];
+function colorRamp(t) {
+  t = Math.max(0, Math.min(1, t));
+  for (let i = 0; i < RAMP.length - 1; i++) {
+    if (t >= RAMP[i].t && t <= RAMP[i+1].t) {
+      const k = (t - RAMP[i].t) / (RAMP[i+1].t - RAMP[i].t);
+      const c = RAMP[i].rgb.map((v, j) => Math.round(v + k * (RAMP[i+1].rgb[j] - v)));
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+  }
+  return 'rgb(200,195,184)';
+}
+function colorByMetric(value, lo, hi, metric) {
+  if (value == null) return 'rgb(200,195,184)';
+  const t = hi === lo ? 0.5 : (value - lo) / (hi - lo);
+  // For volatility metric, color is inverse (low vol = green)
+  return colorRamp(metric === 'volatility' ? 1 - t : t);
+}
+function fmtEuro(n, d=0) { return n == null ? '—' : '€' + n.toLocaleString('it-IT', { maximumFractionDigits: d }); }
+function fmtPct(n, d=2) { return n == null ? '—' : (n > 0 ? '+' : '') + n.toFixed(d) + '%'; }
+function trendCls(c) { return c == null ? 'flat' : c > 0.2 ? 'up' : c < -0.2 ? 'down' : 'flat'; }
+
+// ─── State ────────────────────────────────────────────────
+const state = {
+  data: null,                 // full compass JSON
+  volumeData: null,           // modena-volume-signals.json (NTN/IMI per zona)
+  volByNewZone: {},           // index: NEW zone code → volume entry (handles split/rename)
+  tipo: 'abitazioni_civili',
+  op: 'acquisto',             // (note: compute layer is acquisto-focused, but yield uses both)
+  metric: 'cagr',             // cagr | yield | score | volatility
+  weights: { ...DEFAULT_WEIGHTS },
+  mapProv: null,
+  mapZone: null,
+};
+
+// Momentum tag emoji + label (from compute-volume-signals.py classification)
+const MOMENTUM_VIZ = {
+  rocket:   { emoji: '🚀', label: 'rocket',   color: 'var(--up)',    desc: 'NTN CAGR > +8%/yr · IMI in crescita' },
+  growing:  { emoji: '↗',  label: 'growing',  color: 'var(--up)',    desc: 'NTN CAGR > +2%/yr' },
+  stable:   { emoji: '→',  label: 'stable',   color: 'var(--ink-mid)', desc: '−2% ≤ NTN CAGR ≤ +2%' },
+  cooling:  { emoji: '↘',  label: 'cooling',  color: 'var(--watch)', desc: '−8% ≤ NTN CAGR < −2%' },
+  frozen:   { emoji: '💀', label: 'frozen',   color: 'var(--down)',  desc: 'NTN CAGR < −8% OR IMI_last < 1%' },
+  unknown:  { emoji: '·',  label: '—',        color: 'var(--ink-dim)', desc: 'dati non disponibili' },
+};
+const QUADRANT_VIZ = {
+  Q1_HOT:         { tag: 'HOT',         color: 'oklch(78% 0.15 30)',   desc: 'Premium liquido (prezzo>med · volume>med)' },
+  Q2_OVERPRICED:  { tag: 'OVERPRICED',  color: 'oklch(72% 0.13 70)',   desc: 'Premium illiquido (prezzo>med · volume<med)' },
+  Q3_OPPORTUNITY: { tag: 'OPPORTUNITY', color: 'oklch(70% 0.15 145)',  desc: 'Cheap & active (prezzo<med · volume>med)' },
+  Q4_DEAD:        { tag: 'DEAD',        color: 'oklch(65% 0.05 0)',    desc: 'Cheap & illiquid (prezzo<med · volume<med)' },
+  unknown:        { tag: '—',           color: 'var(--ink-dim)',       desc: 'dati non disponibili' },
+};
+
+// Inietta liquidity component in zone_metrics partendo da volume signals.
+// Chiamata UNA VOLTA dopo il fetch di entrambi i JSON.
+function injectLiquidityIntoCompass() {
+  if (!state.data || !state.volumeData) return;
+  // Index NEW code → volume entry (gestisce split: una OLD può puntare a più NEW)
+  state.volByNewZone = {};
+  for (const v of state.volumeData.zone_volume_metrics || []) {
+    for (const newCode of (v.zona_new || [])) {
+      // Se più OLD puntano alla stessa NEW (merge), tieni quella con NTN più alto
+      if (!state.volByNewZone[newCode] || (v.ntn_last||0) > (state.volByNewZone[newCode].ntn_last||0)) {
+        state.volByNewZone[newCode] = v;
+      }
+    }
+  }
+  // Per ogni tipologia, per ogni zona, attach liquidity component + tags
+  for (const tipoKey of Object.keys(state.data.by_tipologia || {})) {
+    const t = state.data.by_tipologia[tipoKey];
+    for (const z of (t.zone_metrics || [])) {
+      const vol = state.volByNewZone[z.zona];
+      if (!vol) {
+        z.score_components = z.score_components || {};
+        z.score_components.liquidity = null;
+        z.volume_info = null;
+        continue;
+      }
+      // Normalize liquidity_score 0-100 → 0-1 per score_components convention
+      z.score_components = z.score_components || {};
+      z.score_components.liquidity = (vol.liquidity_score != null) ? vol.liquidity_score / 100 : null;
+      z.volume_info = {
+        ntn_cagr_pct: vol.ntn_cagr_pct,
+        ntn_last: vol.ntn_last,
+        ntn_first: vol.ntn_first,
+        ntn_delta_pct: vol.ntn_delta_pct,
+        imi_last_pct: vol.imi_last_pct,
+        imi_avg_pct: vol.imi_avg_pct,
+        liquidity_score: vol.liquidity_score,
+        momentum_tag: vol.momentum_tag,
+        quadrant: vol.price_volume_quadrant,
+        ntn_series: vol.ntn_series,
+        rel: vol.rel,
+        zona_old: vol.zona_old,
+      };
+    }
+    // Province ranking: nessuna volume info (PDF dati sono per macroarea/zona, non comune singolo)
+    for (const p of (t.province_ranking || [])) {
+      p.score_components = p.score_components || {};
+      p.score_components.liquidity = null;
+    }
+  }
+}
+
+// ─── Score recomputation in JS (using pre-computed components) ──
+// Applies CAGR-negative penalty (value-trap protection) AFTER weighted average.
+function recomputeScore(entry, weights) {
+  const c = entry.score_components;
+  if (!c) return null;
+  let s = 0, w = 0;
+  for (const k of SCORE_KEYS) {
+    if (c[k] != null) {
+      s += weights[k] * c[k];
+      w += weights[k];
+    }
+  }
+  if (w === 0) return null;
+  let score = s / w * 100;
+  // Value-trap penalty: a comune/zona with shrinking market gets -10
+  if (entry.cagr != null && entry.cagr < 0) score -= CAGR_NEGATIVE_PENALTY;
+  return Math.max(0, Math.min(100, score));
+}
+function recomputeVerdict(score, entry) {
+  if (score == null) return null;
+  // Data-quality cap: zones/comuni flagged "limited" by the compute layer
+  // (coverage < MIN_CAGR_YEARS) cannot earn BUY/AVOID — only WATCH. A 2-year
+  // CAGR isn't a strong-enough signal for a directional recommendation.
+  if (entry && entry.data_quality === 'limited') return 'WATCH';
+  if (score >= BUY_THRESHOLD) return 'BUY';
+  if (score < AVOID_THRESHOLD) return 'AVOID';
+  return 'WATCH';
+}
+
+// Context tag — heuristic flag based on known comuni groupings and zone naming.
+// Surfaces qualitative caveats next to quantitative score.
+const MONTANI_KNOWN = new Set([
+  'Serramazzoni', 'Pavullo nel Frignano', 'Fanano', 'Sestola', 'Lama Mocogno',
+  'Frassinoro', 'Riolunato', 'Fiumalbo', 'Montecreto', 'Polinago', 'Montese',
+  'Palagano', 'Prignano sulla Secchia', 'Guiglia', 'Montefiorino', 'Zocca',
+  'Marano sul Panaro',
+]);
+const CINTURA_URBANA = new Set([
+  'Castelnuovo Rangone', 'Castelvetro di Modena', 'Castelfranco Emilia',
+  'Formigine', 'Maranello', 'Soliera', 'Nonantola', 'San Cesario sul Panaro',
+  'Spilamberto', 'Vignola', 'Bomporto', 'Bastiglia',
+]);
+const BASSA_MODENESE = new Set([
+  'Carpi', 'Mirandola', 'Concordia sulla Secchia', 'Finale Emilia',
+  'San Felice sul Panaro', 'San Possidonio', 'San Prospero', 'Cavezzo',
+  'Medolla', 'Camposanto', 'Novi di Modena', 'Ravarino', 'Campogalliano',
+]);
+function contextTag(entry) {
+  // For Modena city zones
+  if (entry.dizione) {
+    if (entry.fascia === 'B') return { tag: 'Capoluogo · centro', cls: 'ctx-urban' };
+    if (entry.fascia === 'C') return { tag: 'Capoluogo · semicentro', cls: 'ctx-urban' };
+    if (entry.fascia === 'D') return { tag: 'Capoluogo · periferia', cls: 'ctx-urban' };
+    if (entry.fascia === 'E') return { tag: 'Capoluogo · frazione', cls: 'ctx-frazione' };
+    if (entry.fascia === 'R') return { tag: 'Capoluogo · rurale', cls: 'ctx-rurale' };
+    return null;
+  }
+  // For comuni provincia
+  const n = entry.nome;
+  if (!n) return null;
+  if (n === 'Modena') return { tag: 'Capoluogo provincia', cls: 'ctx-urban' };
+  if (n === 'Sassuolo') return { tag: 'Distretto ceramico', cls: 'ctx-industriale' };
+  if (MONTANI_KNOWN.has(n)) return { tag: 'Montano · illiquido', cls: 'ctx-montano' };
+  if (CINTURA_URBANA.has(n)) return { tag: 'Cintura urbana', cls: 'ctx-cintura' };
+  if (BASSA_MODENESE.has(n)) return { tag: 'Bassa modenese', cls: 'ctx-bassa' };
+  return null;
+}
+
+// ─── Sparkline SVG ────────────────────────────────────────
+function sparkSvg(values, normalized, cls) {
+  if (!values || values.length < 2) return '';
+  if (!normalized || normalized.length !== values.length) return '';
+  const w = 200, h = 32, pad = 3;
+  const xs = values.map((_, i) => pad + (w - 2*pad) * (i / (values.length - 1)));
+  const ys = normalized.map(v => h - pad - (h - 2*pad) * v);
+  const linePts = xs.map((x, i) => `${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' L ');
+  const fill = cls === 'up' ? 'var(--up)' : cls === 'down' ? 'var(--down)' : 'var(--flat)';
+  return `<svg class="spark-svg ${cls}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <path class="area" d="M ${xs[0].toFixed(1)},${h} L ${linePts} L ${xs[xs.length-1].toFixed(1)},${h} Z"/>
+    <path class="line" d="M ${linePts}"/>
+    <circle cx="${xs[xs.length-1].toFixed(1)}" cy="${ys[ys.length-1].toFixed(1)}" r="2.4" fill="${fill}"/>
+  </svg>`;
+}
+
+// ─── Current tipologia data accessor ──────────────────────
+function curr() {
+  return state.data && state.data.by_tipologia[state.tipo];
+}
+
+// ─── Render: TOOLBAR pills tipologia ──────────────────────
+function buildPillsTipo() {
+  const host = document.getElementById('pillsTipo');
+  host.innerHTML = TIPOLOGIE.map(t =>
+    `<div class="pill ${t.key === state.tipo ? 'active' : ''}" data-tipo="${t.key}">${t.label}</div>`
+  ).join('');
+  host.querySelectorAll('[data-tipo]').forEach(el => {
+    el.addEventListener('click', () => {
+      state.tipo = el.dataset.tipo;
+      host.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.tipo === state.tipo));
+      renderAll();
+    });
+  });
+}
+
+// ─── Render: KPI strip ────────────────────────────────────
+function renderKPI() {
+  const d = curr(); if (!d) return;
+  const h = d.headline;
+  const cagrEl = document.getElementById('kpi-cagr');
+  cagrEl.textContent = fmtPct(h.cagr_avg_pct);
+  cagrEl.className = 'val num ' + (h.cagr_avg_pct >= 0 ? 'up' : 'down');
+  document.getElementById('kpi-yield').textContent = h.yield_avg_pct != null ? h.yield_avg_pct.toFixed(2) + '%' : '—';
+  document.getElementById('kpi-prezzo').textContent = fmtEuro(h.prezzo_avg);
+  document.getElementById('kpi-prezzo-sub').textContent = TIPOLOGIE.find(t=>t.key===state.tipo).label.toLowerCase();
+  // Recompute BUY count from runtime weights, not stale Python defaults
+  const pool = [...d.zone_metrics.filter(z => z.dizione), ...d.province_ranking];
+  const nBuy = pool.filter(e => {
+    const s = recomputeScore(e, state.weights);
+    return recomputeVerdict(s, e) === 'BUY';
+  }).length;
+  const nAvoid = pool.filter(e => recomputeVerdict(recomputeScore(e, state.weights), e) === 'AVOID').length;
+  document.getElementById('kpi-buy').textContent = nBuy;
+  document.getElementById('kpi-buy-tot').textContent = pool.length;
+  document.getElementById('kpi-buy-sub').textContent = `BUY · ${nAvoid} AVOID · soglia ≥ ${BUY_THRESHOLD}`;
+
+  // Section header counts — keep static text in sync with the live dataset
+  const provH2 = document.getElementById('prov-h2-count');
+  if (provH2) provH2.textContent = (d.province_ranking || []).length;
+  const zoneH2 = document.getElementById('zone-h2-count');
+  if (zoneH2) {
+    const nWord = (n) => ({10:'Dieci',11:'Undici',12:'Dodici',13:'Tredici',14:'Quattordici',15:'Quindici',16:'Sedici',17:'Diciassette',18:'Diciotto',19:'Diciannove',20:'Venti',21:'Ventuno',22:'Ventidue',23:'Ventitré',24:'Ventiquattro',25:'Venticinque'}[n] || String(n));
+    zoneH2.textContent = nWord((d.zone_metrics || []).filter(z => z.dizione).length);
+  }
+
+  // Mood phrase derived from data
+  const ma = document.getElementById('kpi-mood');
+  const mb = document.getElementById('kpi-mood-2');
+  if (h.cagr_avg_pct == null) { ma.textContent = 'dati parziali'; mb.textContent = 'da raccogliere'; }
+  else if (h.cagr_avg_pct > 1.5)  { ma.textContent = 'in forte crescita'; mb.textContent = 'allargamento generalizzato'; }
+  else if (h.cagr_avg_pct > 0.5)  { ma.textContent = 'moderatamente positivo'; mb.textContent = 'crescita selettiva'; }
+  else if (h.cagr_avg_pct > -0.5) { ma.textContent = 'sostanzialmente piatto'; mb.textContent = 'migrazione spaziale'; }
+  else if (h.cagr_avg_pct > -1.5) { ma.textContent = 'in lieve calo'; mb.textContent = 'erosione progressiva'; }
+  else                            { ma.textContent = 'in contrazione'; mb.textContent = 'asse spostato'; }
+}
+
+// ─── Maps ─────────────────────────────────────────────────
+function buildPalette(entries, metric) {
+  const vals = entries.map(e => e._mapVal).filter(v => v != null);
+  const lo = Math.min(...vals), hi = Math.max(...vals);
+  entries.forEach(e => { e._color = colorByMetric(e._mapVal, lo, hi, metric); });
+  return { lo, hi };
+}
+
+function applyMetricToFeatures(features, byKey, key, metric, recomputeScoreFn) {
+  features.forEach(f => {
+    const k = f.properties[key];
+    const e = byKey[k];
+    let v = null;
+    if (e) {
+      if (metric === 'cagr') v = e.cagr != null ? e.cagr * 100 : null;
+      else if (metric === 'yield') v = e.yield_lordo_pct;
+      else if (metric === 'volatility') v = e.volatility_pct;
+      else if (metric === 'score') v = recomputeScoreFn(e);
+    }
+    f.properties._mapVal = v;
+    f.properties._entry = e || null;
+  });
+  return features;
+}
+
+function metricLabel() {
+  if (state.metric === 'cagr')       return 'CAGR · periodo coperto';
+  if (state.metric === 'yield')      return 'Yield lordo · %';
+  if (state.metric === 'volatility') return 'Volatilità · %';
+  if (state.metric === 'score')      return 'Score composito · 0-100';
+  return '';
+}
+function metricFmt(v) {
+  if (v == null) return 'n/d';
+  if (state.metric === 'cagr')       return fmtPct(v);
+  if (state.metric === 'yield')      return v.toFixed(2) + '%';
+  if (state.metric === 'volatility') return v.toFixed(1) + '%';
+  if (state.metric === 'score')      return v.toFixed(0) + '/100';
+  return v;
+}
+
+// Province map
+async function renderProvMap() {
+  const d = curr(); if (!d) return;
+  if (!window._provGeo) {
+    window._provGeo = await (await fetch('../data/geojson/modena-province-comuni.geojson')).json();
+  }
+  const byCat = {};
+  d.province_ranking.forEach(c => { byCat[c.catasto] = c; });
+
+  applyMetricToFeatures(window._provGeo.features, byCat, 'com_catasto_code', state.metric, e => recomputeScore(e, state.weights));
+  const palette = buildPalette(window._provGeo.features.map(f => f.properties), state.metric);
+  document.getElementById('legend-prov-label').textContent = metricLabel();
+  document.getElementById('legend-prov-min').textContent = metricFmt(palette.lo);
+  document.getElementById('legend-prov-max').textContent = metricFmt(palette.hi);
+
+  if (!state.mapProv) {
+    state.mapProv = new maplibregl.Map({
+      container: 'map-prov',
+      style: {
+        version: 8,
+        sources: { base: { type: 'raster', tiles: ['https://cartodb-basemaps-a.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap © CARTO' } },
+        layers: [{ id: 'base', type: 'raster', source: 'base' }],
+      },
+      center: [10.93, 44.55], zoom: 8.5, attributionControl: true,
+    });
+    state.mapProv.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+    state.mapProv.on('load', () => attachMap(state.mapProv, window._provGeo, 'prov'));
+  } else if (state.mapProv.getSource('regions')) {
+    state.mapProv.getSource('regions').setData(window._provGeo);
+  }
+}
+
+// Zone map
+async function renderZoneMap() {
+  const d = curr(); if (!d) return;
+  if (!window._zoneGeo) {
+    window._zoneGeo = await (await fetch('../data/geojson/modena-zone-omi.geojson')).json();
+  }
+  const byZ = {};
+  d.zone_metrics.filter(z => z.dizione).forEach(z => { byZ[z.zona] = z; });
+
+  applyMetricToFeatures(window._zoneGeo.features, byZ, 'zona', state.metric, e => recomputeScore(e, state.weights));
+  const palette = buildPalette(window._zoneGeo.features.map(f => f.properties), state.metric);
+  document.getElementById('legend-zone-label').textContent = metricLabel();
+  document.getElementById('legend-zone-min').textContent = metricFmt(palette.lo);
+  document.getElementById('legend-zone-max').textContent = metricFmt(palette.hi);
+
+  if (!state.mapZone) {
+    state.mapZone = new maplibregl.Map({
+      container: 'map-zone',
+      style: {
+        version: 8,
+        sources: { base: { type: 'raster', tiles: ['https://cartodb-basemaps-a.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap © CARTO' } },
+        layers: [{ id: 'base', type: 'raster', source: 'base' }],
+      },
+      center: [10.92, 44.66], zoom: 11.5, attributionControl: true,
+    });
+    state.mapZone.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+    state.mapZone.on('load', () => attachMap(state.mapZone, window._zoneGeo, 'zone'));
+  } else if (state.mapZone.getSource('regions')) {
+    state.mapZone.getSource('regions').setData(window._zoneGeo);
+  }
+}
+
+function attachMap(m, geoData, scope) {
+  m.addSource('regions', { type: 'geojson', data: geoData });
+  m.addLayer({ id: 'fill', type: 'fill', source: 'regions',
+    paint: { 'fill-color': ['get', '_color'], 'fill-opacity': 0.76 } });
+  m.addLayer({ id: 'line', type: 'line', source: 'regions',
+    paint: { 'line-color': '#f5efe4', 'line-width': scope === 'prov' ? 0.8 : 1.0 } });
+  m.addLayer({ id: 'hover', type: 'line', source: 'regions',
+    paint: { 'line-color': '#1f5aa8', 'line-width': 2.5 },
+    filter: ['==', '_color', '__none__'] });
+
+  const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 14 });
+  m.on('mousemove', 'fill', e => {
+    const f = e.features[0];
+    m.getCanvas().style.cursor = 'pointer';
+    m.setFilter('hover', ['==', '_color', f.properties._color]);
+    const e2 = f.properties._entry ? JSON.parse(f.properties._entry) : null;
+    const v = f.properties._mapVal;
+    popup.setLngLat(e.lngLat).setHTML(popupHtml(f, e2, v, scope)).addTo(m);
+  });
+  m.on('mouseleave', 'fill', () => {
+    m.getCanvas().style.cursor = '';
+    m.setFilter('hover', ['==', '_color', '__none__']);
+    popup.remove();
+  });
+}
+
+function popupHtml(f, _e, v, scope) {
+  const d = curr();
+  let entry, title, kicker;
+  if (scope === 'prov') {
+    entry = d.province_ranking.find(p => p.catasto === f.properties.com_catasto_code) || {};
+    kicker = `Comune · ${f.properties.com_catasto_code}`;
+    title = f.properties.name;
+  } else {
+    entry = d.zone_metrics.find(z => z.zona === f.properties.zona) || {};
+    kicker = `Zona ${f.properties.zona} · Fascia ${entry.fascia || '?'}`;
+    title = entry.dizione || f.properties.zona;
+  }
+  const sc = recomputeScore(entry, state.weights);
+  const vd = recomputeVerdict(sc, entry);
+  return `
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(58% 0.008 30);text-transform:uppercase;letter-spacing:0.14em">${kicker}</div>
+    <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:400;line-height:1.2;margin-top:6px;color:oklch(15% 0.008 30)">${title.slice(0, 60)}</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid oklch(86% 0.008 75)">
+      <div>
+        <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">CAGR</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:16px;color:${entry.cagr>0?'var(--up)':entry.cagr<0?'var(--down)':'var(--flat)'};margin-top:2px">${entry.cagr!=null?fmtPct(entry.cagr*100):'—'}</div>
+      </div>
+      <div>
+        <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">Yield</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:16px;color:oklch(15% 0.008 30);margin-top:2px">${entry.yield_lordo_pct!=null?entry.yield_lordo_pct.toFixed(2)+'%':'—'}</div>
+      </div>
+      <div>
+        <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">€/m²</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:16px;color:oklch(15% 0.008 30);margin-top:2px">${fmtEuro(entry.prezzo_acquisto)}</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding-top:10px;border-top:1px solid oklch(86% 0.008 75);display:flex;justify-content:space-between;align-items:center">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;color:oklch(15% 0.008 30)">${sc!=null?sc.toFixed(0):'—'}<span style="color:oklch(58% 0.008 30);font-size:12px">/100</span></span>
+      ${vd ? `<span class="verdict ${vd}" style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.06em;font-weight:600;background:${vd==='BUY'?'var(--up)':vd==='WATCH'?'var(--watch)':'var(--down)'};color:var(--bg)">${vd}</span>` : ''}
+    </div>`;
+}
+
+// ─── Table provincia ──────────────────────────────────────
+function renderProvTable() {
+  const d = curr(); if (!d) return;
+  const body = document.getElementById('tbl-prov-body');
+  // Sort by score (recomputed with current weights)
+  const list = d.province_ranking.map(p => ({ ...p, _sc: recomputeScore(p, state.weights) }))
+    .sort((a, b) => (b._sc || -1) - (a._sc || -1));
+  body.innerHTML = list.map(p => {
+    const cagr = p.cagr != null ? p.cagr * 100 : null;
+    const vd = recomputeVerdict(p._sc, p);
+    const rowCls = vd === 'BUY' ? 'row-buy' : vd === 'AVOID' ? 'row-avoid' : '';
+    const ctx = contextTag(p);
+    const ctxHtml = ctx ? `<span class="ctx ${ctx.cls}">${ctx.tag}</span>` : '';
+    return `<tr class="${rowCls}" data-catasto="${p.catasto}">
+      <td>${p.catasto}</td>
+      <td class="name">${p.nome}${ctxHtml}</td>
+      <td class="right num">${fmtEuro(p.prezzo_acquisto)}</td>
+      <td class="right"><span class="pill-pct ${trendCls(cagr)}">${fmtPct(cagr)}</span></td>
+      <td class="right num">${p.yield_lordo_pct!=null?p.yield_lordo_pct.toFixed(2)+'%':'—'}</td>
+      <td class="right num" style="color:var(--ink-dim)">${p.volatility_pct!=null?p.volatility_pct.toFixed(1)+'%':'—'}</td>
+      <td>${scoreBarHtml(p, state.weights)}</td>
+      <td class="right">${vd ? `<span class="verdict ${vd}">${vd}</span>` : '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function scoreBarHtml(entry, weights) {
+  const sc = recomputeScore(entry, weights);
+  if (sc == null) return '<span class="num" style="color:var(--ink-dim)">—</span>';
+  const c = entry.score_components || {};
+  const segs = SCORE_KEYS
+    .map(k => {
+      const w = weights[k];
+      const val = c[k];
+      // Liquidity può essere null per comuni e zone senza dati storici NTN. Mostra come grigio.
+      if (val == null) return `<span class="score-seg" title="${k}: dati n.d." style="flex:${w};background:repeating-linear-gradient(45deg,oklch(94% 0.005 80) 0 3px,oklch(90% 0.005 80) 3px 6px)"></span>`;
+      const fill = val * 100;
+      const color = colorRamp(val);
+      return `<span class="score-seg" title="${k}: ${(val*100).toFixed(0)}/100" style="flex:${w};background:linear-gradient(90deg,${color} ${fill}%,oklch(92% 0.005 75) ${fill}%)"></span>`;
+    }).join('');
+  return `<span class="score-bar">${segs}</span><span class="num" style="margin-left:8px;font-size:12px">${sc.toFixed(0)}</span>`;
+}
+
+// ─── Sparkline grid (zone Modena) ─────────────────────────
+function renderSparkGrid() {
+  const d = curr(); if (!d) return;
+  const current = d.zone_metrics.filter(z => z.dizione)
+    .map(z => ({ ...z, _sc: recomputeScore(z, state.weights) }))
+    .sort((a, b) => (b._sc || -1) - (a._sc || -1));
+  const host = document.getElementById('spark-grid');
+  host.innerHTML = current.map(z => {
+    const cagrPct = z.cagr != null ? z.cagr * 100 : null;
+    const t = trendCls(cagrPct);
+    const vd = recomputeVerdict(z._sc, z);
+    const cellCls = vd === 'BUY' ? 'is-buy' : vd === 'AVOID' ? 'is-avoid' : '';
+    const ctx = contextTag(z);
+    const ctxHtml = ctx ? `<span class="ctx ${ctx.cls}">${ctx.tag.replace('Capoluogo · ','')}</span>` : '';
+    // Volume info (NTN/IMI 2018-2023). Solo se la zona ha storico nel PDF AdE.
+    const vi = z.volume_info;
+    let volHtml = '';
+    if (vi) {
+      const mom = MOMENTUM_VIZ[vi.momentum_tag] || MOMENTUM_VIZ.unknown;
+      const qd  = QUADRANT_VIZ[vi.quadrant] || QUADRANT_VIZ.unknown;
+      const cagrV = vi.ntn_cagr_pct != null ? (vi.ntn_cagr_pct > 0 ? '+' : '') + vi.ntn_cagr_pct.toFixed(1) + '%' : '—';
+      volHtml = `<div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--rule);display:flex;gap:8px;flex-wrap:wrap;font-size:10px;font-family:var(--mono);align-items:center">
+        <span title="${mom.desc}" style="color:${mom.color};font-weight:600">${mom.emoji} ${vi.ntn_last||'?'} NTN · NTN-CAGR ${cagrV}</span>
+        <span title="${qd.desc}" style="background:${qd.color};color:#fff;padding:1px 5px;border-radius:2px;font-size:8.5px;font-weight:600;letter-spacing:0.05em">${qd.tag}</span>
+        <span style="color:var(--ink-dim)">IMI ${vi.imi_last_pct!=null?vi.imi_last_pct.toFixed(2)+'%':'—'}</span>
+      </div>`;
+    }
+    return `<div class="spark-cell ${cellCls}">
+      <div class="spark-zona"><span>${z.zona} · fascia ${z.fascia}</span><span style="color:var(--ink-dim);font-weight:400">${z._sc!=null?z._sc.toFixed(0):'—'}/100${vd?` · <strong style="color:${vd==='BUY'?'var(--up)':vd==='AVOID'?'var(--down)':'var(--watch)'};font-family:var(--mono);font-size:10px">${vd}</strong>`:''}</span></div>
+      <div class="spark-name">${(z.dizione||'').split(' - ').slice(-1)[0].slice(0, 38)}${z.anomaly?'<span class="anomaly-icon" title="anomalia">!</span>':''}${ctxHtml}</div>
+      <div class="spark-stat ${t}">${fmtPct(cagrPct)}</div>
+      <div class="spark-meta">${fmtEuro(z.prezzo_acquisto)} · yield ${z.yield_lordo_pct!=null?z.yield_lordo_pct.toFixed(1)+'%':'—'}</div>
+      ${sparkSvg(z.spark_values, z.spark_norm, t)}
+      ${volHtml}
+    </div>`;
+  }).join('');
+}
+
+// ─── Lanes BUY/WATCH/AVOID + anomalies ────────────────────
+function renderLanes() {
+  const d = curr(); if (!d) return;
+  const pool = [...d.zone_metrics.filter(z => z.dizione), ...d.province_ranking]
+    .map(e => ({ ...e, _sc: recomputeScore(e, state.weights), _vd: null }));
+  pool.forEach(e => { e._vd = recomputeVerdict(e._sc, e); });
+
+  const buy = pool.filter(e => e._vd === 'BUY').sort((a,b) => b._sc - a._sc).slice(0, 8);
+  const avoid = pool.filter(e => e._vd === 'AVOID').sort((a,b) => a._sc - b._sc).slice(0, 8);
+  const watch = pool.filter(e => e._vd === 'WATCH' && e.recent_slope_pct != null && e.cagr != null
+                              && e.recent_slope_pct/100 > e.cagr * 1.5)
+                    .sort((a,b) => (b.recent_slope_pct||0) - (a.recent_slope_pct||0)).slice(0, 8);
+
+  const renderLane = (list) => list.map(e => {
+    const name = e.nome || (e.dizione ? e.dizione.split(' - ').slice(-1)[0].slice(0, 30) : e.zona);
+    const tag = e.nome ? `<em>${e.catasto}</em>` : `<em>${e.zona}</em>`;
+    const ctx = contextTag(e);
+    const ctxHtml = ctx ? `<span class="ctx ${ctx.cls}" style="margin-left:4px;font-size:8.5px">${ctx.tag.replace('Capoluogo · ','')}</span>` : '';
+    return `<div class="lane-row">
+      <span class="nm">${name} ${tag}${ctxHtml}</span>
+      <span class="stat">${e._sc.toFixed(0)} · ${fmtPct(e.cagr!=null?e.cagr*100:null, 1)}</span>
+    </div>`;
+  }).join('');
+
+  document.getElementById('lane-buy').innerHTML = renderLane(buy) || '<div style="padding:14px 0;color:var(--ink-dim);font-style:italic;font-family:var(--serif)">nessuna zona/comune passa la soglia</div>';
+  document.getElementById('lane-watch').innerHTML = renderLane(watch) || '<div style="padding:14px 0;color:var(--ink-dim);font-style:italic;font-family:var(--serif)">nessun outlier di momentum</div>';
+  document.getElementById('lane-avoid').innerHTML = renderLane(avoid) || '<div style="padding:14px 0;color:var(--ink-dim);font-style:italic;font-family:var(--serif)">tutto sopra soglia</div>';
+  document.getElementById('lane-buy-count').textContent   = `${buy.length} candidati`;
+  document.getElementById('lane-watch-count').textContent = `${watch.length} candidati`;
+  document.getElementById('lane-avoid-count').textContent = `${avoid.length} candidati`;
+
+  // Anomalies
+  const anomalies = d.anomalies || [];
+  const host = document.getElementById('anomalies-list');
+  if (!anomalies.length) {
+    host.innerHTML = `<div style="padding:14px 0;color:var(--ink-dim);font-style:italic;font-family:var(--serif)">nessuna zona devia &gt; 1.5σ dalla sua fascia per questa tipologia</div>`;
+  } else {
+    host.innerHTML = anomalies.map(a => `
+      <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--rule);align-items:center">
+        <div>
+          <span class="mono" style="font-weight:600">${a.zona}</span> · fascia ${a.fascia}
+          <span class="italic" style="margin-left:8px;color:var(--ink-mid)">${(a.dizione||'').split(' - ').slice(-1)[0].slice(0,40)}</span>
+          <span class="anomaly-icon">!</span>
+        </div>
+        <div class="mono" style="font-size:12px;color:var(--ink-mid)">
+          CAGR z: <strong style="color:${Math.abs(a.anomaly.cagr_z)>1.5?'var(--accent)':'var(--ink-mid)'}">${a.anomaly.cagr_z!=null?a.anomaly.cagr_z.toFixed(2):'—'}</strong>
+          &nbsp;·&nbsp; Yield z: <strong style="color:${Math.abs(a.anomaly.yield_z||0)>1.5?'var(--accent)':'var(--ink-mid)'}">${a.anomaly.yield_z!=null?a.anomaly.yield_z.toFixed(2):'—'}</strong>
+          &nbsp;·&nbsp; flag: <strong style="color:var(--watch)">${a.anomaly.flag||'—'}</strong>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+// ─── What-if simulator ────────────────────────────────────
+function buildWhatIfZones() {
+  const d = curr(); if (!d) return;
+  const sel = document.getElementById('wf-zone');
+  const zones = d.zone_metrics.filter(z => z.dizione);
+  const comuni = d.province_ranking;
+  sel.innerHTML = `
+    <optgroup label="Modena città · zone OMI">
+      ${zones.map(z => `<option value="zona:${z.zona}">${z.zona} · ${(z.dizione||'').split(' - ').slice(-1)[0].slice(0,45)}</option>`).join('')}
+    </optgroup>
+    <optgroup label="Provincia · comuni">
+      ${comuni.map(c => `<option value="com:${c.catasto}">${c.nome}</option>`).join('')}
+    </optgroup>`;
+  sel.value = 'zona:B3';
+}
+
+function computeWhatIf() {
+  const d = curr(); if (!d) return;
+  const sel = document.getElementById('wf-zone').value;
+  const mq = parseFloat(document.getElementById('wf-mq').value) || 0;
+  const prezzo = parseFloat(document.getElementById('wf-prezzo').value) || 0;
+  const canone = parseFloat(document.getElementById('wf-canone').value) || 0;
+  const anni = parseInt(document.getElementById('wf-anni').value) || 10;
+
+  let entry = null;
+  if (sel.startsWith('zona:')) {
+    entry = d.zone_metrics.find(z => z.zona === sel.split(':')[1]);
+  } else {
+    entry = d.province_ranking.find(c => c.catasto === sel.split(':')[1]);
+  }
+  if (!entry) return;
+
+  const emq = mq > 0 ? prezzo / mq : null;
+  const yieldUser = prezzo > 0 ? (canone * 12 / prezzo) * 100 : null;
+  const yieldZona = entry.yield_lordo_pct;
+  const cagrZona = entry.cagr;  // decimale (es. 0.005 = +0.5%/yr)
+  const emqZona = entry.prezzo_acquisto;
+
+  const cashflow = canone * 12 * anni;
+  const appCap = cagrZona != null ? prezzo * (Math.pow(1 + cagrZona, anni) - 1) : null;
+  const roi = (appCap != null && prezzo > 0) ? ((appCap + cashflow) / prezzo) * 100 : null;
+
+  document.getElementById('wf-emq').textContent = fmtEuro(emq, 0) + '/m²';
+  document.getElementById('wf-emq-delta').innerHTML = emqZona && emq
+    ? `<span style="color:${emq > emqZona ? 'var(--down)' : 'var(--up)'}">${emq>emqZona?'+':'-'}${Math.abs(((emq-emqZona)/emqZona)*100).toFixed(1)}% vs zona (${fmtEuro(emqZona,0)})</span>`
+    : 'zona n/d';
+
+  const yEl = document.getElementById('wf-yield');
+  yEl.textContent = yieldUser != null ? yieldUser.toFixed(2) + '%' : '—';
+  yEl.style.color = yieldZona && yieldUser ? (yieldUser >= yieldZona ? 'var(--up)' : 'var(--down)') : 'var(--ink)';
+  document.getElementById('wf-yield-delta').innerHTML = yieldZona && yieldUser != null
+    ? `<span style="color:${yieldUser >= yieldZona ? 'var(--up)' : 'var(--down)'}">${yieldUser >= yieldZona?'+':''}${(yieldUser - yieldZona).toFixed(2)}pp vs zona (${yieldZona.toFixed(2)}%)</span>`
+    : 'zona n/d';
+
+  document.getElementById('wf-cashflow').textContent = fmtEuro(cashflow);
+  const capEl = document.getElementById('wf-cap');
+  capEl.textContent = appCap != null ? (appCap >= 0 ? '+' : '') + fmtEuro(appCap) : '—';
+  capEl.style.color = appCap != null ? (appCap >= 0 ? 'var(--up)' : 'var(--down)') : 'var(--ink)';
+  document.getElementById('wf-cap-delta').textContent = cagrZona != null
+    ? `CAGR zona ${(cagrZona*100).toFixed(2)}%/yr × ${anni} anni`
+    : '—';
+
+  const roiEl = document.getElementById('wf-roi');
+  roiEl.textContent = roi != null ? fmtPct(roi, 1) : '—';
+  roiEl.style.color = roi != null ? (roi >= 0 ? 'var(--up)' : 'var(--down)') : 'var(--ink)';
+}
+
+// ─── Weights sliders ──────────────────────────────────────
+function readWeights() {
+  state.weights = {};
+  SCORE_KEYS.forEach(k => {
+    state.weights[k] = parseInt(document.getElementById(`w-${k}`).value);
+  });
+  const tot = Object.values(state.weights).reduce((a,b) => a+b, 0);
+  SCORE_KEYS.forEach(k => {
+    const pct = tot > 0 ? Math.round(state.weights[k] / tot * 100) : 0;
+    document.getElementById(`w-${k}-pct`).textContent = pct + '%';
+  });
+}
+function bindWeights() {
+  const reRender = () => {
+    renderKPI();      // BUY count recomputes too
+    renderProvTable();
+    renderSparkGrid();
+    renderLanes();
+    if (state.metric === 'score') {
+      renderProvMap();
+      renderZoneMap();
+    }
+  };
+  SCORE_KEYS.forEach(k => {
+    document.getElementById(`w-${k}`).addEventListener('input', () => {
+      readWeights();
+      reRender();
+    });
+  });
+  document.getElementById('btn-reset-weights').addEventListener('click', () => {
+    SCORE_KEYS.forEach(k =>
+      document.getElementById(`w-${k}`).value = DEFAULT_WEIGHTS[k]);
+    readWeights();
+    reRender();
+  });
+}
+
+// ─── Master render ────────────────────────────────────────
+function renderAll() {
+  renderKPI();
+  renderProvMap();
+  renderZoneMap();
+  renderProvTable();
+  renderSparkGrid();
+  renderLanes();
+  buildWhatIfZones();
+  computeWhatIf();
+}
+
+// ─── Boot ─────────────────────────────────────────────────
+async function boot() {
+  state.data = await (await fetch('../data/computed/modena-compass.json')).json();
+  // Carica volume signals (best-effort, non blocking se file manca)
+  try {
+    state.volumeData = await (await fetch('../data/computed/modena-volume-signals.json')).json();
+    injectLiquidityIntoCompass();
+  } catch (e) {
+    console.warn('Volume signals not available, liquidity component disabled:', e.message);
+  }
+  buildPillsTipo();
+  readWeights();
+  bindWeights();
+
+  document.querySelectorAll('[data-op]').forEach(p => p.addEventListener('click', () => {
+    document.querySelectorAll('[data-op]').forEach(x => x.classList.toggle('active', x === p));
+    state.op = p.dataset.op;
+    renderAll();
+  }));
+  document.querySelectorAll('[data-metric]').forEach(p => p.addEventListener('click', () => {
+    document.querySelectorAll('[data-metric]').forEach(x => x.classList.toggle('active', x === p));
+    state.metric = p.dataset.metric;
+    renderProvMap();
+    renderZoneMap();
+  }));
+
+  ['wf-zone', 'wf-mq', 'wf-prezzo', 'wf-canone', 'wf-anni'].forEach(id => {
+    document.getElementById(id).addEventListener('input', computeWhatIf);
+    document.getElementById(id).addEventListener('change', computeWhatIf);
+  });
+
+  renderAll();
+}
+
+boot().catch(e => {
+  console.error(e);
+  document.body.innerHTML = `<div style="padding:60px;max-width:600px;margin:0 auto;font-family:Fraunces,serif">
+    <h2>Errore caricamento</h2>
+    <pre style="background:oklch(94% 0.005 80);padding:18px;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:13px">${e.message}</pre>
+    <p style="margin-top:16px">Serve: <code>python3 scripts/compute-compass.py</code> per generare <code>data/computed/modena-compass.json</code>, poi <code>python3 -m http.server 8765</code>.</p>
+  </div>`;
+});
+</script>
+
+</body>
+</html>

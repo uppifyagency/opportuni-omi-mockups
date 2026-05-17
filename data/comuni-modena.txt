@@ -1,0 +1,49 @@
+nome                           | catasto  | istat  
+-------------------------------------------------------
+Bastiglia                      | A713     | 036001
+Bomporto                       | A959     | 036002
+Campogalliano                  | B539     | 036003
+Camposanto                     | B566     | 036004
+Carpi                          | B819     | 036005
+Castelfranco Emilia            | C107     | 036006
+Castelnuovo Rangone            | C242     | 036007
+Castelvetro di Modena          | C287     | 036008
+Cavezzo                        | C398     | 036009
+Concordia sulla Secchia        | C951     | 036010
+Fanano                         | D486     | 036011
+Finale Emilia                  | D599     | 036012
+Fiorano Modenese               | D607     | 036013
+Fiumalbo                       | D617     | 036014
+Formigine                      | D711     | 036015
+Frassinoro                     | D783     | 036016
+Guiglia                        | E264     | 036017
+Lama Mocogno                   | E426     | 036018
+Maranello                      | E904     | 036019
+Marano sul Panaro              | E905     | 036020
+Medolla                        | F087     | 036021
+Mirandola                      | F240     | 036022
+Modena                         | F257     | 036023
+Montecreto                     | F484     | 036024
+Montefiorino                   | F503     | 036025
+Montese                        | F642     | 036026
+Nonantola                      | F930     | 036027
+Novi di Modena                 | F966     | 036028
+Palagano                       | G250     | 036029
+Pavullo nel Frignano           | G393     | 036030
+Pievepelago                    | G649     | 036031
+Polinago                       | G789     | 036032
+Prignano sulla Secchia         | H061     | 036033
+Ravarino                       | H195     | 036034
+Riolunato                      | H303     | 036035
+San Cesario sul Panaro         | H794     | 036036
+San Felice sul Panaro          | H835     | 036037
+San Possidonio                 | I128     | 036038
+San Prospero                   | I133     | 036039
+Sassuolo                       | I462     | 036040
+Savignano sul Panaro           | I473     | 036041
+Serramazzoni                   | F357     | 036042
+Sestola                        | I689     | 036043
+Soliera                        | I802     | 036044
+Spilamberto                    | I903     | 036045
+Vignola                        | L885     | 036046
+Zocca                          | M183     | 036047

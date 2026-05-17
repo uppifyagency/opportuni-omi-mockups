@@ -1,0 +1,46 @@
+PARSE-VOLUMI v3 (header-aware)
+PDFs: 6
+
+═══ sr2019_emilia_romagna.pdf → data_year=2018 ═══
+  pages: provincia=34, comune=37
+  parsed: provincia=8, zone=19
+  ✓ sanity check: tutti IMI ∈ [0, 10]%
+
+═══ sr2020_emilia_romagna.pdf → data_year=2019 ═══
+  pages: provincia=34, comune=37
+  parsed: provincia=7, zone=19
+  ✓ sanity check: tutti IMI ∈ [0, 10]%
+
+═══ sr2021_emilia_romagna.pdf → data_year=2020 ═══
+  pages: provincia=36, comune=39
+  parsed: provincia=8, zone=19
+  ✓ sanity check: tutti IMI ∈ [0, 10]%
+
+═══ sr2022_emilia_romagna.pdf → data_year=2021 ═══
+  pages: provincia=35, comune=38
+  parsed: provincia=8, zone=19
+  ✓ sanity check: tutti IMI ∈ [0, 10]%
+
+═══ sr2023_emilia_romagna.pdf → data_year=2022 ═══
+  pages: provincia=35, comune=38
+  parsed: provincia=9, zone=19
+  ✓ NTN cross-check: sum_macro=10772 tot=10772 gap=0.00%
+  ✓ sanity check: tutti IMI ∈ [0, 10]%
+
+═══ sr2024_emilia_romagna.pdf → data_year=2023 ═══
+  pages: provincia=35, comune=38
+  parsed: provincia=9, zone=19
+  ✓ NTN cross-check: sum_macro=100 tot=100 gap=0.00%
+  ✓ sanity check: tutti IMI ∈ [0, 10]%
+
+═══ GLOBAL ═══
+years: [2018, 2019, 2020, 2021, 2022, 2023]
+provincia rows: 49 (8.2/yr, expected 9)
+zone rows:      114 (19.0/yr, expected 19)
+IMI range globale: min=0.00% max=6.29%  (atteso 0-10%)
+  2018: prov=8 zone=19
+  2019: prov=7 zone=19
+  2020: prov=8 zone=19
+  2021: prov=8 zone=19
+  2022: prov=9 zone=19
+  2023: prov=9 zone=19

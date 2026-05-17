@@ -1,0 +1,53 @@
+═══ PARSE-VOLUMI FINAL (dedicated parsers per year) ═══
+PDF count: 6
+
+═══ SR2019 → data_year=2018 ═══
+  ✓ parsed prov=8, zone=19, sanity_issues=0
+
+═══ SR2020 → data_year=2019 ═══
+  ✓ parsed prov=7, zone=19, sanity_issues=0
+
+═══ SR2021 → data_year=2020 ═══
+  ✓ parsed prov=8, zone=19, sanity_issues=0
+
+═══ SR2022 → data_year=2021 ═══
+  ✓ parsed prov=8, zone=19, sanity_issues=0
+
+═══ SR2023 → data_year=2022 ═══
+  ✓ parsed prov=9, zone=19, sanity_issues=0
+  ✓ cross-check NTN: sum_macroaree=10772 totale=10772 gap=0.00%
+
+═══ SR2024 → data_year=2023 ═══
+    ⚠ NTN_var fuori [-90,500] E7=-100.0
+  ✓ parsed prov=9, zone=19, sanity_issues=1
+  ✓ cross-check NTN: sum_macroaree=9572 totale=9572 gap=0.00%
+
+═══ GLOBAL STATS ═══
+Years: [2018, 2019, 2020, 2021, 2022, 2023] (6 total)
+Provincia rows: 49 (8.2/yr; expected 9)
+Zone rows:      114 (19.0/yr; expected 19)
+
+Coverage per anno:
+  2018: prov=8 (totale=NO, macro=8), zone=19
+  2019: prov=7 (totale=NO, macro=7), zone=19
+  2020: prov=8 (totale=NO, macro=8), zone=19
+  2021: prov=8 (totale=NO, macro=8), zone=19
+  2022: prov=9 (totale=sì, macro=8), zone=19
+  2023: prov=9 (totale=sì, macro=8), zone=19
+
+Macroaree distinte: ['APPENNINO PANARO', 'APPENNINO SECCHIA', 'BASSA MODENESE', 'FRIGNANO', 'MODENA CAPOLUOGO', 'PEDEMONTANA', 'PIANURA PANARO', 'PIANURA SECCHIA']
+Missing: []
+Zone OMI distinte: ['B3', 'C7', 'C8', 'D26', 'D27', 'D28', 'D29', 'D30', 'D31', 'D32', 'D33', 'E10', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'R3']
+
+Value ranges:
+  ntn: min=0.00 max=10772.00 (n=163)
+  imi_pct: min=0.00 max=6.29 (n=163)
+  ntn_var_pct: min=-100.00 max=300.00 (n=138)
+  quotazione_eur_mq: min=1238.00 max=2841.00 (n=114)
+
+═══ CROSS-YEAR VALIDATION (var % YoY consistency) ═══
+  ⚠ D30 2019→2020: declared=+10.6% computed=+16.0% gap=5.4pp
+  ⚠ E8 2018→2019: declared=+66.7% computed=+60.0% gap=6.7pp
+  ⚠ E8 2020→2021: declared=+167.9% computed=+150.0% gap=17.9pp
+  ⚠ R3 2018→2019: declared=+2.0% computed=+8.6% gap=6.6pp
+  Total var-consistency issues (>5pp gap): 4
