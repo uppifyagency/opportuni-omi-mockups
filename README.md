@@ -7,6 +7,9 @@ Tre dashboard HTML statiche per analizzare il mercato immobiliare di una **inter
 - **Catanzaro** (`C352`, ISTAT 079) — 80 comuni
 - **Bologna** (`A944`, ISTAT 037) — 55 comuni
 - **Reggio Emilia** (`H223`, ISTAT 035) — 42 comuni
+- **Torino** (`L219`, ISTAT 001) — 312 comuni
+- **Firenze** (`D612`, ISTAT 048) — 41 comuni · pipeline volumi NTN/IMI completa
+- **Napoli** (`F839`, ISTAT 063) — 92 comuni · **67 zone OMI capoluogo** (la provincia con più zone del dataset)
 
 Stack: Python stdlib + HTML/CSS/JS vanilla + MapLibre GL per i mockup; per l'audit math-proof, numpy/scipy/statsmodels/pymoo/networkx/polars/simpy/matplotlib. **Nessun framework UI**, nessun build step, nessuna API key. Costo zero.
 
@@ -38,6 +41,9 @@ Poi apri:
 - [Bologna · A](http://localhost:8765/mockups/bologna-A-brief.html) · [B](http://localhost:8765/mockups/bologna-B-heatmap.html) · [C](http://localhost:8765/mockups/bologna-C-compass.html)
 - [Catanzaro · A](http://localhost:8765/mockups/catanzaro-A-brief.html) · [B](http://localhost:8765/mockups/catanzaro-B-heatmap.html) · [C](http://localhost:8765/mockups/catanzaro-C-compass.html)
 - [Reggio Emilia · A](http://localhost:8765/mockups/reggio-emilia-A-brief.html) · [B](http://localhost:8765/mockups/reggio-emilia-B-heatmap.html) · [C](http://localhost:8765/mockups/reggio-emilia-C-compass.html)
+- [Torino · A](http://localhost:8765/mockups/torino-A-brief.html) · [B](http://localhost:8765/mockups/torino-B-heatmap.html) · [C](http://localhost:8765/mockups/torino-C-compass.html)
+- [Firenze · A](http://localhost:8765/mockups/firenze-A-brief.html) · [B](http://localhost:8765/mockups/firenze-B-heatmap.html) · [C](http://localhost:8765/mockups/firenze-C-compass.html)
+- [Napoli · A](http://localhost:8765/mockups/napoli-A-brief.html) · [B](http://localhost:8765/mockups/napoli-B-heatmap.html) · [C](http://localhost:8765/mockups/napoli-C-compass.html)
 
 I JSON pre-computati in `data/computed/` e i GeoJSON in `data/geojson/` sono già pronti — i mockup funzionano out-of-the-box.
 

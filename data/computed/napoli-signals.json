@@ -1,0 +1,6768 @@
+{
+  "metadata": {
+    "generated_at": "2026-05-14",
+    "headline_tipo": "abitazioni_civili",
+    "headline_op": "acquisto",
+    "source": "Sagona API + GeoPOI Agenzia Entrate (reverse-engineered)",
+    "unit_conventions": {
+      "note": "Fields with `_pct` suffix are already multiplied by 100 (percent). All other CAGR/slope/yield fields are fractional (multiply by 100 for percent).",
+      "percent_fields": [
+        "headline.cagr_avg_pct",
+        "headline.yield_medio_pct",
+        "zone_metrics[].yield_lordo_pct",
+        "zone_metrics[].delta_total_pct",
+        "zone_metrics[].recent_slope_pct_per_year",
+        "zone_metrics[].volatility_pct",
+        "province_ranking[].yield_lordo_pct",
+        "fascia_metrics[].delta_total_pct"
+      ],
+      "fractional_fields": [
+        "zone_metrics[].cagr_full",
+        "fascia_metrics[].cagr",
+        "province_ranking[].cagr"
+      ]
+    },
+    "filters": {
+      "min_cagr_years": 5,
+      "applies_to": "top_growth, top_decline, headline.cagr_avg_pct"
+    }
+  },
+  "headline": {
+    "zone_count_total": 136,
+    "zone_count_current": 62,
+    "zone_count_cagr": 62,
+    "zone_count_cagr_reliable": 52,
+    "cagr_avg_pct": -0.34,
+    "cagr_avg_pct_min_years": 5,
+    "cagr_avg_pct_source": "zone_correnti",
+    "yield_medio_pct": 4.07,
+    "prezzo_medio_attuale": 2367.0,
+    "anni_orizzonte_dataset": 21,
+    "anni_orizzonte_zone_correnti": 21
+  },
+  "top_growth": [
+    {
+      "zona": "E3",
+      "anni_dati_acquisto": 11,
+      "primo_anno": 2005,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1725.0,
+      "prezzo_affitto_attuale": 6.2,
+      "cagr_full": 0.0174,
+      "delta_total_pct": 43.8,
+      "recent_slope_eur_per_year": 5.0,
+      "recent_slope_pct_per_year": 0.3,
+      "volatility_pct": 13.2,
+      "yield_lordo_pct": 4.31,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012,
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1200.0,
+        1650.0,
+        1862.5,
+        1775.0,
+        1725.0,
+        1675.0,
+        1637.5,
+        1537.5,
+        1525.0,
+        1675.0,
+        1725.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.679,
+        1.0,
+        0.868,
+        0.792,
+        0.717,
+        0.66,
+        0.509,
+        0.491,
+        0.717,
+        0.792
+      ],
+      "fascia": "E",
+      "dizione": "S. PIETRO A PATIERNO",
+      "link_zona": "NA00000024"
+    },
+    {
+      "zona": "B8",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2725.0,
+      "prezzo_affitto_attuale": 9.1,
+      "cagr_full": 0.0133,
+      "delta_total_pct": 17.2,
+      "recent_slope_eur_per_year": 48.0,
+      "recent_slope_pct_per_year": 2.11,
+      "volatility_pct": 7.2,
+      "yield_lordo_pct": 4.01,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2325.0,
+        2275.0,
+        2350.0,
+        2225.0,
+        2325.0,
+        2687.5,
+        2725.0
+      ],
+      "spark_normalized": [
+        0.2,
+        0.1,
+        0.25,
+        0.0,
+        0.2,
+        0.925,
+        1.0
+      ],
+      "fascia": "B",
+      "dizione": "PARTE EST CENTRO ANTICO:  PIAZZA MERCATO - MEZZOCANNONE",
+      "link_zona": "NA00004803"
+    },
+    {
+      "zona": "E30",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2025.0,
+      "prezzo_affitto_attuale": 7.2,
+      "cagr_full": 0.0105,
+      "delta_total_pct": 13.3,
+      "recent_slope_eur_per_year": 31.8,
+      "recent_slope_pct_per_year": 1.87,
+      "volatility_pct": 6.6,
+      "yield_lordo_pct": 4.27,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1787.5,
+        1700.0,
+        1737.5,
+        1700.0,
+        1700.0,
+        1937.5,
+        2025.0
+      ],
+      "spark_normalized": [
+        0.269,
+        0.0,
+        0.115,
+        0.0,
+        0.0,
+        0.731,
+        1.0
+      ],
+      "fascia": "E",
+      "dizione": "VIA STADERA",
+      "link_zona": "NA00004998"
+    },
+    {
+      "zona": "C29",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 3687.5,
+      "prezzo_affitto_attuale": 11.7,
+      "cagr_full": 0.0068,
+      "delta_total_pct": 8.5,
+      "recent_slope_eur_per_year": 61.6,
+      "recent_slope_pct_per_year": 1.99,
+      "volatility_pct": 6.5,
+      "yield_lordo_pct": 3.81,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3400.0,
+        3100.0,
+        3187.5,
+        3087.5,
+        3375.0,
+        3550.0,
+        3687.5
+      ],
+      "spark_normalized": [
+        0.521,
+        0.021,
+        0.167,
+        0.0,
+        0.479,
+        0.771,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "VOMERO ALTO, VIA CASTELLINO, PARCO OMODEO, VIA FONTANA, VIA CAVALLINO, VIA GIGANTE, VIA SAN DOMENICO",
+      "link_zona": "NA00005263"
+    },
+    {
+      "zona": "C21",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2425.0,
+      "prezzo_affitto_attuale": 8.1,
+      "cagr_full": 0.0063,
+      "delta_total_pct": 7.8,
+      "recent_slope_eur_per_year": 22.5,
+      "recent_slope_pct_per_year": 1.01,
+      "volatility_pct": 4.7,
+      "yield_lordo_pct": 4.01,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2250.0,
+        2225.0,
+        2200.0,
+        2125.0,
+        2325.0,
+        2325.0,
+        2425.0
+      ],
+      "spark_normalized": [
+        0.417,
+        0.333,
+        0.25,
+        0.0,
+        0.667,
+        0.667,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "SANT`EFRAMO, VIA CARLO DE MARCO, PARCO VILLA TERESA, C.SO AMEDEO DI SAVOIA (EDILIZIA DOPOGUERR)",
+      "link_zona": "NA00004809"
+    }
+  ],
+  "top_decline": [
+    {
+      "zona": "E40",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1525.0,
+      "prezzo_affitto_attuale": 5.4,
+      "cagr_full": -0.0187,
+      "delta_total_pct": -20.3,
+      "recent_slope_eur_per_year": -26.2,
+      "recent_slope_pct_per_year": -1.46,
+      "volatility_pct": 2.2,
+      "yield_lordo_pct": 4.25,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1912.5,
+        1800.0,
+        1762.5,
+        1662.5,
+        1650.0,
+        1612.5,
+        1525.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.71,
+        0.613,
+        0.355,
+        0.323,
+        0.226,
+        0.0
+      ],
+      "fascia": "E",
+      "dizione": "AGNANO,  UNIVERSITA` MONTE SANT`ANGELO , ASTRONI",
+      "link_zona": "NA00005011"
+    },
+    {
+      "zona": "E32",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1325.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": -0.0169,
+      "delta_total_pct": -18.5,
+      "recent_slope_eur_per_year": -12.1,
+      "recent_slope_pct_per_year": -0.85,
+      "volatility_pct": 5.7,
+      "yield_lordo_pct": 4.35,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1625.0,
+        1425.0,
+        1387.5,
+        1287.5,
+        1275.0,
+        1275.0,
+        1325.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.429,
+        0.321,
+        0.036,
+        0.0,
+        0.0,
+        0.143
+      ],
+      "fascia": "E",
+      "dizione": "PONTICELLI (periferia)",
+      "link_zona": "NA00005000"
+    },
+    {
+      "zona": "D29",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2312.5,
+      "prezzo_affitto_attuale": 7.7,
+      "cagr_full": -0.0165,
+      "delta_total_pct": -18.1,
+      "recent_slope_eur_per_year": -13.9,
+      "recent_slope_pct_per_year": -0.56,
+      "volatility_pct": 6.9,
+      "yield_lordo_pct": 4.0,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2825.0,
+        2500.0,
+        2450.0,
+        2225.0,
+        2262.5,
+        2425.0,
+        2312.5
+      ],
+      "spark_normalized": [
+        1.0,
+        0.458,
+        0.375,
+        0.0,
+        0.062,
+        0.333,
+        0.146
+      ],
+      "fascia": "D",
+      "dizione": "via Terracina (parte bassa), BAGNOLI",
+      "link_zona": "NA00004843"
+    },
+    {
+      "zona": "B18",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2800.0,
+      "prezzo_affitto_attuale": 8.8,
+      "cagr_full": -0.0142,
+      "delta_total_pct": -15.8,
+      "recent_slope_eur_per_year": -37.5,
+      "recent_slope_pct_per_year": -1.19,
+      "volatility_pct": 2.7,
+      "yield_lordo_pct": 3.77,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3325.0,
+        3162.5,
+        3062.5,
+        2850.0,
+        2825.0,
+        2800.0,
+        2800.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.69,
+        0.5,
+        0.095,
+        0.048,
+        0.0,
+        0.0
+      ],
+      "fascia": "B",
+      "dizione": "MONTE DI DIO",
+      "link_zona": "NA00005683"
+    },
+    {
+      "zona": "D30",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2125.0,
+      "prezzo_affitto_attuale": 7.6,
+      "cagr_full": -0.0126,
+      "delta_total_pct": -14.1,
+      "recent_slope_eur_per_year": -3.6,
+      "recent_slope_pct_per_year": -0.16,
+      "volatility_pct": 7.5,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2475.0,
+        2187.5,
+        2075.0,
+        1900.0,
+        1925.0,
+        2087.5,
+        2125.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.5,
+        0.304,
+        0.0,
+        0.043,
+        0.326,
+        0.391
+      ],
+      "fascia": "D",
+      "dizione": "VIA CAMPEGNA, CAVALLEGGERI, NUOVA AREA SPORTIVA ATTREZZATA",
+      "link_zona": "NA00004863"
+    }
+  ],
+  "top_yield": [
+    {
+      "zona": "E45",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1375.0,
+      "prezzo_affitto_attuale": 5.0,
+      "cagr_full": -0.0125,
+      "delta_total_pct": -14.1,
+      "recent_slope_eur_per_year": -14.5,
+      "recent_slope_pct_per_year": -0.95,
+      "volatility_pct": 3.2,
+      "yield_lordo_pct": 4.36,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1600.0,
+        1525.0,
+        1512.5,
+        1412.5,
+        1450.0,
+        1412.5,
+        1375.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.667,
+        0.611,
+        0.167,
+        0.333,
+        0.167,
+        0.0
+      ],
+      "fascia": "E",
+      "dizione": "BARRA (Centro Storico)",
+      "link_zona": "NA00005019"
+    },
+    {
+      "zona": "E48",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1325.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": -0.0089,
+      "delta_total_pct": -10.2,
+      "recent_slope_eur_per_year": -7.9,
+      "recent_slope_pct_per_year": -0.56,
+      "volatility_pct": 5.8,
+      "yield_lordo_pct": 4.35,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1475.0,
+        1400.0,
+        1375.0,
+        1250.0,
+        1222.5,
+        1325.0,
+        1325.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.703,
+        0.604,
+        0.109,
+        0.0,
+        0.406,
+        0.406
+      ],
+      "fascia": "E",
+      "dizione": "SECONDIGLIANO (PERIFERIA)",
+      "link_zona": "NA00005663"
+    },
+    {
+      "zona": "E32",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1325.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": -0.0169,
+      "delta_total_pct": -18.5,
+      "recent_slope_eur_per_year": -12.1,
+      "recent_slope_pct_per_year": -0.85,
+      "volatility_pct": 5.7,
+      "yield_lordo_pct": 4.35,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1625.0,
+        1425.0,
+        1387.5,
+        1287.5,
+        1275.0,
+        1275.0,
+        1325.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.429,
+        0.321,
+        0.036,
+        0.0,
+        0.0,
+        0.143
+      ],
+      "fascia": "E",
+      "dizione": "PONTICELLI (periferia)",
+      "link_zona": "NA00005000"
+    },
+    {
+      "zona": "D27",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1775.0,
+      "prezzo_affitto_attuale": 6.4,
+      "cagr_full": -0.004,
+      "delta_total_pct": -4.7,
+      "recent_slope_eur_per_year": -15.5,
+      "recent_slope_pct_per_year": -0.82,
+      "volatility_pct": 3.9,
+      "yield_lordo_pct": 4.33,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1862.5,
+        1900.0,
+        1925.0,
+        1762.5,
+        1750.0,
+        1775.0,
+        1775.0
+      ],
+      "spark_normalized": [
+        0.643,
+        0.857,
+        1.0,
+        0.071,
+        0.0,
+        0.143,
+        0.143
+      ],
+      "fascia": "D",
+      "dizione": "ZONA INDUSTRIALE OVEST (via Ferraris, via Gianturco, Ponte della Maddalena)",
+      "link_zona": "NA00004835"
+    },
+    {
+      "zona": "E33",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1775.0,
+      "prezzo_affitto_attuale": 6.4,
+      "cagr_full": -0.004,
+      "delta_total_pct": -4.7,
+      "recent_slope_eur_per_year": -0.7,
+      "recent_slope_pct_per_year": -0.04,
+      "volatility_pct": 4.0,
+      "yield_lordo_pct": 4.33,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1862.5,
+        1775.0,
+        1750.0,
+        1662.5,
+        1650.0,
+        1737.5,
+        1775.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.588,
+        0.471,
+        0.059,
+        0.0,
+        0.412,
+        0.588
+      ],
+      "fascia": "E",
+      "dizione": "MARIANELLA, PISCINOLA",
+      "link_zona": "NA00005003"
+    }
+  ],
+  "top_volatile": [
+    {
+      "zona": "E3",
+      "anni_dati_acquisto": 11,
+      "primo_anno": 2005,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1725.0,
+      "prezzo_affitto_attuale": 6.2,
+      "cagr_full": 0.0174,
+      "delta_total_pct": 43.8,
+      "recent_slope_eur_per_year": 5.0,
+      "recent_slope_pct_per_year": 0.3,
+      "volatility_pct": 13.2,
+      "yield_lordo_pct": 4.31,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012,
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1200.0,
+        1650.0,
+        1862.5,
+        1775.0,
+        1725.0,
+        1675.0,
+        1637.5,
+        1537.5,
+        1525.0,
+        1675.0,
+        1725.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.679,
+        1.0,
+        0.868,
+        0.792,
+        0.717,
+        0.66,
+        0.509,
+        0.491,
+        0.717,
+        0.792
+      ],
+      "fascia": "E",
+      "dizione": "S. PIETRO A PATIERNO",
+      "link_zona": "NA00000024"
+    },
+    {
+      "zona": "D30",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2125.0,
+      "prezzo_affitto_attuale": 7.6,
+      "cagr_full": -0.0126,
+      "delta_total_pct": -14.1,
+      "recent_slope_eur_per_year": -3.6,
+      "recent_slope_pct_per_year": -0.16,
+      "volatility_pct": 7.5,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2475.0,
+        2187.5,
+        2075.0,
+        1900.0,
+        1925.0,
+        2087.5,
+        2125.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.5,
+        0.304,
+        0.0,
+        0.043,
+        0.326,
+        0.391
+      ],
+      "fascia": "D",
+      "dizione": "VIA CAMPEGNA, CAVALLEGGERI, NUOVA AREA SPORTIVA ATTREZZATA",
+      "link_zona": "NA00004863"
+    },
+    {
+      "zona": "B8",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2725.0,
+      "prezzo_affitto_attuale": 9.1,
+      "cagr_full": 0.0133,
+      "delta_total_pct": 17.2,
+      "recent_slope_eur_per_year": 48.0,
+      "recent_slope_pct_per_year": 2.11,
+      "volatility_pct": 7.2,
+      "yield_lordo_pct": 4.01,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2325.0,
+        2275.0,
+        2350.0,
+        2225.0,
+        2325.0,
+        2687.5,
+        2725.0
+      ],
+      "spark_normalized": [
+        0.2,
+        0.1,
+        0.25,
+        0.0,
+        0.2,
+        0.925,
+        1.0
+      ],
+      "fascia": "B",
+      "dizione": "PARTE EST CENTRO ANTICO:  PIAZZA MERCATO - MEZZOCANNONE",
+      "link_zona": "NA00004803"
+    },
+    {
+      "zona": "B9",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2975.0,
+      "prezzo_affitto_attuale": 9.4,
+      "cagr_full": -0.0073,
+      "delta_total_pct": -8.5,
+      "recent_slope_eur_per_year": 19.8,
+      "recent_slope_pct_per_year": 0.7,
+      "volatility_pct": 7.1,
+      "yield_lordo_pct": 3.79,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3250.0,
+        2850.0,
+        2762.5,
+        2637.5,
+        2762.5,
+        2975.0,
+        2975.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.347,
+        0.204,
+        0.0,
+        0.204,
+        0.551,
+        0.551
+      ],
+      "fascia": "B",
+      "dizione": "PARTE OVEST CENTRO ANTICO: CORSO UMBERTO - VIA DE PRETIS - PIAZZA DEL GESU` - VIA COSTANTINOPOLI - DUOMO",
+      "link_zona": "NA00004804"
+    },
+    {
+      "zona": "C33",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 3337.5,
+      "prezzo_affitto_attuale": 10.6,
+      "cagr_full": 0.0048,
+      "delta_total_pct": 6.0,
+      "recent_slope_eur_per_year": 38.8,
+      "recent_slope_pct_per_year": 1.28,
+      "volatility_pct": 7.0,
+      "yield_lordo_pct": 3.81,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3150.0,
+        3025.0,
+        3050.0,
+        2862.5,
+        3262.5,
+        3300.0,
+        3337.5
+      ],
+      "spark_normalized": [
+        0.605,
+        0.342,
+        0.395,
+        0.0,
+        0.842,
+        0.921,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "COLLI AMINEI",
+      "link_zona": "NA00005664"
+    }
+  ],
+  "zone_metrics": [
+    {
+      "zona": "E3",
+      "anni_dati_acquisto": 11,
+      "primo_anno": 2005,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1725.0,
+      "prezzo_affitto_attuale": 6.2,
+      "cagr_full": 0.0174,
+      "delta_total_pct": 43.8,
+      "recent_slope_eur_per_year": 5.0,
+      "recent_slope_pct_per_year": 0.3,
+      "volatility_pct": 13.2,
+      "yield_lordo_pct": 4.31,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012,
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1200.0,
+        1650.0,
+        1862.5,
+        1775.0,
+        1725.0,
+        1675.0,
+        1637.5,
+        1537.5,
+        1525.0,
+        1675.0,
+        1725.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.679,
+        1.0,
+        0.868,
+        0.792,
+        0.717,
+        0.66,
+        0.509,
+        0.491,
+        0.717,
+        0.792
+      ],
+      "fascia": "E",
+      "dizione": "S. PIETRO A PATIERNO",
+      "link_zona": "NA00000024"
+    },
+    {
+      "zona": "B8",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2725.0,
+      "prezzo_affitto_attuale": 9.1,
+      "cagr_full": 0.0133,
+      "delta_total_pct": 17.2,
+      "recent_slope_eur_per_year": 48.0,
+      "recent_slope_pct_per_year": 2.11,
+      "volatility_pct": 7.2,
+      "yield_lordo_pct": 4.01,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2325.0,
+        2275.0,
+        2350.0,
+        2225.0,
+        2325.0,
+        2687.5,
+        2725.0
+      ],
+      "spark_normalized": [
+        0.2,
+        0.1,
+        0.25,
+        0.0,
+        0.2,
+        0.925,
+        1.0
+      ],
+      "fascia": "B",
+      "dizione": "PARTE EST CENTRO ANTICO:  PIAZZA MERCATO - MEZZOCANNONE",
+      "link_zona": "NA00004803"
+    },
+    {
+      "zona": "E30",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2025.0,
+      "prezzo_affitto_attuale": 7.2,
+      "cagr_full": 0.0105,
+      "delta_total_pct": 13.3,
+      "recent_slope_eur_per_year": 31.8,
+      "recent_slope_pct_per_year": 1.87,
+      "volatility_pct": 6.6,
+      "yield_lordo_pct": 4.27,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1787.5,
+        1700.0,
+        1737.5,
+        1700.0,
+        1700.0,
+        1937.5,
+        2025.0
+      ],
+      "spark_normalized": [
+        0.269,
+        0.0,
+        0.115,
+        0.0,
+        0.0,
+        0.731,
+        1.0
+      ],
+      "fascia": "E",
+      "dizione": "VIA STADERA",
+      "link_zona": "NA00004998"
+    },
+    {
+      "zona": "B27",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 3875.0,
+      "prezzo_affitto_attuale": 11.3,
+      "cagr_full": 0.0098,
+      "delta_total_pct": 2.0,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 3.5,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "CHIAIA PANORAMICA",
+      "link_zona": "NA00010545"
+    },
+    {
+      "zona": "B26",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 4625.0,
+      "prezzo_affitto_attuale": 13.5,
+      "cagr_full": 0.0082,
+      "delta_total_pct": 1.6,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 3.5,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "SAN MARTINO- VIA LUCA GIORDANO-VIA SCARLATTI",
+      "link_zona": "NA00010544"
+    },
+    {
+      "zona": "C29",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 3687.5,
+      "prezzo_affitto_attuale": 11.7,
+      "cagr_full": 0.0068,
+      "delta_total_pct": 8.5,
+      "recent_slope_eur_per_year": 61.6,
+      "recent_slope_pct_per_year": 1.99,
+      "volatility_pct": 6.5,
+      "yield_lordo_pct": 3.81,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3400.0,
+        3100.0,
+        3187.5,
+        3087.5,
+        3375.0,
+        3550.0,
+        3687.5
+      ],
+      "spark_normalized": [
+        0.521,
+        0.021,
+        0.167,
+        0.0,
+        0.479,
+        0.771,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "VOMERO ALTO, VIA CASTELLINO, PARCO OMODEO, VIA FONTANA, VIA CAVALLINO, VIA GIGANTE, VIA SAN DOMENICO",
+      "link_zona": "NA00005263"
+    },
+    {
+      "zona": "C21",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2425.0,
+      "prezzo_affitto_attuale": 8.1,
+      "cagr_full": 0.0063,
+      "delta_total_pct": 7.8,
+      "recent_slope_eur_per_year": 22.5,
+      "recent_slope_pct_per_year": 1.01,
+      "volatility_pct": 4.7,
+      "yield_lordo_pct": 4.01,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2250.0,
+        2225.0,
+        2200.0,
+        2125.0,
+        2325.0,
+        2325.0,
+        2425.0
+      ],
+      "spark_normalized": [
+        0.417,
+        0.333,
+        0.25,
+        0.0,
+        0.667,
+        0.667,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "SANT`EFRAMO, VIA CARLO DE MARCO, PARCO VILLA TERESA, C.SO AMEDEO DI SAVOIA (EDILIZIA DOPOGUERR)",
+      "link_zona": "NA00004809"
+    },
+    {
+      "zona": "D22",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1775.0,
+      "prezzo_affitto_attuale": 5.9,
+      "cagr_full": 0.0061,
+      "delta_total_pct": 7.6,
+      "recent_slope_eur_per_year": 16.8,
+      "recent_slope_pct_per_year": 1.03,
+      "volatility_pct": 2.4,
+      "yield_lordo_pct": 3.99,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1650.0,
+        1625.0,
+        1662.5,
+        1662.5,
+        1750.0,
+        1775.0,
+        1775.0
+      ],
+      "spark_normalized": [
+        0.167,
+        0.0,
+        0.25,
+        0.25,
+        0.833,
+        1.0,
+        1.0
+      ],
+      "fascia": "D",
+      "dizione": "ZONA SEMINDUSTRIALE POGGIOREALE NORD",
+      "link_zona": "NA00004826"
+    },
+    {
+      "zona": "C33",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 3337.5,
+      "prezzo_affitto_attuale": 10.6,
+      "cagr_full": 0.0048,
+      "delta_total_pct": 6.0,
+      "recent_slope_eur_per_year": 38.8,
+      "recent_slope_pct_per_year": 1.28,
+      "volatility_pct": 7.0,
+      "yield_lordo_pct": 3.81,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3150.0,
+        3025.0,
+        3050.0,
+        2862.5,
+        3262.5,
+        3300.0,
+        3337.5
+      ],
+      "spark_normalized": [
+        0.605,
+        0.342,
+        0.395,
+        0.0,
+        0.842,
+        0.921,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "COLLI AMINEI",
+      "link_zona": "NA00005664"
+    },
+    {
+      "zona": "C23",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2350.0,
+      "prezzo_affitto_attuale": 8.4,
+      "cagr_full": 0.0041,
+      "delta_total_pct": 5.0,
+      "recent_slope_eur_per_year": 22.9,
+      "recent_slope_pct_per_year": 1.06,
+      "volatility_pct": 5.4,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2237.5,
+        2162.5,
+        2150.0,
+        2025.0,
+        2162.5,
+        2325.0,
+        2350.0
+      ],
+      "spark_normalized": [
+        0.654,
+        0.423,
+        0.385,
+        0.0,
+        0.423,
+        0.923,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "CORSO GARIBALDI - VASTO - STAZIONE",
+      "link_zona": "NA00004806"
+    },
+    {
+      "zona": "C22",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2212.5,
+      "prezzo_affitto_attuale": 7.9,
+      "cagr_full": 0.0024,
+      "delta_total_pct": 2.9,
+      "recent_slope_eur_per_year": 19.5,
+      "recent_slope_pct_per_year": 0.95,
+      "volatility_pct": 4.1,
+      "yield_lordo_pct": 4.28,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2150.0,
+        2050.0,
+        2050.0,
+        1987.5,
+        2087.5,
+        2200.0,
+        2212.5
+      ],
+      "spark_normalized": [
+        0.722,
+        0.278,
+        0.278,
+        0.0,
+        0.444,
+        0.944,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "VIA CIRILLO - VIA ROSAROLL - BORGO SANT`ANTONIO - MADDALENA",
+      "link_zona": "NA00004805"
+    },
+    {
+      "zona": "E42",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1400.0,
+      "prezzo_affitto_attuale": 5.0,
+      "cagr_full": 0.0023,
+      "delta_total_pct": 2.8,
+      "recent_slope_eur_per_year": 14.1,
+      "recent_slope_pct_per_year": 1.09,
+      "volatility_pct": 4.6,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1362.5,
+        1287.5,
+        1275.0,
+        1252.5,
+        1300.0,
+        1400.0,
+        1400.0
+      ],
+      "spark_normalized": [
+        0.746,
+        0.237,
+        0.153,
+        0.0,
+        0.322,
+        1.0,
+        1.0
+      ],
+      "fascia": "E",
+      "dizione": "SCAMPIA, DON GUANELLA, MONTE ROSA, RIONE SAN GAETANO",
+      "link_zona": "NA00005014"
+    },
+    {
+      "zona": "E27",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1500.0,
+      "prezzo_affitto_attuale": 5.3,
+      "cagr_full": 0.0014,
+      "delta_total_pct": 1.7,
+      "recent_slope_eur_per_year": 8.2,
+      "recent_slope_pct_per_year": 0.59,
+      "volatility_pct": 5.3,
+      "yield_lordo_pct": 4.24,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1475.0,
+        1400.0,
+        1400.0,
+        1325.0,
+        1325.0,
+        1425.0,
+        1500.0
+      ],
+      "spark_normalized": [
+        0.857,
+        0.429,
+        0.429,
+        0.0,
+        0.0,
+        0.571,
+        1.0
+      ],
+      "fascia": "E",
+      "dizione": "PIANURA (Centro Storico)",
+      "link_zona": "NA00004825"
+    },
+    {
+      "zona": "C26",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2350.0,
+      "prezzo_affitto_attuale": 8.4,
+      "cagr_full": 0.0009,
+      "delta_total_pct": 1.1,
+      "recent_slope_eur_per_year": 11.1,
+      "recent_slope_pct_per_year": 0.49,
+      "volatility_pct": 5.4,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2325.0,
+        2275.0,
+        2275.0,
+        2100.0,
+        2275.0,
+        2350.0,
+        2350.0
+      ],
+      "spark_normalized": [
+        0.9,
+        0.7,
+        0.7,
+        0.0,
+        0.7,
+        1.0,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "SANITA` - OSS. ASTRONOMICO - STELLA - MIRACOLI-NOCELLE",
+      "link_zona": "NA00004816"
+    },
+    {
+      "zona": "D35",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2250.0,
+      "prezzo_affitto_attuale": 8.1,
+      "cagr_full": 0.0009,
+      "delta_total_pct": 1.1,
+      "recent_slope_eur_per_year": 6.2,
+      "recent_slope_pct_per_year": 0.28,
+      "volatility_pct": 5.8,
+      "yield_lordo_pct": 4.32,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2225.0,
+        2200.0,
+        2175.0,
+        1975.0,
+        2050.0,
+        2212.5,
+        2250.0
+      ],
+      "spark_normalized": [
+        0.909,
+        0.818,
+        0.727,
+        0.0,
+        0.273,
+        0.864,
+        1.0
+      ],
+      "fascia": "D",
+      "dizione": "FRULLONE, VIA SAN ROCCO, RIONE LIETI",
+      "link_zona": "NA00005603"
+    },
+    {
+      "zona": "C27",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2400.0,
+      "prezzo_affitto_attuale": 8.6,
+      "cagr_full": 0.0004,
+      "delta_total_pct": 0.5,
+      "recent_slope_eur_per_year": 11.4,
+      "recent_slope_pct_per_year": 0.51,
+      "volatility_pct": 4.2,
+      "yield_lordo_pct": 4.3,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2387.5,
+        2262.5,
+        2250.0,
+        2162.5,
+        2200.0,
+        2275.0,
+        2400.0
+      ],
+      "spark_normalized": [
+        0.947,
+        0.421,
+        0.368,
+        0.0,
+        0.158,
+        0.474,
+        1.0
+      ],
+      "fascia": "C",
+      "dizione": "AREA TRA VIA ARENACCIA E CORSO MALTA",
+      "link_zona": "NA00004823"
+    },
+    {
+      "zona": "E38",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1650.0,
+      "prezzo_affitto_attuale": 5.9,
+      "cagr_full": -0.0006,
+      "delta_total_pct": -0.8,
+      "recent_slope_eur_per_year": 4.5,
+      "recent_slope_pct_per_year": 0.27,
+      "volatility_pct": 4.4,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1662.5,
+        1625.0,
+        1625.0,
+        1525.0,
+        1637.5,
+        1650.0,
+        1650.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.727,
+        0.727,
+        0.0,
+        0.818,
+        0.909,
+        0.909
+      ],
+      "fascia": "E",
+      "dizione": "BARRA (semicentro - periferia)",
+      "link_zona": "NA00005008"
+    },
+    {
+      "zona": "E31",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1700.0,
+      "prezzo_affitto_attuale": 6.1,
+      "cagr_full": -0.0012,
+      "delta_total_pct": -1.4,
+      "recent_slope_eur_per_year": 6.4,
+      "recent_slope_pct_per_year": 0.39,
+      "volatility_pct": 3.8,
+      "yield_lordo_pct": 4.31,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1725.0,
+        1650.0,
+        1650.0,
+        1575.0,
+        1625.0,
+        1700.0,
+        1700.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.5,
+        0.5,
+        0.0,
+        0.333,
+        0.833,
+        0.833
+      ],
+      "fascia": "E",
+      "dizione": "PONTICELLI (EDILIZIA CONSOLIDATA)",
+      "link_zona": "NA00004999"
+    },
+    {
+      "zona": "D36",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2150.0,
+      "prezzo_affitto_attuale": 7.7,
+      "cagr_full": -0.0014,
+      "delta_total_pct": -1.7,
+      "recent_slope_eur_per_year": 3.9,
+      "recent_slope_pct_per_year": 0.18,
+      "volatility_pct": 4.8,
+      "yield_lordo_pct": 4.3,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2187.5,
+        2150.0,
+        2100.0,
+        1950.0,
+        2075.0,
+        2150.0,
+        2150.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.842,
+        0.632,
+        0.0,
+        0.526,
+        0.842,
+        0.842
+      ],
+      "fascia": "D",
+      "dizione": "CAMALDOLI, NUOVO POLICLINICO, CAMALDOLILLI, VIA GUANTAI AD ORSOLONA, SANTA CROCE",
+      "link_zona": "NA00005604"
+    },
+    {
+      "zona": "E36",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1425.0,
+      "prezzo_affitto_attuale": 5.1,
+      "cagr_full": -0.0014,
+      "delta_total_pct": -1.7,
+      "recent_slope_eur_per_year": 4.3,
+      "recent_slope_pct_per_year": 0.31,
+      "volatility_pct": 3.9,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1450.0,
+        1375.0,
+        1375.0,
+        1312.5,
+        1325.0,
+        1387.5,
+        1425.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.455,
+        0.455,
+        0.0,
+        0.091,
+        0.545,
+        0.818
+      ],
+      "fascia": "E",
+      "dizione": "CIMITERO, ARPINO",
+      "link_zona": "NA00005006"
+    },
+    {
+      "zona": "C25",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2100.0,
+      "prezzo_affitto_attuale": 7.5,
+      "cagr_full": -0.0015,
+      "delta_total_pct": -1.8,
+      "recent_slope_eur_per_year": 15.4,
+      "recent_slope_pct_per_year": 0.78,
+      "volatility_pct": 5.7,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2137.5,
+        1975.0,
+        1950.0,
+        1875.0,
+        1912.5,
+        2087.5,
+        2100.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.381,
+        0.286,
+        0.0,
+        0.143,
+        0.81,
+        0.857
+      ],
+      "fascia": "C",
+      "dizione": "SAN GIOVANNIELLO - ORTO BOTANICO",
+      "link_zona": "NA00004815"
+    },
+    {
+      "zona": "D21",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1575.0,
+      "prezzo_affitto_attuale": 5.2,
+      "cagr_full": -0.0026,
+      "delta_total_pct": -3.1,
+      "recent_slope_eur_per_year": -5.7,
+      "recent_slope_pct_per_year": -0.36,
+      "volatility_pct": 2.4,
+      "yield_lordo_pct": 3.96,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1625.0,
+        1600.0,
+        1625.0,
+        1575.0,
+        1525.0,
+        1550.0,
+        1575.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.75,
+        1.0,
+        0.5,
+        0.0,
+        0.25,
+        0.5
+      ],
+      "fascia": "D",
+      "dizione": "RIONE LUZZATTI, AREA EX MACELLO",
+      "link_zona": "NA00004829"
+    },
+    {
+      "zona": "D26",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2350.0,
+      "prezzo_affitto_attuale": 7.8,
+      "cagr_full": -0.0035,
+      "delta_total_pct": -4.1,
+      "recent_slope_eur_per_year": -1.8,
+      "recent_slope_pct_per_year": -0.08,
+      "volatility_pct": 4.9,
+      "yield_lordo_pct": 3.98,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2450.0,
+        2337.5,
+        2325.0,
+        2150.0,
+        2150.0,
+        2262.5,
+        2350.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.625,
+        0.583,
+        0.0,
+        0.0,
+        0.375,
+        0.667
+      ],
+      "fascia": "D",
+      "dizione": "SOCCAVO NORD-EST",
+      "link_zona": "NA00004833"
+    },
+    {
+      "zona": "D27",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1775.0,
+      "prezzo_affitto_attuale": 6.4,
+      "cagr_full": -0.004,
+      "delta_total_pct": -4.7,
+      "recent_slope_eur_per_year": -15.5,
+      "recent_slope_pct_per_year": -0.82,
+      "volatility_pct": 3.9,
+      "yield_lordo_pct": 4.33,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1862.5,
+        1900.0,
+        1925.0,
+        1762.5,
+        1750.0,
+        1775.0,
+        1775.0
+      ],
+      "spark_normalized": [
+        0.643,
+        0.857,
+        1.0,
+        0.071,
+        0.0,
+        0.143,
+        0.143
+      ],
+      "fascia": "D",
+      "dizione": "ZONA INDUSTRIALE OVEST (via Ferraris, via Gianturco, Ponte della Maddalena)",
+      "link_zona": "NA00004835"
+    },
+    {
+      "zona": "E33",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1775.0,
+      "prezzo_affitto_attuale": 6.4,
+      "cagr_full": -0.004,
+      "delta_total_pct": -4.7,
+      "recent_slope_eur_per_year": -0.7,
+      "recent_slope_pct_per_year": -0.04,
+      "volatility_pct": 4.0,
+      "yield_lordo_pct": 4.33,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1862.5,
+        1775.0,
+        1750.0,
+        1662.5,
+        1650.0,
+        1737.5,
+        1775.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.588,
+        0.471,
+        0.059,
+        0.0,
+        0.412,
+        0.588
+      ],
+      "fascia": "E",
+      "dizione": "MARIANELLA, PISCINOLA",
+      "link_zona": "NA00005003"
+    },
+    {
+      "zona": "E37",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1500.0,
+      "prezzo_affitto_attuale": 5.3,
+      "cagr_full": -0.0041,
+      "delta_total_pct": -4.8,
+      "recent_slope_eur_per_year": -3.2,
+      "recent_slope_pct_per_year": -0.21,
+      "volatility_pct": 3.5,
+      "yield_lordo_pct": 4.24,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1575.0,
+        1525.0,
+        1525.0,
+        1450.0,
+        1425.0,
+        1500.0,
+        1500.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.667,
+        0.667,
+        0.167,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "fascia": "E",
+      "dizione": "CAVE E SELVA DI CHIAIANO, TIRONE",
+      "link_zona": "NA00005007"
+    },
+    {
+      "zona": "E43",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1700.0,
+      "prezzo_affitto_attuale": 6.1,
+      "cagr_full": -0.0042,
+      "delta_total_pct": -4.9,
+      "recent_slope_eur_per_year": 1.4,
+      "recent_slope_pct_per_year": 0.08,
+      "volatility_pct": 4.5,
+      "yield_lordo_pct": 4.31,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1787.5,
+        1700.0,
+        1675.0,
+        1575.0,
+        1600.0,
+        1700.0,
+        1700.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.588,
+        0.471,
+        0.0,
+        0.118,
+        0.588,
+        0.588
+      ],
+      "fascia": "E",
+      "dizione": "SAN GIOVANNI A TEDUCCIO",
+      "link_zona": "NA00005016"
+    },
+    {
+      "zona": "E47",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1525.0,
+      "prezzo_affitto_attuale": 5.4,
+      "cagr_full": -0.0046,
+      "delta_total_pct": -5.4,
+      "recent_slope_eur_per_year": -8.0,
+      "recent_slope_pct_per_year": -0.51,
+      "volatility_pct": 2.8,
+      "yield_lordo_pct": 4.25,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1612.5,
+        1575.0,
+        1625.0,
+        1537.5,
+        1525.0,
+        1525.0,
+        1525.0
+      ],
+      "spark_normalized": [
+        0.875,
+        0.5,
+        1.0,
+        0.125,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fascia": "E",
+      "dizione": "PONTICELLI (CENTRO STORICO)",
+      "link_zona": "NA00005515"
+    },
+    {
+      "zona": "E46",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1650.0,
+      "prezzo_affitto_attuale": 5.9,
+      "cagr_full": -0.0049,
+      "delta_total_pct": -5.7,
+      "recent_slope_eur_per_year": -3.6,
+      "recent_slope_pct_per_year": -0.21,
+      "volatility_pct": 3.3,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1750.0,
+        1700.0,
+        1650.0,
+        1575.0,
+        1575.0,
+        1650.0,
+        1650.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.714,
+        0.429,
+        0.0,
+        0.0,
+        0.429,
+        0.429
+      ],
+      "fascia": "E",
+      "dizione": "SECONDIGLIANO (ZONA NUOVA)",
+      "link_zona": "NA00005020"
+    },
+    {
+      "zona": "E34",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1750.0,
+      "prezzo_affitto_attuale": 6.3,
+      "cagr_full": -0.0052,
+      "delta_total_pct": -6.0,
+      "recent_slope_eur_per_year": -0.2,
+      "recent_slope_pct_per_year": -0.01,
+      "volatility_pct": 5.6,
+      "yield_lordo_pct": 4.32,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1862.5,
+        1750.0,
+        1737.5,
+        1650.0,
+        1600.0,
+        1750.0,
+        1750.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.571,
+        0.524,
+        0.19,
+        0.0,
+        0.571,
+        0.571
+      ],
+      "fascia": "E",
+      "dizione": "SECONDIGLIANO (Centro Storico)",
+      "link_zona": "NA00005004"
+    },
+    {
+      "zona": "E39",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1637.5,
+      "prezzo_affitto_attuale": 5.8,
+      "cagr_full": -0.0061,
+      "delta_total_pct": -7.1,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": 5.0,
+      "yield_lordo_pct": 4.25,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1762.5,
+        1637.5,
+        1625.0,
+        1525.0,
+        1525.0,
+        1625.0,
+        1637.5
+      ],
+      "spark_normalized": [
+        1.0,
+        0.474,
+        0.421,
+        0.0,
+        0.0,
+        0.421,
+        0.474
+      ],
+      "fascia": "E",
+      "dizione": "PIANURA",
+      "link_zona": "NA00005009"
+    },
+    {
+      "zona": "C30",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1900.0,
+      "prezzo_affitto_attuale": 6.8,
+      "cagr_full": -0.0063,
+      "delta_total_pct": -7.3,
+      "recent_slope_eur_per_year": -4.8,
+      "recent_slope_pct_per_year": -0.24,
+      "volatility_pct": 2.9,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2050.0,
+        1987.5,
+        1937.5,
+        1862.5,
+        1925.0,
+        1950.0,
+        1900.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.667,
+        0.4,
+        0.0,
+        0.333,
+        0.467,
+        0.2
+      ],
+      "fascia": "C",
+      "dizione": "OSPEDALE SAN GENNARO-FONTANELLE",
+      "link_zona": "NA00005511"
+    },
+    {
+      "zona": "D23",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2050.0,
+      "prezzo_affitto_attuale": 6.8,
+      "cagr_full": -0.0063,
+      "delta_total_pct": -7.3,
+      "recent_slope_eur_per_year": -5.5,
+      "recent_slope_pct_per_year": -0.27,
+      "volatility_pct": 3.1,
+      "yield_lordo_pct": 3.98,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2212.5,
+        2075.0,
+        2075.0,
+        2075.0,
+        2000.0,
+        2012.5,
+        2050.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.353,
+        0.353,
+        0.353,
+        0.0,
+        0.059,
+        0.235
+      ],
+      "fascia": "D",
+      "dizione": "LA LOGGETTA, RIONE TRAIANO",
+      "link_zona": "NA00004827"
+    },
+    {
+      "zona": "E44",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1525.0,
+      "prezzo_affitto_attuale": 5.4,
+      "cagr_full": -0.0065,
+      "delta_total_pct": -7.6,
+      "recent_slope_eur_per_year": -3.6,
+      "recent_slope_pct_per_year": -0.23,
+      "volatility_pct": 3.8,
+      "yield_lordo_pct": 4.25,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1650.0,
+        1575.0,
+        1525.0,
+        1450.0,
+        1450.0,
+        1525.0,
+        1525.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.625,
+        0.375,
+        0.0,
+        0.0,
+        0.375,
+        0.375
+      ],
+      "fascia": "E",
+      "dizione": "PONTICELLI ESPANSIONE RECENTE",
+      "link_zona": "NA00005017"
+    },
+    {
+      "zona": "D33",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2475.0,
+      "prezzo_affitto_attuale": 8.2,
+      "cagr_full": -0.0072,
+      "delta_total_pct": -8.3,
+      "recent_slope_eur_per_year": -16.8,
+      "recent_slope_pct_per_year": -0.63,
+      "volatility_pct": 5.2,
+      "yield_lordo_pct": 3.98,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2700.0,
+        2650.0,
+        2575.0,
+        2325.0,
+        2325.0,
+        2475.0,
+        2475.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.867,
+        0.667,
+        0.0,
+        0.0,
+        0.4,
+        0.4
+      ],
+      "fascia": "D",
+      "dizione": "VIA EPOMEO",
+      "link_zona": "NA00005343"
+    },
+    {
+      "zona": "B9",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2975.0,
+      "prezzo_affitto_attuale": 9.4,
+      "cagr_full": -0.0073,
+      "delta_total_pct": -8.5,
+      "recent_slope_eur_per_year": 19.8,
+      "recent_slope_pct_per_year": 0.7,
+      "volatility_pct": 7.1,
+      "yield_lordo_pct": 3.79,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3250.0,
+        2850.0,
+        2762.5,
+        2637.5,
+        2762.5,
+        2975.0,
+        2975.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.347,
+        0.204,
+        0.0,
+        0.204,
+        0.551,
+        0.551
+      ],
+      "fascia": "B",
+      "dizione": "PARTE OVEST CENTRO ANTICO: CORSO UMBERTO - VIA DE PRETIS - PIAZZA DEL GESU` - VIA COSTANTINOPOLI - DUOMO",
+      "link_zona": "NA00004804"
+    },
+    {
+      "zona": "B13",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 3550.0,
+      "prezzo_affitto_attuale": 10.3,
+      "cagr_full": -0.0078,
+      "delta_total_pct": -9.0,
+      "recent_slope_eur_per_year": -11.8,
+      "recent_slope_pct_per_year": -0.32,
+      "volatility_pct": 3.2,
+      "yield_lordo_pct": 3.48,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3900.0,
+        3700.0,
+        3612.5,
+        3437.5,
+        3550.0,
+        3550.0,
+        3550.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.568,
+        0.378,
+        0.0,
+        0.243,
+        0.243,
+        0.243
+      ],
+      "fascia": "B",
+      "dizione": "P.ZZA PLEBISCITO, MUNICIPIO, POSTA CENTRALE, VIA TOLEDO",
+      "link_zona": "NA00005507"
+    },
+    {
+      "zona": "D34",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2212.5,
+      "prezzo_affitto_attuale": 7.9,
+      "cagr_full": -0.008,
+      "delta_total_pct": -9.2,
+      "recent_slope_eur_per_year": -2.5,
+      "recent_slope_pct_per_year": -0.11,
+      "volatility_pct": 6.9,
+      "yield_lordo_pct": 4.28,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2437.5,
+        2225.0,
+        2125.0,
+        1937.5,
+        1975.0,
+        2075.0,
+        2212.5
+      ],
+      "spark_normalized": [
+        1.0,
+        0.575,
+        0.375,
+        0.0,
+        0.075,
+        0.275,
+        0.55
+      ],
+      "fascia": "D",
+      "dizione": "CENTRO DIREZIONALE",
+      "link_zona": "NA00005514"
+    },
+    {
+      "zona": "C32",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2650.0,
+      "prezzo_affitto_attuale": 8.8,
+      "cagr_full": -0.0085,
+      "delta_total_pct": -9.8,
+      "recent_slope_eur_per_year": 10.5,
+      "recent_slope_pct_per_year": 0.4,
+      "volatility_pct": 6.6,
+      "yield_lordo_pct": 3.98,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2937.5,
+        2612.5,
+        2500.0,
+        2375.0,
+        2475.0,
+        2650.0,
+        2650.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.422,
+        0.222,
+        0.0,
+        0.178,
+        0.489,
+        0.489
+      ],
+      "fascia": "C",
+      "dizione": "MATERDEI",
+      "link_zona": "NA00005513"
+    },
+    {
+      "zona": "E48",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1325.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": -0.0089,
+      "delta_total_pct": -10.2,
+      "recent_slope_eur_per_year": -7.9,
+      "recent_slope_pct_per_year": -0.56,
+      "volatility_pct": 5.8,
+      "yield_lordo_pct": 4.35,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1475.0,
+        1400.0,
+        1375.0,
+        1250.0,
+        1222.5,
+        1325.0,
+        1325.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.703,
+        0.604,
+        0.109,
+        0.0,
+        0.406,
+        0.406
+      ],
+      "fascia": "E",
+      "dizione": "SECONDIGLIANO (PERIFERIA)",
+      "link_zona": "NA00005663"
+    },
+    {
+      "zona": "C24",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 4450.0,
+      "prezzo_affitto_attuale": 13.0,
+      "cagr_full": -0.0093,
+      "delta_total_pct": -10.6,
+      "recent_slope_eur_per_year": 2.1,
+      "recent_slope_pct_per_year": 0.05,
+      "volatility_pct": 6.1,
+      "yield_lordo_pct": 3.51,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        4975.0,
+        4550.0,
+        4325.0,
+        4025.0,
+        4300.0,
+        4450.0,
+        4450.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.553,
+        0.316,
+        0.0,
+        0.289,
+        0.447,
+        0.447
+      ],
+      "fascia": "C",
+      "dizione": "POSILLIPO",
+      "link_zona": "NA00004807"
+    },
+    {
+      "zona": "E28",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1450.0,
+      "prezzo_affitto_attuale": 5.2,
+      "cagr_full": -0.0095,
+      "delta_total_pct": -10.8,
+      "recent_slope_eur_per_year": -6.6,
+      "recent_slope_pct_per_year": -0.44,
+      "volatility_pct": 4.2,
+      "yield_lordo_pct": 4.3,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1625.0,
+        1512.5,
+        1500.0,
+        1400.0,
+        1400.0,
+        1450.0,
+        1450.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.5,
+        0.444,
+        0.0,
+        0.0,
+        0.222,
+        0.222
+      ],
+      "fascia": "E",
+      "dizione": "PIANURA PERIFERIA",
+      "link_zona": "NA00004872"
+    },
+    {
+      "zona": "C31",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2975.0,
+      "prezzo_affitto_attuale": 9.4,
+      "cagr_full": -0.0102,
+      "delta_total_pct": -11.5,
+      "recent_slope_eur_per_year": -18.4,
+      "recent_slope_pct_per_year": -0.58,
+      "volatility_pct": 3.8,
+      "yield_lordo_pct": 3.79,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3362.5,
+        3150.0,
+        3112.5,
+        2900.0,
+        2900.0,
+        2975.0,
+        2975.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.541,
+        0.459,
+        0.0,
+        0.0,
+        0.162,
+        0.162
+      ],
+      "fascia": "C",
+      "dizione": "CASALE DI POSILLIPO",
+      "link_zona": "NA00005512"
+    },
+    {
+      "zona": "C28",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2800.0,
+      "prezzo_affitto_attuale": 9.4,
+      "cagr_full": -0.0107,
+      "delta_total_pct": -12.2,
+      "recent_slope_eur_per_year": 10.2,
+      "recent_slope_pct_per_year": 0.37,
+      "volatility_pct": 6.3,
+      "yield_lordo_pct": 4.03,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3187.5,
+        2762.5,
+        2650.0,
+        2612.5,
+        2687.5,
+        2800.0,
+        2800.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.261,
+        0.065,
+        0.0,
+        0.13,
+        0.326,
+        0.326
+      ],
+      "fascia": "C",
+      "dizione": "FUORIGROTTA, MOSTRA D`OLTREMARE, PARCO SAN PAOLO",
+      "link_zona": "NA00004824"
+    },
+    {
+      "zona": "D24",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1900.0,
+      "prezzo_affitto_attuale": 6.8,
+      "cagr_full": -0.0121,
+      "delta_total_pct": -13.6,
+      "recent_slope_eur_per_year": -1.8,
+      "recent_slope_pct_per_year": -0.09,
+      "volatility_pct": 5.8,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2200.0,
+        1975.0,
+        1875.0,
+        1800.0,
+        1825.0,
+        1950.0,
+        1900.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.438,
+        0.188,
+        0.0,
+        0.062,
+        0.375,
+        0.25
+      ],
+      "fascia": "D",
+      "dizione": "Calata Capodichino, DOGANELLA, Via Masoni",
+      "link_zona": "NA00004828"
+    },
+    {
+      "zona": "E45",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1375.0,
+      "prezzo_affitto_attuale": 5.0,
+      "cagr_full": -0.0125,
+      "delta_total_pct": -14.1,
+      "recent_slope_eur_per_year": -14.5,
+      "recent_slope_pct_per_year": -0.95,
+      "volatility_pct": 3.2,
+      "yield_lordo_pct": 4.36,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1600.0,
+        1525.0,
+        1512.5,
+        1412.5,
+        1450.0,
+        1412.5,
+        1375.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.667,
+        0.611,
+        0.167,
+        0.333,
+        0.167,
+        0.0
+      ],
+      "fascia": "E",
+      "dizione": "BARRA (Centro Storico)",
+      "link_zona": "NA00005019"
+    },
+    {
+      "zona": "D30",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2125.0,
+      "prezzo_affitto_attuale": 7.6,
+      "cagr_full": -0.0126,
+      "delta_total_pct": -14.1,
+      "recent_slope_eur_per_year": -3.6,
+      "recent_slope_pct_per_year": -0.16,
+      "volatility_pct": 7.5,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2475.0,
+        2187.5,
+        2075.0,
+        1900.0,
+        1925.0,
+        2087.5,
+        2125.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.5,
+        0.304,
+        0.0,
+        0.043,
+        0.326,
+        0.391
+      ],
+      "fascia": "D",
+      "dizione": "VIA CAMPEGNA, CAVALLEGGERI, NUOVA AREA SPORTIVA ATTREZZATA",
+      "link_zona": "NA00004863"
+    },
+    {
+      "zona": "B25",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 3800.0,
+      "prezzo_affitto_attuale": 12.0,
+      "cagr_full": -0.0129,
+      "delta_total_pct": -2.6,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 3.79,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "P.ZZA MEDAGLIE D`ORO, VIA CILEA, P.ZZA QUATTRO GIORNATE",
+      "link_zona": "NA00010543"
+    },
+    {
+      "zona": "B18",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2800.0,
+      "prezzo_affitto_attuale": 8.8,
+      "cagr_full": -0.0142,
+      "delta_total_pct": -15.8,
+      "recent_slope_eur_per_year": -37.5,
+      "recent_slope_pct_per_year": -1.19,
+      "volatility_pct": 2.7,
+      "yield_lordo_pct": 3.77,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        3325.0,
+        3162.5,
+        3062.5,
+        2850.0,
+        2825.0,
+        2800.0,
+        2800.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.69,
+        0.5,
+        0.095,
+        0.048,
+        0.0,
+        0.0
+      ],
+      "fascia": "B",
+      "dizione": "MONTE DI DIO",
+      "link_zona": "NA00005683"
+    },
+    {
+      "zona": "D29",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2312.5,
+      "prezzo_affitto_attuale": 7.7,
+      "cagr_full": -0.0165,
+      "delta_total_pct": -18.1,
+      "recent_slope_eur_per_year": -13.9,
+      "recent_slope_pct_per_year": -0.56,
+      "volatility_pct": 6.9,
+      "yield_lordo_pct": 4.0,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2825.0,
+        2500.0,
+        2450.0,
+        2225.0,
+        2262.5,
+        2425.0,
+        2312.5
+      ],
+      "spark_normalized": [
+        1.0,
+        0.458,
+        0.375,
+        0.0,
+        0.062,
+        0.333,
+        0.146
+      ],
+      "fascia": "D",
+      "dizione": "via Terracina (parte bassa), BAGNOLI",
+      "link_zona": "NA00004843"
+    },
+    {
+      "zona": "E32",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1325.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": -0.0169,
+      "delta_total_pct": -18.5,
+      "recent_slope_eur_per_year": -12.1,
+      "recent_slope_pct_per_year": -0.85,
+      "volatility_pct": 5.7,
+      "yield_lordo_pct": 4.35,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1625.0,
+        1425.0,
+        1387.5,
+        1287.5,
+        1275.0,
+        1275.0,
+        1325.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.429,
+        0.321,
+        0.036,
+        0.0,
+        0.0,
+        0.143
+      ],
+      "fascia": "E",
+      "dizione": "PONTICELLI (periferia)",
+      "link_zona": "NA00005000"
+    },
+    {
+      "zona": "E40",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1525.0,
+      "prezzo_affitto_attuale": 5.4,
+      "cagr_full": -0.0187,
+      "delta_total_pct": -20.3,
+      "recent_slope_eur_per_year": -26.2,
+      "recent_slope_pct_per_year": -1.46,
+      "volatility_pct": 2.2,
+      "yield_lordo_pct": 4.25,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1912.5,
+        1800.0,
+        1762.5,
+        1662.5,
+        1650.0,
+        1612.5,
+        1525.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.71,
+        0.613,
+        0.355,
+        0.323,
+        0.226,
+        0.0
+      ],
+      "fascia": "E",
+      "dizione": "AGNANO,  UNIVERSITA` MONTE SANT`ANGELO , ASTRONI",
+      "link_zona": "NA00005011"
+    },
+    {
+      "zona": "D32",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2014,
+      "ultimo_anno": 2020,
+      "prezzo_acquisto_attuale": 2150.0,
+      "prezzo_affitto_attuale": 6.2,
+      "cagr_full": -0.032,
+      "delta_total_pct": -17.7,
+      "recent_slope_eur_per_year": -70.0,
+      "recent_slope_pct_per_year": -2.68,
+      "volatility_pct": 5.1,
+      "yield_lordo_pct": 3.46,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020
+      ],
+      "spark_values": [
+        2612.5,
+        2337.5,
+        2325.0,
+        2150.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.405,
+        0.378,
+        0.0
+      ],
+      "fascia": "D",
+      "dizione": "NISIDA, ARENILE BAGNOLI",
+      "link_zona": "NA00004871"
+    },
+    {
+      "zona": "B19",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 4750.0,
+      "prezzo_affitto_attuale": 13.9,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 3.51,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "FASCIA COSTIERA DI PREGIO",
+      "link_zona": "NA00010025"
+    },
+    {
+      "zona": "B20",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 4550.0,
+      "prezzo_affitto_attuale": 13.2,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 3.48,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "CHIAIA PREGIATA",
+      "link_zona": "NA00010252"
+    },
+    {
+      "zona": "B21",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 3375.0,
+      "prezzo_affitto_attuale": 10.7,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 3.8,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "CHIAIA  ANTICA",
+      "link_zona": "NA00010312"
+    },
+    {
+      "zona": "B22",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 4150.0,
+      "prezzo_affitto_attuale": 12.1,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 3.5,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "CHIAIA ALTA",
+      "link_zona": "NA00010313"
+    },
+    {
+      "zona": "B23",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2800.0,
+      "prezzo_affitto_attuale": 10.0,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 4.29,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "QUARTIERI SPAGNOLI - CAVONE",
+      "link_zona": "NA00010340"
+    },
+    {
+      "zona": "B24",
+      "anni_dati_acquisto": 2,
+      "primo_anno": 2024,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2975.0,
+      "prezzo_affitto_attuale": 9.4,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 3.79,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": [],
+      "fascia": "B",
+      "dizione": "CORSO VITTORIO EMANUELE 8DA PIAZZA MAZZINI A SANTA MARIA APPARENTE)",
+      "link_zona": "NA00010341"
+    },
+    {
+      "zona": "D25",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 2075.0,
+      "prezzo_affitto_attuale": 6.9,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": 4.8,
+      "recent_slope_pct_per_year": 0.24,
+      "volatility_pct": 5.2,
+      "yield_lordo_pct": 3.99,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        2075.0,
+        2012.5,
+        2000.0,
+        1900.0,
+        1850.0,
+        2025.0,
+        2075.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.722,
+        0.667,
+        0.222,
+        0.0,
+        0.778,
+        1.0
+      ],
+      "fascia": "D",
+      "dizione": "VIA POGGIOREALE, NUOVO COMPLESSO INAIL",
+      "link_zona": "NA00004830"
+    },
+    {
+      "zona": "E29",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1700.0,
+      "prezzo_affitto_attuale": 6.1,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": 1.8,
+      "recent_slope_pct_per_year": 0.11,
+      "volatility_pct": 4.0,
+      "yield_lordo_pct": 4.31,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1700.0,
+        1675.0,
+        1700.0,
+        1600.0,
+        1600.0,
+        1700.0,
+        1700.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.75,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "fascia": "E",
+      "dizione": "MIANO",
+      "link_zona": "NA00004997"
+    },
+    {
+      "zona": "E35",
+      "anni_dati_acquisto": 7,
+      "primo_anno": 2014,
+      "ultimo_anno": 2026,
+      "prezzo_acquisto_attuale": 1775.0,
+      "prezzo_affitto_attuale": 6.4,
+      "cagr_full": 0.0,
+      "delta_total_pct": 0.0,
+      "recent_slope_eur_per_year": 0.7,
+      "recent_slope_pct_per_year": 0.04,
+      "volatility_pct": 2.4,
+      "yield_lordo_pct": 4.33,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024,
+        2026
+      ],
+      "spark_values": [
+        1775.0,
+        1775.0,
+        1775.0,
+        1700.0,
+        1750.0,
+        1775.0,
+        1775.0
+      ],
+      "spark_normalized": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.667,
+        1.0,
+        1.0
+      ],
+      "fascia": "E",
+      "dizione": "CHIAIANO",
+      "link_zona": "NA00005005"
+    },
+    {
+      "zona": "D18",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1850.0,
+      "prezzo_affitto_attuale": 4.7,
+      "cagr_full": 0.0613,
+      "delta_total_pct": 51.6,
+      "recent_slope_eur_per_year": 92.8,
+      "recent_slope_pct_per_year": 7.6,
+      "volatility_pct": 17.5,
+      "yield_lordo_pct": 3.05,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1220.0,
+        1650.0,
+        1825.0,
+        1850.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.683,
+        0.96,
+        1.0
+      ]
+    },
+    {
+      "zona": "E14",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2125.0,
+      "prezzo_affitto_attuale": 5.3,
+      "cagr_full": 0.059,
+      "delta_total_pct": 49.4,
+      "recent_slope_eur_per_year": 106.5,
+      "recent_slope_pct_per_year": 7.49,
+      "volatility_pct": 24.2,
+      "yield_lordo_pct": 2.99,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1422.5,
+        2025.0,
+        2237.5,
+        2125.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.739,
+        1.0,
+        0.862
+      ]
+    },
+    {
+      "zona": "E13",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1900.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": 0.0557,
+      "delta_total_pct": 46.2,
+      "recent_slope_eur_per_year": 85.9,
+      "recent_slope_pct_per_year": 6.6,
+      "volatility_pct": 23.0,
+      "yield_lordo_pct": 3.03,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1300.0,
+        1837.5,
+        1900.0,
+        1900.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.896,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "zona": "E21",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1750.0,
+      "prezzo_affitto_attuale": 4.3,
+      "cagr_full": 0.0557,
+      "delta_total_pct": 46.1,
+      "recent_slope_eur_per_year": 77.8,
+      "recent_slope_pct_per_year": 6.5,
+      "volatility_pct": 21.7,
+      "yield_lordo_pct": 2.95,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1197.5,
+        1675.0,
+        1712.5,
+        1750.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.864,
+        0.932,
+        1.0
+      ]
+    },
+    {
+      "zona": "D15",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1950.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": 0.0528,
+      "delta_total_pct": 43.4,
+      "recent_slope_eur_per_year": 86.3,
+      "recent_slope_pct_per_year": 6.35,
+      "volatility_pct": 16.7,
+      "yield_lordo_pct": 2.95,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1360.0,
+        1800.0,
+        1937.5,
+        1950.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.746,
+        0.979,
+        1.0
+      ]
+    },
+    {
+      "zona": "D6",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1900.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": 0.0528,
+      "delta_total_pct": 43.4,
+      "recent_slope_eur_per_year": 85.9,
+      "recent_slope_pct_per_year": 6.48,
+      "volatility_pct": 14.8,
+      "yield_lordo_pct": 3.03,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1325.0,
+        1712.5,
+        1900.0,
+        1900.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.674,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "zona": "E17",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1900.0,
+      "prezzo_affitto_attuale": 4.8,
+      "cagr_full": 0.0495,
+      "delta_total_pct": 40.2,
+      "recent_slope_eur_per_year": 81.0,
+      "recent_slope_pct_per_year": 5.97,
+      "volatility_pct": 14.4,
+      "yield_lordo_pct": 3.03,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1355.0,
+        1737.5,
+        1900.0,
+        1900.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.702,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "zona": "E8",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1825.0,
+      "prezzo_affitto_attuale": 4.6,
+      "cagr_full": 0.0482,
+      "delta_total_pct": 39.0,
+      "recent_slope_eur_per_year": 71.8,
+      "recent_slope_pct_per_year": 5.47,
+      "volatility_pct": 15.0,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1312.5,
+        1700.0,
+        1750.0,
+        1825.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.756,
+        0.854,
+        1.0
+      ]
+    },
+    {
+      "zona": "D9",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1825.0,
+      "prezzo_affitto_attuale": 4.6,
+      "cagr_full": 0.0448,
+      "delta_total_pct": 35.9,
+      "recent_slope_eur_per_year": 73.9,
+      "recent_slope_pct_per_year": 5.51,
+      "volatility_pct": 12.9,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1342.5,
+        1662.5,
+        1862.5,
+        1825.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.615,
+        1.0,
+        0.928
+      ]
+    },
+    {
+      "zona": "E1",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2025.0,
+      "prezzo_affitto_attuale": 5.0,
+      "cagr_full": 0.0438,
+      "delta_total_pct": 35.0,
+      "recent_slope_eur_per_year": 75.7,
+      "recent_slope_pct_per_year": 5.05,
+      "volatility_pct": 9.5,
+      "yield_lordo_pct": 2.96,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1500.0,
+        1825.0,
+        1950.0,
+        2025.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.619,
+        0.857,
+        1.0
+      ]
+    },
+    {
+      "zona": "E18",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1825.0,
+      "prezzo_affitto_attuale": 4.6,
+      "cagr_full": 0.0437,
+      "delta_total_pct": 34.9,
+      "recent_slope_eur_per_year": 69.0,
+      "recent_slope_pct_per_year": 5.1,
+      "volatility_pct": 7.1,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1352.5,
+        1600.0,
+        1750.0,
+        1825.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.524,
+        0.841,
+        1.0
+      ]
+    },
+    {
+      "zona": "E5",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1750.0,
+      "prezzo_affitto_attuale": 4.3,
+      "cagr_full": 0.0434,
+      "delta_total_pct": 34.6,
+      "recent_slope_eur_per_year": 68.2,
+      "recent_slope_pct_per_year": 5.25,
+      "volatility_pct": 14.9,
+      "yield_lordo_pct": 2.95,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1300.0,
+        1650.0,
+        1800.0,
+        1750.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.7,
+        1.0,
+        0.9
+      ]
+    },
+    {
+      "zona": "D4",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2000.0,
+      "prezzo_affitto_attuale": 5.0,
+      "cagr_full": 0.041,
+      "delta_total_pct": 32.5,
+      "recent_slope_eur_per_year": 72.5,
+      "recent_slope_pct_per_year": 4.8,
+      "volatility_pct": 11.9,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1510.0,
+        1862.5,
+        2000.0,
+        2000.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.719,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "zona": "E7",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1650.0,
+      "prezzo_affitto_attuale": 4.2,
+      "cagr_full": 0.0405,
+      "delta_total_pct": 32.0,
+      "recent_slope_eur_per_year": 62.5,
+      "recent_slope_pct_per_year": 5.0,
+      "volatility_pct": 16.4,
+      "yield_lordo_pct": 3.05,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1250.0,
+        1587.5,
+        1750.0,
+        1650.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.675,
+        1.0,
+        0.8
+      ]
+    },
+    {
+      "zona": "D5",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2200.0,
+      "prezzo_affitto_attuale": 5.5,
+      "cagr_full": 0.0402,
+      "delta_total_pct": 31.7,
+      "recent_slope_eur_per_year": 72.8,
+      "recent_slope_pct_per_year": 4.36,
+      "volatility_pct": 24.8,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1670.0,
+        2337.5,
+        2250.0,
+        2200.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.869,
+        0.794
+      ]
+    },
+    {
+      "zona": "E15",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1750.0,
+      "prezzo_affitto_attuale": 4.3,
+      "cagr_full": 0.04,
+      "delta_total_pct": 31.6,
+      "recent_slope_eur_per_year": 60.3,
+      "recent_slope_pct_per_year": 4.53,
+      "volatility_pct": 15.3,
+      "yield_lordo_pct": 2.95,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1330.0,
+        1700.0,
+        1750.0,
+        1750.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.881,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "zona": "E6",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1575.0,
+      "prezzo_affitto_attuale": 4.0,
+      "cagr_full": 0.0396,
+      "delta_total_pct": 31.2,
+      "recent_slope_eur_per_year": 57.4,
+      "recent_slope_pct_per_year": 4.78,
+      "volatility_pct": 9.9,
+      "yield_lordo_pct": 3.05,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1200.0,
+        1425.0,
+        1587.5,
+        1575.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.581,
+        1.0,
+        0.968
+      ]
+    },
+    {
+      "zona": "E19",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1650.0,
+      "prezzo_affitto_attuale": 4.2,
+      "cagr_full": 0.0361,
+      "delta_total_pct": 28.2,
+      "recent_slope_eur_per_year": 50.6,
+      "recent_slope_pct_per_year": 3.93,
+      "volatility_pct": 27.0,
+      "yield_lordo_pct": 3.05,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1287.5,
+        1825.0,
+        1750.0,
+        1650.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.86,
+        0.674
+      ]
+    },
+    {
+      "zona": "C17",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2475.0,
+      "prezzo_affitto_attuale": 6.2,
+      "cagr_full": 0.0335,
+      "delta_total_pct": 26.0,
+      "recent_slope_eur_per_year": 65.5,
+      "recent_slope_pct_per_year": 3.34,
+      "volatility_pct": 21.5,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1965.0,
+        2625.0,
+        2437.5,
+        2475.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.716,
+        0.773
+      ]
+    },
+    {
+      "zona": "E12",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1550.0,
+      "prezzo_affitto_attuale": 3.9,
+      "cagr_full": 0.0312,
+      "delta_total_pct": 24.0,
+      "recent_slope_eur_per_year": 43.3,
+      "recent_slope_pct_per_year": 3.47,
+      "volatility_pct": 12.3,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1250.0,
+        1525.0,
+        1562.5,
+        1550.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.88,
+        1.0,
+        0.96
+      ]
+    },
+    {
+      "zona": "C7",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2425.0,
+      "prezzo_affitto_attuale": 6.0,
+      "cagr_full": 0.0305,
+      "delta_total_pct": 23.4,
+      "recent_slope_eur_per_year": 61.1,
+      "recent_slope_pct_per_year": 3.11,
+      "volatility_pct": 17.8,
+      "yield_lordo_pct": 2.97,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1965.0,
+        2525.0,
+        2412.5,
+        2425.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.799,
+        0.821
+      ]
+    },
+    {
+      "zona": "D1",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2375.0,
+      "prezzo_affitto_attuale": 5.9,
+      "cagr_full": 0.0299,
+      "delta_total_pct": 22.9,
+      "recent_slope_eur_per_year": 61.1,
+      "recent_slope_pct_per_year": 3.16,
+      "volatility_pct": 6.0,
+      "yield_lordo_pct": 2.98,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1932.5,
+        2200.0,
+        2250.0,
+        2375.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.605,
+        0.718,
+        1.0
+      ]
+    },
+    {
+      "zona": "E20",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1650.0,
+      "prezzo_affitto_attuale": 4.2,
+      "cagr_full": 0.0299,
+      "delta_total_pct": 22.9,
+      "recent_slope_eur_per_year": 43.1,
+      "recent_slope_pct_per_year": 3.21,
+      "volatility_pct": 13.2,
+      "yield_lordo_pct": 3.05,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1342.5,
+        1650.0,
+        1650.0,
+        1650.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "zona": "D13",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3175.0,
+      "prezzo_affitto_attuale": 8.0,
+      "cagr_full": 0.0287,
+      "delta_total_pct": 21.9,
+      "recent_slope_eur_per_year": 80.7,
+      "recent_slope_pct_per_year": 3.1,
+      "volatility_pct": 13.0,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2605.0,
+        3187.5,
+        3200.0,
+        3175.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.979,
+        1.0,
+        0.958
+      ]
+    },
+    {
+      "zona": "E11",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1550.0,
+      "prezzo_affitto_attuale": 3.9,
+      "cagr_full": 0.0283,
+      "delta_total_pct": 21.6,
+      "recent_slope_eur_per_year": 39.8,
+      "recent_slope_pct_per_year": 3.12,
+      "volatility_pct": 11.0,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1275.0,
+        1525.0,
+        1562.5,
+        1550.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.87,
+        1.0,
+        0.957
+      ]
+    },
+    {
+      "zona": "D7",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2662.5,
+      "prezzo_affitto_attuale": 6.7,
+      "cagr_full": 0.0276,
+      "delta_total_pct": 21.0,
+      "recent_slope_eur_per_year": 64.4,
+      "recent_slope_pct_per_year": 2.93,
+      "volatility_pct": 18.1,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2200.0,
+        2825.0,
+        2750.0,
+        2662.5
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.88,
+        0.74
+      ]
+    },
+    {
+      "zona": "C4",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2375.0,
+      "prezzo_affitto_attuale": 5.9,
+      "cagr_full": 0.0274,
+      "delta_total_pct": 20.9,
+      "recent_slope_eur_per_year": 56.8,
+      "recent_slope_pct_per_year": 2.89,
+      "volatility_pct": 18.2,
+      "yield_lordo_pct": 2.98,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1965.0,
+        2525.0,
+        2450.0,
+        2375.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.866,
+        0.732
+      ]
+    },
+    {
+      "zona": "D17",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3000.0,
+      "prezzo_affitto_attuale": 7.5,
+      "cagr_full": 0.0264,
+      "delta_total_pct": 20.0,
+      "recent_slope_eur_per_year": 79.6,
+      "recent_slope_pct_per_year": 3.18,
+      "volatility_pct": 7.7,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2500.0,
+        2787.5,
+        3075.0,
+        3000.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.5,
+        1.0,
+        0.87
+      ]
+    },
+    {
+      "zona": "C6",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2350.0,
+      "prezzo_affitto_attuale": 5.9,
+      "cagr_full": 0.0259,
+      "delta_total_pct": 19.6,
+      "recent_slope_eur_per_year": 52.0,
+      "recent_slope_pct_per_year": 2.65,
+      "volatility_pct": 10.9,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1965.0,
+        2337.5,
+        2300.0,
+        2350.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.968,
+        0.87,
+        1.0
+      ]
+    },
+    {
+      "zona": "E23",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2412.5,
+      "prezzo_affitto_attuale": 6.0,
+      "cagr_full": 0.0253,
+      "delta_total_pct": 19.1,
+      "recent_slope_eur_per_year": 59.5,
+      "recent_slope_pct_per_year": 2.94,
+      "volatility_pct": 10.4,
+      "yield_lordo_pct": 2.98,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2025.0,
+        2375.0,
+        2500.0,
+        2412.5
+      ],
+      "spark_normalized": [
+        0.0,
+        0.737,
+        1.0,
+        0.816
+      ]
+    },
+    {
+      "zona": "C5",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2225.0,
+      "prezzo_affitto_attuale": 5.6,
+      "cagr_full": 0.0248,
+      "delta_total_pct": 18.7,
+      "recent_slope_eur_per_year": 46.0,
+      "recent_slope_pct_per_year": 2.45,
+      "volatility_pct": 12.2,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1875.0,
+        2250.0,
+        2175.0,
+        2225.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.8,
+        0.933
+      ]
+    },
+    {
+      "zona": "D19",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2962.5,
+      "prezzo_affitto_attuale": 7.4,
+      "cagr_full": 0.0245,
+      "delta_total_pct": 18.5,
+      "recent_slope_eur_per_year": 73.2,
+      "recent_slope_pct_per_year": 2.93,
+      "volatility_pct": 7.4,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2500.0,
+        2787.5,
+        3037.5,
+        2962.5
+      ],
+      "spark_normalized": [
+        0.0,
+        0.535,
+        1.0,
+        0.86
+      ]
+    },
+    {
+      "zona": "E4",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2025.0,
+      "prezzo_affitto_attuale": 5.0,
+      "cagr_full": 0.0211,
+      "delta_total_pct": 15.7,
+      "recent_slope_eur_per_year": 45.7,
+      "recent_slope_pct_per_year": 2.61,
+      "volatility_pct": 8.6,
+      "yield_lordo_pct": 2.96,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1750.0,
+        1937.5,
+        2125.0,
+        2025.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.5,
+        1.0,
+        0.733
+      ]
+    },
+    {
+      "zona": "E24",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1875.0,
+      "prezzo_affitto_attuale": 4.7,
+      "cagr_full": 0.0207,
+      "delta_total_pct": 15.4,
+      "recent_slope_eur_per_year": 35.7,
+      "recent_slope_pct_per_year": 2.2,
+      "volatility_pct": 7.6,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1625.0,
+        1850.0,
+        1875.0,
+        1875.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.9,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "zona": "C2",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2575.0,
+      "prezzo_affitto_attuale": 6.5,
+      "cagr_full": 0.0195,
+      "delta_total_pct": 14.4,
+      "recent_slope_eur_per_year": 50.6,
+      "recent_slope_pct_per_year": 2.25,
+      "volatility_pct": 13.1,
+      "yield_lordo_pct": 3.03,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2250.0,
+        2687.5,
+        2750.0,
+        2575.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.875,
+        1.0,
+        0.65
+      ]
+    },
+    {
+      "zona": "D8",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2900.0,
+      "prezzo_affitto_attuale": 7.2,
+      "cagr_full": 0.0185,
+      "delta_total_pct": 13.7,
+      "recent_slope_eur_per_year": 55.5,
+      "recent_slope_pct_per_year": 2.18,
+      "volatility_pct": 12.8,
+      "yield_lordo_pct": 2.98,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2550.0,
+        3025.0,
+        3112.5,
+        2900.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.844,
+        1.0,
+        0.622
+      ]
+    },
+    {
+      "zona": "C8",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2550.0,
+      "prezzo_affitto_attuale": 6.3,
+      "cagr_full": 0.0174,
+      "delta_total_pct": 12.8,
+      "recent_slope_eur_per_year": 32.2,
+      "recent_slope_pct_per_year": 1.43,
+      "volatility_pct": 16.9,
+      "yield_lordo_pct": 2.96,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2260.0,
+        2787.5,
+        2512.5,
+        2550.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.479,
+        0.55
+      ]
+    },
+    {
+      "zona": "E26",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1825.0,
+      "prezzo_affitto_attuale": 4.6,
+      "cagr_full": 0.0167,
+      "delta_total_pct": 12.3,
+      "recent_slope_eur_per_year": 33.1,
+      "recent_slope_pct_per_year": 2.03,
+      "volatility_pct": 6.5,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1625.0,
+        1625.0,
+        1812.5,
+        1825.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.0,
+        0.938,
+        1.0
+      ]
+    },
+    {
+      "zona": "E25",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2475.0,
+      "prezzo_affitto_attuale": 6.2,
+      "cagr_full": 0.0166,
+      "delta_total_pct": 12.2,
+      "recent_slope_eur_per_year": 40.4,
+      "recent_slope_pct_per_year": 1.83,
+      "volatility_pct": 10.2,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2205.0,
+        2550.0,
+        2575.0,
+        2475.0
+      ],
+      "spark_normalized": [
+        0.0,
+        0.932,
+        1.0,
+        0.73
+      ]
+    },
+    {
+      "zona": "B5",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 5400.0,
+      "prezzo_affitto_attuale": 12.8,
+      "cagr_full": 0.0147,
+      "delta_total_pct": 10.8,
+      "recent_slope_eur_per_year": 79.7,
+      "recent_slope_pct_per_year": 1.63,
+      "volatility_pct": 12.0,
+      "yield_lordo_pct": 2.84,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        4875.0,
+        5725.0,
+        5725.0,
+        5400.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        1.0,
+        0.618
+      ]
+    },
+    {
+      "zona": "C15",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2425.0,
+      "prezzo_affitto_attuale": 6.0,
+      "cagr_full": 0.0142,
+      "delta_total_pct": 10.4,
+      "recent_slope_eur_per_year": 30.5,
+      "recent_slope_pct_per_year": 1.39,
+      "volatility_pct": 21.6,
+      "yield_lordo_pct": 2.97,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2197.5,
+        2850.0,
+        2650.0,
+        2425.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.693,
+        0.349
+      ]
+    },
+    {
+      "zona": "C10",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2575.0,
+      "prezzo_affitto_attuale": 6.5,
+      "cagr_full": 0.0141,
+      "delta_total_pct": 10.3,
+      "recent_slope_eur_per_year": 29.8,
+      "recent_slope_pct_per_year": 1.28,
+      "volatility_pct": 13.2,
+      "yield_lordo_pct": 3.03,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2335.0,
+        2775.0,
+        2612.5,
+        2575.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.631,
+        0.545
+      ]
+    },
+    {
+      "zona": "D2",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1737.5,
+      "prezzo_affitto_attuale": 4.3,
+      "cagr_full": 0.0132,
+      "delta_total_pct": 9.6,
+      "recent_slope_eur_per_year": 24.8,
+      "recent_slope_pct_per_year": 1.56,
+      "volatility_pct": 8.0,
+      "yield_lordo_pct": 2.97,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1585.0,
+        1762.5,
+        1825.0,
+        1737.5
+      ],
+      "spark_normalized": [
+        0.0,
+        0.74,
+        1.0,
+        0.635
+      ]
+    },
+    {
+      "zona": "E10",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1962.5,
+      "prezzo_affitto_attuale": 4.9,
+      "cagr_full": 0.0124,
+      "delta_total_pct": 9.0,
+      "recent_slope_eur_per_year": 24.9,
+      "recent_slope_pct_per_year": 1.38,
+      "volatility_pct": 10.7,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1800.0,
+        2075.0,
+        2075.0,
+        1962.5
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        1.0,
+        0.591
+      ]
+    },
+    {
+      "zona": "D12",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2100.0,
+      "prezzo_affitto_attuale": 5.2,
+      "cagr_full": 0.0123,
+      "delta_total_pct": 8.9,
+      "recent_slope_eur_per_year": 26.3,
+      "recent_slope_pct_per_year": 1.36,
+      "volatility_pct": 13.0,
+      "yield_lordo_pct": 2.97,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1927.5,
+        2275.0,
+        2250.0,
+        2100.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.928,
+        0.496
+      ]
+    },
+    {
+      "zona": "C3",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2862.5,
+      "prezzo_affitto_attuale": 7.2,
+      "cagr_full": 0.0111,
+      "delta_total_pct": 8.0,
+      "recent_slope_eur_per_year": 29.1,
+      "recent_slope_pct_per_year": 1.1,
+      "volatility_pct": 3.5,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2650.0,
+        2825.0,
+        2825.0,
+        2862.5
+      ],
+      "spark_normalized": [
+        0.0,
+        0.824,
+        0.824,
+        1.0
+      ]
+    },
+    {
+      "zona": "C11",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3225.0,
+      "prezzo_affitto_attuale": 8.1,
+      "cagr_full": 0.0104,
+      "delta_total_pct": 7.5,
+      "recent_slope_eur_per_year": 33.1,
+      "recent_slope_pct_per_year": 1.1,
+      "volatility_pct": 11.0,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3000.0,
+        3462.5,
+        3400.0,
+        3225.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.865,
+        0.486
+      ]
+    },
+    {
+      "zona": "B3",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 4800.0,
+      "prezzo_affitto_attuale": 11.4,
+      "cagr_full": 0.0093,
+      "delta_total_pct": 6.7,
+      "recent_slope_eur_per_year": 34.4,
+      "recent_slope_pct_per_year": 0.77,
+      "volatility_pct": 15.0,
+      "yield_lordo_pct": 2.85,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        4500.0,
+        5405.0,
+        5000.0,
+        4800.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.552,
+        0.331
+      ]
+    },
+    {
+      "zona": "B12",
+      "anni_dati_acquisto": 6,
+      "primo_anno": 2014,
+      "ultimo_anno": 2024,
+      "prezzo_acquisto_attuale": 4550.0,
+      "prezzo_affitto_attuale": 12.1,
+      "cagr_full": 0.0068,
+      "delta_total_pct": 7.1,
+      "recent_slope_eur_per_year": 31.4,
+      "recent_slope_pct_per_year": 0.74,
+      "volatility_pct": 3.4,
+      "yield_lordo_pct": 3.19,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024
+      ],
+      "spark_values": [
+        4250.0,
+        4150.0,
+        4200.0,
+        4150.0,
+        4400.0,
+        4550.0
+      ],
+      "spark_normalized": [
+        0.25,
+        0.0,
+        0.125,
+        0.0,
+        0.625,
+        1.0
+      ]
+    },
+    {
+      "zona": "B10",
+      "anni_dati_acquisto": 6,
+      "primo_anno": 2014,
+      "ultimo_anno": 2024,
+      "prezzo_acquisto_attuale": 3900.0,
+      "prezzo_affitto_attuale": 11.4,
+      "cagr_full": 0.0039,
+      "delta_total_pct": 4.0,
+      "recent_slope_eur_per_year": 10.4,
+      "recent_slope_pct_per_year": 0.28,
+      "volatility_pct": 5.5,
+      "yield_lordo_pct": 3.51,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024
+      ],
+      "spark_values": [
+        3750.0,
+        3575.0,
+        3650.0,
+        3475.0,
+        3625.0,
+        3900.0
+      ],
+      "spark_normalized": [
+        0.647,
+        0.235,
+        0.412,
+        0.0,
+        0.353,
+        1.0
+      ]
+    },
+    {
+      "zona": "C9",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3500.0,
+      "prezzo_affitto_attuale": 8.8,
+      "cagr_full": 0.0036,
+      "delta_total_pct": 2.6,
+      "recent_slope_eur_per_year": 5.3,
+      "recent_slope_pct_per_year": 0.15,
+      "volatility_pct": 8.3,
+      "yield_lordo_pct": 3.02,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3412.5,
+        3750.0,
+        3500.0,
+        3500.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.259,
+        0.259
+      ]
+    },
+    {
+      "zona": "B2",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3150.0,
+      "prezzo_affitto_attuale": 7.9,
+      "cagr_full": 0.0029,
+      "delta_total_pct": 2.0,
+      "recent_slope_eur_per_year": 13.7,
+      "recent_slope_pct_per_year": 0.44,
+      "volatility_pct": 12.3,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3087.5,
+        3537.5,
+        3487.5,
+        3150.0
+      ],
+      "spark_normalized": [
+        0.0,
+        1.0,
+        0.889,
+        0.139
+      ]
+    },
+    {
+      "zona": "E2",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1525.0,
+      "prezzo_affitto_attuale": 3.8,
+      "cagr_full": -0.0014,
+      "delta_total_pct": -1.0,
+      "recent_slope_eur_per_year": -2.2,
+      "recent_slope_pct_per_year": -0.14,
+      "volatility_pct": 0.8,
+      "yield_lordo_pct": 2.99,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1540.0,
+        1550.0,
+        1537.5,
+        1525.0
+      ],
+      "spark_normalized": [
+        0.6,
+        1.0,
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "zona": "B16",
+      "anni_dati_acquisto": 6,
+      "primo_anno": 2014,
+      "ultimo_anno": 2024,
+      "prezzo_acquisto_attuale": 3625.0,
+      "prezzo_affitto_attuale": 10.6,
+      "cagr_full": -0.002,
+      "delta_total_pct": -2.0,
+      "recent_slope_eur_per_year": -6.2,
+      "recent_slope_pct_per_year": -0.17,
+      "volatility_pct": 3.8,
+      "yield_lordo_pct": 3.51,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024
+      ],
+      "spark_values": [
+        3700.0,
+        3500.0,
+        3500.0,
+        3400.0,
+        3512.5,
+        3625.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.333,
+        0.333,
+        0.0,
+        0.375,
+        0.75
+      ]
+    },
+    {
+      "zona": "C19",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3112.5,
+      "prezzo_affitto_attuale": 7.8,
+      "cagr_full": -0.0022,
+      "delta_total_pct": -1.5,
+      "recent_slope_eur_per_year": -6.5,
+      "recent_slope_pct_per_year": -0.21,
+      "volatility_pct": 11.9,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3160.0,
+        3587.5,
+        3400.0,
+        3112.5
+      ],
+      "spark_normalized": [
+        0.1,
+        1.0,
+        0.605,
+        0.0
+      ]
+    },
+    {
+      "zona": "B1",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 4200.0,
+      "prezzo_affitto_attuale": 10.5,
+      "cagr_full": -0.0027,
+      "delta_total_pct": -1.9,
+      "recent_slope_eur_per_year": -25.2,
+      "recent_slope_pct_per_year": -0.59,
+      "volatility_pct": 14.2,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        4280.0,
+        4950.0,
+        4350.0,
+        4200.0
+      ],
+      "spark_normalized": [
+        0.107,
+        1.0,
+        0.2,
+        0.0
+      ]
+    },
+    {
+      "zona": "C1",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3762.5,
+      "prezzo_affitto_attuale": 9.4,
+      "cagr_full": -0.0033,
+      "delta_total_pct": -2.3,
+      "recent_slope_eur_per_year": -19.6,
+      "recent_slope_pct_per_year": -0.51,
+      "volatility_pct": 11.5,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3850.0,
+        4337.5,
+        3950.0,
+        3762.5
+      ],
+      "spark_normalized": [
+        0.152,
+        1.0,
+        0.326,
+        0.0
+      ]
+    },
+    {
+      "zona": "B11",
+      "anni_dati_acquisto": 6,
+      "primo_anno": 2014,
+      "ultimo_anno": 2024,
+      "prezzo_acquisto_attuale": 2975.0,
+      "prezzo_affitto_attuale": 8.7,
+      "cagr_full": -0.0041,
+      "delta_total_pct": -4.0,
+      "recent_slope_eur_per_year": -12.7,
+      "recent_slope_pct_per_year": -0.41,
+      "volatility_pct": 4.0,
+      "yield_lordo_pct": 3.51,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024
+      ],
+      "spark_values": [
+        3100.0,
+        2937.5,
+        2975.0,
+        2825.0,
+        2900.0,
+        2975.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.409,
+        0.545,
+        0.0,
+        0.273,
+        0.545
+      ]
+    },
+    {
+      "zona": "B14",
+      "anni_dati_acquisto": 6,
+      "primo_anno": 2014,
+      "ultimo_anno": 2024,
+      "prezzo_acquisto_attuale": 4550.0,
+      "prezzo_affitto_attuale": 12.1,
+      "cagr_full": -0.0043,
+      "delta_total_pct": -4.2,
+      "recent_slope_eur_per_year": -8.6,
+      "recent_slope_pct_per_year": -0.18,
+      "volatility_pct": 7.8,
+      "yield_lordo_pct": 3.19,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024
+      ],
+      "spark_values": [
+        4750.0,
+        4200.0,
+        4250.0,
+        4050.0,
+        4400.0,
+        4550.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.214,
+        0.286,
+        0.0,
+        0.5,
+        0.714
+      ]
+    },
+    {
+      "zona": "C18",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3600.0,
+      "prezzo_affitto_attuale": 9.0,
+      "cagr_full": -0.0058,
+      "delta_total_pct": -4.0,
+      "recent_slope_eur_per_year": -22.0,
+      "recent_slope_pct_per_year": -0.59,
+      "volatility_pct": 8.0,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3750.0,
+        4050.0,
+        3850.0,
+        3600.0
+      ],
+      "spark_normalized": [
+        0.333,
+        1.0,
+        0.556,
+        0.0
+      ]
+    },
+    {
+      "zona": "C14",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2400.0,
+      "prezzo_affitto_attuale": 6.0,
+      "cagr_full": -0.0072,
+      "delta_total_pct": -5.0,
+      "recent_slope_eur_per_year": -25.5,
+      "recent_slope_pct_per_year": -1.01,
+      "volatility_pct": 12.8,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2525.0,
+        2850.0,
+        2500.0,
+        2400.0
+      ],
+      "spark_normalized": [
+        0.278,
+        1.0,
+        0.222,
+        0.0
+      ]
+    },
+    {
+      "zona": "D14",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2712.5,
+      "prezzo_affitto_attuale": 6.8,
+      "cagr_full": -0.0084,
+      "delta_total_pct": -5.7,
+      "recent_slope_eur_per_year": -20.9,
+      "recent_slope_pct_per_year": -0.73,
+      "volatility_pct": 14.3,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        2877.5,
+        3300.0,
+        3112.5,
+        2712.5
+      ],
+      "spark_normalized": [
+        0.281,
+        1.0,
+        0.681,
+        0.0
+      ]
+    },
+    {
+      "zona": "C12",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2787.5,
+      "prezzo_affitto_attuale": 7.0,
+      "cagr_full": -0.0104,
+      "delta_total_pct": -7.1,
+      "recent_slope_eur_per_year": -30.4,
+      "recent_slope_pct_per_year": -1.01,
+      "volatility_pct": 11.9,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3000.0,
+        3350.0,
+        3112.5,
+        2787.5
+      ],
+      "spark_normalized": [
+        0.378,
+        1.0,
+        0.578,
+        0.0
+      ]
+    },
+    {
+      "zona": "D20",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 1700.0,
+      "prezzo_affitto_attuale": 4.2,
+      "cagr_full": -0.0116,
+      "delta_total_pct": -7.9,
+      "recent_slope_eur_per_year": -22.8,
+      "recent_slope_pct_per_year": -1.23,
+      "volatility_pct": 3.2,
+      "yield_lordo_pct": 2.96,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        1845.0,
+        1850.0,
+        1737.5,
+        1700.0
+      ],
+      "spark_normalized": [
+        0.967,
+        1.0,
+        0.25,
+        0.0
+      ]
+    },
+    {
+      "zona": "B6",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 5625.0,
+      "prezzo_affitto_attuale": 12.7,
+      "cagr_full": -0.0121,
+      "delta_total_pct": -8.2,
+      "recent_slope_eur_per_year": -68.5,
+      "recent_slope_pct_per_year": -1.12,
+      "volatility_pct": 4.8,
+      "yield_lordo_pct": 2.71,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        6125.0,
+        6275.0,
+        6050.0,
+        5625.0
+      ],
+      "spark_normalized": [
+        0.769,
+        1.0,
+        0.654,
+        0.0
+      ]
+    },
+    {
+      "zona": "B7",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3750.0,
+      "prezzo_affitto_attuale": 9.4,
+      "cagr_full": -0.0123,
+      "delta_total_pct": -8.3,
+      "recent_slope_eur_per_year": -39.7,
+      "recent_slope_pct_per_year": -0.97,
+      "volatility_pct": 8.5,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        4090.0,
+        4300.0,
+        4250.0,
+        3750.0
+      ],
+      "spark_normalized": [
+        0.618,
+        1.0,
+        0.909,
+        0.0
+      ]
+    },
+    {
+      "zona": "C16",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2950.0,
+      "prezzo_affitto_attuale": 7.4,
+      "cagr_full": -0.0127,
+      "delta_total_pct": -8.5,
+      "recent_slope_eur_per_year": -35.2,
+      "recent_slope_pct_per_year": -1.09,
+      "volatility_pct": 14.4,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3225.0,
+        3662.5,
+        3450.0,
+        2950.0
+      ],
+      "spark_normalized": [
+        0.386,
+        1.0,
+        0.702,
+        0.0
+      ]
+    },
+    {
+      "zona": "B17",
+      "anni_dati_acquisto": 6,
+      "primo_anno": 2014,
+      "ultimo_anno": 2024,
+      "prezzo_acquisto_attuale": 3800.0,
+      "prezzo_affitto_attuale": 10.1,
+      "cagr_full": -0.0129,
+      "delta_total_pct": -12.1,
+      "recent_slope_eur_per_year": -44.5,
+      "recent_slope_pct_per_year": -1.03,
+      "volatility_pct": 5.2,
+      "yield_lordo_pct": 3.19,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024
+      ],
+      "spark_values": [
+        4325.0,
+        3900.0,
+        3850.0,
+        3662.5,
+        3800.0,
+        3800.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.358,
+        0.283,
+        0.0,
+        0.208,
+        0.208
+      ]
+    },
+    {
+      "zona": "B15",
+      "anni_dati_acquisto": 6,
+      "primo_anno": 2014,
+      "ultimo_anno": 2024,
+      "prezzo_acquisto_attuale": 2800.0,
+      "prezzo_affitto_attuale": 8.8,
+      "cagr_full": -0.0144,
+      "delta_total_pct": -13.5,
+      "recent_slope_eur_per_year": -41.6,
+      "recent_slope_pct_per_year": -1.29,
+      "volatility_pct": 6.6,
+      "yield_lordo_pct": 3.77,
+      "spark_years": [
+        2014,
+        2016,
+        2018,
+        2020,
+        2022,
+        2024
+      ],
+      "spark_values": [
+        3237.5,
+        2862.5,
+        2700.0,
+        2612.5,
+        2650.0,
+        2800.0
+      ],
+      "spark_normalized": [
+        1.0,
+        0.4,
+        0.14,
+        0.0,
+        0.06,
+        0.3
+      ]
+    },
+    {
+      "zona": "B4",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 4575.0,
+      "prezzo_affitto_attuale": 10.9,
+      "cagr_full": -0.0154,
+      "delta_total_pct": -10.3,
+      "recent_slope_eur_per_year": -86.1,
+      "recent_slope_pct_per_year": -1.69,
+      "volatility_pct": 7.4,
+      "yield_lordo_pct": 2.86,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        5100.0,
+        5312.5,
+        4750.0,
+        4575.0
+      ],
+      "spark_normalized": [
+        0.712,
+        1.0,
+        0.237,
+        0.0
+      ]
+    },
+    {
+      "zona": "C13",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 3637.5,
+      "prezzo_affitto_attuale": 9.1,
+      "cagr_full": -0.022,
+      "delta_total_pct": -14.4,
+      "recent_slope_eur_per_year": -90.8,
+      "recent_slope_pct_per_year": -2.14,
+      "volatility_pct": 4.4,
+      "yield_lordo_pct": 3.0,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        4250.0,
+        4250.0,
+        3900.0,
+        3637.5
+      ],
+      "spark_normalized": [
+        1.0,
+        1.0,
+        0.429,
+        0.0
+      ]
+    },
+    {
+      "zona": "C20",
+      "anni_dati_acquisto": 4,
+      "primo_anno": 2005,
+      "ultimo_anno": 2012,
+      "prezzo_acquisto_attuale": 2475.0,
+      "prezzo_affitto_attuale": 6.2,
+      "cagr_full": -0.0271,
+      "delta_total_pct": -17.5,
+      "recent_slope_eur_per_year": -77.3,
+      "recent_slope_pct_per_year": -2.58,
+      "volatility_pct": 6.0,
+      "yield_lordo_pct": 3.01,
+      "spark_years": [
+        2005,
+        2008,
+        2010,
+        2012
+      ],
+      "spark_values": [
+        3000.0,
+        3025.0,
+        2725.0,
+        2475.0
+      ],
+      "spark_normalized": [
+        0.955,
+        1.0,
+        0.455,
+        0.0
+      ]
+    },
+    {
+      "zona": "D10",
+      "anni_dati_acquisto": 1,
+      "primo_anno": 2005,
+      "ultimo_anno": 2005,
+      "prezzo_acquisto_attuale": 1425.0,
+      "prezzo_affitto_attuale": 7.1,
+      "cagr_full": null,
+      "delta_total_pct": null,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 5.98,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": []
+    },
+    {
+      "zona": "D16",
+      "anni_dati_acquisto": 1,
+      "primo_anno": 2005,
+      "ultimo_anno": 2005,
+      "prezzo_acquisto_attuale": 1365.0,
+      "prezzo_affitto_attuale": 6.8,
+      "cagr_full": null,
+      "delta_total_pct": null,
+      "recent_slope_eur_per_year": null,
+      "recent_slope_pct_per_year": null,
+      "volatility_pct": null,
+      "yield_lordo_pct": 5.98,
+      "spark_years": [],
+      "spark_values": [],
+      "spark_normalized": []
+    }
+  ],
+  "fascia_metrics": {
+    "B": {
+      "primo_anno": 2005,
+      "ultimo_anno": 2026,
+      "prezzo_iniziale": 4580.0,
+      "prezzo_attuale": 3612.0,
+      "delta_total_pct": -21.1,
+      "cagr": -0.0112,
+      "series": {
+        "2005": 4580.0,
+        "2008": 5072.0,
+        "2010": 4802.0,
+        "2012": 4500.0,
+        "2014": 3628.0,
+        "2016": 3374.0,
+        "2018": 3356.0,
+        "2020": 3211.0,
+        "2022": 3341.0,
+        "2024": 3653.0,
+        "2026": 3612.0
+      }
+    },
+    "C": {
+      "primo_anno": 2005,
+      "ultimo_anno": 2026,
+      "prezzo_iniziale": 2730.0,
+      "prezzo_attuale": 2741.0,
+      "delta_total_pct": 0.4,
+      "cagr": 0.0002,
+      "series": {
+        "2005": 2730.0,
+        "2008": 3126.0,
+        "2010": 2946.0,
+        "2012": 2814.0,
+        "2014": 2812.0,
+        "2016": 2626.0,
+        "2018": 2588.0,
+        "2020": 2462.0,
+        "2022": 2607.0,
+        "2024": 2711.0,
+        "2026": 2741.0
+      }
+    },
+    "D": {
+      "primo_anno": 2005,
+      "ultimo_anno": 2026,
+      "prezzo_iniziale": 1874.0,
+      "prezzo_attuale": 2079.0,
+      "delta_total_pct": 10.9,
+      "cagr": 0.0049,
+      "series": {
+        "2005": 1874.0,
+        "2008": 2314.0,
+        "2010": 2383.0,
+        "2012": 2316.0,
+        "2014": 2253.0,
+        "2016": 2127.0,
+        "2018": 2094.0,
+        "2020": 1956.0,
+        "2022": 1959.0,
+        "2024": 2060.0,
+        "2026": 2079.0
+      }
+    },
+    "E": {
+      "primo_anno": 2005,
+      "ultimo_anno": 2026,
+      "prezzo_iniziale": 1454.0,
+      "prezzo_attuale": 1589.0,
+      "delta_total_pct": 9.3,
+      "cagr": 0.0042,
+      "series": {
+        "2005": 1454.0,
+        "2008": 1778.0,
+        "2010": 1868.0,
+        "2012": 1841.0,
+        "2014": 1671.0,
+        "2016": 1594.0,
+        "2018": 1583.0,
+        "2020": 1498.0,
+        "2022": 1506.0,
+        "2024": 1579.0,
+        "2026": 1589.0
+      }
+    }
+  },
+  "province_ranking": [
+    {
+      "catasto": "L845",
+      "nome": "Vico Equense",
+      "prezzo_attuale_medio": 3441.0,
+      "prezzo_iniziale_medio": 1343.0,
+      "delta_total_pct": 156.1,
+      "cagr": 0.0458,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "H072",
+      "nome": "Procida",
+      "prezzo_attuale_medio": 3078.0,
+      "prezzo_iniziale_medio": 1235.0,
+      "delta_total_pct": 149.2,
+      "cagr": 0.0444,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G568",
+      "nome": "Piano di Sorrento",
+      "prezzo_attuale_medio": 3944.0,
+      "prezzo_iniziale_medio": 1672.0,
+      "delta_total_pct": 135.9,
+      "cagr": 0.0417,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "F162",
+      "nome": "Meta",
+      "prezzo_attuale_medio": 3588.0,
+      "prezzo_iniziale_medio": 1543.0,
+      "delta_total_pct": 132.5,
+      "cagr": 0.041,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "H114",
+      "nome": "Quarto",
+      "prezzo_attuale_medio": 1700.0,
+      "prezzo_iniziale_medio": 733.0,
+      "delta_total_pct": 131.9,
+      "cagr": 0.0409,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "M115",
+      "nome": "Volla",
+      "prezzo_attuale_medio": 1708.0,
+      "prezzo_iniziale_medio": 802.0,
+      "delta_total_pct": 113.1,
+      "cagr": 0.0367,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B946",
+      "nome": "Casavatore",
+      "prezzo_attuale_medio": 1550.0,
+      "prezzo_iniziale_medio": 750.0,
+      "delta_total_pct": 106.8,
+      "cagr": 0.0352,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I208",
+      "nome": "Sant'Agnello",
+      "prezzo_attuale_medio": 3919.0,
+      "prezzo_iniziale_medio": 1918.0,
+      "delta_total_pct": 104.3,
+      "cagr": 0.0346,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I391",
+      "nome": "San Vitaliano",
+      "prezzo_attuale_medio": 1268.0,
+      "prezzo_iniziale_medio": 624.0,
+      "delta_total_pct": 103.0,
+      "cagr": 0.0343,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "F488",
+      "nome": "Monte di Procida",
+      "prezzo_attuale_medio": 2012.0,
+      "prezzo_iniziale_medio": 1003.0,
+      "delta_total_pct": 100.6,
+      "cagr": 0.0337,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "F030",
+      "nome": "Massa Lubrense",
+      "prezzo_attuale_medio": 3197.0,
+      "prezzo_iniziale_medio": 1612.0,
+      "delta_total_pct": 98.4,
+      "cagr": 0.0332,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "C495",
+      "nome": "Cercola",
+      "prezzo_attuale_medio": 1680.0,
+      "prezzo_iniziale_medio": 876.0,
+      "delta_total_pct": 91.8,
+      "cagr": 0.0315,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G670",
+      "nome": "Pimonte",
+      "prezzo_attuale_medio": 1334.0,
+      "prezzo_iniziale_medio": 702.0,
+      "delta_total_pct": 90.1,
+      "cagr": 0.0311,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "C188",
+      "nome": "Castello di Cisterna",
+      "prezzo_attuale_medio": 1381.0,
+      "prezzo_iniziale_medio": 734.0,
+      "delta_total_pct": 88.1,
+      "cagr": 0.0305,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "A535",
+      "nome": "Bacoli",
+      "prezzo_attuale_medio": 2042.0,
+      "prezzo_iniziale_medio": 1092.0,
+      "delta_total_pct": 87.0,
+      "cagr": 0.0303,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I151",
+      "nome": "San Sebastiano al Vesuvio",
+      "prezzo_attuale_medio": 2006.0,
+      "prezzo_iniziale_medio": 1084.0,
+      "delta_total_pct": 85.2,
+      "cagr": 0.0298,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "D789",
+      "nome": "Frattamaggiore",
+      "prezzo_attuale_medio": 1650.0,
+      "prezzo_iniziale_medio": 912.0,
+      "delta_total_pct": 80.9,
+      "cagr": 0.0286,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "M289",
+      "nome": "Massa di Somma",
+      "prezzo_attuale_medio": 1556.0,
+      "prezzo_iniziale_medio": 868.0,
+      "delta_total_pct": 79.2,
+      "cagr": 0.0282,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "C697",
+      "nome": "Cimitile",
+      "prezzo_attuale_medio": 1200.0,
+      "prezzo_iniziale_medio": 683.0,
+      "delta_total_pct": 75.6,
+      "cagr": 0.0272,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E131",
+      "nome": "Gragnano",
+      "prezzo_attuale_medio": 1940.0,
+      "prezzo_iniziale_medio": 1108.0,
+      "delta_total_pct": 75.2,
+      "cagr": 0.0271,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B227",
+      "nome": "Brusciano",
+      "prezzo_attuale_medio": 1298.0,
+      "prezzo_iniziale_medio": 746.0,
+      "delta_total_pct": 74.1,
+      "cagr": 0.0268,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "D170",
+      "nome": "Crispano",
+      "prezzo_attuale_medio": 1230.0,
+      "prezzo_iniziale_medio": 717.0,
+      "delta_total_pct": 71.6,
+      "cagr": 0.0261,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "A068",
+      "nome": "Agerola",
+      "prezzo_attuale_medio": 1322.0,
+      "prezzo_iniziale_medio": 774.0,
+      "delta_total_pct": 71.0,
+      "cagr": 0.0259,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "D790",
+      "nome": "Frattaminore",
+      "prezzo_attuale_medio": 1274.0,
+      "prezzo_iniziale_medio": 750.0,
+      "delta_total_pct": 69.9,
+      "cagr": 0.0256,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "C675",
+      "nome": "Cicciano",
+      "prezzo_attuale_medio": 1142.0,
+      "prezzo_iniziale_medio": 681.0,
+      "delta_total_pct": 67.8,
+      "cagr": 0.025,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I540",
+      "nome": "Scisciano",
+      "prezzo_attuale_medio": 1095.0,
+      "prezzo_iniziale_medio": 652.0,
+      "delta_total_pct": 67.8,
+      "cagr": 0.025,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "M280",
+      "nome": "Trecase",
+      "prezzo_attuale_medio": 1450.0,
+      "prezzo_iniziale_medio": 863.0,
+      "delta_total_pct": 68.0,
+      "cagr": 0.025,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I293",
+      "nome": "Sant'Antimo",
+      "prezzo_attuale_medio": 1189.0,
+      "prezzo_iniziale_medio": 711.0,
+      "delta_total_pct": 67.3,
+      "cagr": 0.0248,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I652",
+      "nome": "Serrara Fontana",
+      "prezzo_attuale_medio": 2600.0,
+      "prezzo_iniziale_medio": 1600.0,
+      "delta_total_pct": 62.5,
+      "cagr": 0.0234,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G762",
+      "nome": "Poggiomarino",
+      "prezzo_attuale_medio": 1075.0,
+      "prezzo_iniziale_medio": 663.0,
+      "delta_total_pct": 62.1,
+      "cagr": 0.0233,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G795",
+      "nome": "Pollena Trocchia",
+      "prezzo_attuale_medio": 1308.0,
+      "prezzo_iniziale_medio": 809.0,
+      "delta_total_pct": 61.7,
+      "cagr": 0.0231,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "M273",
+      "nome": "Santa Maria la Carità",
+      "prezzo_attuale_medio": 1512.0,
+      "prezzo_iniziale_medio": 943.0,
+      "delta_total_pct": 60.3,
+      "cagr": 0.0227,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B759",
+      "nome": "Cardito",
+      "prezzo_attuale_medio": 1236.0,
+      "prezzo_iniziale_medio": 774.0,
+      "delta_total_pct": 59.8,
+      "cagr": 0.0226,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I469",
+      "nome": "Saviano",
+      "prezzo_attuale_medio": 1003.0,
+      "prezzo_iniziale_medio": 630.0,
+      "delta_total_pct": 59.4,
+      "cagr": 0.0224,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E224",
+      "nome": "Grumo Nevano",
+      "prezzo_attuale_medio": 1225.0,
+      "prezzo_iniziale_medio": 772.0,
+      "delta_total_pct": 58.7,
+      "cagr": 0.0223,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G309",
+      "nome": "Villaricca",
+      "prezzo_attuale_medio": 1330.0,
+      "prezzo_iniziale_medio": 842.0,
+      "delta_total_pct": 57.9,
+      "cagr": 0.022,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B565",
+      "nome": "Camposano",
+      "prezzo_attuale_medio": 1050.0,
+      "prezzo_iniziale_medio": 668.0,
+      "delta_total_pct": 57.3,
+      "cagr": 0.0218,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "D702",
+      "nome": "Forio",
+      "prezzo_attuale_medio": 2750.0,
+      "prezzo_iniziale_medio": 1839.0,
+      "delta_total_pct": 49.6,
+      "cagr": 0.0194,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "H101",
+      "nome": "Qualiano",
+      "prezzo_attuale_medio": 1096.0,
+      "prezzo_iniziale_medio": 741.0,
+      "delta_total_pct": 47.8,
+      "cagr": 0.0188,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B980",
+      "nome": "Casola di Napoli",
+      "prezzo_attuale_medio": 1308.0,
+      "prezzo_iniziale_medio": 891.0,
+      "delta_total_pct": 46.8,
+      "cagr": 0.0184,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B076",
+      "nome": "Boscoreale",
+      "prezzo_attuale_medio": 1280.0,
+      "prezzo_iniziale_medio": 875.0,
+      "delta_total_pct": 46.3,
+      "cagr": 0.0183,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E954",
+      "nome": "Mariglianella",
+      "prezzo_attuale_medio": 1265.0,
+      "prezzo_iniziale_medio": 875.0,
+      "delta_total_pct": 44.6,
+      "cagr": 0.0177,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B077",
+      "nome": "Boscotrecase",
+      "prezzo_attuale_medio": 1218.0,
+      "prezzo_iniziale_medio": 846.0,
+      "delta_total_pct": 44.0,
+      "cagr": 0.0175,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I300",
+      "nome": "Sant'Antonio Abate",
+      "prezzo_attuale_medio": 1260.0,
+      "prezzo_iniziale_medio": 876.0,
+      "delta_total_pct": 43.9,
+      "cagr": 0.0175,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B452",
+      "nome": "Calvizzano",
+      "prezzo_attuale_medio": 1173.0,
+      "prezzo_iniziale_medio": 823.0,
+      "delta_total_pct": 42.5,
+      "cagr": 0.017,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "A064",
+      "nome": "Afragola",
+      "prezzo_attuale_medio": 1656.0,
+      "prezzo_iniziale_medio": 1166.0,
+      "delta_total_pct": 41.9,
+      "cagr": 0.0168,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "L460",
+      "nome": "Tufino",
+      "prezzo_attuale_medio": 948.0,
+      "prezzo_iniziale_medio": 668.0,
+      "delta_total_pct": 41.8,
+      "cagr": 0.0168,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "A617",
+      "nome": "Barano d'Ischia",
+      "prezzo_attuale_medio": 1945.0,
+      "prezzo_iniziale_medio": 1386.0,
+      "delta_total_pct": 40.3,
+      "cagr": 0.0163,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E329",
+      "nome": "Ischia",
+      "prezzo_attuale_medio": 3000.0,
+      "prezzo_iniziale_medio": 2152.0,
+      "delta_total_pct": 39.4,
+      "cagr": 0.0159,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "C929",
+      "nome": "Comiziano",
+      "prezzo_attuale_medio": 948.0,
+      "prezzo_iniziale_medio": 683.0,
+      "delta_total_pct": 38.7,
+      "cagr": 0.0157,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B925",
+      "nome": "Casandrino",
+      "prezzo_attuale_medio": 1058.0,
+      "prezzo_iniziale_medio": 772.0,
+      "delta_total_pct": 37.1,
+      "cagr": 0.0152,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G902",
+      "nome": "Portici",
+      "prezzo_attuale_medio": 2239.0,
+      "prezzo_iniziale_medio": 1643.0,
+      "delta_total_pct": 36.3,
+      "cagr": 0.0148,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E396",
+      "nome": "Lacco Ameno",
+      "prezzo_attuale_medio": 2700.0,
+      "prezzo_iniziale_medio": 2000.0,
+      "delta_total_pct": 35.0,
+      "cagr": 0.0144,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E557",
+      "nome": "Lettere",
+      "prezzo_attuale_medio": 1300.0,
+      "prezzo_iniziale_medio": 963.0,
+      "delta_total_pct": 34.9,
+      "cagr": 0.0144,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B922",
+      "nome": "Casamarciano",
+      "prezzo_attuale_medio": 1172.0,
+      "prezzo_iniziale_medio": 888.0,
+      "delta_total_pct": 32.0,
+      "cagr": 0.0133,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "L245",
+      "nome": "Torre Annunziata",
+      "prezzo_attuale_medio": 1793.0,
+      "prezzo_iniziale_medio": 1370.0,
+      "delta_total_pct": 30.9,
+      "cagr": 0.0129,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I073",
+      "nome": "San Paolo Bel Sito",
+      "prezzo_attuale_medio": 1012.0,
+      "prezzo_iniziale_medio": 775.0,
+      "delta_total_pct": 30.6,
+      "cagr": 0.0128,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E955",
+      "nome": "Marigliano",
+      "prezzo_attuale_medio": 1270.0,
+      "prezzo_iniziale_medio": 979.0,
+      "delta_total_pct": 29.7,
+      "cagr": 0.0125,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I978",
+      "nome": "Striano",
+      "prezzo_attuale_medio": 868.0,
+      "prezzo_iniziale_medio": 668.0,
+      "delta_total_pct": 29.9,
+      "cagr": 0.0125,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "L259",
+      "nome": "Torre del Greco",
+      "prezzo_attuale_medio": 1868.0,
+      "prezzo_iniziale_medio": 1438.0,
+      "delta_total_pct": 29.9,
+      "cagr": 0.0125,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I862",
+      "nome": "Sorrento",
+      "prezzo_attuale_medio": 4350.0,
+      "prezzo_iniziale_medio": 3373.0,
+      "delta_total_pct": 29.0,
+      "cagr": 0.0122,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "F924",
+      "nome": "Nola",
+      "prezzo_attuale_medio": 1492.0,
+      "prezzo_iniziale_medio": 1162.0,
+      "delta_total_pct": 28.4,
+      "cagr": 0.012,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E620",
+      "nome": "Liveri",
+      "prezzo_attuale_medio": 865.0,
+      "prezzo_iniziale_medio": 680.0,
+      "delta_total_pct": 27.2,
+      "cagr": 0.0115,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B924",
+      "nome": "Casamicciola Terme",
+      "prezzo_attuale_medio": 2322.0,
+      "prezzo_iniziale_medio": 1839.0,
+      "delta_total_pct": 26.3,
+      "cagr": 0.0112,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "H433",
+      "nome": "Roccarainola",
+      "prezzo_attuale_medio": 910.0,
+      "prezzo_iniziale_medio": 725.0,
+      "delta_total_pct": 25.5,
+      "cagr": 0.0109,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G813",
+      "nome": "Pompei",
+      "prezzo_attuale_medio": 1997.0,
+      "prezzo_iniziale_medio": 1595.0,
+      "delta_total_pct": 25.2,
+      "cagr": 0.0108,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G812",
+      "nome": "Pomigliano d'Arco",
+      "prezzo_attuale_medio": 1719.0,
+      "prezzo_iniziale_medio": 1379.0,
+      "delta_total_pct": 24.6,
+      "cagr": 0.0105,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B740",
+      "nome": "Carbonara di Nola",
+      "prezzo_attuale_medio": 868.0,
+      "prezzo_iniziale_medio": 702.0,
+      "delta_total_pct": 23.6,
+      "cagr": 0.0102,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "H243",
+      "nome": "Ercolano",
+      "prezzo_attuale_medio": 1735.0,
+      "prezzo_iniziale_medio": 1416.0,
+      "delta_total_pct": 22.6,
+      "cagr": 0.0097,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "M072",
+      "nome": "Visciano",
+      "prezzo_attuale_medio": 818.0,
+      "prezzo_iniziale_medio": 693.0,
+      "delta_total_pct": 18.0,
+      "cagr": 0.0079,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "C129",
+      "nome": "Castellammare di Stabia",
+      "prezzo_attuale_medio": 2262.0,
+      "prezzo_iniziale_medio": 1932.0,
+      "delta_total_pct": 17.1,
+      "cagr": 0.0076,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G190",
+      "nome": "Ottaviano",
+      "prezzo_attuale_medio": 1019.0,
+      "prezzo_iniziale_medio": 878.0,
+      "delta_total_pct": 16.0,
+      "cagr": 0.0071,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "H860",
+      "nome": "San Gennaro Vesuviano",
+      "prezzo_attuale_medio": 978.0,
+      "prezzo_iniziale_medio": 860.0,
+      "delta_total_pct": 13.7,
+      "cagr": 0.0061,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I262",
+      "nome": "Sant'Anastasia",
+      "prezzo_attuale_medio": 1308.0,
+      "prezzo_iniziale_medio": 1171.0,
+      "delta_total_pct": 11.7,
+      "cagr": 0.0053,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G283",
+      "nome": "Palma Campania",
+      "prezzo_attuale_medio": 973.0,
+      "prezzo_iniziale_medio": 882.0,
+      "delta_total_pct": 10.3,
+      "cagr": 0.0047,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "L142",
+      "nome": "Terzigno",
+      "prezzo_attuale_medio": 918.0,
+      "prezzo_iniziale_medio": 836.0,
+      "delta_total_pct": 9.8,
+      "cagr": 0.0045,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B990",
+      "nome": "Casoria",
+      "prezzo_attuale_medio": 1501.0,
+      "prezzo_iniziale_medio": 1390.0,
+      "delta_total_pct": 8.0,
+      "cagr": 0.0037,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "F839",
+      "nome": "Napoli",
+      "prezzo_attuale_medio": 2370.0,
+      "prezzo_iniziale_medio": 2262.0,
+      "delta_total_pct": 4.8,
+      "cagr": 0.0022,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "A024",
+      "nome": "Acerra",
+      "prezzo_attuale_medio": 1311.0,
+      "prezzo_iniziale_medio": 1265.0,
+      "delta_total_pct": 3.6,
+      "cagr": 0.0017,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E054",
+      "nome": "Giugliano in Campania",
+      "prezzo_attuale_medio": 1329.0,
+      "prezzo_iniziale_medio": 1282.0,
+      "delta_total_pct": 3.7,
+      "cagr": 0.0017,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B905",
+      "nome": "Casalnuovo di Napoli",
+      "prezzo_attuale_medio": 1507.0,
+      "prezzo_iniziale_medio": 1465.0,
+      "delta_total_pct": 2.9,
+      "cagr": 0.0014,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "H892",
+      "nome": "San Giorgio a Cremano",
+      "prezzo_attuale_medio": 2079.0,
+      "prezzo_iniziale_medio": 2019.0,
+      "delta_total_pct": 3.0,
+      "cagr": 0.0014,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B696",
+      "nome": "Capri",
+      "prezzo_attuale_medio": 7738.0,
+      "prezzo_iniziale_medio": 7653.0,
+      "delta_total_pct": 1.1,
+      "cagr": 0.0005,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "H931",
+      "nome": "San Giuseppe Vesuviano",
+      "prezzo_attuale_medio": 956.0,
+      "prezzo_iniziale_medio": 950.0,
+      "delta_total_pct": 0.6,
+      "cagr": 0.0003,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "B371",
+      "nome": "Caivano",
+      "prezzo_attuale_medio": 1194.0,
+      "prezzo_iniziale_medio": 1188.0,
+      "delta_total_pct": 0.5,
+      "cagr": 0.0002,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "I820",
+      "nome": "Somma Vesuviana",
+      "prezzo_attuale_medio": 1252.0,
+      "prezzo_iniziale_medio": 1271.0,
+      "delta_total_pct": -1.5,
+      "cagr": -0.0007,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "A268",
+      "nome": "Anacapri",
+      "prezzo_attuale_medio": 6238.0,
+      "prezzo_iniziale_medio": 6920.0,
+      "delta_total_pct": -9.9,
+      "cagr": -0.0049,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "A455",
+      "nome": "Arzano",
+      "prezzo_attuale_medio": 1294.0,
+      "prezzo_iniziale_medio": 1448.0,
+      "delta_total_pct": -10.6,
+      "cagr": -0.0053,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "G964",
+      "nome": "Pozzuoli",
+      "prezzo_attuale_medio": 1838.0,
+      "prezzo_iniziale_medio": 2095.0,
+      "delta_total_pct": -12.3,
+      "cagr": -0.0062,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "F799",
+      "nome": "Mugnano di Napoli",
+      "prezzo_attuale_medio": 1534.0,
+      "prezzo_iniziale_medio": 1829.0,
+      "delta_total_pct": -16.1,
+      "cagr": -0.0083,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "F111",
+      "nome": "Melito di Napoli",
+      "prezzo_attuale_medio": 1296.0,
+      "prezzo_iniziale_medio": 1580.0,
+      "delta_total_pct": -18.0,
+      "cagr": -0.0094,
+      "anni_coperti": 22
+    },
+    {
+      "catasto": "E906",
+      "nome": "Marano di Napoli",
+      "prezzo_attuale_medio": 1427.0,
+      "prezzo_iniziale_medio": 1831.0,
+      "delta_total_pct": -22.1,
+      "cagr": -0.0118,
+      "anni_coperti": 22
+    }
+  ]
+}

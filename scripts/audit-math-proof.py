@@ -77,6 +77,9 @@ PROFILES = {
     "catanzaro": {"capoluogo": "C352", "prov_sigla": "CZ"},
     "bologna":   {"capoluogo": "A944", "prov_sigla": "BO"},
     "reggio-emilia": {"capoluogo": "H223", "prov_sigla": "RE"},
+    "torino":    {"capoluogo": "L219", "prov_sigla": "TO"},
+    "firenze":   {"capoluogo": "D612", "prov_sigla": "FI"},
+    "napoli":    {"capoluogo": "F839", "prov_sigla": "NA"},
 }
 
 plt.rcParams.update({

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Torino · brief immobiliare · OMI Agenzia delle Entrate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       oklch(97% 0.005 80);
+    --paper:    oklch(99% 0.003 80);
+    --ink:      oklch(15% 0.008 30);
+    --ink-mid:  oklch(40% 0.008 30);
+    --ink-dim:  oklch(60% 0.008 30);
+    --rule:     oklch(88% 0.005 80);
+    --rule-mid: oklch(78% 0.005 80);
+    --up:       oklch(48% 0.16 145);
+    --up-bg:    oklch(94% 0.05 145);
+    --down:     oklch(52% 0.20 25);
+    --down-bg:  oklch(94% 0.05 25);
+    --neutral:  oklch(55% 0.005 80);
+    --accent:   oklch(38% 0.16 250);
+
+    --serif:    'Instrument Serif', 'Times New Roman', serif;
+    --sans:     'IBM Plex Sans', system-ui, sans-serif;
+    --mono:     'IBM Plex Mono', 'SF Mono', monospace;
+  }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  html, body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.5; margin: 0; }
+  body {
+    background-image:
+      radial-gradient(at 0% 0%, oklch(92% 0.02 60 / 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, oklch(92% 0.02 30 / 0.3) 0px, transparent 50%);
+    background-attachment: fixed;
+    padding-bottom: 80px;
+  }
+  .serif { font-family: var(--serif); }
+  .italic { font-style: italic; font-family: var(--serif); }
+  .mono  { font-family: var(--mono); }
+  .num   { font-family: var(--mono); font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  .upper { text-transform: uppercase; letter-spacing: 0.14em; }
+  .small { font-size: 11px; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  /* HEADER */
+  header { padding: 56px 0 32px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--accent); font-weight: 500;
+  }
+  .eyebrow::before {
+    content: ""; width: 24px; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(48px, 6vw, 84px); line-height: 1.0; letter-spacing: -0.015em;
+    margin: 16px 0 0; color: var(--ink);
+  }
+  h1 em { color: var(--accent); }
+  .deck {
+    font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.45;
+    color: var(--ink-mid); max-width: 720px; margin-top: 28px;
+  }
+  .dateline {
+    font-size: 11px; color: var(--ink-dim); letter-spacing: 0.06em;
+    margin-top: 40px; font-family: var(--mono);
+  }
+
+  /* HEADLINE NUMBERS */
+  .headline-row {
+    margin-top: 56px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .hl {
+    padding: 28px 28px 28px 0;
+    border-right: 1px solid var(--rule);
+  }
+  .hl:last-child { border-right: none; padding-right: 0; }
+  .hl-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-dim); }
+  .hl-value {
+    font-family: var(--mono); font-size: clamp(28px, 3.4vw, 42px); font-weight: 500;
+    letter-spacing: -0.04em; margin-top: 12px; color: var(--ink);
+  }
+  .hl-sub { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-mid); margin-top: 6px; }
+
+  /* SECTION TITLES */
+  section { margin-top: 80px; }
+  .section-eyebrow {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--accent); font-weight: 500;
+  }
+  h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(28px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.01em;
+    margin: 12px 0 0; max-width: 700px;
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+  .section-deck {
+    font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--ink-mid);
+    margin-top: 12px; max-width: 600px; line-height: 1.5;
+  }
+
+  /* THREE SIGNALS */
+  .signals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 36px; border-top: 1px solid var(--rule); }
+  .signal { padding: 32px 28px 32px 0; border-right: 1px solid var(--rule); }
+  .signal:last-child { border-right: none; padding-right: 0; }
+  .signal-num { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-dim); }
+  .signal-title { font-family: var(--serif); font-size: 24px; line-height: 1.2; margin-top: 8px; }
+  .signal-stat {
+    font-family: var(--mono); font-size: 32px; font-weight: 500;
+    letter-spacing: -0.03em; margin-top: 24px;
+  }
+  .signal-stat.up { color: var(--up); }
+  .signal-stat.down { color: var(--down); }
+  .signal-body { font-size: 13px; color: var(--ink-mid); line-height: 1.6; margin-top: 14px; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; margin-top: 28px; }
+  thead th {
+    text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-dim); padding: 12px 14px 12px 0; font-weight: 500;
+    border-bottom: 1px solid var(--rule-mid);
+  }
+  thead th.right { text-align: right; padding-right: 0; }
+  tbody td {
+    padding: 14px 14px 14px 0; border-bottom: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 13px; vertical-align: middle;
+  }
+  tbody td:first-child { font-weight: 600; }
+  tbody td.zona-name {
+    font-family: var(--serif); font-size: 15px; font-weight: 400;
+    color: var(--ink); font-variant-numeric: normal;
+  }
+  tbody td.zona-desc {
+    font-family: var(--sans); font-size: 12px; color: var(--ink-mid);
+    font-variant-numeric: normal; font-weight: 400;
+  }
+  tbody td.right { text-align: right; padding-right: 0; }
+  tbody tr:hover { background: oklch(95% 0.01 60); }
+
+  .pill {
+    display: inline-block; padding: 3px 8px; border-radius: 3px;
+    font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .pill.up { background: var(--up-bg); color: var(--up); }
+  .pill.down { background: var(--down-bg); color: var(--down); }
+  .pill.flat { background: oklch(92% 0.005 80); color: var(--neutral); }
+
+  /* SPARKLINE */
+  .spark { width: 110px; height: 28px; vertical-align: middle; }
+  .spark path.line { fill: none; stroke-width: 1.5; }
+  .spark path.area { fill-opacity: 0.12; stroke: none; }
+  .spark circle { stroke: var(--paper); stroke-width: 1.5; }
+  .spark.up path.line, .spark.up circle { stroke: var(--up); fill: var(--up); }
+  .spark.up path.area { fill: var(--up); }
+  .spark.down path.line, .spark.down circle { stroke: var(--down); fill: var(--down); }
+  .spark.down path.area { fill: var(--down); }
+  .spark.flat path.line, .spark.flat circle { stroke: var(--neutral); fill: var(--neutral); }
+  .spark.flat path.area { fill: var(--neutral); }
+
+  /* FOOTER */
+  footer { margin-top: 100px; padding-top: 32px; border-top: 1px solid var(--rule); font-size: 11px; color: var(--ink-dim); }
+  footer a { color: var(--ink-mid); text-decoration-color: var(--rule-mid); text-underline-offset: 3px; }
+
+  .skel { height: 18px; background: var(--rule); border-radius: 2px; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Brief immobiliare · banca dati OMI</div>
+    <h1>Torino in <em>21 anni</em>:<br>capoluogo, cintura, valli e Canavese.</h1>
+    <p class="deck">Il valore al metro quadro si è assestato, le compravendite no. Centro storico in raffreddamento, semicintura che tiene il passo, periferia che lavora. Tre letture, nessuno slogan.</p>
+    <div class="dateline">Edizione · <span id="hl-edizione">…</span> · <span id="dl">…</span></div>
+  </header>
+
+  <!-- ─── HEADLINE NUMBERS ─── -->
+  <div class="headline-row">
+    <div class="hl">
+      <div class="hl-label">CAGR medio · dataset <span id="kpi-horizon">…</span> anni</div>
+      <div class="hl-value num" id="kpi-cagr">…</div>
+      <div class="hl-sub" id="kpi-cagr-sub">…</div>
+    </div>
+    <div class="hl">
+      <div class="hl-label">Yield lordo medio</div>
+      <div class="hl-value num" id="kpi-yield">…</div>
+      <div class="hl-sub italic">acquisto vs affitto annuo</div>
+    </div>
+    <div class="hl">
+      <div class="hl-label">Prezzo medio capoluogo</div>
+      <div class="hl-value num" id="kpi-prezzo">…</div>
+      <div class="hl-sub italic">€/m² abitazioni civili · zone Torino città</div>
+    </div>
+    <div class="hl">
+      <div class="hl-label">Zone monitorate</div>
+      <div class="hl-value num"><span id="kpi-zones">…</span><span style="font-size: 0.5em; color: var(--ink-dim)"> / <span id="kpi-zones-total">…</span></span></div>
+      <div class="hl-sub italic">correnti / storiche</div>
+    </div>
+  </div>
+
+  <!-- ─── 3 SIGNALI ─── -->
+  <section>
+    <div class="section-eyebrow">Tre segnali</div>
+    <h2>Cosa dice <em>davvero</em> il dato.</h2>
+    <p class="section-deck">Per fascia, per zona, per comune della provincia.<br>Numeri verificati, niente confusione da renomenclatura zone.</p>
+
+    <div class="signals">
+      <div class="signal">
+        <div class="signal-num"><em>1.</em></div>
+        <div class="signal-title" id="sig1-title">Centro storico vs <em>rurale</em>.</div>
+        <div class="signal-stat" id="sig1-stat">…</div>
+        <div class="signal-body" id="sig1-body">…</div>
+      </div>
+      <div class="signal">
+        <div class="signal-num"><em>2.</em></div>
+        <div class="signal-title" id="sig2-title">L'<em>outlier</em>.</div>
+        <div class="signal-stat up" id="sig2-stat">…</div>
+        <div class="signal-body" id="sig2-body">…</div>
+      </div>
+      <div class="signal">
+        <div class="signal-num"><em>3.</em></div>
+        <div class="signal-title">Costa, città, <em>entroterra</em>.</div>
+        <div class="signal-stat up" id="sig3-stat">…</div>
+        <div class="signal-body" id="sig3-body">…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RANKING ZONE ─── -->
+  <section>
+    <div class="section-eyebrow">Capitolo primo · Torino città</div>
+    <h2>Le <span id="h2-zone-count">…</span> zone OMI, <em>ordinate per crescita</em>.</h2>
+    <p class="section-deck">CAGR sul periodo coperto, sparkline 2005–2026, yield lordo, volatilità annua.</p>
+
+    <table id="tbl-zone">
+      <thead>
+        <tr>
+          <th style="width: 5%">Zona</th>
+          <th style="width: 30%">Quartiere</th>
+          <th class="right" style="width: 12%">Prezzo €/m²</th>
+          <th class="right" style="width: 12%">CAGR / yr</th>
+          <th style="width: 18%">Trend</th>
+          <th class="right" style="width: 12%">Yield lordo</th>
+          <th class="right" style="width: 11%">Volatilità</th>
+        </tr>
+      </thead>
+      <tbody id="tbl-zone-body">
+        <tr><td colspan="7"><div class="skel"></div></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── PROVINCIA ─── -->
+  <section>
+    <div class="section-eyebrow">Capitolo secondo · provincia di Torino</div>
+    <h2><span id="h2-prov-count">…</span> comuni, <em>due Emilie</em>.</h2>
+    <p class="section-deck">Valli alpine, Canavese, cintura, capoluogo, Collina, Pinerolese. CAGR sull'orizzonte coperto dai dati OMI.</p>
+
+    <table id="tbl-prov">
+      <thead>
+        <tr>
+          <th style="width: 5%">Cat.</th>
+          <th style="width: 40%">Comune</th>
+          <th class="right" style="width: 15%">Prezzo medio</th>
+          <th class="right" style="width: 15%">CAGR / yr</th>
+          <th class="right" style="width: 25%">Delta totale</th>
+        </tr>
+      </thead>
+      <tbody id="tbl-prov-body">
+        <tr><td colspan="5"><div class="skel"></div></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona), wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni zone · <a href="https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/" target="_blank">GeoPOI</a> reverse-engineered (KMZ→GeoJSON). Calcoli verificati con asserts in <span class="mono">scripts/compute-torino-signals.py</span>.
+    <br><br>
+    <span id="dq-footer-line" style="display:inline-block;padding:8px 12px;border-left:3px solid oklch(70% 0.10 50);background:oklch(98% 0.005 75);margin:8px 0 14px 0;font-size:11px;line-height:1.5;color:oklch(40% 0.005 75)">
+      <strong>Trasparenza qualità dati:</strong> <span id="dq-footer-text">…</span>
+    </span>
+    <br>
+    <span class="italic">Brief immobiliare Torino · serie OMI Agenzia delle Entrate · MMXXVI</span>
+  </footer>
+
+</div>
+
+<script>
+function sparkSvg(values, normalized, trend) {
+  if (!values || values.length < 2) return '';
+  if (!normalized || normalized.length !== values.length) return '';
+  const w = 110, h = 28, pad = 2;
+  const xs = values.map((_, i) => pad + (w - 2*pad) * (i / (values.length - 1)));
+  const ys = normalized.map(v => h - pad - (h - 2*pad) * v);
+  const linePoints = xs.map((x, i) => `${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' L ');
+  const areaPath = `M ${xs[0].toFixed(1)},${h} L ${linePoints} L ${xs[xs.length-1].toFixed(1)},${h} Z`;
+  const linePath = `M ${linePoints}`;
+  const lastX = xs[xs.length - 1], lastY = ys[ys.length - 1];
+  return `<svg class="spark ${trend}" viewBox="0 0 ${w} ${h}">
+    <path class="area" d="${areaPath}"/>
+    <path class="line" d="${linePath}"/>
+    <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="2.5"/>
+  </svg>`;
+}
+
+function pctPill(value, digits = 2) {
+  if (value == null) return `<span class="pill flat">n/d</span>`;
+  const cls = value > 0.2 ? 'up' : value < -0.2 ? 'down' : 'flat';
+  const sign = value > 0 ? '+' : '';
+  return `<span class="pill ${cls}">${sign}${value.toFixed(digits)}%</span>`;
+}
+
+function fmtEuro(n, digits = 0) {
+  if (n == null) return '—';
+  return '€' + n.toLocaleString('it-IT', { maximumFractionDigits: digits });
+}
+
+function shortDizione(diz) {
+  if (!diz) return '';
+  // Cataloga ENTI come "CAPOLUOGO - CENTRO STORICO" -> "CENTRO STORICO"
+  return diz.split(' - ').slice(-1)[0];
+}
+
+async function loadAndRender() {
+  const d = await (await fetch('../data/computed/torino-signals.json')).json();
+  // FIX UI-5: carica volume-signals per popolare footer trasparenza qualità dati
+  let volMeta = {};
+  try {
+    const vs = await (await fetch('../data/computed/torino-volume-signals.json')).json();
+    const agg = vs.aggregated_by_new_zone || [];
+    volMeta = {
+      lowSample: agg.filter(z => z.low_sample).map(z => z.zona_new),
+      gap2018: agg.filter(z => z.has_2018_gap).length,
+      interp2018: agg.filter(z => z.has_2018_interpolated).length,
+      noD14: agg.filter(z => z.is_d14_missing_2024).map(z => z.zona_new),
+      unknown: agg.filter(z => z.rel === 'unknown').map(z => z.zona_new),
+    };
+  } catch (e) { console.warn('volume-signals non caricabile (A-brief):', e); }
+
+  const dqEl = document.getElementById('dq-footer-text');
+  if (dqEl && Object.keys(volMeta).length) {
+    const parts = [];
+    parts.push(`I numeri sopra sono <strong>relativi al pool Torino</strong> (capoluogo + provincia). Una performance "top" qui non è confrontabile in assoluto con altre province.`);
+    if (volMeta.gap2018) parts.push(`<strong>Buco 2018</strong> non ricostruibile per ${volMeta.gap2018} zone.`);
+    if (volMeta.interp2018) parts.push(`<strong>NTN 2018 stimato</strong> via macroaree-downscaling per ${volMeta.interp2018} zone (CAGR matematicamente invariante).`);
+    if (volMeta.lowSample.length) parts.push(`<strong>Zone NTN-micro</strong> (campione &lt;5): ${volMeta.lowSample.join(', ')} → CAGR statisticamente debole.`);
+    if (volMeta.noD14.length) parts.push(`<strong>Zone senza dato 2024</strong>: ${volMeta.noD14.join(', ')} (soppressione AdE SR2025).`);
+    if (volMeta.unknown.length) parts.push(`<strong>Mapping non risolto</strong>: ${volMeta.unknown.join(', ')} esclusi dal join NEW.`);
+    dqEl.innerHTML = parts.join(' ');
+  }
+  const h = d.headline;
+
+  document.getElementById('dl').textContent = new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' });
+  // Edizione: caricata da GeoPOI GeoJSON (semestre delle zone OMI correnti).
+  try {
+    const zg = await (await fetch('../data/geojson/torino-zone-omi.geojson')).json();
+    const sem = (zg?.features?.[0]?.properties?.semestre) || '';
+    if (sem && sem.length === 5) {
+      document.getElementById('hl-edizione').textContent = `${sem.slice(0,4)}-S${sem.slice(4)}`;
+    } else {
+      document.getElementById('hl-edizione').textContent = '—';
+    }
+  } catch (e) { document.getElementById('hl-edizione').textContent = '—'; }
+
+  // KPIs
+  document.getElementById('kpi-horizon').textContent = h.anni_orizzonte_dataset || h.anni_orizzonte || '—';
+  const cagrEl = document.getElementById('kpi-cagr');
+  if (h.cagr_avg_pct != null) {
+    cagrEl.textContent = (h.cagr_avg_pct > 0 ? '+' : '') + h.cagr_avg_pct.toFixed(2) + '%';
+    cagrEl.style.color = h.cagr_avg_pct >= 0 ? 'var(--up)' : 'var(--down)';
+    const adj = Math.abs(h.cagr_avg_pct) < 0.5 ? 'mercato piatto' :
+                h.cagr_avg_pct > 0 ? 'crescita nominale moderata' : 'mercato in contrazione';
+    const denom = (h.zone_count_cagr_reliable && h.cagr_avg_pct_min_years)
+      ? `${h.zone_count_cagr_reliable} zone con dati ≥${h.cagr_avg_pct_min_years} anni`
+      : `${h.zone_count_current} zone correnti${h.cagr_avg_pct_min_years ? ` (nessuna con orizzonte ≥${h.cagr_avg_pct_min_years} anni)` : ''}`;
+    document.getElementById('kpi-cagr-sub').innerHTML = `<em>${adj}</em>, su ${denom} (valori nominali, non deflazionati)`;
+  } else {
+    cagrEl.textContent = 'n/d';
+  }
+
+  document.getElementById('kpi-yield').textContent = h.yield_medio_pct != null ? h.yield_medio_pct.toFixed(2) + '%' : 'n/d';
+  document.getElementById('kpi-prezzo').textContent = fmtEuro(h.prezzo_medio_attuale);
+  document.getElementById('kpi-zones').textContent = h.zone_count_current;
+  document.getElementById('kpi-zones-total').textContent = h.zone_count_total;
+
+  // Signal 1: fascia B (centro) vs fascia R (rurale)
+  const fascia = d.fascia_metrics;
+  const sig1Stat = document.getElementById('sig1-stat');
+  const sig1Body = document.getElementById('sig1-body');
+  if (fascia.B && fascia.R) {
+    const bCagr = fascia.B.cagr * 100, rCagr = fascia.R.cagr * 100;
+    sig1Stat.textContent = (bCagr > 0 ? '+' : '') + bCagr.toFixed(2) + '%';
+    sig1Stat.classList.add(bCagr >= 0 ? 'up' : 'down');
+    sig1Body.innerHTML = `Fascia B (centro storico) ${bCagr >= 0 ? 'cresce' : 'cala'} dello <span class="num">${Math.abs(bCagr).toFixed(2)}%</span> l'anno. Fascia R (rurale) ${rCagr >= 0 ? 'cresce' : 'cala'} dello <span class="num">${Math.abs(rCagr).toFixed(2)}%</span>. ${Math.abs(rCagr - bCagr) > 0.5 ? "L'asse di valore si sta " + (rCagr > bCagr ? 'spostando verso la periferia' : 'concentrando in centro') + '.' : 'Le due fasce si muovono in parallelo.'}`;
+  } else if (fascia.B) {
+    const bCagr = fascia.B.cagr * 100;
+    sig1Stat.textContent = (bCagr > 0 ? '+' : '') + bCagr.toFixed(2) + '%';
+    sig1Stat.classList.add(bCagr >= 0 ? 'up' : 'down');
+    sig1Body.innerHTML = `Fascia B (centro storico) ${bCagr >= 0 ? 'cresce' : 'cala'} dello <span class="num">${Math.abs(bCagr).toFixed(2)}%</span> l'anno sull'orizzonte coperto.`;
+  } else {
+    sig1Stat.textContent = 'n/d';
+    sig1Body.textContent = 'Dati insufficienti per il confronto fascia B vs fascia R.';
+  }
+
+  // Signal 2: top growth zona (data-driven, non più hardcoded "Cognento")
+  // FIX R4: fallback su zone_metrics se top_growth precomputato è vuoto
+  // (capita quando min_cagr_years=5 ma le zone correnti hanno solo 2 anni di dati)
+  let topGrow = d.top_growth && d.top_growth[0];
+  let shortHorizonWarn = false;
+  if (!topGrow || topGrow.cagr_full == null) {
+    const candidates = (d.zone_metrics || [])
+      .filter(z => z.dizione && z.cagr_full != null)
+      .sort((a, b) => (b.cagr_full || -99) - (a.cagr_full || -99));
+    topGrow = candidates[0];
+    shortHorizonWarn = !!topGrow;
+  }
+  const sig2Title = document.getElementById('sig2-title');
+  const sig2Stat = document.getElementById('sig2-stat');
+  const sig2Body = document.getElementById('sig2-body');
+  if (topGrow && topGrow.cagr_full != null) {
+    const cagrPct = topGrow.cagr_full * 100;
+    const dz = shortDizione(topGrow.dizione) || topGrow.zona;
+    sig2Title.innerHTML = `${dz.split(' ').slice(0,3).join(' ')} <em>l'outlier</em>.`;
+    sig2Stat.textContent = (cagrPct > 0 ? '+' : '') + cagrPct.toFixed(2) + '%';
+    sig2Stat.className = 'signal-stat ' + (cagrPct >= 0 ? 'up' : 'down');
+    const avgCagr = h.cagr_avg_pct || 0;
+    const anniZ = topGrow.anni_dati_acquisto || topGrow.anni || null;
+    const horizonNote = shortHorizonWarn && anniZ
+      ? ` <em style="color: var(--ink-mid)">(orizzonte breve: ${anniZ} anni di dati, segnale provvisorio)</em>`
+      : '';
+    sig2Body.innerHTML = `Zona <span class="mono">${topGrow.zona}</span>, fascia ${topGrow.fascia || '?'}. La zona con crescita più alta a Torino città — <span class="num">${cagrPct >= 0 ? '+' : ''}${cagrPct.toFixed(2)}%/yr</span> contro la media <span class="num">${avgCagr >= 0 ? '+' : ''}${avgCagr.toFixed(2)}%/yr</span>.${horizonNote}`;
+  } else {
+    sig2Title.innerHTML = `Outlier <em>non trovato</em>.`;
+    sig2Stat.textContent = 'n/d';
+    sig2Stat.classList.add('flat');
+    sig2Body.textContent = 'Nessuna zona corrente con CAGR calcolabile.';
+  }
+
+  // Signal 3: top vs bottom comuni della provincia
+  // Escludi entry stale per evitare ranking falsato da serie non aggiornate
+  const pr = (d.province_ranking || []).filter(p => !p.stale && !p.no_data);
+  if (pr.length >= 6) {
+    const top3 = pr.slice(0, 3);
+    const bot3 = pr.slice(-3);
+    const nGrow = pr.filter(p => p.cagr != null && p.cagr > 0).length;
+    const nDecl = pr.filter(p => p.cagr != null && p.cagr < 0).length;
+    const nFlat = pr.length - nGrow - nDecl;
+    const sig3Stat = document.getElementById('sig3-stat');
+    const topCagr = top3[0].cagr * 100;
+    sig3Stat.textContent = (topCagr > 0 ? '+' : '') + topCagr.toFixed(2) + '%';
+    sig3Stat.className = 'signal-stat ' + (topCagr >= 0 ? 'up' : 'down');
+    document.getElementById('sig3-body').innerHTML =
+      `<strong style="color: var(--up); font-family: var(--mono)">${top3.map(p=>p.nome).join(', ')}</strong> in testa con <span class="num">${(top3[2].cagr*100).toFixed(2)}–${(top3[0].cagr*100).toFixed(2)}%/yr</span>. ` +
+      `<strong style="color: var(--down); font-family: var(--mono)">${bot3.map(p=>p.nome).join(', ')}</strong> in coda. ` +
+      `Su <span class="num">${pr.length}</span> comuni provincia: <span class="num">${nGrow}</span> in crescita, <span class="num">${nDecl}</span> in calo${nFlat > 0 ? `, <span class="num">${nFlat}</span> stabili` : ''}.`;
+  } else if (pr.length >= 1) {
+    document.getElementById('sig3-stat').textContent = (pr[0].cagr * 100 > 0 ? '+' : '') + (pr[0].cagr*100).toFixed(2) + '%';
+    document.getElementById('sig3-body').textContent = `Solo ${pr.length} comuni con dati OMI sufficienti — provincia con copertura ancora parziale.`;
+  } else {
+    document.getElementById('sig3-stat').textContent = 'n/d';
+    document.getElementById('sig3-body').textContent = 'Provincia senza comuni con CAGR calcolabile.';
+  }
+
+  // Section h2 counts
+  const currentZones = d.zone_metrics.filter(z => z.dizione);
+  document.getElementById('h2-zone-count').textContent = currentZones.length;
+  document.getElementById('h2-prov-count').textContent = pr.length;
+
+  // Zone table — only current zones (those with dizione)
+  const zoneBody = document.getElementById('tbl-zone-body');
+  currentZones.sort((a, b) => (b.cagr_full || -99) - (a.cagr_full || -99));
+  zoneBody.innerHTML = currentZones.map(z => {
+    const cagr = z.cagr_full != null ? z.cagr_full * 100 : null;
+    const trend = cagr == null ? 'flat' : cagr > 0.2 ? 'up' : cagr < -0.2 ? 'down' : 'flat';
+    return `<tr>
+      <td>${z.zona}</td>
+      <td><span class="zona-name">${shortDizione(z.dizione).slice(0, 45)}</span><br><span class="zona-desc">fascia ${z.fascia || '—'}</span></td>
+      <td class="right num">${fmtEuro(z.prezzo_acquisto_attuale)}</td>
+      <td class="right">${pctPill(cagr)}</td>
+      <td>${sparkSvg(z.spark_values, z.spark_normalized, trend)}</td>
+      <td class="right num">${z.yield_lordo_pct != null ? z.yield_lordo_pct.toFixed(2) + '%' : '—'}</td>
+      <td class="right num" style="color: var(--ink-dim)">${z.volatility_pct != null ? z.volatility_pct.toFixed(1) + '%' : '—'}</td>
+    </tr>`;
+  }).join('');
+
+  // Province table
+  const provBody = document.getElementById('tbl-prov-body');
+  provBody.innerHTML = pr.map(p => {
+    const cagrPct = p.cagr != null ? p.cagr * 100 : null;
+    return `<tr>
+      <td>${p.catasto}</td>
+      <td><span class="zona-name">${p.nome}</span></td>
+      <td class="right num">${fmtEuro(p.prezzo_attuale_medio)}</td>
+      <td class="right">${pctPill(cagrPct)}</td>
+      <td class="right num" style="color: ${p.delta_total_pct > 0 ? 'var(--up)' : p.delta_total_pct < 0 ? 'var(--down)' : 'var(--neutral)'}">${p.delta_total_pct != null ? (p.delta_total_pct > 0 ? '+' : '') + p.delta_total_pct.toFixed(1) + '%' : '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+loadAndRender().catch(e => {
+  console.error(e);
+  document.body.innerHTML = `<div style="padding:60px;max-width:600px;margin:0 auto;font-family:Instrument Serif,serif">
+    <h2>Errore caricamento</h2>
+    <pre style="background:oklch(94% 0.005 80);padding:18px;border-radius:4px;font-family:IBM Plex Mono,monospace;font-size:13px">${e.message}</pre>
+    <p style="margin-top:16px;color:oklch(40% 0.008 30)">Servi da <code>opportuni-poc/</code> con <code>python3 -m http.server 8765</code>, poi <a href="http://localhost:8765/mockups/torino-A-brief.html">http://localhost:8765/mockups/torino-A-brief.html</a></p>
+  </div>`;
+});
+</script>
+
+</body>
+</html>

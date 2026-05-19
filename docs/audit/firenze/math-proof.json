@@ -1,0 +1,84 @@
+{
+  "headline": {
+    "yield_medio_pct": 4.16,
+    "cagr_avg_pct_signals": 0.29,
+    "cagr_avg_pct_compass": 0.29,
+    "prezzo_medio_attuale": 2958.0,
+    "zone_count_current": 34,
+    "csv_span": 21
+  },
+  "cagr_distribution": {
+    "n": 34,
+    "mean": 0.29147058823529415,
+    "median": 0.21000000000000002,
+    "sd": 0.7607338257591738,
+    "skewness": 1.5582772268903862,
+    "kurtosis": 3.467129958639098,
+    "shapiro_p": 0.0013698275939185048,
+    "iqr_outliers": 3,
+    "q25": -0.18,
+    "q75": 0.49
+  },
+  "fascia_ts": {
+    "B": {
+      "years_n": 11,
+      "adf_p_value": 0.20206249772633028,
+      "ols_slope_eur_per_year": 12.157199211045253,
+      "ols_slope_p_value": 0.06961415417156146,
+      "ols_slope_ci95_low": -1.2007595030391744,
+      "ols_slope_ci95_high": 25.515157925129678,
+      "ljung_box_p": 0.7573699469671551
+    },
+    "C": {
+      "years_n": 11,
+      "adf_p_value": 7.712715642372603e-08,
+      "ols_slope_eur_per_year": -28.276134122289093,
+      "ols_slope_p_value": 0.02029388233273556,
+      "ols_slope_ci95_low": -51.01923095257671,
+      "ols_slope_ci95_high": -5.533037292001474,
+      "ljung_box_p": 0.06106758279598047
+    },
+    "D": {
+      "years_n": 11,
+      "adf_p_value": 2.424232265295224e-26,
+      "ols_slope_eur_per_year": -15.639250493097535,
+      "ols_slope_p_value": 0.11418597995472896,
+      "ols_slope_ci95_low": -35.864660972848405,
+      "ols_slope_ci95_high": 4.586159986653335,
+      "ljung_box_p": 0.2246958292257203
+    },
+    "E": {
+      "years_n": 11,
+      "adf_p_value": 2.2837413412017745e-05,
+      "ols_slope_eur_per_year": -14.18698224852156,
+      "ols_slope_p_value": 0.13958141636287988,
+      "ols_slope_ci95_low": -33.991772106453965,
+      "ols_slope_ci95_high": 5.61780760941085,
+      "ljung_box_p": 0.4217249057679767
+    }
+  },
+  "pareto": {
+    "pool_n": 95,
+    "pareto_front_n": 7,
+    "top_buy_n": 6,
+    "overlap_pct": 66.66666666666666
+  },
+  "monte_carlo": {
+    "n_sims": 1000,
+    "weight_jitter_pp": 10.0,
+    "base_buy_count": 15,
+    "mc_p5": 12.0,
+    "mc_p50": 16.0,
+    "mc_p95": 24.0,
+    "mc_mean": 16.94,
+    "mc_sd": 3.646051795256575
+  },
+  "knn_graph": {
+    "nodes": 34,
+    "edges": 63,
+    "density": 0.11229946524064172,
+    "avg_degree": 3.7058823529411766,
+    "clustering_coef": 0.3658263305322129,
+    "fascia_assortativity": 0.23696034381715186
+  }
+}

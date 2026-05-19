@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Napoli · Heat Map · OMI 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.5.0/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.5.0/dist/maplibre-gl.css" rel="stylesheet">
+<style>
+  :root {
+    --bg:       oklch(95% 0.008 75);
+    --paper:    oklch(98% 0.005 75);
+    --ink:      oklch(15% 0.008 30);
+    --ink-mid:  oklch(38% 0.008 30);
+    --ink-dim:  oklch(58% 0.008 30);
+    --rule:     oklch(86% 0.008 75);
+    --rule-mid: oklch(76% 0.008 75);
+
+    --up:       oklch(50% 0.16 145);
+    --up-2:     oklch(70% 0.14 140);
+    --up-3:     oklch(85% 0.10 135);
+    --down:     oklch(52% 0.20 25);
+    --down-2:   oklch(68% 0.18 30);
+    --down-3:   oklch(82% 0.12 35);
+    --flat:     oklch(78% 0.012 80);
+
+    --accent:   oklch(50% 0.18 40);
+
+    --serif:    'Fraunces', 'Times New Roman', serif;
+    --sans:     'DM Sans', system-ui, sans-serif;
+    --mono:     'JetBrains Mono', 'SF Mono', monospace;
+  }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  html, body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.55; margin: 0; }
+  body { padding-bottom: 80px; }
+  .serif { font-family: var(--serif); font-feature-settings: "ss01", "ss03"; }
+  .italic-serif { font-family: var(--serif); font-style: italic; }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 36px; }
+
+  /* HEADER */
+  header { padding: 64px 0 36px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--accent); font-weight: 500;
+  }
+  .eyebrow::before {
+    content: ""; width: 28px; height: 2px; background: var(--accent); border-radius: 1px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 350;
+    font-size: clamp(52px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.025em;
+    margin: 18px 0 0; color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+  h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .deck {
+    font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.4;
+    color: var(--ink-mid); max-width: 760px; margin-top: 32px; font-weight: 350;
+  }
+
+  /* MACRO STRIP */
+  .macro {
+    margin-top: 64px;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 32px; align-items: end;
+    padding-bottom: 28px; border-bottom: 1px solid var(--rule);
+  }
+  .macro-headline {
+    font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.25;
+    color: var(--ink); font-weight: 350;
+  }
+  .macro-headline em { color: var(--accent); font-style: normal; font-weight: 500; }
+  .macro-cell { text-align: right; }
+  .macro-cell .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-dim); margin-bottom: 8px; }
+  .macro-cell .val { font-family: var(--mono); font-size: 32px; font-weight: 500; letter-spacing: -0.04em; color: var(--ink); }
+  .macro-cell .sub { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--ink-mid); margin-top: 4px; }
+  .val.up   { color: var(--up); }
+  .val.down { color: var(--down); }
+
+  /* MAP HERO */
+  section { margin-top: 72px; }
+  .section-eyebrow { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); font-weight: 500; }
+  h2 {
+    font-family: var(--serif); font-weight: 350;
+    font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.015em;
+    margin: 14px 0 0; max-width: 800px;
+  }
+  h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .section-deck { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-mid); margin-top: 14px; max-width: 640px; line-height: 1.5; font-weight: 350; }
+
+  .map-shell {
+    margin-top: 36px;
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden; position: relative;
+  }
+  #map, #map-prov { height: 560px; position: relative; }
+  /* FIX MapLibre 4.x: canvas-container deve riempire il parent — in 4.5.0 il CSS
+     stock non setta height/width, e MapLibre legge clientHeight per i tile fetches.
+     Senza questo: clientHeight=0 → 0 tile request → mappa vuota. */
+  #map .maplibregl-canvas-container,
+  #map-prov .maplibregl-canvas-container { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .map-legend {
+    position: absolute; left: 18px; bottom: 18px;
+    background: oklch(98% 0.005 75 / 0.95); backdrop-filter: blur(8px);
+    padding: 14px 18px; border: 1px solid var(--rule); border-radius: 4px;
+    z-index: 5; font-size: 11px;
+  }
+  .map-legend .lbl { font-family: var(--mono); color: var(--ink-dim); font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px; }
+  .legend-row { display: flex; align-items: center; gap: 12px; }
+  .legend-scale { width: 220px; height: 10px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--down) 0%, var(--down-2) 25%, var(--flat) 50%, var(--up-2) 75%, var(--up) 100%); }
+  .legend-tick { font-family: var(--mono); font-size: 10.5px; color: var(--ink-mid); }
+  .maplibregl-popup-content {
+    background: var(--paper); border: 1px solid var(--rule-mid); border-radius: 4px;
+    box-shadow: 0 8px 24px oklch(15% 0 0 / 0.08);
+    padding: 14px 16px; min-width: 200px; font-family: var(--sans);
+  }
+  .maplibregl-popup-tip { display: none; }
+  .maplibregl-ctrl-attrib { background: oklch(98% 0.005 75 / 0.8) !important; font-family: var(--mono) !important; font-size: 9px !important; color: var(--ink-dim) !important; }
+  .maplibregl-ctrl-group { background: var(--paper) !important; border: 1px solid var(--rule) !important; box-shadow: 0 2px 6px oklch(15% 0 0 / 0.05) !important; }
+
+  /* SPARKLINE GRID */
+  .spark-grid {
+    margin-top: 36px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0; border-top: 1px solid var(--rule);
+  }
+  .spark-cell {
+    padding: 22px 22px 22px 0; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule);
+    transition: background 0.15s;
+  }
+  .spark-cell:hover { background: oklch(93% 0.01 75); }
+  .spark-cell:nth-child(5n) { border-right: none; padding-right: 0; }
+  .spark-zona { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--ink); }
+  .spark-name { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.2; color: var(--ink); margin-top: 4px; }
+  .spark-stat { font-family: var(--mono); font-size: 22px; font-weight: 500; letter-spacing: -0.03em; margin-top: 14px; }
+  .spark-stat.up { color: var(--up); }
+  .spark-stat.down { color: var(--down); }
+  .spark-stat.flat { color: var(--flat); }
+  .spark-meta { font-size: 11px; color: var(--ink-dim); margin-top: 6px; font-family: var(--mono); }
+  .spark-svg { width: 100%; height: 36px; margin-top: 14px; }
+  .spark-svg path.line { fill: none; stroke-width: 1.8; }
+  .spark-svg path.area { fill-opacity: 0.10; stroke: none; }
+  .spark-svg.up path.line { stroke: var(--up); }
+  .spark-svg.up path.area { fill: var(--up); }
+  .spark-svg.down path.line { stroke: var(--down); }
+  .spark-svg.down path.area { fill: var(--down); }
+  .spark-svg.flat path.line { stroke: var(--flat); }
+  .spark-svg.flat path.area { fill: var(--flat); }
+  .spark-svg circle { r: 2.4; stroke: var(--paper); stroke-width: 1.5; }
+
+  /* INSIGHT CARDS */
+  .insights {
+    margin-top: 56px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .insight { padding: 32px 28px 32px 0; border-right: 1px solid var(--rule); }
+  .insight:last-child { border-right: none; padding-right: 0; }
+  .insight-num { font-family: var(--serif); font-style: italic; font-size: 56px; line-height: 1; color: var(--accent); font-weight: 400; }
+  .insight-title { font-family: var(--serif); font-size: 21px; line-height: 1.25; margin-top: 12px; }
+  .insight-title em { font-style: italic; color: var(--accent); }
+  .insight-body { font-size: 14px; color: var(--ink-mid); line-height: 1.65; margin-top: 14px; }
+  .insight-body strong { font-family: var(--mono); color: var(--ink); font-weight: 500; }
+
+  /* FOOTER */
+  footer { margin-top: 100px; padding-top: 32px; border-top: 1px solid var(--rule); font-size: 11.5px; color: var(--ink-dim); }
+  footer a { color: var(--ink-mid); text-decoration-color: var(--rule-mid); text-underline-offset: 3px; }
+  footer .colophon { font-family: var(--serif); font-style: italic; color: var(--ink-mid); margin-top: 12px; font-size: 14px; }
+
+  .skel { height: 28px; background: var(--rule); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Napoli in cartografia · banca dati OMI</div>
+    <h1>Il mercato di <em>Napoli</em>,<br>letto sul territorio.</h1>
+    <p class="deck">Verde, dove i prezzi salgono; rosso, dove arretrano. Dalla cintura urbana fittissima all'area flegrea, dalla fascia vesuviana alla penisola sorrentina, fino alle isole: il colore mostra dove il valore si è spostato in 21 anni di rilevazioni OMI.</p>
+  </header>
+
+  <!-- MACRO STRIP -->
+  <div class="macro">
+    <div class="macro-headline" id="macro-headline">
+      Tra <em>golfo</em> e <em>Vesuvio</em>,<br>provincia a <em>sei velocità</em>.
+    </div>
+    <div class="macro-cell">
+      <div class="lbl">CAGR · <span id="m-horizon">…</span> anni</div>
+      <div class="val num" id="m-cagr">…</div>
+      <div class="sub">media zone correnti</div>
+    </div>
+    <div class="macro-cell">
+      <div class="lbl">Yield lordo</div>
+      <div class="val num" id="m-yield">…</div>
+      <div class="sub">acquisto vs affitto</div>
+    </div>
+    <div class="macro-cell">
+      <div class="lbl">€/m² · oggi</div>
+      <div class="val num" id="m-prezzo">…</div>
+      <div class="sub">abitazioni civili</div>
+    </div>
+  </div>
+
+  <!-- MAP PROVINCIA (zoom-out) -->
+  <section>
+    <div class="section-eyebrow">Lettura cartografica · scala provincia</div>
+    <h2>La provincia, <em><span id="h2-prov-count">…</span> comuni in un colpo</em>.</h2>
+    <p class="section-deck">CAGR sull'orizzonte coperto, per ogni comune della provincia di Napoli. Cintura urbana, area flegrea, fascia vesuviana, penisola sorrentina, area nolano-giuglianese, isole. Hover per il dettaglio.</p>
+
+    <div class="map-shell">
+      <div id="map-prov"></div>
+      <div class="map-legend">
+        <div class="lbl">CAGR comune <span style="color:var(--ink-faint);font-weight:400">· scala P5–P95</span></div>
+        <div class="legend-row">
+          <span class="legend-tick" id="legend-prov-min">…</span>
+          <div class="legend-scale"></div>
+          <span class="legend-tick" id="legend-prov-max">…</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP ZONE NAPOLI (zoom-in capoluogo) -->
+  <section>
+    <div class="section-eyebrow">Lettura cartografica · scala zone Napoli città</div>
+    <h2>Napoli dentro, <em><span id="h2-zone-count">…</span> zone</em>.</h2>
+    <p class="section-deck">Stesso indicatore, scala sub-comunale. Poligoni ufficiali GeoPOI dell'Agenzia delle Entrate, semestre 2025-S2.</p>
+
+    <div class="map-shell">
+      <div id="map"></div>
+      <div class="map-legend">
+        <div class="lbl">CAGR zona <span style="color:var(--ink-faint);font-weight:400">· scala P5–P95</span></div>
+        <div class="legend-row">
+          <span class="legend-tick" id="legend-min">…</span>
+          <div class="legend-scale"></div>
+          <span class="legend-tick" id="legend-max">…</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPARKLINE GRID -->
+  <section>
+    <div class="section-eyebrow">Vista zona-per-zona</div>
+    <h2><span id="h2-spark-count">…</span> quartieri, <em><span id="h2-spark-count-2">…</span> curve</em>.</h2>
+    <p class="section-deck">Sparkline normalizzata sull'intero orizzonte. Lo stesso dato della mappa, raccontato con la curva del tempo.</p>
+
+    <div class="spark-grid" id="spark-grid"></div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section>
+    <div class="section-eyebrow">Tre letture</div>
+    <h2>Cosa serve <em>davvero</em> a un investitore.</h2>
+    <p class="section-deck">Generate dai dati, non scritte a mano: ogni numero è un risultato del compute layer.</p>
+
+    <div class="insights">
+      <div class="insight">
+        <div class="insight-num"><em>i</em></div>
+        <div class="insight-title" id="ins-1-title">Centro vs <em>periferia</em>.</div>
+        <div class="insight-body" id="ins-1">…</div>
+      </div>
+      <div class="insight">
+        <div class="insight-num"><em>ii</em></div>
+        <div class="insight-title" id="ins-2-title">L'<em>outlier</em>.</div>
+        <div class="insight-body" id="ins-2">…</div>
+      </div>
+      <div class="insight">
+        <div class="insight-num"><em>iii</em></div>
+        <div class="insight-title">Provincia in <em>sei velocità</em>.</div>
+        <div class="insight-body" id="ins-3">…</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Dati · <a href="https://3eurotools.it/api-quotazioni-immobiliari-omi" target="_blank">Sagona API</a> (D. Sagona), wrapper su <a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati-omi" target="_blank">OMI · Agenzia delle Entrate</a>. Poligoni · GeoPOI reverse-engineered (semestre 2025-S2). Confini comuni · <a href="https://github.com/openpolis/geojson-italy" target="_blank">openpolis</a> CC-BY. Basemap · CARTO + OpenStreetMap. Compute · <span class="num">scripts/compute-napoli-signals.py</span>.
+    <p class="colophon">Cartografia immobiliare Napoli · serie OMI Agenzia delle Entrate · MMXXVI</p>
+  </footer>
+
+</div>
+
+<script>
+// FIX cromatica 2026-05-17: scala DIVERGENTE centrata su 0% (non più lineare min-max).
+// Diagnosi: la rampa lineare causava falsità — un comune con CAGR=0% (neutralità reale)
+// poteva apparire rosso (in declino) se la distribuzione era asimmetrica. Vedi
+// docs/audit/COLORMAP-AUDIT.md per il dettaglio statistico.
+const NEG_RAMP = [
+  { t: 0.00, rgb: [195, 60,  55]  },
+  { t: 0.50, rgb: [222, 132, 92]  },
+  { t: 1.00, rgb: [240, 232, 218] },
+];
+const POS_RAMP = [
+  { t: 0.00, rgb: [240, 232, 218] },
+  { t: 0.50, rgb: [144, 188, 122] },
+  { t: 1.00, rgb: [60,  140, 80]  },
+];
+function interpRgb(ramp, t) {
+  t = Math.max(0, Math.min(1, t));
+  for (let i = 0; i < ramp.length - 1; i++) {
+    if (t >= ramp[i].t && t <= ramp[i+1].t) {
+      const k = (t - ramp[i].t) / (ramp[i+1].t - ramp[i].t);
+      const c = ramp[i].rgb.map((v, j) => Math.round(v + k * (ramp[i+1].rgb[j] - v)));
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+  }
+  return `rgb(${ramp[ramp.length-1].rgb.join(',')})`;
+}
+function colorForCAGR(cagrPct, negClamp, posClamp) {
+  if (cagrPct == null) return 'rgb(200, 195, 184)';
+  if (cagrPct >= 0) {
+    const denom = (posClamp > 0) ? posClamp : 1;
+    return interpRgb(POS_RAMP, cagrPct / denom);
+  } else {
+    const denom = (negClamp < 0) ? Math.abs(negClamp) : 1;
+    return interpRgb(NEG_RAMP, 1 - Math.abs(cagrPct) / denom);
+  }
+}
+function percentileClamp(values) {
+  if (!values || values.length === 0) return { negClamp: -1, posClamp: 1, p5: -1, p95: 1, realMin: -1, realMax: 1 };
+  const sorted = [...values].sort((a,b) => a - b);
+  // FIX 2026-05-17 v3: P5/P95 (solo ~10% saturati invece di 50%); espone realMin/realMax per disclosure.
+  const n = sorted.length;
+  const p5 = sorted[Math.max(0, Math.floor(n * 0.05))];
+  const p95 = sorted[Math.min(n - 1, Math.floor(n * 0.95))];
+  return {
+    negClamp: p5 < 0 ? p5 : -0.5,
+    posClamp: p95 > 0 ? p95 : 0.5,
+    p5: p5, p95: p95,
+    realMin: sorted[0], realMax: sorted[n - 1],
+  };
+}
+
+function trendOf(cagrPct) {
+  if (cagrPct == null) return 'flat';
+  if (cagrPct > 0.2) return 'up';
+  if (cagrPct < -0.2) return 'down';
+  return 'flat';
+}
+
+function sparkSvg(values, normalized, trend) {
+  if (!values || values.length < 2) return '';
+  if (!normalized || normalized.length !== values.length) return '';
+  const w = 200, h = 36, pad = 3;
+  const xs = values.map((_, i) => pad + (w - 2*pad) * (i / (values.length - 1)));
+  const ys = normalized.map(v => h - pad - (h - 2*pad) * v);
+  const linePts = xs.map((x, i) => `${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' L ');
+  return `<svg class="spark-svg ${trend}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <path class="area" d="M ${xs[0].toFixed(1)},${h} L ${linePts} L ${xs[xs.length-1].toFixed(1)},${h} Z"/>
+    <path class="line" d="M ${linePts}"/>
+    <circle cx="${xs[xs.length-1].toFixed(1)}" cy="${ys[ys.length-1].toFixed(1)}" r="2.4" fill="currentColor" style="color:${trend==='up'?'var(--up)':trend==='down'?'var(--down)':'var(--flat)'}"/>
+  </svg>`;
+}
+
+function fmtEuro(n, digits = 0) {
+  if (n == null) return '—';
+  return '€' + n.toLocaleString('it-IT', { maximumFractionDigits: digits });
+}
+
+function shortDizione(diz) {
+  if (!diz) return '';
+  return diz.split(' - ').slice(-1)[0];
+}
+
+let map = null, mapProv = null;
+
+async function loadAndRender() {
+  const signals = await (await fetch('../data/computed/napoli-signals.json')).json();
+  const zonesGeo = await (await fetch('../data/geojson/napoli-zone-omi.geojson')).json();
+  const provGeo = await (await fetch('../data/geojson/napoli-province-comuni.geojson')).json();
+  // FIX UI-4: carica volume-signals per propagare flag qualità nei tooltip e nelle sparkline
+  let volByZonaNew = {};
+  try {
+    const volSig = await (await fetch('../data/computed/napoli-volume-signals.json')).json();
+    for (const z of (volSig.aggregated_by_new_zone || [])) volByZonaNew[z.zona_new] = z;
+  } catch (e) {
+    console.warn('volume-signals non caricabile (B-heatmap funziona senza):', e);
+  }
+  function dqBadges(vol) {
+    if (!vol) return '';
+    const parts = [];
+    if (vol.low_sample)             parts.push('<span style="color:oklch(50% 0.12 50);font-family:JetBrains Mono,monospace;font-size:9px;border:1px dashed oklch(70% 0.12 50);padding:1px 5px;border-radius:2px;margin-left:4px" title="NTN_first<5: CAGR statisticamente debole">⚠ micro</span>');
+    if (vol.has_2018_gap)           parts.push('<span style="color:oklch(50% 0.10 250);font-family:JetBrains Mono,monospace;font-size:9px;border:1px dashed oklch(70% 0.10 250);padding:1px 5px;border-radius:2px;margin-left:4px" title="Manca 2018, non ricostruibile">○ gap 18</span>');
+    else if (vol.has_2018_interpolated) parts.push('<span style="color:oklch(45% 0.08 180);font-family:JetBrains Mono,monospace;font-size:9px;border:1px dotted oklch(65% 0.08 180);padding:1px 5px;border-radius:2px;margin-left:4px" title="NTN 2018 stimato via macroaree-downscaling. CAGR invariante.">◐ 2018 stim</span>');
+    if (vol.is_d14_missing_2024)    parts.push('<span style="color:oklch(45% 0.16 30);font-family:JetBrains Mono,monospace;font-size:9px;border:1px dashed oklch(70% 0.15 30);padding:1px 5px;border-radius:2px;margin-left:4px" title="Omessa da AdE SR2025">⊘ no 24</span>');
+    return parts.join('');
+  }
+  const h = signals.headline;
+
+  // Macro
+  document.getElementById('m-horizon').textContent = h.anni_orizzonte_dataset || h.anni_orizzonte || '—';
+  const cagrEl = document.getElementById('m-cagr');
+  if (h.cagr_avg_pct != null) {
+    cagrEl.textContent = (h.cagr_avg_pct > 0 ? '+' : '') + h.cagr_avg_pct.toFixed(2) + '%';
+    cagrEl.classList.add(h.cagr_avg_pct >= 0 ? 'up' : 'down');
+  } else cagrEl.textContent = 'n/d';
+  document.getElementById('m-yield').textContent = h.yield_medio_pct != null ? h.yield_medio_pct.toFixed(2) + '%' : 'n/d';
+  document.getElementById('m-prezzo').textContent = fmtEuro(h.prezzo_medio_attuale);
+
+  // Inject CAGR onto each polygon feature (key by zona)
+  const cagrByZona = {};
+  for (const z of signals.zone_metrics) {
+    if (z.dizione) cagrByZona[z.zona] = z.cagr_full != null ? z.cagr_full * 100 : null;
+  }
+  const values = Object.values(cagrByZona).filter(v => v != null);
+  const clamp = percentileClamp(values);
+  const legMin = document.getElementById('legend-min');
+  const legMax = document.getElementById('legend-max');
+  legMin.textContent = (clamp.negClamp > 0 ? '+' : '') + clamp.negClamp.toFixed(2) + '%';
+  legMax.textContent = (clamp.posClamp > 0 ? '+' : '') + clamp.posClamp.toFixed(2) + '%';
+  const nLow = values.filter(v => v < clamp.negClamp).length;
+  const nHigh = values.filter(v => v > clamp.posClamp).length;
+  legMin.title = `5° percentile · veri estremi della distribuzione: ${clamp.realMin.toFixed(2)}% / +${clamp.realMax.toFixed(2)}% (${nLow}+${nHigh} valori saturati su ${values.length})`;
+  legMax.title = legMin.title;
+
+  zonesGeo.features.forEach(f => {
+    const c = cagrByZona[f.properties.zona];
+    f.properties._cagr = c;
+    f.properties._color = colorForCAGR(c, clamp.negClamp, clamp.posClamp);
+  });
+
+  // ── PROVINCIA MAP (zoom-out, 80 comuni) ──
+  const provCagrByCat = {};
+  for (const p of signals.province_ranking) provCagrByCat[p.catasto] = p.cagr != null ? p.cagr * 100 : null;
+  const pVals = Object.values(provCagrByCat).filter(v => v != null);
+  const pClamp = percentileClamp(pVals);
+  const pLegMin = document.getElementById('legend-prov-min');
+  const pLegMax = document.getElementById('legend-prov-max');
+  pLegMin.textContent = (pClamp.negClamp > 0 ? '+' : '') + pClamp.negClamp.toFixed(2) + '%';
+  pLegMax.textContent = (pClamp.posClamp > 0 ? '+' : '') + pClamp.posClamp.toFixed(2) + '%';
+  const pLow = pVals.filter(v => v < pClamp.negClamp).length;
+  const pHigh = pVals.filter(v => v > pClamp.posClamp).length;
+  pLegMin.title = `5° percentile · veri estremi della distribuzione: ${pClamp.realMin.toFixed(2)}% / +${pClamp.realMax.toFixed(2)}% (${pLow}+${pHigh} valori saturati su ${pVals.length})`;
+  pLegMax.title = pLegMin.title;
+  provGeo.features.forEach(f => {
+    const c = provCagrByCat[f.properties.com_catasto_code];
+    f.properties._cagr = c;
+    f.properties._color = colorForCAGR(c, pClamp.negClamp, pClamp.posClamp);
+  });
+
+  document.getElementById('h2-prov-count').textContent = provGeo.features.length;
+
+  // Napoli centro città: lon 14.2526, lat 40.8359. Provincia: cintura urbana fittissima + Area vesuviana a est, Penisola sorrentina a sud-est, Area flegrea (Pozzuoli, Bacoli) a ovest, Area nolana/giuglianese a nord, isole Ischia/Procida/Capri.
+  mapProv = new maplibregl.Map({
+    container: 'map-prov',
+    style: {
+      version: 8,
+      sources: { 'base': { type: 'raster', tiles: ['https://cartodb-basemaps-a.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap © CARTO' } },
+      layers: [{ id: 'base', type: 'raster', source: 'base' }],
+    },
+    center: [7.39, 45.16], zoom: 8.3,
+    attributionControl: true,
+  });
+  mapProv.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+  mapProv.on('load', () => {
+    mapProv.addSource('comuni', { type: 'geojson', data: provGeo });
+    mapProv.addLayer({ id: 'comuni-fill', type: 'fill', source: 'comuni', paint: { 'fill-color': ['get', '_color'], 'fill-opacity': 0.78 } });
+    mapProv.addLayer({ id: 'comuni-line', type: 'line', source: 'comuni', paint: { 'line-color': '#f5efe4', 'line-width': 0.8 } });
+    mapProv.addLayer({ id: 'comuni-hover', type: 'line', source: 'comuni', paint: { 'line-color': '#1f5aa8', 'line-width': 2.2 }, filter: ['==', 'name', ''] });
+
+    const popupP = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 14 });
+    mapProv.on('mousemove', 'comuni-fill', e => {
+      const f = e.features[0];
+      mapProv.getCanvas().style.cursor = 'pointer';
+      mapProv.setFilter('comuni-hover', ['==', 'name', f.properties.name]);
+      const cagr = f.properties._cagr;
+      const cat = f.properties.com_catasto_code;
+      const p = signals.province_ranking.find(x => x.catasto === cat) || {};
+      const delta = p.delta_total_pct;
+      const eur = p.prezzo_attuale_medio;
+      const html = `
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(58% 0.008 30);text-transform:uppercase;letter-spacing:0.14em">Comune · ${cat}</div>
+        <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:400;line-height:1.2;margin-top:6px;color:oklch(15% 0.008 30)">${f.properties.name}</div>
+        <div style="display:flex;gap:20px;margin-top:14px;padding-top:12px;border-top:1px solid oklch(86% 0.008 75)">
+          <div>
+            <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">CAGR</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:${cagr>0?'var(--up)':cagr<0?'var(--down)':'var(--flat)'};margin-top:2px">${cagr!=null?(cagr>0?'+':'')+cagr.toFixed(2)+'%':'—'}</div>
+          </div>
+          <div>
+            <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">Δ tot</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:${delta>0?'var(--up)':delta<0?'var(--down)':'var(--flat)'};margin-top:2px">${delta!=null?(delta>0?'+':'')+delta.toFixed(1)+'%':'—'}</div>
+          </div>
+          <div>
+            <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">€/m²</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:oklch(15% 0.008 30);margin-top:2px">${eur?fmtEuro(eur):'—'}</div>
+          </div>
+        </div>`;
+      popupP.setLngLat(e.lngLat).setHTML(html).addTo(mapProv);
+    });
+    mapProv.on('mouseleave', 'comuni-fill', () => {
+      mapProv.getCanvas().style.cursor = '';
+      mapProv.setFilter('comuni-hover', ['==', 'name', '']);
+      popupP.remove();
+    });
+  });
+
+  // ── ZONE MAP (zoom-in capoluogo Napoli, codice F839) ──
+  map = new maplibregl.Map({
+    container: 'map',
+    style: {
+      version: 8,
+      sources: { 'base': { type: 'raster', tiles: ['https://cartodb-basemaps-a.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap © CARTO' } },
+      layers: [{ id: 'base', type: 'raster', source: 'base' }],
+    },
+    center: [14.2526, 40.8359],
+    zoom: 11.7,
+    attributionControl: true,
+  });
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+
+  map.on('load', () => {
+    map.addSource('zones', { type: 'geojson', data: zonesGeo });
+    map.addLayer({
+      id: 'zones-fill', type: 'fill', source: 'zones',
+      paint: { 'fill-color': ['get', '_color'], 'fill-opacity': 0.78 },
+    });
+    map.addLayer({
+      id: 'zones-line', type: 'line', source: 'zones',
+      paint: { 'line-color': '#f5efe4', 'line-width': 1.2 },
+    });
+    map.addLayer({
+      id: 'zones-hover', type: 'line', source: 'zones',
+      paint: { 'line-color': '#1f5aa8', 'line-width': 2.5 },
+      filter: ['==', 'zona', ''],
+    });
+
+    // Auto-fit map zone ai bounds del GeoJSON per gestire capoluoghi di forma irregolare
+    try {
+      const bounds = new maplibregl.LngLatBounds();
+      zonesGeo.features.forEach(f => {
+        const coords = (f.geometry && f.geometry.coordinates) || [];
+        const walk = (arr) => {
+          if (typeof arr[0] === 'number' && typeof arr[1] === 'number') {
+            bounds.extend([arr[0], arr[1]]);
+          } else if (Array.isArray(arr)) {
+            arr.forEach(walk);
+          }
+        };
+        walk(coords);
+      });
+      if (!bounds.isEmpty()) {
+        map.fitBounds(bounds, { padding: 40, animate: false, maxZoom: 13 });
+      }
+    } catch (err) { console.warn('fitBounds skipped', err); }
+
+    const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 14 });
+    map.on('mousemove', 'zones-fill', e => {
+      const f = e.features[0];
+      map.getCanvas().style.cursor = 'pointer';
+      map.setFilter('zones-hover', ['==', 'zona', f.properties.zona]);
+      const cagr = f.properties._cagr;
+      const z = signals.zone_metrics.find(x => x.zona === f.properties.zona) || {};
+      const vol = volByZonaNew[f.properties.zona];
+      const html = `
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(58% 0.008 30);text-transform:uppercase;letter-spacing:0.14em">Zona ${f.properties.zona} · Fascia ${f.properties.fascia || '?'}${dqBadges(vol)}</div>
+        <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:400;line-height:1.2;margin-top:6px;color:oklch(15% 0.008 30)">${f.properties.dizione || 'n/d'}</div>
+        <div style="display:flex;gap:18px;margin-top:14px;padding-top:12px;border-top:1px solid oklch(86% 0.008 75)">
+          <div>
+            <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">CAGR</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:${cagr>0?'var(--up)':cagr<0?'var(--down)':'var(--flat)'};margin-top:2px">${cagr!=null?(cagr>0?'+':'')+cagr.toFixed(2)+'%':'—'}</div>
+          </div>
+          <div>
+            <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">€/m²</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:oklch(15% 0.008 30);margin-top:2px">${fmtEuro(z.prezzo_acquisto_attuale)}</div>
+          </div>
+          <div>
+            <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:oklch(58% 0.008 30)">Yield</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:oklch(15% 0.008 30);margin-top:2px">${z.yield_lordo_pct!=null?z.yield_lordo_pct.toFixed(2)+'%':'—'}</div>
+          </div>
+        </div>`;
+      popup.setLngLat(e.lngLat).setHTML(html).addTo(map);
+    });
+    map.on('mouseleave', 'zones-fill', () => {
+      map.getCanvas().style.cursor = '';
+      map.setFilter('zones-hover', ['==', 'zona', '']);
+      popup.remove();
+    });
+  });
+
+  // Sparkline grid
+  const currentZones = signals.zone_metrics.filter(z => z.dizione);
+  currentZones.sort((a, b) => (b.cagr_full || -99) - (a.cagr_full || -99));
+  document.getElementById('h2-zone-count').textContent = currentZones.length;
+  document.getElementById('h2-spark-count').textContent = currentZones.length;
+  document.getElementById('h2-spark-count-2').textContent = currentZones.length;
+
+  const sparkBody = document.getElementById('spark-grid');
+  sparkBody.innerHTML = currentZones.map(z => {
+    const cagr = z.cagr_full != null ? z.cagr_full * 100 : null;
+    const t = trendOf(cagr);
+    const vol = volByZonaNew[z.zona];
+    return `<div class="spark-cell">
+      <div class="spark-zona">${z.zona} · fascia ${z.fascia || '—'}${dqBadges(vol)}</div>
+      <div class="spark-name">${shortDizione(z.dizione).slice(0, 38)}</div>
+      <div class="spark-stat ${t}">${cagr != null ? (cagr > 0 ? '+' : '') + cagr.toFixed(2) + '%' : '—'}</div>
+      <div class="spark-meta">${fmtEuro(z.prezzo_acquisto_attuale)} · yield ${z.yield_lordo_pct != null ? z.yield_lordo_pct.toFixed(1) + '%' : '—'}</div>
+      ${sparkSvg(z.spark_values, z.spark_normalized, t)}
+    </div>`;
+  }).join('');
+
+  // Insights — data-driven, niente narrativa hardcoded di Modena
+  const fascia = signals.fascia_metrics;
+  const ins1Title = document.getElementById('ins-1-title');
+  const ins1 = document.getElementById('ins-1');
+  if (fascia.B && fascia.R) {
+    const bCagr = fascia.B.cagr * 100, rCagr = fascia.R.cagr * 100;
+    const verbo = bCagr >= 0 ? `cresce <strong>+${bCagr.toFixed(2)}%/yr</strong>` : `cala <strong>${bCagr.toFixed(2)}%/yr</strong>`;
+    const verboR = rCagr >= 0 ? `cresce <strong>+${rCagr.toFixed(2)}%/yr</strong>` : `cala <strong>${rCagr.toFixed(2)}%/yr</strong>`;
+    ins1Title.innerHTML = rCagr > bCagr ? 'La <em>periferia</em> ha vinto.' : 'Il <em>centro</em> tiene.';
+    ins1.innerHTML = `Fascia <strong>B</strong> (centro storico) ${verbo} sull'orizzonte coperto. Fascia <strong>R</strong> (rurale) ${verboR}. Il valore si è spostato di chilometri, non di anni.`;
+  } else if (fascia.B || fascia.C) {
+    const f = fascia.B || fascia.C;
+    const lbl = fascia.B ? 'B (centro storico)' : 'C (semicentrale)';
+    ins1Title.innerHTML = 'Centro <em>solo</em>.';
+    ins1.innerHTML = `Solo la fascia <strong>${lbl}</strong> ha dati sufficienti per l'aggregato: ${f.cagr >= 0 ? '+' : ''}<strong>${(f.cagr*100).toFixed(2)}%/yr</strong>. Lettura per fascia da incrociare con la mappa zone (Napoli città ha 47 zone OMI distinte).`;
+  } else {
+    ins1Title.innerHTML = 'Fasce <em>insufficienti</em>.';
+    ins1.innerHTML = 'Dati di fascia non sufficienti per il confronto centro/rurale.';
+  }
+
+  // FIX R4: fallback su zone_metrics se top_growth precomputato è vuoto
+  let tg = signals.top_growth && signals.top_growth[0];
+  let shortHorizonWarn = false;
+  if (!tg || tg.cagr_full == null) {
+    const candidates = (signals.zone_metrics || [])
+      .filter(z => z.dizione && z.cagr_full != null)
+      .sort((a, b) => (b.cagr_full || -99) - (a.cagr_full || -99));
+    tg = candidates[0];
+    shortHorizonWarn = !!tg;
+  }
+  const ins2Title = document.getElementById('ins-2-title');
+  const ins2 = document.getElementById('ins-2');
+  if (tg && tg.cagr_full != null) {
+    const cagrPct = tg.cagr_full * 100;
+    const dz = shortDizione(tg.dizione) || tg.zona;
+    ins2Title.innerHTML = `${dz.split(' ').slice(0,3).join(' ')}, <em>la prima</em>.`;
+    const yld = tg.yield_lordo_pct != null ? `<strong>${tg.yield_lordo_pct.toFixed(2)}%</strong>` : '<strong>n/d</strong>';
+    const anniZ = tg.anni_dati_acquisto || tg.anni || null;
+    const horizonNote = shortHorizonWarn && anniZ
+      ? ` <em style="color: var(--ink-mid)">(orizzonte breve: ${anniZ} anni di dati, segnale provvisorio)</em>`
+      : '';
+    ins2.innerHTML = `<strong>${dz}</strong> (zona ${tg.zona}, fascia ${tg.fascia || '?'}) ${cagrPct >= 0 ? 'guida la crescita con' : 'è la zona meno cedente con'} <strong>${(cagrPct > 0 ? '+' : '') + cagrPct.toFixed(2)}%/yr</strong> e yield lordo ${yld}. È il punto di partenza naturale per uno screening intra-città.${horizonNote}`;
+  } else {
+    ins2Title.innerHTML = 'Nessun <em>outlier</em>.';
+    ins2.innerHTML = 'Nessuna zona corrente con CAGR calcolabile sull\'orizzonte coperto.';
+  }
+
+  // Escludi entry stale per evitare ranking falsato da serie non aggiornate
+  const prov = (signals.province_ranking || []).filter(p => !p.stale && !p.no_data);
+  if (prov.length >= 6) {
+    const top3 = prov.slice(0, 3).map(p => p.nome).join(', ');
+    const bot3 = prov.slice(-3).map(p => p.nome).join(', ');
+    const nGrow = prov.filter(p => p.cagr != null && p.cagr > 0).length;
+    const nDecl = prov.filter(p => p.cagr != null && p.cagr < 0).length;
+    const nFlat = prov.length - nGrow - nDecl;
+    document.getElementById('ins-3').innerHTML =
+      `Su <strong>${prov.length}</strong> comuni provincia con dati OMI: <strong>${nGrow}</strong> in crescita, <strong>${nDecl}</strong> in calo${nFlat > 0 ? `, <strong>${nFlat}</strong> stabili` : ''}. ` +
+      `<strong>${top3}</strong> in testa (${(prov[2].cagr*100).toFixed(2)}–${(prov[0].cagr*100).toFixed(2)}%/yr). ` +
+      `<strong>${bot3}</strong> in coda. Cintura urbana, area flegrea, fascia vesuviana, penisola sorrentina e isole si muovono a velocità diverse — il pattern è geografico, non socio-demografico.`;
+  } else if (prov.length >= 1) {
+    document.getElementById('ins-3').innerHTML =
+      `Solo <strong>${prov.length}</strong> comuni della provincia hanno dati OMI sufficienti per un CAGR. Provincia con copertura ancora parziale — la lettura cartografica va calibrata su quel sottocampione.`;
+  } else {
+    document.getElementById('ins-3').textContent = 'Nessun comune della provincia con CAGR calcolabile.';
+  }
+}
+
+loadAndRender().catch(e => {
+  console.error(e);
+  document.body.innerHTML = `<div style="padding:60px;max-width:600px;margin:0 auto;font-family:Fraunces,serif">
+    <h2>Errore caricamento</h2>
+    <pre style="background:oklch(94% 0.005 80);padding:18px;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:13px">${e.message}</pre>
+    <p style="margin-top:16px">Servi da <code>opportuni-poc/</code>: <code>python3 -m http.server 8765</code>, poi <a href="http://localhost:8765/mockups/napoli-B-heatmap.html">http://localhost:8765/mockups/napoli-B-heatmap.html</a></p>
+  </div>`;
+});
+</script>
+
+</body>
+</html>
