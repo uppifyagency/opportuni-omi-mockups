@@ -1,0 +1,76 @@
+{
+  "headline": {
+    "yield_medio_pct": 4.9,
+    "cagr_avg_pct_signals": 2.41,
+    "cagr_avg_pct_compass": 2.41,
+    "prezzo_medio_attuale": 1347.0,
+    "zone_count_current": 24,
+    "csv_span": 21
+  },
+  "cagr_distribution": {
+    "n": 24,
+    "mean": 2.4099999999999997,
+    "median": 1.045,
+    "sd": 3.1035407549106395,
+    "skewness": 1.4458396535046143,
+    "kurtosis": 0.6222107476934058,
+    "shapiro_p": 9.127128912053066e-06,
+    "iqr_outliers": 5,
+    "q25": 0.48,
+    "q75": 2.155
+  },
+  "fascia_ts": {
+    "B": {
+      "years_n": 11,
+      "adf_p_value": 0.02950866763118289,
+      "ols_slope_eur_per_year": -19.83076923076949,
+      "ols_slope_p_value": 0.003682850380646365,
+      "ols_slope_ci95_low": -31.367160764828952,
+      "ols_slope_ci95_high": -8.294377696710031,
+      "ljung_box_p": 0.0664253193919076
+    },
+    "C": {
+      "years_n": 11,
+      "adf_p_value": 0.03660801299795531,
+      "ols_slope_eur_per_year": -16.25877712031575,
+      "ols_slope_p_value": 0.004710707026759826,
+      "ols_slope_ci95_low": -26.12416101342987,
+      "ols_slope_ci95_high": -6.393393227201626,
+      "ljung_box_p": 0.10739379329984249
+    },
+    "D": {
+      "years_n": 11,
+      "adf_p_value": 0.46154052870227547,
+      "ols_slope_eur_per_year": -1.0700197238657267,
+      "ols_slope_p_value": 0.7889714109222203,
+      "ols_slope_ci95_low": -9.848281086605109,
+      "ols_slope_ci95_high": 7.708241638873655,
+      "ljung_box_p": 0.24501181692146304
+    },
+    "E": {
+      "years_n": 11,
+      "adf_p_value": 0.9206400649401363,
+      "ols_slope_eur_per_year": -2.4526627218934323,
+      "ols_slope_p_value": 0.4651175537777119,
+      "ols_slope_ci95_low": -9.726478602723331,
+      "ols_slope_ci95_high": 4.8211531589364665,
+      "ljung_box_p": 0.11248346441446508
+    }
+  },
+  "pareto": {
+    "pool_n": 81,
+    "pareto_front_n": 9,
+    "top_buy_n": 6,
+    "overlap_pct": 100.0
+  },
+  "monte_carlo": {
+    "n_sims": 1000,
+    "weight_jitter_pp": 10.0,
+    "base_buy_count": 7,
+    "mc_p5": 5.0,
+    "mc_p50": 7.0,
+    "mc_p95": 14.0,
+    "mc_mean": 8.455,
+    "mc_sd": 3.1934578708937393
+  }
+}

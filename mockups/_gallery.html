@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <title>Opportuni · gallery 7 città × 3 mockup</title>
+  <style>
+    :root {
+      --bg: #f5f1ea;
+      --paper: #ede6d8;
+      --ink: #1a1a1a;
+      --ink-mid: #555;
+      --ink-faint: #999;
+      --accent: #9c4a2a;
+      --up: #2a7a4a;
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', SFMono-Regular, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { background: var(--bg); color: var(--ink); font-family: var(--sans); margin: 0; padding: 0; }
+    header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 32px 32px;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 48px;
+      font-weight: 400;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+    h1 em { color: var(--accent); font-style: normal; }
+    .deck {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink-mid);
+      max-width: 720px;
+      line-height: 1.5;
+      margin: 0 0 8px;
+    }
+    .meta {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-faint);
+      margin-top: 24px;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+    .city {
+      margin-top: 56px;
+    }
+    .city-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .city h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 32px;
+      font-weight: 400;
+      margin: 0 0 8px;
+      letter-spacing: -0.01em;
+    }
+    .city h2 em { color: var(--accent); font-style: normal; font-weight: 500; }
+    .city-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-mid);
+      margin: 0 0 24px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: var(--paper);
+      border-radius: 6px;
+      padding: 24px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: block;
+      border: 1px solid transparent;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      border-color: var(--ink-faint);
+    }
+    .card-letter {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 56px;
+      line-height: 1;
+      color: var(--accent);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .card-desc {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.45;
+    }
+    .card-file {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-faint);
+      margin-top: 16px;
+      text-transform: lowercase;
+    }
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-faint);
+      border-top: 1px solid var(--ink-faint);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    .open-all {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 8px 16px;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      border-radius: 3px;
+    }
+    .open-all:hover { background: var(--accent); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Opportuni · <em>7 città × 3 mockup</em></h1>
+  <p class="deck">Modena · Reggio Emilia · Bologna · Catanzaro · Torino · Firenze · Napoli. Per ogni provincia, tre dashboard HTML statiche alimentate da dati pubblici OMI con 21 anni di storia.</p>
+  <p class="deck">Audit math-proof v3 + cross-mockup automatizzato: 0 FAIL su tutte le città; il protocollo è descritto in <a href="../REPLICATE-FOR-OTHER-PROVINCE.md">REPLICATE-FOR-OTHER-PROVINCE.md</a> §20+§24.</p>
+  <div class="meta">cliccare una card per aprire il mockup · click destro → "Apri link in nuova scheda" per affiancarli</div>
+  <a class="open-all" href="#" onclick="openAll(); return false;">Apri tutti i 21 mockup in nuove tab →</a>
+</header>
+
+<main>
+
+  <section class="city">
+    <div class="city-eyebrow">§ 1 · Emilia-Romagna · Capoluogo F257</div>
+    <h2>Modena, <em>47 comuni</em>.</h2>
+    <p class="city-sub">Provincia originale (golden master). Investor-* files = template di partenza per le altre città.</p>
+    <div class="cards">
+      <a class="card" href="investor-A-brief.html">
+        <div class="card-letter">A</div>
+        <div class="card-title">Investor Brief</div>
+        <div class="card-desc">Tabella ranking densa, 3 segnali narrativi, KPI strip, sparkline SVG. Stile editorial bloomberg-lite.</div>
+        <div class="card-file">investor-A-brief.html</div>
+      </a>
+      <a class="card" href="investor-B-heatmap.html">
+        <div class="card-letter">B</div>
+        <div class="card-title">Heat Map First</div>
+        <div class="card-desc">Mappa provincia + mappa zone capoluogo. Hero MapLibre, sparkline grid, insight cards.</div>
+        <div class="card-file">investor-B-heatmap.html</div>
+      </a>
+      <a class="card" href="investor-C-compass.html">
+        <div class="card-letter">C</div>
+        <div class="card-title">Investment Compass</div>
+        <div class="card-desc">Score 0–100 con 6 componenti, verdict BUY/WATCH/AVOID, weight sliders runtime, anomaly detection, k-NN comparables, what-if simulator.</div>
+        <div class="card-file">investor-C-compass.html</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="city">
+    <div class="city-eyebrow">§ 2 · Emilia-Romagna · Capoluogo H223</div>
+    <h2>Reggio Emilia, <em>42 comuni</em>.</h2>
+    <p class="city-sub">Provincia in contrazione: 32/42 comuni con CAGR negativo, mediana −0.58%. Volumi NTN +88.4% (2018→2023).</p>
+    <div class="cards">
+      <a class="card" href="reggio-emilia-A-brief.html">
+        <div class="card-letter">A</div>
+        <div class="card-title">Investor Brief</div>
+        <div class="card-desc">Tabella ranking, 3 segnali, KPI strip, sparkline. CAGR provincia con denominatore qualificato per orizzonte breve.</div>
+        <div class="card-file">reggio-emilia-A-brief.html</div>
+      </a>
+      <a class="card" href="reggio-emilia-B-heatmap.html">
+        <div class="card-letter">B</div>
+        <div class="card-title">Heat Map First</div>
+        <div class="card-desc">Mappa provincia (42 comuni, scala P5–P95) + mappa zone capoluogo. Appennino reggiano vs pianura del Po.</div>
+        <div class="card-file">reggio-emilia-B-heatmap.html</div>
+      </a>
+      <a class="card" href="reggio-emilia-C-compass.html">
+        <div class="card-letter">C</div>
+        <div class="card-title">Investment Compass</div>
+        <div class="card-desc">Score 0–100, momentum tag NTN, k-NN comparables, what-if. Capoluogo macroarea "REGGIO NELL'EMILIA CAPOLUOGO".</div>
+        <div class="card-file">reggio-emilia-C-compass.html</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="city">
+    <div class="city-eyebrow">§ 3 · Emilia-Romagna · Capoluogo A944</div>
+    <h2>Bologna, <em>55 comuni</em>.</h2>
+    <p class="city-sub">Mercato a due velocità: pianura urbana che cresce, Appennino in arretramento. Volumi NTN +90.21% (2018→2023).</p>
+    <div class="cards">
+      <a class="card" href="bologna-A-brief.html">
+        <div class="card-letter">A</div>
+        <div class="card-title">Investor Brief</div>
+        <div class="card-desc">CAGR medio +0.20% su 30 zone affidabili (≥5 anni). Top: Sant'Agata Bolognese +3.18%/yr.</div>
+        <div class="card-file">bologna-A-brief.html</div>
+      </a>
+      <a class="card" href="bologna-B-heatmap.html">
+        <div class="card-letter">B</div>
+        <div class="card-title">Heat Map First</div>
+        <div class="card-desc">Mappa provincia (55 comuni) + mappa zone Bologna città. Appennino bolognese a sud, Bassa a nord.</div>
+        <div class="card-file">bologna-B-heatmap.html</div>
+      </a>
+      <a class="card" href="bologna-C-compass.html">
+        <div class="card-letter">C</div>
+        <div class="card-title">Investment Compass</div>
+        <div class="card-desc">Score 0–100, soglia BUY=51.9 (Jenks). Macroarea capoluogo "BOLOGNA CAPOLUOGO" con momentum tag NTN.</div>
+        <div class="card-file">bologna-C-compass.html</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="city">
+    <div class="city-eyebrow">§ 4 · Calabria · Capoluogo C352</div>
+    <h2>Catanzaro, <em>80 comuni</em>.</h2>
+    <p class="city-sub">Tre cicli che non si parlano: costa tirrenica, ionica, capoluogo, Presila in quota. 79/80 in crescita (Martirano filtrata: stale 2012).</p>
+    <div class="cards">
+      <a class="card" href="catanzaro-A-brief.html">
+        <div class="card-letter">A</div>
+        <div class="card-title">Investor Brief</div>
+        <div class="card-desc">Range 0.29–4.49%/yr, deviazione standard runtime. Top: Caraffa +4.49%/yr (segnale provvisorio: 2 anni di dati).</div>
+        <div class="card-file">catanzaro-A-brief.html</div>
+      </a>
+      <a class="card" href="catanzaro-B-heatmap.html">
+        <div class="card-letter">B</div>
+        <div class="card-title">Heat Map First</div>
+        <div class="card-desc">Mappa provincia (80 comuni stretti nord-sud) + zone capoluogo. Stale Martirano filtrata da bot3.</div>
+        <div class="card-file">catanzaro-B-heatmap.html</div>
+      </a>
+      <a class="card" href="catanzaro-C-compass.html">
+        <div class="card-letter">C</div>
+        <div class="card-title">Investment Compass</div>
+        <div class="card-desc">Score 0–100, soglia BUY=46.5 (Jenks). Compass include lane anomalie + comparables.</div>
+        <div class="card-file">catanzaro-C-compass.html</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="city">
+    <div class="city-eyebrow">§ 5 · Piemonte · Capoluogo L219</div>
+    <h2>Torino, <em>312 comuni</em>.</h2>
+    <p class="city-sub">La provincia più grande d'Italia per numero di comuni. Capoluogo metropolitano, cintura industriale, valli alpine (Susa, Chisone, Pellice), Canavese e Pinerolese, Collina torinese a sud-est. 47 zone OMI nel capoluogo.</p>
+    <div class="cards">
+      <a class="card" href="torino-A-brief.html">
+        <div class="card-letter">A</div>
+        <div class="card-title">Investor Brief</div>
+        <div class="card-desc">Tabella ranking 312 comuni, 3 segnali, KPI strip, sparkline. Scala P5–P95 dinamica per evitare bias da outlier alpini/Canavese.</div>
+        <div class="card-file">torino-A-brief.html</div>
+      </a>
+      <a class="card" href="torino-B-heatmap.html">
+        <div class="card-letter">B</div>
+        <div class="card-title">Heat Map First</div>
+        <div class="card-desc">Mappa provincia ampia (1.5°×0.9° lon/lat) + mappa 47 zone Torino città. Diverging color con pivot 0% (Brewer).</div>
+        <div class="card-file">torino-B-heatmap.html</div>
+      </a>
+      <a class="card" href="torino-C-compass.html">
+        <div class="card-letter">C</div>
+        <div class="card-title">Investment Compass</div>
+        <div class="card-desc">Score 0–100, soglia BUY Jenks-calibrata per pool Torino. Tag contestuale: valli alpine, cintura, Canavese, Collina, Pinerolese.</div>
+        <div class="card-file">torino-C-compass.html</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="city">
+    <div class="city-eyebrow">§ 6 · Toscana · Capoluogo D612</div>
+    <h2>Firenze, <em>41 comuni</em>.</h2>
+    <p class="city-sub">Capoluogo regionale + cintura metropolitana (Sesto, Scandicci, Bagno a Ripoli), Piana fiorentina, Mugello a nord (Borgo San Lorenzo), Valdarno a sud-est, Chianti a sud (Greve), Empolese-Valdelsa a ovest (Empoli, Certaldo). 9 macroaree urbane nel capoluogo, volumi NTN/IMI da SR Toscana 2019–2025.</p>
+    <div class="cards">
+      <a class="card" href="firenze-A-brief.html">
+        <div class="card-letter">A</div>
+        <div class="card-title">Investor Brief</div>
+        <div class="card-desc">Tabella ranking 41 comuni, 3 segnali, KPI strip, sparkline. Distribuzione compatta — nessun outlier estremo come Torino alpina.</div>
+        <div class="card-file">firenze-A-brief.html</div>
+      </a>
+      <a class="card" href="firenze-B-heatmap.html">
+        <div class="card-letter">B</div>
+        <div class="card-title">Heat Map First</div>
+        <div class="card-desc">Mappa provincia compatta (~0.9°×0.8° lon/lat) + mappa zone capoluogo. Diverging color con pivot 0% (Brewer).</div>
+        <div class="card-file">firenze-B-heatmap.html</div>
+      </a>
+      <a class="card" href="firenze-C-compass.html">
+        <div class="card-letter">C</div>
+        <div class="card-title">Investment Compass</div>
+        <div class="card-desc">Score 0–100, soglia BUY Jenks-calibrata per pool Firenze. Tag contestuale: Mugello, Chianti, Empolese-Valdelsa, Valdarno, cintura, capoluogo. Liquidity score da NTN/IMI macroaree urbane.</div>
+        <div class="card-file">firenze-C-compass.html</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="city">
+    <div class="city-eyebrow">§ 7 · Campania · Capoluogo F839</div>
+    <h2>Napoli, <em>92 comuni</em>.</h2>
+    <p class="city-sub">La provincia con più zone OMI capoluogo dell'intero dataset (67). Geografia stratificata in 6 cluster: cintura urbana densissima, area flegrea (Pozzuoli, Bacoli), fascia vesuviana (Portici, Ercolano, Torre del Greco), penisola sorrentina, area nolano-giuglianese, e tre isole (Capri, Ischia, Procida). CAGR medio −0.34%/yr (mercato compatto: Kruskal-Wallis p=0.27, fasce non significativamente diverse).</p>
+    <div class="cards">
+      <a class="card" href="napoli-A-brief.html">
+        <div class="card-letter">A</div>
+        <div class="card-title">Investor Brief</div>
+        <div class="card-desc">Tabella ranking 92 comuni, 3 segnali. Top growth: S. Pietro a Patierno +1.74%, Centro Antico Est +1.33%. Top decline: Agnano −1.87%, Ponticelli −1.69%, Bagnoli −1.65%.</div>
+        <div class="card-file">napoli-A-brief.html</div>
+      </a>
+      <a class="card" href="napoli-B-heatmap.html">
+        <div class="card-letter">B</div>
+        <div class="card-title">Heat Map First</div>
+        <div class="card-desc">Mappa provincia + 67 zone capoluogo (la più ricca del dataset). Diverging color con pivot 0%. Insight: provincia a sei velocità con isole, costiera, vesuviano, flegrea.</div>
+        <div class="card-file">napoli-B-heatmap.html</div>
+      </a>
+      <a class="card" href="napoli-C-compass.html">
+        <div class="card-letter">C</div>
+        <div class="card-title">Investment Compass</div>
+        <div class="card-desc">Score 0–100 su 5 tipologie. Boom magazzini (52/62 zone BUY) coerente con logistica post-pandemia; uffici capoluogo a zero BUY (smart working). Tag contestuale per 6 cluster geografici.</div>
+        <div class="card-file">napoli-C-compass.html</div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>Repo: <a href="https://github.com/uppifyagency/opportuni-omi-mockups" target="_blank">github.com/uppifyagency/opportuni-omi-mockups</a></div>
+  <div style="margin-top:6px">Audit math-proof v3 · 2026-05-17 · 39 bug fixati · 0 sum-check failures · 0 syntax errors</div>
+</footer>
+
+<script>
+const URLS = [
+  'investor-A-brief.html','investor-B-heatmap.html','investor-C-compass.html',
+  'reggio-emilia-A-brief.html','reggio-emilia-B-heatmap.html','reggio-emilia-C-compass.html',
+  'bologna-A-brief.html','bologna-B-heatmap.html','bologna-C-compass.html',
+  'catanzaro-A-brief.html','catanzaro-B-heatmap.html','catanzaro-C-compass.html',
+  'firenze-A-brief.html','firenze-B-heatmap.html','firenze-C-compass.html',
+  'napoli-A-brief.html','napoli-B-heatmap.html','napoli-C-compass.html',
+];
+function openAll() {
+  URLS.forEach((u, i) => setTimeout(() => window.open(u, '_blank'), i * 80));
+}
+</script>
+
+</body>
+</html>
